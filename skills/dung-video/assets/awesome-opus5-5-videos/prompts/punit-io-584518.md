@@ -1,6 +1,6 @@
 # Remotion Product Launch Film Code
 
-An Opus 5.5 video by [@punit_io](https://x.com/punit_io) · [Original post with the video](https://x.com/punit_io/status/210446847234DU-AN-MAU518)
+An Opus 5.5 video by [@punit_io](https://x.com/punit_io) · [Original post with the video](https://x.com/punit_io/status/2104468472344584518)
 
 - **Category:** Motion graphics
 - **Author:** [@punit_io](https://x.com/punit_io)

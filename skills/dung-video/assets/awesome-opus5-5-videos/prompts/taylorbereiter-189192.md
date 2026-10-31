@@ -1,6 +1,6 @@
 # Opus 5.5 video by @TaylorBereiter
 
-[▶ Watch the original and a live remake on Skillry](https://skillry.dev/ai-videos/opus-5-5/taylorbereiter-189192?utm_source=github&utm_medium=readme&utm_campaign=awesome-opus5-5-videos) · [Original post](https://x.com/TaylorBereiter/status/21040DU-AN-MAU1706189192)
+[▶ Watch the original and a live remake on Skillry](https://skillry.dev/ai-videos/opus-5-5/taylorbereiter-189192?utm_source=github&utm_medium=readme&utm_campaign=awesome-opus5-5-videos) · [Original post](https://x.com/TaylorBereiter/status/2104045641706189192)
 
 - **Category:** Games & interactive
 - **Remake built with:** Canvas · Web Audio

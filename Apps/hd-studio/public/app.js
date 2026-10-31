@@ -3223,7 +3223,7 @@ const PLATFORMS = {
   tiktok: { name: "TikTok", html: [txt(6.500, 3.500, 4.700, "9:41", "font-weight:600"), statusIcons,
       lbl(27.800, 11.300, 4.200, "Explore", "opacity:.75"), lbl(48.900, 11.300, 4.200, "Following", "opacity:.75"), lbl(70.800, 11.300, 4.200, "For You", "font-weight:700"),
       `<span class="pC pBar" style="left:71.300cqw;top:13.800cqh;width:6.800cqw"></span>`, at(90.600, 11.200, 7.600, lineIc(P.search)),
-      avatar(91.400, DU-AN-MAU00, 11),
+      avatar(91.400, 45.400, 11),
       at(91.200, 55.600, 9.800, fillIc(P.heart)), lbl(91.300, 59, 3.400, "2.8M"),
       at(91.200, 65.400, 9.600, fillIc(P.bubble, '<g fill="#8a8a8a"><circle cx="8" cy="11.300" r="1.300"/><circle cx="12" cy="11.300" r="1.300"/><circle cx="16" cy="11.300" r="1.300"/></g>')), lbl(91.300, 68.800, 3.400, "2.8M"),
       at(91.200, 75.100, 9.400, fillIc(P.mark)), lbl(91.300, 78.500, 3.400, "2.8M"),

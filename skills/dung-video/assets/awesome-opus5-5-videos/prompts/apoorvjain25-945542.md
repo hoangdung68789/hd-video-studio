@@ -1,6 +1,6 @@
 # Photon Journey Remotion Animation
 
-An Opus 5.5 video by [@apoorvjain25](https://x.com/apoorvjain25) · [Original post with the video](https://x.com/apoorvjain25/status/21048189404679DU-AN-MAU2)
+An Opus 5.5 video by [@apoorvjain25](https://x.com/apoorvjain25) · [Original post with the video](https://x.com/apoorvjain25/status/2104818940467945542)
 
 - **Category:** Games & interactive
 - **Author:** [@apoorvjain25](https://x.com/apoorvjain25)

@@ -1,6 +1,6 @@
 # Interactive Tectonic Earthquake Simulation Video
 
-An Opus 5.5 video by [@egeberkina](https://x.com/egeberkina) · [Original post with the video](https://x.com/egeberkina/status/21050297134DU-AN-MAU9521)
+An Opus 5.5 video by [@egeberkina](https://x.com/egeberkina) · [Original post with the video](https://x.com/egeberkina/status/2105029713445949521)
 
 - **Category:** Games & interactive
 - **Author:** [@egeberkina](https://x.com/egeberkina)

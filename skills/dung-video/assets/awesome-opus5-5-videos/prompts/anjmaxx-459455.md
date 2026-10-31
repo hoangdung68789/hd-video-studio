@@ -1,6 +1,6 @@
 # Opus 5.5 video by @anjmaxx
 
-[▶ Watch the original and a live remake on Skillry](https://skillry.dev/ai-videos/opus-5-5/anjmaxx-DU-AN-MAU55?utm_source=github&utm_medium=readme&utm_campaign=awesome-opus5-5-videos) · [Original post](https://x.com/anjmaxx/status/2103173729656DU-AN-MAU55)
+[▶ Watch the original and a live remake on Skillry](https://skillry.dev/ai-videos/opus-5-5/anjmaxx-459455?utm_source=github&utm_medium=readme&utm_campaign=awesome-opus5-5-videos) · [Original post](https://x.com/anjmaxx/status/2103173729656459455)
 
 - **Category:** Motion graphics
 - **Remake built with:** Canvas · Pixel art
