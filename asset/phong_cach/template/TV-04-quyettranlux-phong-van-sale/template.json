@@ -1,0 +1,651 @@
+{
+ "id": "TV-04",
+ "ten": "Phỏng vấn sale giỏi 4 câu hỏi (tiêu đề câu hỏi 2 tầng xanh/trắng)",
+ "the_loai": [
+  "q&a",
+  "chia se"
+ ],
+ "nguon": {
+  "url": "https://www.tiktok.com/@quyettranlux/video/7558268872336362759",
+  "ngay_xem": "2026-10-30",
+  "chi_so": "379,8K xem · 13K thích · 85 bình luận · 690 chia sẻ · đăng 07/10/2025 (video.info.json)",
+  "nhan": "XM"
+ },
+ "thong_so": {
+  "khung": "9:16",
+  "fps": 30,
+  "thoi_luong": 82.11,
+  "lufs": null,
+  "bpm": 184.6,
+  "shot_tb": 3.16,
+  "su_kien_moi_giay": 0.49
+ },
+ "giu_chan": {
+  "hook": "tên series 'best seller' + pháo giấy + ảnh khách mời + meme cười trong 6,5 s",
+  "open_loops": [
+   {
+    "mo": 13.8,
+    "tra_loi": 69.8
+   }
+  ],
+  "doi_nhip_moi_giay": 9.1,
+  "cao_trao": 46.4,
+  "keu_goi_theo_doi": {
+   "giay": 76.0,
+   "cach": "bắt tay cảm ơn, không kêu gọi; 'series' ở hook gợi theo dõi tập sau [Ước đoán]"
+  }
+ },
+ "doan": [
+  {
+   "tu": 0,
+   "den": 6.47,
+   "vai_tro": "hook",
+   "canh": {
+    "co": "trung",
+    "goc": "ngang, host nói thẳng máy",
+    "chuyen_dong_may": "cam_tay",
+    "host": true
+   },
+   "loi": {
+    "vai_tro": "gioi_thieu_series + nhan_vat",
+    "o_dien": ""
+   },
+   "chu": [
+    {
+     "giay": 0.1,
+     "ma": "tieu_de_2_tang_xanh_trang",
+     "vai_tro": "ten_series",
+     "font": "sans đậm in hoa (chưa rõ tên)",
+     "co_pct": 4,
+     "vi_tri_pct": [
+      35,
+      58
+     ],
+     "mau": "#00F8ED dòng 1 / #FFFCF8 dòng 2",
+     "vao": "pop từng dòng lệch ~0,2 s",
+     "ra": "cat_cung ~2–2,5 s",
+     "muc_dich": "tao_to_mo",
+     "ly_do": "tên series 'phỏng vấn best seller' ngay khung đầu + pháo giấy: hứa hẹn nhân vật giỏi"
+    }
+   ],
+   "mg": [
+    {
+     "giay": 4.16,
+     "ma": "anh_chen_pip",
+     "mo_ta": "ảnh nhân vật chèn khung nhỏ dưới-phải",
+     "thoi_luong": 0.6,
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "giới thiệu khách mời bằng ảnh khi host nhắc tên",
+     "gan_loi": "giới thiệu khách mời",
+     "ket_hop": [
+      "whoosh +12 dB"
+     ]
+    }
+   ],
+   "broll": [
+    {
+     "giay": 4.73,
+     "loai": "meme_phan_ung",
+     "thoi_luong": 1.74,
+     "lech_loi_s": 0,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "chèn mặt meme cười toàn màn hình ngay sau lời khen — gây cười, đổi nhịp ở giây 5",
+     "gan_loi": "lời khen khách mời"
+    }
+   ],
+   "an": [],
+   "chuyen_canh": {
+    "giay": 0.0,
+    "ma": "mo_dau_phao_giay",
+    "so_khung": 0,
+    "easing": ""
+   },
+   "cat": [
+    4.73
+   ],
+   "sfx": [
+    {
+     "giay": 0.1,
+     "vai_tro": "pop_nhe",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 4,
+     "nguon": "them_theo_luat_dung_video (không tách được ở mẫu)"
+    },
+    {
+     "giay": 4.16,
+     "vai_tro": "whoosh_swish",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 12.0,
+     "nguon": "do_mau (trùng sự kiện hình, có thể lẫn giọng) [Ước đoán]"
+    }
+   ],
+   "nhac": {
+    "phach": [],
+    "dien_bien": "ha",
+    "muc_so_voi_giong_db": null
+   }
+  },
+  {
+   "tu": 6.47,
+   "den": 19.0,
+   "vai_tro": "mo_bai",
+   "canh": {
+    "co": "toan",
+    "goc": "ngang, nhà mẫu",
+    "chuyen_dong_may": "cam_tay theo host",
+    "host": true
+   },
+   "loi": {
+    "vai_tro": "chao + xin hoi 4 cau",
+    "o_dien": ""
+   },
+   "chu": [],
+   "mg": [
+    {
+     "giay": 11.4,
+     "ma": "the_poster_du_an",
+     "mo_ta": "poster dự án/thành tích chèn góc trên-phải",
+     "thoi_luong": 1.4,
+     "muc_dich": "chung_minh_so_lieu",
+     "ly_do": "khi host nhắc thành tích khách mời, hiện bằng chứng (poster) thay lời",
+     "gan_loi": "thành tích bán hàng",
+     "ket_hop": []
+    }
+   ],
+   "broll": [],
+   "an": [],
+   "chuyen_canh": {
+    "giay": 6.47,
+    "ma": "pixel_mosaic",
+    "so_khung": 6,
+    "easing": "cat"
+   },
+   "cat": [
+    6.47,
+    10.47,
+    13.2,
+    15.17,
+    17.43
+   ],
+   "sfx": [
+    {
+     "giay": 11.4,
+     "vai_tro": "pop_nhe",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 4,
+     "nguon": "them_theo_luat_dung_video (không tách được ở mẫu)"
+    }
+   ],
+   "nhac": {
+    "phach": [
+     10.47
+    ],
+    "dien_bien": "giu",
+    "muc_so_voi_giong_db": null
+   }
+  },
+  {
+   "tu": 19.0,
+   "den": 31.2,
+   "vai_tro": "cau_hoi_1",
+   "canh": {
+    "co": "trung/can",
+    "goc": "ngang, 2 người",
+    "chuyen_dong_may": "dung",
+    "host": true
+   },
+   "loi": {
+    "vai_tro": "hoi: khach den tu dau → tra loi: kenh TikTok",
+    "o_dien": ""
+   },
+   "chu": [
+    {
+     "giay": 19.0,
+     "ma": "tieu_de_2_tang_xanh_trang",
+     "vai_tro": "cau_hoi",
+     "font": "sans đậm in hoa (chưa rõ tên)",
+     "co_pct": 4,
+     "vi_tri_pct": [
+      45,
+      55
+     ],
+     "mau": "#00F8ED dòng 1 / #FFFCF8 dòng 2",
+     "vao": "pop từng dòng lệch ~0,2 s",
+     "ra": "cat_cung ~2–2,5 s",
+     "muc_dich": "chuyen_y",
+     "ly_do": "câu hỏi phỏng vấn hiện 2 tầng xanh/trắng đúng lúc người hỏi nói — người xem tắt tiếng vẫn biết đang ở câu mấy"
+    }
+   ],
+   "mg": [
+    {
+     "giay": 24.56,
+     "ma": "anh_chup_kenh",
+     "mo_ta": "ảnh chụp trang hồ sơ kênh chèn góc trên-phải",
+     "thoi_luong": 6.2,
+     "muc_dich": "chung_minh_so_lieu",
+     "ly_do": "câu trả lời 'khách từ kênh' được chứng minh bằng ảnh kênh thật",
+     "gan_loi": "kênh bán hàng",
+     "ket_hop": [
+      "whoosh +14 dB"
+     ]
+    }
+   ],
+   "broll": [],
+   "an": [],
+   "chuyen_canh": {
+    "giay": 19.0,
+    "ma": "cut",
+    "so_khung": 0,
+    "easing": ""
+   },
+   "cat": [
+    22.4,
+    23.63,
+    30.8
+   ],
+   "sfx": [
+    {
+     "giay": 19.0,
+     "vai_tro": "riser_swell",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 4.8,
+     "nguon": "do_mau (trùng sự kiện hình, có thể lẫn giọng) [Ước đoán]"
+    },
+    {
+     "giay": 24.56,
+     "vai_tro": "whoosh_swish",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 14.4,
+     "nguon": "do_mau (trùng sự kiện hình, có thể lẫn giọng) [Ước đoán]"
+    }
+   ],
+   "nhac": {
+    "phach": [
+     22.4
+    ],
+    "dien_bien": "ha",
+    "muc_so_voi_giong_db": null
+   }
+  },
+  {
+   "tu": 31.2,
+   "den": 40.4,
+   "vai_tro": "cau_hoi_2",
+   "canh": {
+    "co": "trung",
+    "goc": "ngang, 2 người",
+    "chuyen_dong_may": "dung",
+    "host": true
+   },
+   "loi": {
+    "vai_tro": "hoi: tai sao chon du an → gia hop ly, o hay dau tu",
+    "o_dien": ""
+   },
+   "chu": [
+    {
+     "giay": 31.2,
+     "ma": "tieu_de_2_tang_xanh_trang",
+     "vai_tro": "cau_hoi",
+     "font": "sans đậm in hoa (chưa rõ tên)",
+     "co_pct": 4,
+     "vi_tri_pct": [
+      45,
+      55
+     ],
+     "mau": "#00F8ED dòng 1 / #FFFCF8 dòng 2",
+     "vao": "pop từng dòng lệch ~0,2 s",
+     "ra": "cat_cung ~2–2,5 s",
+     "muc_dich": "chuyen_y",
+     "ly_do": "câu hỏi phỏng vấn hiện 2 tầng xanh/trắng đúng lúc người hỏi nói — người xem tắt tiếng vẫn biết đang ở câu mấy"
+    },
+    {
+     "giay": 35.2,
+     "ma": "tieu_de_2_tang_xanh_trang",
+     "vai_tro": "y_tra_loi",
+     "font": "sans đậm in hoa (chưa rõ tên)",
+     "co_pct": 4,
+     "vi_tri_pct": [
+      45,
+      55
+     ],
+     "mau": "#00F8ED dòng 1 / #FFFCF8 dòng 2",
+     "vao": "pop từng dòng lệch ~0,2 s",
+     "ra": "cat_cung ~2–2,5 s",
+     "muc_dich": "nhan_gia",
+     "ly_do": "ý chính câu trả lời (giá) hiện cùng kiểu câu hỏi — tóm tắt cho người lướt"
+    },
+    {
+     "giay": 38.3,
+     "ma": "tieu_de_2_tang_xanh_trang",
+     "vai_tro": "cau_hoi_phu",
+     "font": "sans đậm in hoa (chưa rõ tên)",
+     "co_pct": 4,
+     "vi_tri_pct": [
+      45,
+      55
+     ],
+     "mau": "#00F8ED dòng 1 / #FFFCF8 dòng 2",
+     "vao": "pop từng dòng lệch ~0,2 s",
+     "ra": "cat_cung ~2–2,5 s",
+     "muc_dich": "tao_to_mo",
+     "ly_do": "câu hỏi phụ hiện ngay để nối mạch"
+    }
+   ],
+   "mg": [],
+   "broll": [],
+   "an": [],
+   "chuyen_canh": {
+    "giay": 30.8,
+    "ma": "cut",
+    "so_khung": 0,
+    "easing": ""
+   },
+   "cat": [
+    33.97,
+    35.17,
+    36.27,
+    38.2,
+    39.17
+   ],
+   "sfx": [
+    {
+     "giay": 31.32,
+     "vai_tro": "riser_swell",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 4.8,
+     "nguon": "do_mau (trùng sự kiện hình, có thể lẫn giọng) [Ước đoán]"
+    },
+    {
+     "giay": 35.3,
+     "vai_tro": "whoosh_swish",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 14.5,
+     "nguon": "do_mau (trùng sự kiện hình, có thể lẫn giọng) [Ước đoán]"
+    },
+    {
+     "giay": 38.36,
+     "vai_tro": "whoosh_swish",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 11.8,
+     "nguon": "do_mau (trùng sự kiện hình, có thể lẫn giọng) [Ước đoán]"
+    }
+   ],
+   "nhac": {
+    "phach": [
+     35.17,
+     39.17
+    ],
+    "dien_bien": "ha",
+    "muc_so_voi_giong_db": null
+   }
+  },
+  {
+   "tu": 40.4,
+   "den": 61.4,
+   "vai_tro": "cau_hoi_3",
+   "canh": {
+    "co": "trung",
+    "goc": "ngang, 2 người",
+    "chuyen_dong_may": "dung",
+    "host": true
+   },
+   "loi": {
+    "vai_tro": "hoi: kho khan khi chot → chot trong ngay, 1/3 khach",
+    "o_dien": ""
+   },
+   "chu": [
+    {
+     "giay": 40.4,
+     "ma": "tieu_de_2_tang_xanh_trang",
+     "vai_tro": "cau_hoi",
+     "font": "sans đậm in hoa (chưa rõ tên)",
+     "co_pct": 4,
+     "vi_tri_pct": [
+      45,
+      55
+     ],
+     "mau": "#00F8ED dòng 1 / #FFFCF8 dòng 2",
+     "vao": "pop từng dòng lệch ~0,2 s",
+     "ra": "cat_cung ~2–2,5 s",
+     "muc_dich": "chuyen_y",
+     "ly_do": "câu hỏi phỏng vấn hiện 2 tầng xanh/trắng đúng lúc người hỏi nói — người xem tắt tiếng vẫn biết đang ở câu mấy"
+    },
+    {
+     "giay": 46.4,
+     "ma": "tieu_de_2_tang_xanh_trang",
+     "vai_tro": "y_tra_loi",
+     "font": "sans đậm in hoa (chưa rõ tên)",
+     "co_pct": 4,
+     "vi_tri_pct": [
+      45,
+      55
+     ],
+     "mau": "#00F8ED dòng 1 / #FFFCF8 dòng 2",
+     "vao": "pop từng dòng lệch ~0,2 s",
+     "ra": "cat_cung ~2–2,5 s",
+     "muc_dich": "nhan_gia",
+     "ly_do": "ý ấn tượng nhất (chốt trong ngày) được nhấn bằng chữ + sticker tiền"
+    }
+   ],
+   "an": [
+    {
+     "giay": 47.16,
+     "loai": "icon",
+     "vi_tri_pct": [
+      40,
+      60
+     ],
+     "mau": "ảnh tiền",
+     "vao": "pop bay",
+     "ra": "cat_cung",
+     "co_sfx": true,
+     "muc_dich": "nhan_gia",
+     "ly_do": "minh họa 'chốt nhanh = tiền về' đúng câu trả lời",
+     "gan_loi": "chốt trong ngày"
+    },
+    {
+     "giay": 50.86,
+     "loai": "icon",
+     "vi_tri_pct": [
+      50,
+      65
+     ],
+     "mau": "3 avatar hoạt hình",
+     "vao": "pop lần lượt",
+     "ra": "cat_cung",
+     "co_sfx": true,
+     "muc_dich": "chung_minh_so_lieu",
+     "ly_do": "minh họa tỉ lệ '1 trong 3 khách' bằng 3 hình người",
+     "gan_loi": "tỉ lệ khách"
+    }
+   ],
+   "mg": [],
+   "broll": [],
+   "chuyen_canh": {
+    "giay": 39.17,
+    "ma": "cut",
+    "so_khung": 0,
+    "easing": ""
+   },
+   "cat": [
+    43.17,
+    46.17,
+    48.13,
+    49.97,
+    52.93,
+    56.4,
+    60.8
+   ],
+   "sfx": [
+    {
+     "giay": 40.4,
+     "vai_tro": "pop_nhe",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 4,
+     "nguon": "them_theo_luat_dung_video (không tách được ở mẫu)"
+    },
+    {
+     "giay": 46.4,
+     "vai_tro": "pop_nhe",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 4,
+     "nguon": "them_theo_luat_dung_video (không tách được ở mẫu)"
+    },
+    {
+     "giay": 47.16,
+     "vai_tro": "riser_swell",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 9.2,
+     "nguon": "do_mau (trùng sự kiện hình, có thể lẫn giọng) [Ước đoán]"
+    },
+    {
+     "giay": 50.86,
+     "vai_tro": "whoosh_swish",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 10.1,
+     "nguon": "do_mau (trùng sự kiện hình, có thể lẫn giọng) [Ước đoán]"
+    }
+   ],
+   "nhac": {
+    "phach": [
+     46.17,
+     48.13,
+     49.97
+    ],
+    "dien_bien": "ha",
+    "muc_so_voi_giong_db": null
+   }
+  },
+  {
+   "tu": 61.4,
+   "den": 82.11,
+   "vai_tro": "cau_hoi_4_chot",
+   "canh": {
+    "co": "trung",
+    "goc": "ngang, 2 người → bắt tay",
+    "chuyen_dong_may": "dung",
+    "host": true
+   },
+   "loi": {
+    "vai_tro": "loi khuyen cho sale → cam on, bat tay",
+    "o_dien": ""
+   },
+   "chu": [
+    {
+     "giay": 61.4,
+     "ma": "tieu_de_2_tang_xanh_trang",
+     "vai_tro": "cau_hoi",
+     "font": "sans đậm in hoa (chưa rõ tên)",
+     "co_pct": 4,
+     "vi_tri_pct": [
+      45,
+      25
+     ],
+     "mau": "#00F8ED dòng 1 / #FFFCF8 dòng 2",
+     "vao": "pop từng dòng lệch ~0,2 s",
+     "ra": "cat_cung ~2–2,5 s",
+     "muc_dich": "chuyen_y",
+     "ly_do": "câu hỏi phỏng vấn hiện 2 tầng xanh/trắng đúng lúc người hỏi nói — người xem tắt tiếng vẫn biết đang ở câu mấy"
+    },
+    {
+     "giay": 69.8,
+     "ma": "tieu_de_2_tang_xanh_trang",
+     "vai_tro": "y_tra_loi",
+     "font": "sans đậm in hoa (chưa rõ tên)",
+     "co_pct": 4,
+     "vi_tri_pct": [
+      45,
+      25
+     ],
+     "mau": "#00F8ED dòng 1 / #FFFCF8 dòng 2",
+     "vao": "pop từng dòng lệch ~0,2 s",
+     "ra": "cat_cung ~2–2,5 s",
+     "muc_dich": "keu_goi",
+     "ly_do": "câu đúc kết thành khẩu hiệu — đoạn dễ chia sẻ"
+    }
+   ],
+   "mg": [],
+   "broll": [],
+   "an": [],
+   "chuyen_canh": {
+    "giay": 60.8,
+    "ma": "cut",
+    "so_khung": 0,
+    "easing": ""
+   },
+   "cat": [
+    66.3,
+    68.8,
+    75.8,
+    79.4
+   ],
+   "sfx": [
+    {
+     "giay": 61.4,
+     "vai_tro": "pop_nhe",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 4,
+     "nguon": "them_theo_luat_dung_video (không tách được ở mẫu)"
+    },
+    {
+     "giay": 69.8,
+     "vai_tro": "pop_nhe",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 4,
+     "nguon": "them_theo_luat_dung_video (không tách được ở mẫu)"
+    }
+   ],
+   "nhac": {
+    "phach": [
+     75.8,
+     79.4
+    ],
+    "dien_bien": "ha",
+    "muc_so_voi_giong_db": null
+   }
+  }
+ ],
+ "su_kien_do_duoc": {
+  "cat": 25,
+  "chu": 9,
+  "mg": 3,
+  "broll": 1,
+  "an": 2,
+  "chuyen_canh": 6,
+  "sfx": 14,
+  "phach_manh": 9
+ },
+ "ghi_chu_do": {
+  "sfx": "119 sự kiện âm lẫn giọng nói; chỉ giữ cái trùng sự kiện hình ±0,15 s",
+  "chu_do_tai": "mặt nạ màu xanh ngọc 10 fps (vùng y 12–75 %); MG/AN đo trên khung 1 fps + đỉnh SFX",
+  "loi": "whisper large-v3 53 câu, nhiều từ xác suất thấp — chỉ dùng vai trò"
+ },
+ "ket_hop": [
+  {
+   "dau_hieu_loi": "câu hỏi phỏng vấn / chuyển ý",
+   "combo": "tiêu đề 2 tầng: dòng 1 xanh ngọc #00F8ED + dòng 2 trắng in hoa, pop lệch 0,2 s, giữa-trái khung, không nền hộp",
+   "thoi_diem": "đúng lúc người hỏi bắt đầu câu",
+   "nguon": "https://www.tiktok.com/@quyettranlux/video/7558268872336362759 · 19/31,2/40,4/61,4 s"
+  },
+  {
+   "dau_hieu_loi": "nhắc kênh / thành tích / bằng chứng",
+   "combo": "ảnh chụp thật (hồ sơ kênh, poster) chèn góc trên-phải + whoosh",
+   "thoi_diem": "+0,5 s sau từ khóa",
+   "nguon": "https://www.tiktok.com/@quyettranlux/video/7558268872336362759 · 11,4 / 24,6 s"
+  },
+  {
+   "dau_hieu_loi": "tỉ lệ / con số người",
+   "combo": "icon người hoạt hình pop lần lượt giữa khung + pop/whoosh",
+   "thoi_diem": "đúng câu nói",
+   "nguon": "https://www.tiktok.com/@quyettranlux/video/7558268872336362759 · 50,9 s"
+  }
+ ],
+ "diem_yeu_da_sua": [
+  "meme khuôn mặt người thật khác (bản quyền chân dung) → bản Dũng thay bằng phản ứng của chính người dẫn hoặc bỏ",
+  "chuyển cảnh pixel mosaic giữ nguyên được (không phải punch-in)",
+  "SFX không tách khỏi giọng → SFX thêm theo luật ghi rõ nguon"
+ ],
+ "trang_thai": "Thu nghiem",
+ "so_lan_dung": 0,
+ "dung_cham": []
+}

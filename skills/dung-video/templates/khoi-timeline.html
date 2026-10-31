@@ -1,0 +1,17 @@
+<!-- Mẫu khối để mọi thứ hiện và chỉnh được trên timeline HD Studio. Luật: rules/studio-timeline.md -->
+<!-- Lời thoại của một cảnh, hiện ở lớp Lời thoại nếu id hoặc tên tệp có "thoai" -->
+<audio id="thoai-c01" class="clip" src="assets/audio/thoai/c01.mp3" data-start="0" data-duration="4.2" data-track-index="20" data-volume="1"></audio>
+<!-- Một SFX -->
+<audio id="sfx-01" class="clip sfx" src="assets/audio/sfx/whoosh.mp3" data-start="1.2" data-duration="0.6" data-track-index="30" data-volume="0.6" data-sfx-peak="0.1"></audio>
+<!-- Nhạc nền, hiện ở lớp Nhạc nền nếu tên có "nhac" -->
+<audio id="nhac" class="clip" src="assets/audio/nhac.mp3" data-start="0" data-duration="60" data-track-index="40" data-volume="1"></audio>
+<!-- Hiệu ứng tự có hình -->
+<div id="flash-01" class="clip fx" data-ten="Lóe" data-start="3" data-duration="0.4" data-track-index="50" style="position:absolute;inset:0;background:#fff;opacity:0"></div>
+<!-- Hiệu ứng tác động lên video: phần tử rỗng, tween ghi data là id của nó -->
+<div id="fx-zoom-01" class="clip fx" data-ten="Đẩy cận" data-start="12.4" data-duration="0.6" data-track-index="51" style="display:none"></div>
+<script>tl.to("#v3", { scale: 1.15, duration: 0.3, data: "fx-zoom-01" }, 12.4);</script>
+<!-- Chuyển cảnh: thêm class trans -->
+<div id="fx-cat-01" class="clip fx trans" data-ten="Lát cắt" data-start="8.7" data-duration="0.6" data-track-index="52" style="display:none"></div>
+<!-- Hình và nhãn dán -->
+<div id="hinh-01" class="clip shape" data-start="2" data-duration="3" data-track-index="60" style="position:absolute;left:100px;top:100px;width:400px;height:400px;background:#fff"></div>
+<img id="nhan-dan-01" class="clip sticker" src="assets/capcut/a.png" data-start="2" data-duration="3" data-track-index="61" style="position:absolute;left:100px;top:100px;width:400px;height:400px;object-fit:contain" />

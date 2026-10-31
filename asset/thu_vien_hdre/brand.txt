@@ -1,0 +1,15 @@
+# BỘ NHẬN DIỆN HOÀNG DŨNG REAL ESTATE (video-master Bước 4.1) – anh điền các ô còn trống
+thuong_hieu = Hoàng Dũng Real Estate
+mau_chu_dao = <điền mã màu, vd #0B2545>
+mau_nhan_gia = vàng kim (vd #D4A437)
+font_chu_khoa = Montserrat ExtraBold
+font_chu_phu = Be Vietnam Pro SemiBold
+font_phu_de = Be Vietnam Pro Medium
+logo = <đường dẫn file logo PNG đã tách nền>  # chỉ chèn khi Dũng yêu cầu; góc trên phải trong vùng an toàn; không có ở cảnh CTA
+chu_sau_chu = KHÔNG phông nền (H-hieu_ung_3d-002)
+so_dien_thoai_zalo_hien_thi = <ANH TỰ ĐIỀN – AI không bao giờ tự điền>
+cau_cta_co_dinh = <điền nếu có>
+tiktok = hoangdung.bds89
+loai_tai_khoan_tiktok = <cá nhân / doanh nghiệp>
+loai_tai_khoan_instagram = <cá nhân / nhà sáng tạo / doanh nghiệp>
+hashtag_co_dinh = #HoangDungRealEstate #HoangDungBDS

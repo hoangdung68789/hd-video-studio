@@ -1,0 +1,41 @@
+<!-- R01 — Hook: kinetic slam từng từ, từ khóa cuối vàng gold (L1 · T3 · họ B+C) -->
+<script type="application/json" id="recipe-meta">
+{
+  "id": "r01-hook-kinetic-slam",
+  "name": "Hook kinetic slam",
+  "family": "B. Nhịp & nhấn + C. Sáng & màu",
+  "tier": "T3", "types": ["L1"],
+  "font_profile": "hook",
+  "fonts": [{"alias": "FXHook", "file": "Montserrat-Black.ttf", "weight": 900}],
+  "params": {"w1": "3 CĂN NHÀ", "w2": "TÂN PHÚ"},
+  "touch": 1.0, "duration": 3.0,
+  "timing": {"in": 0.34, "stagger_word": 0.14, "hold": 1.2, "out": 0.22},
+  "sfx": [
+    {"role": "text_word_rise", "path": "Swipe & Swish/SWISH 11.wav", "at": -0.14, "align": "peak", "vol": 0.45},
+    {"role": "title_slam", "path": "Highlight/motionarray_730596/Star 6.wav", "at": 0.0, "align": "peak", "vol": 0.7, "dur": 0.9}
+  ],
+  "source": "Lời thoại thật c09 'Hôm nay bán 3 căn nhà luôn Tân Phú' (dự án DU-AN-MAU)"
+}
+</script>
+<style>
+  .r01 { position: absolute; left: 60px; width: 860px; top: 420px; text-align: center; font-family: "FXHook", sans-serif; font-weight: 900; }
+  .r01 .w { display: block; line-height: 1.25; letter-spacing: -0.01em; will-change: transform, opacity, filter; }
+  .r01 .a { font-size: 92px; color: #fff; text-shadow: 0 3px 10px rgba(0,0,0,.75), 0 0 28px rgba(0,0,0,.45); }
+  .r01 .b { font-size: 132px; padding-top: .34em; margin-top: -.34em;
+    background: linear-gradient(180deg, #ffe48a 0%, #f0a81c 52%, #a8680a 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
+    filter: drop-shadow(0 0 1.5px rgba(0,0,0,.95)) drop-shadow(0 4px 8px rgba(0,0,0,.6)); }
+</style>
+<template id="fx">
+  <div class="r01"><span class="w a">{{w1}}</span><span class="w b">{{w2}}</span></div>
+</template>
+<script id="fx-js">
+  // T = khung từ khóa cuối (w2) chạm. w1 chạm trước 0.14s. Mỗi từ: scale 1.6→1, mờ 14px→0, opacity 0→1 trong 0.34s, expo.out.
+  function FX(tl, T, P) {
+    var IN = 0.34, ST = 0.14, HOLD = 1.2, OUT = 0.22;
+    tl.fromTo(".r01 .a", { opacity: 0, scale: 1.6, filter: "blur(14px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: IN, ease: "expo.out" }, T - ST - IN);
+    tl.fromTo(".r01 .b", { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: IN, ease: "expo.out" }, T - IN);
+    tl.to(".r01 .b", { scale: 1.04, duration: 0.08, ease: "power2.out" }, T);
+    tl.to(".r01 .b", { scale: 1, duration: 0.18, ease: "power2.inOut" }, T + 0.08);
+    tl.to(".r01", { opacity: 0, y: -24, duration: OUT, ease: "power2.in" }, T + HOLD);
+  }
+</script>

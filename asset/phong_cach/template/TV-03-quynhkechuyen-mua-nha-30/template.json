@@ -1,0 +1,558 @@
+{
+ "id": "TV-03",
+ "ten": "Kể chuyện hài 'mua nhà trước 30 tuổi' (lời + phụ đề cụm + số cam + twist)",
+ "the_loai": [
+  "ke chuyen",
+  "chia se"
+ ],
+ "nguon": {
+  "url": "https://www.tiktok.com/@quynhkechuyennha/video/7424415111038700807",
+  "ngay_xem": "2026-10-30",
+  "chi_so": "327,5K xem · 4,8K thích · 161 bình luận · 1,5K chia sẻ · đăng 11/10/2024 (video.info.json)",
+  "nhan": "XM"
+ },
+ "thong_so": {
+  "khung": "9:16",
+  "fps": 30,
+  "thoi_luong": 18.3,
+  "lufs": null,
+  "bpm": 129.2,
+  "shot_tb": 2.61,
+  "su_kien_moi_giay": 1.09
+ },
+ "giu_chan": {
+  "hook": "câu hứa 'cách mua nhà trước 30 tuổi' + số tuổi bật cam trong 2 s đầu",
+  "open_loops": [
+   {
+    "mo": 0.05,
+    "tra_loi": 12.12
+   }
+  ],
+  "doi_nhip_moi_giay": 3.7,
+  "cao_trao": 12.12,
+  "keu_goi_theo_doi": {
+   "giay": 16.27,
+   "cach": "lời cảm ơn + sticker cười; không kêu gọi theo dõi [Ước đoán: kích bình luận]"
+  }
+ },
+ "doan": [
+  {
+   "tu": 0,
+   "den": 2.62,
+   "vai_tro": "hook",
+   "canh": {
+    "co": "toan",
+    "goc": "ngang, quay lưng nhìn qua cửa kính",
+    "chuyen_dong_may": "dung",
+    "host": true
+   },
+   "loi": {
+    "vai_tro": "hook_hua_hen (bí quyết mua nhà trước 30 tuổi)",
+    "o_dien": ""
+   },
+   "chu": [
+    {
+     "giay": 0.05,
+     "ma": "phu_de_cum_tu",
+     "vai_tro": "phu_de",
+     "font": "sans thường (chưa rõ tên)",
+     "co_pct": 2.6,
+     "vi_tri_pct": [
+      50,
+      63
+     ],
+     "mau": "#E6F6F7",
+     "vao": "cat_cung theo cụm lời",
+     "ra": "cat_cung",
+     "muc_dich": "tao_to_mo",
+     "ly_do": "câu hứa hẹn hiện ngay khung đầu"
+    },
+    {
+     "giay": 1.62,
+     "ma": "so_nhan_cam_pop",
+     "vai_tro": "so_tuoi",
+     "font": "sans đậm (chưa rõ tên)",
+     "co_pct": 6,
+     "vi_tri_pct": [
+      82,
+      70
+     ],
+     "mau": "#FA7602",
+     "vao": "pop",
+     "ra": "cat_cung cùng phụ đề",
+     "muc_dich": "nhan_gia",
+     "ly_do": "số tuổi bật cam đúng lúc nói — con số làm hook dễ nhớ"
+    }
+   ],
+   "broll": [],
+   "an": [],
+   "mg": [],
+   "chuyen_canh": {},
+   "ly_do_tinh": "một cảnh tĩnh 6,9 s, nhịp do phụ đề + số pop",
+   "cat": [],
+   "sfx": [
+    {
+     "giay": 0.05,
+     "vai_tro": "tick_nhe",
+     "gan_voi": "chu",
+     "db_so_voi_nhac": 3,
+     "nguon": "them_theo_luat_dung_video (không đo được ở mẫu)"
+    },
+    {
+     "giay": 1.62,
+     "vai_tro": "pop_nhe",
+     "gan_voi": "chu",
+     "db_so_voi_nhac": 3,
+     "nguon": "them_theo_luat_dung_video (không đo được ở mẫu)"
+    }
+   ],
+   "nhac": {
+    "phach": [],
+    "dien_bien": "giu",
+    "muc_so_voi_giong_db": null
+   }
+  },
+  {
+   "tu": 2.62,
+   "den": 5.38,
+   "vai_tro": "giai_phap",
+   "canh": {
+    "co": "toan",
+    "goc": "ngang, ban công nhìn dự án",
+    "chuyen_dong_may": "dung",
+    "host": true
+   },
+   "loi": {
+    "vai_tro": "ke_hoach_buoc_1 (trả trước %)",
+    "o_dien": ""
+   },
+   "chu": [
+    {
+     "giay": 2.62,
+     "ma": "phu_de_cum_tu",
+     "vai_tro": "phu_de",
+     "font": "sans thường (chưa rõ tên)",
+     "co_pct": 2.6,
+     "vi_tri_pct": [
+      50,
+      63
+     ],
+     "mau": "#E6F6F7",
+     "vao": "cat_cung theo cụm lời",
+     "ra": "cat_cung",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "phụ đề cắt theo cụm lời, đổi đúng lúc câu đổi — người xem tắt tiếng vẫn theo được câu chuyện"
+    },
+    {
+     "giay": 4.62,
+     "ma": "so_nhan_cam_pop",
+     "vai_tro": "phan_tram",
+     "font": "sans đậm (chưa rõ tên)",
+     "co_pct": 6,
+     "vi_tri_pct": [
+      82,
+      70
+     ],
+     "mau": "#FA7602",
+     "vao": "pop",
+     "ra": "cat_cung cùng phụ đề",
+     "muc_dich": "nhan_gia",
+     "ly_do": "tỉ lệ trả trước bật cam ngay sau chớp sáng — nhấn con số tài chính"
+    }
+   ],
+   "broll": [],
+   "an": [],
+   "mg": [],
+   "chuyen_canh": {
+    "giay": 4.38,
+    "ma": "chop_sang_tach_mau",
+    "so_khung": 6,
+    "easing": "cat"
+   },
+   "cat": [],
+   "sfx": [
+    {
+     "giay": 2.62,
+     "vai_tro": "tick_nhe",
+     "gan_voi": "chu",
+     "db_so_voi_nhac": 3,
+     "nguon": "them_theo_luat_dung_video (không đo được ở mẫu)"
+    },
+    {
+     "giay": 4.42,
+     "vai_tro": "whoosh_chop_sang",
+     "gan_voi": "chuyen_canh",
+     "db_so_voi_nhac": 5.7,
+     "nguon": "do_mau"
+    },
+    {
+     "giay": 4.62,
+     "vai_tro": "pop_nhe",
+     "gan_voi": "chu",
+     "db_so_voi_nhac": 3,
+     "nguon": "them_theo_luat_dung_video (không đo được ở mẫu)"
+    }
+   ],
+   "nhac": {
+    "phach": [],
+    "dien_bien": "giu",
+    "muc_so_voi_giong_db": null
+   }
+  },
+  {
+   "tu": 5.38,
+   "den": 14.33,
+   "vai_tro": "bang_chung",
+   "canh": {
+    "co": "chi_tiet",
+    "goc": "từ trên bàn ký",
+    "chuyen_dong_may": "cam_tay",
+    "host": false
+   },
+   "loi": {
+    "vai_tro": "ke_hoach_buoc_2_3 (cho thuê → trả góp → twist)",
+    "o_dien": ""
+   },
+   "chu": [
+    {
+     "giay": 5.38,
+     "ma": "phu_de_cum_tu",
+     "vai_tro": "phu_de",
+     "font": "sans thường (chưa rõ tên)",
+     "co_pct": 2.6,
+     "vi_tri_pct": [
+      50,
+      63
+     ],
+     "mau": "#E6F6F7",
+     "vao": "cat_cung theo cụm lời",
+     "ra": "cat_cung",
+     "muc_dich": "chuyen_y",
+     "ly_do": "cụm 'sau đó' tách riêng 0,5 s — ngắt nhịp trước twist"
+    },
+    {
+     "giay": 5.88,
+     "ma": "phu_de_cum_tu",
+     "vai_tro": "phu_de",
+     "font": "sans thường (chưa rõ tên)",
+     "co_pct": 2.6,
+     "vi_tri_pct": [
+      50,
+      63
+     ],
+     "mau": "#E6F6F7",
+     "vao": "cat_cung theo cụm lời",
+     "ra": "cat_cung",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "phụ đề cắt theo cụm lời, đổi đúng lúc câu đổi — người xem tắt tiếng vẫn theo được câu chuyện"
+    },
+    {
+     "giay": 8.38,
+     "ma": "phu_de_cum_tu",
+     "vai_tro": "phu_de",
+     "font": "sans thường (chưa rõ tên)",
+     "co_pct": 2.6,
+     "vi_tri_pct": [
+      50,
+      63
+     ],
+     "mau": "#E6F6F7",
+     "vao": "cat_cung theo cụm lời",
+     "ra": "cat_cung",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "phụ đề cắt theo cụm lời, đổi đúng lúc câu đổi — người xem tắt tiếng vẫn theo được câu chuyện"
+    },
+    {
+     "giay": 10.62,
+     "ma": "phu_de_cum_tu",
+     "vai_tro": "phu_de",
+     "font": "sans thường (chưa rõ tên)",
+     "co_pct": 2.6,
+     "vi_tri_pct": [
+      50,
+      63
+     ],
+     "mau": "#E6F6F7",
+     "vao": "cat_cung theo cụm lời",
+     "ra": "cat_cung",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "phụ đề cắt theo cụm lời, đổi đúng lúc câu đổi — người xem tắt tiếng vẫn theo được câu chuyện"
+    },
+    {
+     "giay": 12.12,
+     "ma": "phu_de_cum_tu",
+     "vai_tro": "phu_de",
+     "font": "sans thường (chưa rõ tên)",
+     "co_pct": 2.6,
+     "vi_tri_pct": [
+      50,
+      63
+     ],
+     "mau": "#E6F6F7",
+     "vao": "cat_cung theo cụm lời",
+     "ra": "cat_cung",
+     "muc_dich": "tao_to_mo",
+     "ly_do": "câu twist 'vừa có nhà vừa có bạn trai' — điểm gây cười/cao trào"
+    }
+   ],
+   "broll": [
+    {
+     "giay": 6.93,
+     "loai": "chi_tiet",
+     "thoi_luong": 1.64,
+     "lech_loi_s": 1.05,
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "cảnh ký hợp đồng có túi quà chủ đầu tư — biến kế hoạch thành 'thật', vào trễ ~1 s sau câu (L-cut)",
+     "gan_loi": "thuê nhà"
+    },
+    {
+     "giay": 8.57,
+     "loai": "chi_tiet",
+     "thoi_luong": 3.03,
+     "lech_loi_s": 0.2,
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "cận tay ký đúng câu tiền thuê/trả góp",
+     "gan_loi": "tiền thuê hằng tháng"
+    },
+    {
+     "giay": 11.6,
+     "loai": "chi_tiet",
+     "thoi_luong": 2.73,
+     "lech_loi_s": 0.5,
+     "muc_dich": "chung_minh_so_lieu",
+     "ly_do": "cận giấy tờ + mã QR: bằng chứng giao dịch trước câu twist",
+     "gan_loi": "trả góp căn nhà"
+    }
+   ],
+   "an": [],
+   "mg": [],
+   "chuyen_canh": {
+    "giay": 6.93,
+    "ma": "cut",
+    "so_khung": 0,
+    "easing": ""
+   },
+   "cat": [
+    6.93,
+    8.57,
+    11.6
+   ],
+   "sfx": [
+    {
+     "giay": 5.38,
+     "vai_tro": "tick_nhe",
+     "gan_voi": "chu",
+     "db_so_voi_nhac": 3,
+     "nguon": "them_theo_luat_dung_video (không đo được ở mẫu)"
+    },
+    {
+     "giay": 5.88,
+     "vai_tro": "tick_nhe",
+     "gan_voi": "chu",
+     "db_so_voi_nhac": 3,
+     "nguon": "them_theo_luat_dung_video (không đo được ở mẫu)"
+    },
+    {
+     "giay": 8.38,
+     "vai_tro": "tick_nhe",
+     "gan_voi": "chu",
+     "db_so_voi_nhac": 3,
+     "nguon": "them_theo_luat_dung_video (không đo được ở mẫu)"
+    },
+    {
+     "giay": 10.62,
+     "vai_tro": "tick_nhe",
+     "gan_voi": "chu",
+     "db_so_voi_nhac": 3,
+     "nguon": "them_theo_luat_dung_video (không đo được ở mẫu)"
+    },
+    {
+     "giay": 12.12,
+     "vai_tro": "tick_nhe",
+     "gan_voi": "chu",
+     "db_so_voi_nhac": 3,
+     "nguon": "them_theo_luat_dung_video (không đo được ở mẫu)"
+    }
+   ],
+   "nhac": {
+    "phach": [
+     6.93,
+     11.6
+    ],
+    "dien_bien": "giu",
+    "muc_so_voi_giong_db": null
+   }
+  },
+  {
+   "tu": 14.33,
+   "den": 16.27,
+   "vai_tro": "chot",
+   "canh": {
+    "co": "trung",
+    "goc": "ngang, ngồi ghế bành đọc sách",
+    "chuyen_dong_may": "dung",
+    "host": true
+   },
+   "loi": {
+    "vai_tro": "punchline",
+    "o_dien": ""
+   },
+   "chu": [
+    {
+     "giay": 14.38,
+     "ma": "phu_de_cum_tu",
+     "vai_tro": "phu_de",
+     "font": "sans thường (chưa rõ tên)",
+     "co_pct": 2.6,
+     "vi_tri_pct": [
+      50,
+      63
+     ],
+     "mau": "#E6F6F7",
+     "vao": "cat_cung theo cụm lời",
+     "ra": "cat_cung",
+     "muc_dich": "keu_goi",
+     "ly_do": "câu chốt ngắn trên cảnh 'người thành đạt' — đối lập hài"
+    }
+   ],
+   "broll": [],
+   "an": [],
+   "mg": [],
+   "chuyen_canh": {
+    "giay": 14.33,
+    "ma": "cut",
+    "so_khung": 0,
+    "easing": ""
+   },
+   "cat": [
+    14.33
+   ],
+   "sfx": [
+    {
+     "giay": 14.38,
+     "vai_tro": "tick_nhe",
+     "gan_voi": "chu",
+     "db_so_voi_nhac": 3,
+     "nguon": "them_theo_luat_dung_video (không đo được ở mẫu)"
+    }
+   ],
+   "nhac": {
+    "phach": [],
+    "dien_bien": "giu",
+    "muc_so_voi_giong_db": null
+   }
+  },
+  {
+   "tu": 16.27,
+   "den": 18.3,
+   "vai_tro": "cta",
+   "canh": {
+    "co": "trung",
+    "goc": "ban công, cười ngả người",
+    "chuyen_dong_may": "cam_tay",
+    "host": true
+   },
+   "loi": {
+    "vai_tro": "loi_cam_on_ket",
+    "o_dien": ""
+   },
+   "chu": [],
+   "mg": [],
+   "an": [
+    {
+     "giay": 16.38,
+     "loai": "icon",
+     "vi_tri_pct": [
+      25,
+      80
+     ],
+     "mau": "#FB8A1B",
+     "vao": "pop rải nhiều chữ cười nghiêng",
+     "ra": "cat_cung",
+     "co_sfx": true,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "sticker cười cam rải góc dưới-trái + SFX mạnh (+12 dB) báo 'đây là đùa' — kết vui, kích bình luận/chia sẻ",
+     "gan_loi": "sau punchline"
+    }
+   ],
+   "broll": [],
+   "chuyen_canh": {
+    "giay": 16.27,
+    "ma": "cut",
+    "so_khung": 0,
+    "easing": ""
+   },
+   "cat": [
+    16.27,
+    17.87
+   ],
+   "sfx": [
+    {
+     "giay": 16.52,
+     "vai_tro": "whoosh",
+     "gan_voi": "an",
+     "db_so_voi_nhac": 11.6,
+     "nguon": "do_mau"
+    },
+    {
+     "giay": 16.88,
+     "vai_tro": "riser_cuoi_hai",
+     "gan_voi": "an",
+     "db_so_voi_nhac": 12.5,
+     "nguon": "do_mau"
+    }
+   ],
+   "nhac": {
+    "phach": [],
+    "dien_bien": "ha",
+    "muc_so_voi_giong_db": null
+   }
+  }
+ ],
+ "su_kien_do_duoc": {
+  "cat": 6,
+  "chu": 10,
+  "mg": 0,
+  "broll": 3,
+  "an": 1,
+  "chuyen_canh": 4,
+  "sfx": 13,
+  "phach_manh": 2
+ },
+ "ghi_chu_do": {
+  "sfx_mau_tach_duoc": 3,
+  "sfx_khong_do_duoc": "30 sự kiện nằm trong giọng nói, không tách được",
+  "sfx_them_theo_luat": 10,
+  "loi": "whisper large-v3 12 câu (do_mau/loi_whisper.srt), chỉ dùng vai trò",
+  "chu_do_tai": "dải 4 fps vùng y 60–82 % (do_mau/chu_4fps.jpg), sai số ±0,13 s"
+ },
+ "ket_hop": [
+  {
+   "dau_hieu_loi": "con số (tuổi, %, giá) trong câu kể",
+   "combo": "phụ đề trắng giữa khung + số cam #FA7602 pop bên phải dưới phụ đề + pop nhẹ",
+   "thoi_diem": "đúng từ ±0,1 s",
+   "nguon": "https://www.tiktok.com/@quynhkechuyennha/video/7424415111038700807 · 1,6 s / 4,6 s"
+  },
+  {
+   "dau_hieu_loi": "kế hoạch tài chính / giao dịch",
+   "combo": "b-roll cận ký hợp đồng + giấy tờ, vào trễ ~1 s (L-cut), phụ đề cụm giữ nguyên",
+   "thoi_diem": "+0,2–1 s sau câu",
+   "nguon": "https://www.tiktok.com/@quynhkechuyennha/video/7424415111038700807 · 6,9–14,3 s"
+  },
+  {
+   "dau_hieu_loi": "câu đùa / punchline kết",
+   "combo": "cắt sang cảnh người dẫn cười + sticker chữ cười cam rải góc + whoosh/riser mạnh",
+   "thoi_diem": "+0,1 s sau cú cắt",
+   "nguon": "https://www.tiktok.com/@quynhkechuyennha/video/7424415111038700807 · 16,3–17,9 s"
+  }
+ ],
+ "diem_yeu_da_sua": [
+  "phụ đề trắng nhỏ (~2,6 % cao) dễ chìm trên tường trắng → bản Dũng dùng font có dấu cỡ lớn hơn, viền/bóng, không nền hộp",
+  "cảnh mở 6,9 s một góc → bản Dũng chia ≤4 s",
+  "mẫu không có SFX tách được cho phụ đề → thêm tick/pop nhẹ theo luật, chỉ ở số nhấn nếu Dũng thấy ồn",
+  "lời mẫu là chuyện đùa — chỉ học cấu trúc kể (hứa → kế hoạch → twist → cười), không chép lời"
+ ],
+ "trang_thai": "Thu nghiem",
+ "so_lan_dung": 0,
+ "dung_cham": []
+}

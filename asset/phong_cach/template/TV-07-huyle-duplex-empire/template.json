@@ -1,0 +1,576 @@
+{
+ "id": "TV-07",
+ "ten": "Tour căn hộ không lời, giấu giá để khách hỏi",
+ "the_loai": [
+  "review nha"
+ ],
+ "nguon": {
+  "url": "https://www.tiktok.com/@huyle.bds/video/7503198750861479176",
+  "ngay_xem": "2026-10-30",
+  "chi_so": "91,5K xem · 2.962 thích · 51 bình luận · 536 chia sẻ · đăng 11/05/2025 (trang video + info.json khớp)",
+  "nhan": "XM"
+ },
+ "thong_so": {
+  "khung": "9:16",
+  "fps": 30,
+  "thoi_luong": 56.63,
+  "lufs": null,
+  "bpm": 112.3,
+  "shot_tb": 4.05,
+  "su_kien_moi_giay": 0.25
+ },
+ "giu_chan": {
+  "hook": "tên căn hộ + phòng khách đèn chùm rồi view đêm trong 6 s",
+  "open_loops": [
+   {
+    "mo": 0.3,
+    "tra_loi": null,
+    "ghi_chu": "giá không được nói; người xem hỏi ở bình luận"
+   }
+  ],
+  "doi_nhip_moi_giay": 4.05,
+  "cao_trao": 37.23,
+  "keu_goi_theo_doi": {
+   "giay": 54.65,
+   "cach": "không kêu gọi; bình luận xin giá đóng vai lời mời liên hệ"
+  }
+ },
+ "doan": [
+  {
+   "tu": 0,
+   "den": 6.4,
+   "vai_tro": "hook",
+   "canh": {
+    "co": "toan",
+    "goc": "góc rộng, thấp",
+    "chuyen_dong_may": "trượt",
+    "host": false
+   },
+   "chu": [
+    {
+     "giay": 0.3,
+     "ma": "tieu_de_trang_nho",
+     "vai_tro": "ten_can_ho",
+     "font": "sans (chưa rõ tên)",
+     "co_pct": 2.5,
+     "vi_tri_pct": [
+      25,
+      18
+     ],
+     "mau": "#FFFFFF",
+     "vao": "hien (mốc ±0,5 s)",
+     "ra": "cat_cung theo canh 1,73 s",
+     "muc_dich": "dinh_vi",
+     "ly_do": "chỉ ghi tên căn và khu, không ghi giá — người xem phải hỏi"
+    }
+   ],
+   "broll": [
+    {
+     "giay": 0.0,
+     "loai": "toan",
+     "thoi_luong": 1.73,
+     "lech_loi_s": 0,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "phòng khách đèn chùm rồi view đêm thành phố: khoe điểm đắt nhất ngay 6 s đầu",
+     "gan_loi": "khong_loi_nhac"
+    },
+    {
+     "giay": 1.73,
+     "loai": "toan",
+     "thoi_luong": 4.67,
+     "lech_loi_s": 0,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "phòng khách đèn chùm rồi view đêm thành phố: khoe điểm đắt nhất ngay 6 s đầu",
+     "gan_loi": "khong_loi_nhac"
+    }
+   ],
+   "chuyen_canh": {},
+   "cat": [
+    1.73
+   ],
+   "sfx": [
+    {
+     "giay": 0.3,
+     "vai_tro": "pop_nhe",
+     "gan_voi": "chu",
+     "db_so_voi_nhac": 3,
+     "nguon": "them_theo_luat_dung_video (mẫu không có)"
+    },
+    {
+     "giay": 4.74,
+     "vai_tro": "pop",
+     "gan_voi": "nhac",
+     "db_so_voi_nhac": 5.1,
+     "nguon": "do_mau (có thể là tiếng trong bản nhạc) [Ước đoán]"
+    }
+   ],
+   "nhac": {
+    "phach": [
+     1.73
+    ],
+    "dien_bien": "giu",
+    "muc_so_voi_giong_db": null
+   },
+   "mg": [],
+   "an": [],
+   "loi": {
+    "vai_tro": "khong_loi",
+    "o_dien": ""
+   }
+  },
+  {
+   "tu": 6.4,
+   "den": 27.12,
+   "vai_tro": "bang_chung",
+   "canh": {
+    "co": "toan/chi_tiet",
+    "goc": "góc rộng",
+    "chuyen_dong_may": "trượt/xoay",
+    "host": false
+   },
+   "chu": [],
+   "broll": [
+    {
+     "giay": 6.4,
+     "loai": "noi_that",
+     "thoi_luong": 6.47,
+     "lech_loi_s": 0,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "cảnh dài 2,5–6,5 s theo nhạc, xen view để không gian thở",
+     "gan_loi": "khong_loi_nhac"
+    },
+    {
+     "giay": 12.87,
+     "loai": "noi_that",
+     "thoi_luong": 2.66,
+     "lech_loi_s": 0,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "cảnh dài 2,5–6,5 s theo nhạc, xen view để không gian thở",
+     "gan_loi": "khong_loi_nhac"
+    },
+    {
+     "giay": 15.53,
+     "loai": "noi_that",
+     "thoi_luong": 3.0,
+     "lech_loi_s": 0,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "cảnh dài 2,5–6,5 s theo nhạc, xen view để không gian thở",
+     "gan_loi": "khong_loi_nhac"
+    },
+    {
+     "giay": 18.53,
+     "loai": "noi_that",
+     "thoi_luong": 2.74,
+     "lech_loi_s": 0,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "cảnh dài 2,5–6,5 s theo nhạc, xen view để không gian thở",
+     "gan_loi": "khong_loi_nhac"
+    },
+    {
+     "giay": 21.27,
+     "loai": "noi_that",
+     "thoi_luong": 3.36,
+     "lech_loi_s": 0,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "cảnh dài 2,5–6,5 s theo nhạc, xen view để không gian thở",
+     "gan_loi": "khong_loi_nhac"
+    },
+    {
+     "giay": 24.63,
+     "loai": "noi_that",
+     "thoi_luong": 2.49,
+     "lech_loi_s": 0,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "cảnh dài 2,5–6,5 s theo nhạc, xen view để không gian thở",
+     "gan_loi": "khong_loi_nhac"
+    }
+   ],
+   "chuyen_canh": {
+    "giay": 6.4,
+    "ma": "cut",
+    "so_khung": 0,
+    "easing": ""
+   },
+   "cat": [
+    6.4,
+    12.87,
+    15.53,
+    18.53,
+    21.27,
+    24.63
+   ],
+   "sfx": [
+    {
+     "giay": 8.72,
+     "vai_tro": "pop",
+     "gan_voi": "nhac",
+     "db_so_voi_nhac": 4.8,
+     "nguon": "do_mau (có thể là tiếng trong bản nhạc) [Ước đoán]"
+    },
+    {
+     "giay": 10.74,
+     "vai_tro": "hit",
+     "gan_voi": "nhac",
+     "db_so_voi_nhac": 7.3,
+     "nguon": "do_mau (có thể là tiếng trong bản nhạc) [Ước đoán]"
+    },
+    {
+     "giay": 11.6,
+     "vai_tro": "pop",
+     "gan_voi": "nhac",
+     "db_so_voi_nhac": 4.4,
+     "nguon": "do_mau (có thể là tiếng trong bản nhạc) [Ước đoán]"
+    },
+    {
+     "giay": 14.98,
+     "vai_tro": "hit",
+     "gan_voi": "nhac",
+     "db_so_voi_nhac": 7.4,
+     "nguon": "do_mau (có thể là tiếng trong bản nhạc) [Ước đoán]"
+    },
+    {
+     "giay": 15.76,
+     "vai_tro": "pop",
+     "gan_voi": "nhac",
+     "db_so_voi_nhac": 4.3,
+     "nguon": "do_mau (có thể là tiếng trong bản nhạc) [Ước đoán]"
+    },
+    {
+     "giay": 18.28,
+     "vai_tro": "swish",
+     "gan_voi": "nhac",
+     "db_so_voi_nhac": 4.1,
+     "nguon": "do_mau (có thể là tiếng trong bản nhạc) [Ước đoán]"
+    },
+    {
+     "giay": 21.06,
+     "vai_tro": "pop",
+     "gan_voi": "nhac",
+     "db_so_voi_nhac": 4.0,
+     "nguon": "do_mau (có thể là tiếng trong bản nhạc) [Ước đoán]"
+    },
+    {
+     "giay": 21.48,
+     "vai_tro": "riser",
+     "gan_voi": "nhac",
+     "db_so_voi_nhac": 7.6,
+     "nguon": "do_mau (có thể là tiếng trong bản nhạc) [Ước đoán]"
+    },
+    {
+     "giay": 21.88,
+     "vai_tro": "swish",
+     "gan_voi": "nhac",
+     "db_so_voi_nhac": 7.1,
+     "nguon": "do_mau (có thể là tiếng trong bản nhạc) [Ước đoán]"
+    },
+    {
+     "giay": 24.24,
+     "vai_tro": "pop",
+     "gan_voi": "nhac",
+     "db_so_voi_nhac": 4.3,
+     "nguon": "do_mau (có thể là tiếng trong bản nhạc) [Ước đoán]"
+    },
+    {
+     "giay": 25.72,
+     "vai_tro": "riser",
+     "gan_voi": "nhac",
+     "db_so_voi_nhac": 5.8,
+     "nguon": "do_mau (có thể là tiếng trong bản nhạc) [Ước đoán]"
+    },
+    {
+     "giay": 26.18,
+     "vai_tro": "pop",
+     "gan_voi": "nhac",
+     "db_so_voi_nhac": 6.0,
+     "nguon": "do_mau (có thể là tiếng trong bản nhạc) [Ước đoán]"
+    }
+   ],
+   "nhac": {
+    "phach": [
+     12.87,
+     15.53,
+     21.27
+    ],
+    "dien_bien": "giu",
+    "muc_so_voi_giong_db": null
+   },
+   "mg": [],
+   "an": [],
+   "loi": {
+    "vai_tro": "khong_loi",
+    "o_dien": ""
+   }
+  },
+  {
+   "tu": 27.12,
+   "den": 37.23,
+   "vai_tro": "bang_chung",
+   "canh": {
+    "co": "toan",
+    "goc": "góc rộng",
+    "chuyen_dong_may": "trượt",
+    "host": false
+   },
+   "chu": [],
+   "broll": [
+    {
+     "giay": 27.12,
+     "loai": "noi_that",
+     "thoi_luong": 10.11,
+     "lech_loi_s": 0,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "phòng ngủ phụ, phòng tắm sau màn đen ngắn: báo sang tầng/khu khác",
+     "gan_loi": "khong_loi_nhac"
+    }
+   ],
+   "chuyen_canh": {
+    "giay": 28.5,
+    "ma": "dip_den",
+    "so_khung": 15,
+    "easing": "inout"
+   },
+   "cat": [
+    27.12
+   ],
+   "sfx": [
+    {
+     "giay": 31.46,
+     "vai_tro": "swish",
+     "gan_voi": "nhac",
+     "db_so_voi_nhac": 5.8,
+     "nguon": "do_mau (có thể là tiếng trong bản nhạc) [Ước đoán]"
+    },
+    {
+     "giay": 35.58,
+     "vai_tro": "pop",
+     "gan_voi": "nhac",
+     "db_so_voi_nhac": 4.8,
+     "nguon": "do_mau (có thể là tiếng trong bản nhạc) [Ước đoán]"
+    }
+   ],
+   "nhac": {
+    "phach": [
+     27.12
+    ],
+    "dien_bien": "ha",
+    "muc_so_voi_giong_db": null
+   },
+   "mg": [],
+   "an": [],
+   "loi": {
+    "vai_tro": "khong_loi",
+    "o_dien": ""
+   }
+  },
+  {
+   "tu": 37.23,
+   "den": 46.02,
+   "vai_tro": "tien_ich",
+   "canh": {
+    "co": "toan",
+    "goc": "từ cao",
+    "chuyen_dong_may": "dung/trượt",
+    "host": false
+   },
+   "chu": [],
+   "broll": [
+    {
+     "giay": 37.23,
+     "loai": "flycam",
+     "thoi_luong": 6.14,
+     "lech_loi_s": 0,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "view ngày, hồ bơi đêm, view hoàng hôn: bán tiện ích và tầm nhìn không cần lời",
+     "gan_loi": "khong_loi_nhac"
+    },
+    {
+     "giay": 43.37,
+     "loai": "flycam",
+     "thoi_luong": 2.65,
+     "lech_loi_s": 0,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "view ngày, hồ bơi đêm, view hoàng hôn: bán tiện ích và tầm nhìn không cần lời",
+     "gan_loi": "khong_loi_nhac"
+    }
+   ],
+   "chuyen_canh": {
+    "giay": 37.23,
+    "ma": "cut",
+    "so_khung": 0,
+    "easing": ""
+   },
+   "cat": [
+    37.23,
+    43.37
+   ],
+   "sfx": [
+    {
+     "giay": 37.26,
+     "vai_tro": "pop",
+     "gan_voi": "nhac",
+     "db_so_voi_nhac": 6.0,
+     "nguon": "do_mau (có thể là tiếng trong bản nhạc) [Ước đoán]"
+    },
+    {
+     "giay": 38.82,
+     "vai_tro": "riser",
+     "gan_voi": "nhac",
+     "db_so_voi_nhac": 5.6,
+     "nguon": "do_mau (có thể là tiếng trong bản nhạc) [Ước đoán]"
+    }
+   ],
+   "nhac": {
+    "phach": [],
+    "dien_bien": "len",
+    "muc_so_voi_giong_db": null
+   },
+   "mg": [],
+   "an": [],
+   "loi": {
+    "vai_tro": "khong_loi",
+    "o_dien": ""
+   }
+  },
+  {
+   "tu": 46.02,
+   "den": 54.65,
+   "vai_tro": "bang_chung",
+   "canh": {
+    "co": "toan",
+    "goc": "góc rộng",
+    "chuyen_dong_may": "trượt",
+    "host": true
+   },
+   "chu": [],
+   "broll": [
+    {
+     "giay": 50.28,
+     "loai": "noi_that",
+     "thoi_luong": 4.37,
+     "lech_loi_s": 0,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "bếp và bàn ăn sau cảnh có người đứng trên cầu thang để so tỉ lệ không gian",
+     "gan_loi": "khong_loi_nhac"
+    }
+   ],
+   "chuyen_canh": {
+    "giay": 46.02,
+    "ma": "cut",
+    "so_khung": 0,
+    "easing": ""
+   },
+   "cat": [
+    46.02,
+    50.28
+   ],
+   "sfx": [
+    {
+     "giay": 46.14,
+     "vai_tro": "swish",
+     "gan_voi": "nhac",
+     "db_so_voi_nhac": 5.3,
+     "nguon": "do_mau (có thể là tiếng trong bản nhạc) [Ước đoán]"
+    },
+    {
+     "giay": 48.16,
+     "vai_tro": "hit",
+     "gan_voi": "nhac",
+     "db_so_voi_nhac": 7.6,
+     "nguon": "do_mau (có thể là tiếng trong bản nhạc) [Ước đoán]"
+    }
+   ],
+   "nhac": {
+    "phach": [
+     46.02,
+     50.28
+    ],
+    "dien_bien": "giu",
+    "muc_so_voi_giong_db": null
+   },
+   "mg": [],
+   "an": [],
+   "loi": {
+    "vai_tro": "khong_loi",
+    "o_dien": ""
+   }
+  },
+  {
+   "tu": 54.65,
+   "den": 56.63,
+   "vai_tro": "chot",
+   "canh": {
+    "co": "toan",
+    "goc": "ngước lên tòa nhà",
+    "chuyen_dong_may": "dung",
+    "host": false
+   },
+   "chu": [],
+   "broll": [
+    {
+     "giay": 54.65,
+     "loai": "toan",
+     "thoi_luong": 1.98,
+     "lech_loi_s": 0,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "tòa nhà ngày chuyển tối: khép tour, không giá, không kêu gọi",
+     "gan_loi": "khong_loi_nhac"
+    }
+   ],
+   "chuyen_canh": {
+    "giay": 54.65,
+    "ma": "cut",
+    "so_khung": 0,
+    "easing": ""
+   },
+   "cat": [
+    54.65
+   ],
+   "sfx": [],
+   "nhac": {
+    "phach": [],
+    "dien_bien": "giu",
+    "muc_so_voi_giong_db": null
+   },
+   "mg": [],
+   "an": [],
+   "loi": {
+    "vai_tro": "khong_loi",
+    "o_dien": ""
+   }
+  }
+ ],
+ "su_kien_do_duoc": {
+  "cat": 13,
+  "chu": 1,
+  "mg": 0,
+  "broll": 13,
+  "an": 0,
+  "chuyen_canh": 5,
+  "sfx": 20,
+  "phach_manh": 7
+ },
+ "binh_luan": {
+  "nguon": "trang video, đọc 30/10/2026",
+  "nhan": "Có bình luận",
+  "dien_giai": "phần lớn bình luận đọc được là hỏi giá, tầng hoặc thuê"
+ },
+ "ghi_chu_do": {
+  "sfx": "19 sự kiện đo được; video không lời nhưng có thể là âm trong bản nhạc",
+  "tieu_de": "mốc tiêu đề từ khung 1 fps, sai số ±0,5 s"
+ },
+ "ket_hop": [
+  {
+   "dau_hieu_loi": "video tìm khách, không muốn công khai giá",
+   "combo": "chỉ ghi tên căn và khu, tour đẹp không lời, không giá, để khách hỏi ở bình luận",
+   "thoi_diem": "toàn video",
+   "nguon": "https://www.tiktok.com/@huyle.bds/video/7503198750861479176 · bình luận"
+  }
+ ],
+ "diem_yeu_da_sua": [
+  "không có chữ thông tin → bản Dũng thêm nhãn phòng/diện tích nếu Dũng cấp số",
+  "giấu giá chỉ hợp video tìm khách; không áp cho video có mục tiêu nêu giá"
+ ],
+ "trang_thai": "Thu nghiem",
+ "so_lan_dung": 0,
+ "dung_cham": []
+}

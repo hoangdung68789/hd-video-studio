@@ -1,0 +1,20 @@
+{
+ "footage": "",
+ "preset": "bds — review nhà ~2 phút, người dẫn + tour (template _TEMPLATE_BDS_Review_2phut)",
+ "style": {
+  "name": "Lời dẫn nhạc nhỏ → 2 cảnh ~5s nhạc lớn đúng drop sau mỗi clip; chữ to xếp tầng bên trái vàng/trắng ở lời quan trọng; chuyển cảnh mờ dần theo nhịp",
+  "source": "so_thich",
+  "ref_videos": [
+   "https://www.tiktok.com/@quynhanhbds/video/7676404843660987655 (chữ xếp tầng trái '60 TỶ / PENTHOUSE / 342 m²', đo 25/10)",
+   "Videos\\DU-AN-MAU\\final\\DU-AN-MAU.mp4 (bản Dũng duyệt 26/10/2026)"
+  ]
+ },
+ "engine": "hyperframes 0.8.171 (hf/)",
+ "library": {"videos": 0, "last_learned": "", "sources": []},
+ "stages": {"0": "", "1": "", "1b": "", "2": "", "2b": "", "3": "", "4": "", "5": "", "6": "", "7": ""},
+ "missing": [],
+ "skipped_refs": [],
+ "lufs": {"voice": -14, "music_voice": -28, "music_hook": -28, "music_only": -11},
+ "preview": "",
+ "final": ""
+}

@@ -1,0 +1,1029 @@
+{
+ "id": "TV-06",
+ "ten": "Review biệt thự chữ động sang (viết tay + chữ in, số/giá to, logo)",
+ "the_loai": [
+  "review nha"
+ ],
+ "nguon": {
+  "url": "https://www.tiktok.com/@lakimmyduyen/video/7622295518382804245",
+  "ngay_xem": "2026-10-30",
+  "chi_so": "166K xem · 5.105 thích · 136 bình luận · 1.448 chia sẻ · đăng 28/03/2026 (trang video + info.json khớp)",
+  "nhan": "XM"
+ },
+ "thong_so": {
+  "khung": "9:16",
+  "fps": 30,
+  "thoi_luong": 62.48,
+  "lufs": null,
+  "bpm": 123.0,
+  "shot_tb": 2.98,
+  "su_kien_moi_giay": 0.67
+ },
+ "giu_chan": {
+  "hook": "3 lợi ích bật liên tiếp trong 3,9 s, kết bằng câu nhử về giá",
+  "open_loops": [
+   {
+    "mo": 2.1,
+    "tra_loi": 52.1
+   }
+  ],
+  "doi_nhip_moi_giay": 8.9,
+  "cao_trao": 52.1,
+  "keu_goi_theo_doi": {
+   "giay": 61.25,
+   "cach": "logo đơn vị sản xuất, không có lời kêu gọi theo dõi"
+  }
+ },
+ "doan": [
+  {
+   "tu": 0,
+   "den": 3.88,
+   "vai_tro": "hook",
+   "canh": {
+    "co": "toan",
+    "goc": "ngang, trước biệt thự",
+    "chuyen_dong_may": "lùi theo người",
+    "host": true
+   },
+   "loi": {
+    "vai_tro": "3 lợi ích + câu nhử giá",
+    "o_dien": ""
+   },
+   "chu": [
+    {
+     "giay": 0.0,
+     "ma": "sans_in (chưa rõ tên)",
+     "vai_tro": "loi_ich_1",
+     "font": "sans_in (chưa rõ tên)",
+     "co_pct": 12,
+     "vi_tri_pct": [
+      50,
+      22
+     ],
+     "mau": "#25638F",
+     "vao": "hiện từng cụm theo từ, lệch 0,25–0,75 s",
+     "ra": "cat_cung/nhòe theo cảnh",
+     "sau_nguoi": false,
+     "muc_dich": "tao_to_mo",
+     "ly_do": "lợi ích pháp lý bật to ngay khung đầu, kèm chữ nhỏ viết tay"
+    },
+    {
+     "giay": 1.3,
+     "ma": "sans_in (chưa rõ tên)",
+     "vai_tro": "loi_ich_2",
+     "font": "sans_in (chưa rõ tên)",
+     "co_pct": 12,
+     "vi_tri_pct": [
+      25,
+      62
+     ],
+     "mau": "#CE2B3F",
+     "vao": "hiện từng cụm theo từ, lệch 0,25–0,75 s",
+     "ra": "cat_cung/nhòe theo cảnh",
+     "sau_nguoi": true,
+     "muc_dich": "tao_to_mo",
+     "ly_do": "lợi ích 2 đặt sau người để chữ và người cùng khối, thấy rõ chiều sâu"
+    },
+    {
+     "giay": 2.1,
+     "ma": "viet_tay_nghieng (chưa rõ tên)",
+     "vai_tro": "cau_nhu_gia",
+     "font": "viet_tay_nghieng (chưa rõ tên)",
+     "co_pct": 18,
+     "vi_tri_pct": [
+      45,
+      40
+     ],
+     "mau": "#C4303F",
+     "vao": "hiện từng cụm theo từ, lệch 0,25–0,75 s",
+     "ra": "cat_cung/nhòe theo cảnh",
+     "sau_nguoi": false,
+     "muc_dich": "tao_to_mo",
+     "ly_do": "chữ viết tay rất to cho từ 'giá' — mở câu nhử"
+    },
+    {
+     "giay": 2.6,
+     "ma": "sans_in (chưa rõ tên)",
+     "vai_tro": "cau_nhu_gia_2",
+     "font": "sans_in (chưa rõ tên)",
+     "co_pct": 6,
+     "vi_tri_pct": [
+      45,
+      55
+     ],
+     "mau": "#FFFFFF",
+     "vao": "hiện từng cụm theo từ, lệch 0,25–0,75 s",
+     "ra": "cat_cung/nhòe theo cảnh",
+     "sau_nguoi": false,
+     "muc_dich": "tao_to_mo",
+     "ly_do": "phủ định bất ngờ, kéo người xem đợi con số"
+    }
+   ],
+   "mg": [],
+   "broll": [],
+   "an": [],
+   "chuyen_canh": {},
+   "cat": [],
+   "sfx": [
+    {
+     "giay": 0.08,
+     "vai_tro": "accent_pop_hit",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 14.1,
+     "nguon": "do_mau (trùng sự kiện hình, có thể lẫn giọng) [Ước đoán]"
+    },
+    {
+     "giay": 1.38,
+     "vai_tro": "riser_swell",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 13.3,
+     "nguon": "do_mau (trùng sự kiện hình, có thể lẫn giọng) [Ước đoán]"
+    },
+    {
+     "giay": 2.1,
+     "vai_tro": "pop_nhe",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 4,
+     "nguon": "them_theo_luat_dung_video (không tách được ở mẫu)"
+    },
+    {
+     "giay": 2.6,
+     "vai_tro": "pop_nhe",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 4,
+     "nguon": "them_theo_luat_dung_video (không tách được ở mẫu)"
+    }
+   ],
+   "nhac": {
+    "phach": [],
+    "dien_bien": "giu",
+    "muc_so_voi_giong_db": null
+   }
+  },
+  {
+   "tu": 3.88,
+   "den": 11.63,
+   "vai_tro": "vi_tri",
+   "canh": {
+    "co": "toan",
+    "goc": "ngang",
+    "chuyen_dong_may": "lùi theo người",
+    "host": true
+   },
+   "loi": {
+    "vai_tro": "ten du an + chu dau tu + ke hoach",
+    "o_dien": ""
+   },
+   "chu": [
+    {
+     "giay": 5.4,
+     "ma": "viet_tay_nghieng (chưa rõ tên) + sans_in (chưa rõ tên)",
+     "vai_tro": "dinh_vi",
+     "font": "viet_tay_nghieng (chưa rõ tên) + sans_in (chưa rõ tên)",
+     "co_pct": 7,
+     "vi_tri_pct": [
+      45,
+      50
+     ],
+     "mau": "#FFFFFF",
+     "vao": "hiện từng cụm theo từ, lệch 0,25–0,75 s",
+     "ra": "cat_cung/nhòe theo cảnh",
+     "sau_nguoi": false,
+     "muc_dich": "dinh_vi",
+     "ly_do": "cụm viết tay nhỏ rồi chữ in to: tách tầng thông tin"
+    },
+    {
+     "giay": 8.6,
+     "ma": "sans_in (chưa rõ tên) + viet_tay_nghieng (chưa rõ tên)",
+     "vai_tro": "dinh_vi_2",
+     "font": "sans_in (chưa rõ tên) + viet_tay_nghieng (chưa rõ tên)",
+     "co_pct": 10,
+     "vi_tri_pct": [
+      30,
+      58
+     ],
+     "mau": "#CE2B3F",
+     "vao": "hiện từng cụm theo từ, lệch 0,25–0,75 s",
+     "ra": "cat_cung/nhòe theo cảnh",
+     "sau_nguoi": true,
+     "muc_dich": "tao_to_mo",
+     "ly_do": "số/chữ đỏ to đi cùng viết tay vàng: định vị 'không dành cho số đông'"
+    }
+   ],
+   "mg": [
+    {
+     "giay": 3.88,
+     "ma": "logo_du_an",
+     "mo_ta": "logo dự án xanh đậm trên trời, giữ 4,5 s",
+     "thoi_luong": 4.5,
+     "muc_dich": "dinh_vi",
+     "ly_do": "logo đặt vào vùng trời trống, không che người",
+     "gan_loi": "tên dự án",
+     "ket_hop": []
+    },
+    {
+     "giay": 7.12,
+     "ma": "logo_chu_dau_tu",
+     "mo_ta": "2 logo chủ đầu tư trượt vào dưới cụm chữ",
+     "thoi_luong": 1.3,
+     "muc_dich": "chung_minh_so_lieu",
+     "ly_do": "uy tín chủ đầu tư đúng lúc nói tên",
+     "gan_loi": "chủ đầu tư",
+     "ket_hop": []
+    }
+   ],
+   "broll": [],
+   "an": [],
+   "chuyen_canh": {
+    "giay": 10.6,
+    "ma": "zoom_nhoe",
+    "so_khung": 30,
+    "easing": "inout"
+   },
+   "cat": [],
+   "sfx": [
+    {
+     "giay": 3.88,
+     "vai_tro": "pop_nhe",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 4,
+     "nguon": "them_theo_luat_dung_video (không tách được ở mẫu)"
+    },
+    {
+     "giay": 5.4,
+     "vai_tro": "pop_nhe",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 4,
+     "nguon": "them_theo_luat_dung_video (không tách được ở mẫu)"
+    },
+    {
+     "giay": 7.12,
+     "vai_tro": "pop_nhe",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 4,
+     "nguon": "them_theo_luat_dung_video (không tách được ở mẫu)"
+    },
+    {
+     "giay": 8.74,
+     "vai_tro": "whoosh_swish",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 5.7,
+     "nguon": "do_mau (trùng sự kiện hình, có thể lẫn giọng) [Ước đoán]"
+    }
+   ],
+   "nhac": {
+    "phach": [],
+    "dien_bien": "giu",
+    "muc_so_voi_giong_db": null
+   }
+  },
+  {
+   "tu": 11.63,
+   "den": 24.55,
+   "vai_tro": "bang_chung",
+   "canh": {
+    "co": "chi_tiet/toan",
+    "goc": "đa góc",
+    "chuyen_dong_may": "trượt/xoay nhẹ",
+    "host": false
+   },
+   "loi": {
+    "vai_tro": "mo ta khong gian",
+    "o_dien": ""
+   },
+   "chu": [],
+   "mg": [],
+   "an": [],
+   "broll": [
+    {
+     "giay": 11.63,
+     "loai": "toan",
+     "thoi_luong": 2.4,
+     "lech_loi_s": 0,
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "tour 1–3 s/cảnh để khoe vật liệu, không chữ cho mắt nghỉ sau hook dày chữ",
+     "gan_loi": "lời mô tả không gian"
+    },
+    {
+     "giay": 14.03,
+     "loai": "toan",
+     "thoi_luong": 3.24,
+     "lech_loi_s": 0,
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "tour 1–3 s/cảnh để khoe vật liệu, không chữ cho mắt nghỉ sau hook dày chữ",
+     "gan_loi": "lời mô tả không gian"
+    },
+    {
+     "giay": 17.27,
+     "loai": "noi_that",
+     "thoi_luong": 1.13,
+     "lech_loi_s": 0,
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "tour 1–3 s/cảnh để khoe vật liệu, không chữ cho mắt nghỉ sau hook dày chữ",
+     "gan_loi": "lời mô tả không gian"
+    },
+    {
+     "giay": 18.4,
+     "loai": "noi_that",
+     "thoi_luong": 1.1,
+     "lech_loi_s": 0,
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "tour 1–3 s/cảnh để khoe vật liệu, không chữ cho mắt nghỉ sau hook dày chữ",
+     "gan_loi": "lời mô tả không gian"
+    },
+    {
+     "giay": 19.5,
+     "loai": "noi_that",
+     "thoi_luong": 3.17,
+     "lech_loi_s": 0,
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "tour 1–3 s/cảnh để khoe vật liệu, không chữ cho mắt nghỉ sau hook dày chữ",
+     "gan_loi": "lời mô tả không gian"
+    },
+    {
+     "giay": 22.67,
+     "loai": "noi_that",
+     "thoi_luong": 0.96,
+     "lech_loi_s": 0,
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "tour 1–3 s/cảnh để khoe vật liệu, không chữ cho mắt nghỉ sau hook dày chữ",
+     "gan_loi": "lời mô tả không gian"
+    },
+    {
+     "giay": 23.63,
+     "loai": "noi_that",
+     "thoi_luong": 0.92,
+     "lech_loi_s": 0,
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "tour 1–3 s/cảnh để khoe vật liệu, không chữ cho mắt nghỉ sau hook dày chữ",
+     "gan_loi": "lời mô tả không gian"
+    }
+   ],
+   "chuyen_canh": {
+    "giay": 11.63,
+    "ma": "cut",
+    "so_khung": 0,
+    "easing": ""
+   },
+   "cat": [
+    11.63,
+    14.03,
+    17.27,
+    18.4,
+    19.5,
+    22.67,
+    23.63
+   ],
+   "sfx": [],
+   "nhac": {
+    "phach": [
+     18.4
+    ],
+    "dien_bien": "giu",
+    "muc_so_voi_giong_db": null
+   }
+  },
+  {
+   "tu": 24.55,
+   "den": 34.13,
+   "vai_tro": "cam_xuc",
+   "canh": {
+    "co": "toan→trung",
+    "goc": "ngang, phòng khách",
+    "chuyen_dong_may": "lùi theo người",
+    "host": true
+   },
+   "loi": {
+    "vai_tro": "doi tu vat chat sang cam giac song",
+    "o_dien": ""
+   },
+   "chu": [
+    {
+     "giay": 25.0,
+     "ma": "viet_tay_nghieng (chưa rõ tên) + sans_in (chưa rõ tên)",
+     "vai_tro": "doi_goc_nhin",
+     "font": "viet_tay_nghieng (chưa rõ tên) + sans_in (chưa rõ tên)",
+     "co_pct": 8,
+     "vi_tri_pct": [
+      40,
+      25
+     ],
+     "mau": "#CE2B3F",
+     "vao": "hiện từng cụm theo từ, lệch 0,25–0,75 s",
+     "ra": "cat_cung/nhòe theo cảnh",
+     "sau_nguoi": false,
+     "muc_dich": "chuyen_y",
+     "ly_do": "phủ định để đổi góc nhìn sang cảm xúc"
+    },
+    {
+     "giay": 27.4,
+     "ma": "sans_in (chưa rõ tên)",
+     "vai_tro": "dan_dat",
+     "font": "sans_in (chưa rõ tên)",
+     "co_pct": 5,
+     "vi_tri_pct": [
+      40,
+      25
+     ],
+     "mau": "#FFFFFF",
+     "vao": "hiện từng cụm theo từ, lệch 0,25–0,75 s",
+     "ra": "cat_cung/nhòe theo cảnh",
+     "sau_nguoi": false,
+     "muc_dich": "chuyen_y",
+     "ly_do": "chữ hiện dần theo từng từ, đi cùng lời"
+    },
+    {
+     "giay": 29.6,
+     "ma": "sans_in (chưa rõ tên) + viet_tay_nghieng (chưa rõ tên)",
+     "vai_tro": "dan_dat_2",
+     "font": "sans_in (chưa rõ tên) + viet_tay_nghieng (chưa rõ tên)",
+     "co_pct": 6,
+     "vi_tri_pct": [
+      40,
+      27
+     ],
+     "mau": "#2E6053",
+     "vao": "hiện từng cụm theo từ, lệch 0,25–0,75 s",
+     "ra": "cat_cung/nhòe theo cảnh",
+     "sau_nguoi": false,
+     "muc_dich": "tao_to_mo",
+     "ly_do": "chữ viết tay xanh lá tiệp nội thất"
+    },
+    {
+     "giay": 31.4,
+     "ma": "viet_tay_nghieng (chưa rõ tên)",
+     "vai_tro": "tu_khoa",
+     "font": "viet_tay_nghieng (chưa rõ tên)",
+     "co_pct": 7,
+     "vi_tri_pct": [
+      50,
+      55
+     ],
+     "mau": "#B68A48",
+     "vao": "hiện từng cụm theo từ, lệch 0,25–0,75 s",
+     "ra": "cat_cung/nhòe theo cảnh",
+     "sau_nguoi": true,
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "từ khóa màu đồng đặt thấp ngang người, chốt ý"
+    }
+   ],
+   "mg": [
+    {
+     "giay": 28.4,
+     "ma": "logo_du_an",
+     "mo_ta": "logo dự án lặp lại trong câu nói",
+     "thoi_luong": 1.0,
+     "muc_dich": "dinh_vi",
+     "ly_do": "logo thay chữ tên dự án trong câu, nhắc nhận diện",
+     "gan_loi": "tên dự án",
+     "ket_hop": []
+    }
+   ],
+   "broll": [],
+   "an": [],
+   "chuyen_canh": {
+    "giay": 24.55,
+    "ma": "cut",
+    "so_khung": 0,
+    "easing": ""
+   },
+   "cat": [
+    24.55
+   ],
+   "sfx": [
+    {
+     "giay": 25.04,
+     "vai_tro": "whoosh_swish",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 4.8,
+     "nguon": "do_mau (trùng sự kiện hình, có thể lẫn giọng) [Ước đoán]"
+    },
+    {
+     "giay": 27.3,
+     "vai_tro": "accent_pop_hit",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 6.3,
+     "nguon": "do_mau (trùng sự kiện hình, có thể lẫn giọng) [Ước đoán]"
+    },
+    {
+     "giay": 28.46,
+     "vai_tro": "whoosh_swish",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 6.3,
+     "nguon": "do_mau (trùng sự kiện hình, có thể lẫn giọng) [Ước đoán]"
+    },
+    {
+     "giay": 29.6,
+     "vai_tro": "pop_nhe",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 4,
+     "nguon": "them_theo_luat_dung_video (không tách được ở mẫu)"
+    },
+    {
+     "giay": 31.3,
+     "vai_tro": "riser_swell",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 8.6,
+     "nguon": "do_mau (trùng sự kiện hình, có thể lẫn giọng) [Ước đoán]"
+    }
+   ],
+   "nhac": {
+    "phach": [],
+    "dien_bien": "giu",
+    "muc_so_voi_giong_db": null
+   }
+  },
+  {
+   "tu": 34.13,
+   "den": 44.3,
+   "vai_tro": "bang_chung",
+   "canh": {
+    "co": "toan/chi_tiet",
+    "goc": "đa góc",
+    "chuyen_dong_may": "trượt/xoay",
+    "host": false
+   },
+   "loi": {
+    "vai_tro": "mo ta tang tren",
+    "o_dien": ""
+   },
+   "chu": [],
+   "mg": [],
+   "an": [],
+   "broll": [
+    {
+     "giay": 34.13,
+     "loai": "noi_that",
+     "thoi_luong": 2.44,
+     "lech_loi_s": 0,
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "tour phòng ngủ, tủ đồ, phòng tắm: kéo dài mong đợi trước màn giá",
+     "gan_loi": "lời mô tả không gian"
+    },
+    {
+     "giay": 36.57,
+     "loai": "noi_that",
+     "thoi_luong": 1.4,
+     "lech_loi_s": 0,
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "tour phòng ngủ, tủ đồ, phòng tắm: kéo dài mong đợi trước màn giá",
+     "gan_loi": "lời mô tả không gian"
+    },
+    {
+     "giay": 37.97,
+     "loai": "noi_that",
+     "thoi_luong": 1.36,
+     "lech_loi_s": 0,
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "tour phòng ngủ, tủ đồ, phòng tắm: kéo dài mong đợi trước màn giá",
+     "gan_loi": "lời mô tả không gian"
+    },
+    {
+     "giay": 39.33,
+     "loai": "noi_that",
+     "thoi_luong": 0.74,
+     "lech_loi_s": 0,
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "tour phòng ngủ, tủ đồ, phòng tắm: kéo dài mong đợi trước màn giá",
+     "gan_loi": "lời mô tả không gian"
+    },
+    {
+     "giay": 40.07,
+     "loai": "noi_that",
+     "thoi_luong": 0.9,
+     "lech_loi_s": 0,
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "tour phòng ngủ, tủ đồ, phòng tắm: kéo dài mong đợi trước màn giá",
+     "gan_loi": "lời mô tả không gian"
+    },
+    {
+     "giay": 40.97,
+     "loai": "noi_that",
+     "thoi_luong": 16.5,
+     "lech_loi_s": 0,
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "tour phòng ngủ, tủ đồ, phòng tắm: kéo dài mong đợi trước màn giá",
+     "gan_loi": "lời mô tả không gian"
+    }
+   ],
+   "chuyen_canh": {
+    "giay": 34.13,
+    "ma": "cut",
+    "so_khung": 0,
+    "easing": ""
+   },
+   "cat": [
+    34.13,
+    36.57,
+    37.97,
+    39.33,
+    40.07,
+    40.97
+   ],
+   "sfx": [],
+   "nhac": {
+    "phach": [],
+    "dien_bien": "giu",
+    "muc_so_voi_giong_db": null
+   }
+  },
+  {
+   "tu": 44.3,
+   "den": 53.6,
+   "vai_tro": "gia",
+   "canh": {
+    "co": "trung",
+    "goc": "ngang, ngồi sofa",
+    "chuyen_dong_may": "dung",
+    "host": true
+   },
+   "loi": {
+    "vai_tro": "thong so → gia",
+    "o_dien": ""
+   },
+   "chu": [
+    {
+     "giay": 44.4,
+     "ma": "sans_in (chưa rõ tên) + viet_tay_nghieng (chưa rõ tên)",
+     "vai_tro": "loai_nha",
+     "font": "sans_in (chưa rõ tên) + viet_tay_nghieng (chưa rõ tên)",
+     "co_pct": 7,
+     "vi_tri_pct": [
+      50,
+      18
+     ],
+     "mau": "#CE2B3F",
+     "vao": "hiện từng cụm theo từ, lệch 0,25–0,75 s",
+     "ra": "cat_cung/nhòe theo cảnh",
+     "sau_nguoi": false,
+     "muc_dich": "dinh_vi",
+     "ly_do": "loại nhà ngay đầu màn thông số"
+    },
+    {
+     "giay": 45.6,
+     "ma": "sans_in (chưa rõ tên)",
+     "vai_tro": "dien_tich_dat",
+     "font": "sans_in (chưa rõ tên)",
+     "co_pct": 13,
+     "vi_tri_pct": [
+      50,
+      40
+     ],
+     "mau": "#B68A48",
+     "vao": "hiện từng cụm theo từ, lệch 0,25–0,75 s",
+     "ra": "cat_cung/nhòe theo cảnh",
+     "sau_nguoi": true,
+     "muc_dich": "chung_minh_so_lieu",
+     "ly_do": "số diện tích to gradient đồng, đặt sau đầu ngang vai (không che mặt)"
+    },
+    {
+     "giay": 47.4,
+     "ma": "sans_in (chưa rõ tên)",
+     "vai_tro": "dien_tich_xd",
+     "font": "sans_in (chưa rõ tên)",
+     "co_pct": 13,
+     "vi_tri_pct": [
+      50,
+      40
+     ],
+     "mau": "#C65B57",
+     "vao": "hiện từng cụm theo từ, lệch 0,25–0,75 s",
+     "ra": "cat_cung/nhòe theo cảnh",
+     "sau_nguoi": true,
+     "muc_dich": "chung_minh_so_lieu",
+     "ly_do": "đổi màu đỏ để phân biệt số thứ hai"
+    },
+    {
+     "giay": 49.4,
+     "ma": "sans_in (chưa rõ tên)",
+     "vai_tro": "so_tang",
+     "font": "sans_in (chưa rõ tên)",
+     "co_pct": 3,
+     "vi_tri_pct": [
+      50,
+      62
+     ],
+     "mau": "#FFFFFF",
+     "vao": "hiện từng cụm theo từ, lệch 0,25–0,75 s",
+     "ra": "cat_cung/nhòe theo cảnh",
+     "sau_nguoi": false,
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "chữ nhỏ từng ý trên người, nhịp nhanh theo lời"
+    },
+    {
+     "giay": 49.9,
+     "ma": "sans_in (chưa rõ tên)",
+     "vai_tro": "so_lau",
+     "font": "sans_in (chưa rõ tên)",
+     "co_pct": 3,
+     "vi_tri_pct": [
+      50,
+      62
+     ],
+     "mau": "#FFFFFF",
+     "vao": "hiện từng cụm theo từ, lệch 0,25–0,75 s",
+     "ra": "cat_cung/nhòe theo cảnh",
+     "sau_nguoi": false,
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "như trên"
+    },
+    {
+     "giay": 50.4,
+     "ma": "sans_in (chưa rõ tên)",
+     "vai_tro": "so_phong",
+     "font": "sans_in (chưa rõ tên)",
+     "co_pct": 3,
+     "vi_tri_pct": [
+      50,
+      62
+     ],
+     "mau": "#FFFFFF",
+     "vao": "hiện từng cụm theo từ, lệch 0,25–0,75 s",
+     "ra": "cat_cung/nhòe theo cảnh",
+     "sau_nguoi": false,
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "như trên"
+    },
+    {
+     "giay": 51.4,
+     "ma": "sans_in (chưa rõ tên)",
+     "vai_tro": "dan_gia",
+     "font": "sans_in (chưa rõ tên)",
+     "co_pct": 6,
+     "vi_tri_pct": [
+      40,
+      22
+     ],
+     "mau": "#FFFFFF",
+     "vao": "hiện từng cụm theo từ, lệch 0,25–0,75 s",
+     "ra": "cat_cung/nhòe theo cảnh",
+     "sau_nguoi": false,
+     "muc_dich": "tao_to_mo",
+     "ly_do": "từ dẫn hiện trước số 0,7 s để tạo căng"
+    },
+    {
+     "giay": 52.1,
+     "ma": "sans_in (chưa rõ tên)",
+     "vai_tro": "gia",
+     "font": "sans_in (chưa rõ tên)",
+     "co_pct": 18,
+     "vi_tri_pct": [
+      50,
+      40
+     ],
+     "mau": "#201FF0",
+     "vao": "hiện từng cụm theo từ, lệch 0,25–0,75 s",
+     "ra": "cat_cung/nhòe theo cảnh",
+     "sau_nguoi": true,
+     "muc_dich": "nhan_gia",
+     "ly_do": "giá lớn nhất video, màu xanh dương tương phản: trả lời câu nhử ở hook"
+    }
+   ],
+   "mg": [],
+   "broll": [],
+   "an": [],
+   "chuyen_canh": {
+    "giay": 44.3,
+    "ma": "cut",
+    "so_khung": 0,
+    "easing": ""
+   },
+   "cat": [],
+   "sfx": [
+    {
+     "giay": 44.4,
+     "vai_tro": "pop_nhe",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 4,
+     "nguon": "them_theo_luat_dung_video (không tách được ở mẫu)"
+    },
+    {
+     "giay": 45.6,
+     "vai_tro": "pop_nhe",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 4,
+     "nguon": "them_theo_luat_dung_video (không tách được ở mẫu)"
+    },
+    {
+     "giay": 47.42,
+     "vai_tro": "accent_pop_hit",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 5.1,
+     "nguon": "do_mau (trùng sự kiện hình, có thể lẫn giọng) [Ước đoán]"
+    },
+    {
+     "giay": 49.4,
+     "vai_tro": "pop_nhe",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 4,
+     "nguon": "them_theo_luat_dung_video (không tách được ở mẫu)"
+    },
+    {
+     "giay": 49.9,
+     "vai_tro": "pop_nhe",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 4,
+     "nguon": "them_theo_luat_dung_video (không tách được ở mẫu)"
+    },
+    {
+     "giay": 50.4,
+     "vai_tro": "pop_nhe",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 4,
+     "nguon": "them_theo_luat_dung_video (không tách được ở mẫu)"
+    },
+    {
+     "giay": 51.4,
+     "vai_tro": "pop_nhe",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 4,
+     "nguon": "them_theo_luat_dung_video (không tách được ở mẫu)"
+    },
+    {
+     "giay": 51.96,
+     "vai_tro": "riser_swell",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 5.9,
+     "nguon": "do_mau (trùng sự kiện hình, có thể lẫn giọng) [Ước đoán]"
+    }
+   ],
+   "nhac": {
+    "phach": [],
+    "dien_bien": "giu",
+    "muc_so_voi_giong_db": null
+   }
+  },
+  {
+   "tu": 53.6,
+   "den": 62.48,
+   "vai_tro": "chot",
+   "canh": {
+    "co": "trung/chi_tiet",
+    "goc": "bếp + nội thất",
+    "chuyen_dong_may": "trượt",
+    "host": true
+   },
+   "loi": {
+    "vai_tro": "ket + goi y tim hieu",
+    "o_dien": ""
+   },
+   "chu": [],
+   "mg": [
+    {
+     "giay": 61.25,
+     "ma": "logo_ket",
+     "mo_ta": "logo nhà sản xuất giữa màn đen",
+     "thoi_luong": 1.2,
+     "muc_dich": "keu_goi",
+     "ly_do": "kết sạch bằng nhận diện đơn vị sản xuất",
+     "gan_loi": "kết",
+     "ket_hop": []
+    }
+   ],
+   "broll": [
+    {
+     "giay": 57.47,
+     "loai": "noi_that",
+     "thoi_luong": 0.73,
+     "lech_loi_s": 0,
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "5 cảnh ~0,75 s dồn nhịp kết",
+     "gan_loi": "lời mô tả không gian"
+    },
+    {
+     "giay": 58.2,
+     "loai": "noi_that",
+     "thoi_luong": 0.8,
+     "lech_loi_s": 0,
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "5 cảnh ~0,75 s dồn nhịp kết",
+     "gan_loi": "lời mô tả không gian"
+    },
+    {
+     "giay": 59.0,
+     "loai": "noi_that",
+     "thoi_luong": 0.77,
+     "lech_loi_s": 0,
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "5 cảnh ~0,75 s dồn nhịp kết",
+     "gan_loi": "lời mô tả không gian"
+    },
+    {
+     "giay": 59.77,
+     "loai": "noi_that",
+     "thoi_luong": 0.73,
+     "lech_loi_s": 0,
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "5 cảnh ~0,75 s dồn nhịp kết",
+     "gan_loi": "lời mô tả không gian"
+    },
+    {
+     "giay": 60.5,
+     "loai": "noi_that",
+     "thoi_luong": 0.75,
+     "lech_loi_s": 0,
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "5 cảnh ~0,75 s dồn nhịp kết",
+     "gan_loi": "lời mô tả không gian"
+    }
+   ],
+   "an": [],
+   "chuyen_canh": {
+    "giay": 53.6,
+    "ma": "nhoe_lia",
+    "so_khung": 10,
+    "easing": "inout"
+   },
+   "cat": [
+    57.47,
+    58.2,
+    59.0,
+    59.77,
+    60.5,
+    61.25
+   ],
+   "sfx": [
+    {
+     "giay": 61.25,
+     "vai_tro": "pop_nhe",
+     "gan_voi": "su_kien_hinh",
+     "db_so_voi_nhac": 4,
+     "nguon": "them_theo_luat_dung_video (không tách được ở mẫu)"
+    }
+   ],
+   "nhac": {
+    "phach": [
+     59.0,
+     60.5
+    ],
+    "dien_bien": "giu",
+    "muc_so_voi_giong_db": null
+   }
+  }
+ ],
+ "su_kien_do_duoc": {
+  "cat": 20,
+  "chu": 18,
+  "mg": 4,
+  "broll": 18,
+  "an": 0,
+  "chuyen_canh": 6,
+  "sfx": 22,
+  "phach_manh": 3
+ },
+ "binh_luan": {
+  "nguon": "trang video, đọc 30/10/2026",
+  "nhan": "Có bình luận",
+  "khen": [
+   "sound design được khen",
+   "chuyển cảnh kiểu teleport được nhắc tới"
+  ],
+  "che": [
+   "1 bình luận chê chữ núp sau người khó đọc"
+  ]
+ },
+ "gu_dung": {
+  "ngay": "2026-10-30",
+  "nhan_xet": "thích kiểu này: chuyên nghiệp, cuốn hút",
+  "luat": "chữ được đặt sau người như mẫu, chỉ không che khuôn mặt"
+ },
+ "ghi_chu_do": {
+  "chu_do_tai": "dải 4 fps đoạn 0–12, 25–34, 44–54 s (±0,13 s); các đoạn còn lại khung 1 fps",
+  "cum_chu": "nhiều cụm hiện từng phần, đếm 1 sự kiện cho mỗi cụm; 'và', 'đang' ở 50,9–51,1 s không đếm",
+  "sfx": "chỉ giữ SFX trùng sự kiện hình ±0,15 s; còn lại Không đo được",
+  "co_pct_vi_tri": "Ước đoán trên contact sheet; màu đo pixel, gradient lấy trung vị"
+ },
+ "ket_hop": [
+  {
+   "dau_hieu_loi": "liệt kê lợi ích ở hook",
+   "combo": "mỗi lợi ích 1 kiểu chữ + màu khác nhau, 1,2 s/ý, chữ in to + chữ viết tay nhỏ",
+   "thoi_diem": "đúng từ khóa",
+   "nguon": "https://www.tiktok.com/@lakimmyduyen/video/7622295518382804245 · 0–3,9 s"
+  },
+  {
+   "dau_hieu_loi": "diện tích / thông số",
+   "combo": "số rất to sau đầu người, ngang vai, mỗi số một màu, không che mặt",
+   "thoi_diem": "đúng số ±0,2 s",
+   "nguon": "https://www.tiktok.com/@lakimmyduyen/video/7622295518382804245 · 45,6 / 47,4 s"
+  },
+  {
+   "dau_hieu_loi": "giá chào bán",
+   "combo": "từ dẫn trắng trước 0,7 s, rồi giá to nhất video màu tương phản sau người",
+   "thoi_diem": "đúng từ",
+   "nguon": "https://www.tiktok.com/@lakimmyduyen/video/7622295518382804245 · 51,4–53,5 s"
+  },
+  {
+   "dau_hieu_loi": "tên dự án / chủ đầu tư",
+   "combo": "logo thật đặt vùng trời trống + logo đối tác trượt vào đúng lúc nói tên",
+   "thoi_diem": "đúng tên",
+   "nguon": "https://www.tiktok.com/@lakimmyduyen/video/7622295518382804245 · 3,9 / 7,1 s"
+  }
+ ],
+ "diem_yeu_da_sua": [
+  "1 bình luận chê chữ núp sau khó đọc → giữ kiểu tách nền (Dũng chốt), nhưng số/từ chính vẫn phải đọc được và không che mặt",
+  "font viết tay + logo thuộc dự án mẫu → bản Dũng dùng font trong kho có đủ dấu, logo thật của dự án Dũng"
+ ],
+ "trang_thai": "Thu nghiem",
+ "so_lan_dung": 0,
+ "dung_cham": []
+}

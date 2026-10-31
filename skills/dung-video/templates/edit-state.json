@@ -1,0 +1,22 @@
+{
+  "footage": "",
+  "mode": "A|T",
+  "genre": "",
+  "preset": "",
+  "style": {
+    "name": "",
+    "source": "dung_chon|so_thich|video_mau",
+    "ref_videos": []
+  },
+  "template": {
+    "id": "",
+    "path": "",
+    "map": []
+  },
+  "engine": "hyperframes",
+  "stages": {},
+  "missing": [],
+  "skipped_refs": [],
+  "lufs": {},
+  "final": ""
+}

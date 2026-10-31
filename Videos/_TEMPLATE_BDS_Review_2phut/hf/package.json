@@ -1,0 +1,10 @@
+{
+  "name": "hf",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx --yes hyperframes@0.8.171 preview",
+    "check": "npx --yes hyperframes@0.8.171 check",
+    "render": "npx --yes hyperframes@0.8.171 render"
+  }
+}

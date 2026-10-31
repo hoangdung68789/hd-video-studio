@@ -1,0 +1,602 @@
+{
+ "id": "TV-01",
+ "ten": "Penthouse tiết lộ giá giữa video (không lời, nhạc dâng)",
+ "the_loai": [
+  "review nha"
+ ],
+ "nguon": {
+  "url": "https://www.tiktok.com/@quynhanhbds/video/7676404843660987655",
+  "ngay_xem": "2026-10-30",
+  "chi_so": "2,9M xem · 267,9K thích · 6,3K bình luận · 137,8K chia sẻ (video.info.json)",
+  "nhan": "XM"
+ },
+ "thong_so": {
+  "khung": "9:16",
+  "fps": 30,
+  "thoi_luong": 58.9,
+  "lufs": null,
+  "bpm": 161.5,
+  "shot_tb": 2.27,
+  "su_kien_moi_giay": 0.54
+ },
+ "giu_chan": {
+  "hook": "bóng người trước kính nhìn toàn cảnh 0–3,2s + caption câu nhử",
+  "open_loops": [
+   {
+    "mo": 0,
+    "tra_loi": 18.35
+   }
+  ],
+  "doi_nhip_moi_giay": 2.27,
+  "cao_trao": 24.03,
+  "keu_goi_theo_doi": {
+   "giay": 55.75,
+   "cach": "chữ ký thương hiệu, không có lời kêu gọi"
+  }
+ },
+ "doan": [
+  {
+   "tu": 0,
+   "den": 3.2,
+   "vai_tro": "hook",
+   "canh": {
+    "co": "toan",
+    "goc": "ngang",
+    "chuyen_dong_may": "dung",
+    "host": true
+   },
+   "broll": [],
+   "chu": [],
+   "mg": [],
+   "an": [],
+   "sfx": [],
+   "chuyen_canh": {},
+   "ly_do_tinh": "hook bằng hình: bóng người trước kính nhìn toàn cảnh thành phố 3,2s, không chữ — gây tò mò 'ai, ở đâu'",
+   "cat": [],
+   "nhac": {
+    "phach": [],
+    "dien_bien": "ha",
+    "muc_so_voi_giong_db": 0
+   },
+   "loi": {
+    "vai_tro": "khong_loi",
+    "o_dien": ""
+   }
+  },
+  {
+   "tu": 3.2,
+   "den": 18.17,
+   "vai_tro": "van_de",
+   "canh": {
+    "co": "trung",
+    "goc": "ngang",
+    "chuyen_dong_may": "lia_cham",
+    "host": false
+   },
+   "broll": [
+    {
+     "giay": 3.2,
+     "loai": "noi_that",
+     "thoi_luong": 1.53,
+     "lech_loi_s": 0,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "teaser nội thất ~1,5s/cảnh đúng phách để khoe nhanh nhiều không gian, giữ người xem tới màn tiết lộ giá",
+     "gan_loi": "khong_loi_nhac"
+    },
+    {
+     "giay": 4.73,
+     "loai": "noi_that",
+     "thoi_luong": 1.5,
+     "lech_loi_s": 0,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "teaser nội thất ~1,5s/cảnh đúng phách để khoe nhanh nhiều không gian, giữ người xem tới màn tiết lộ giá",
+     "gan_loi": "khong_loi_nhac"
+    },
+    {
+     "giay": 7.73,
+     "loai": "noi_that",
+     "thoi_luong": 2.97,
+     "lech_loi_s": 0,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "teaser nội thất ~1,5s/cảnh đúng phách để khoe nhanh nhiều không gian, giữ người xem tới màn tiết lộ giá",
+     "gan_loi": "khong_loi_nhac"
+    },
+    {
+     "giay": 10.7,
+     "loai": "noi_that",
+     "thoi_luong": 1.5,
+     "lech_loi_s": 0,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "teaser nội thất ~1,5s/cảnh đúng phách để khoe nhanh nhiều không gian, giữ người xem tới màn tiết lộ giá",
+     "gan_loi": "khong_loi_nhac"
+    },
+    {
+     "giay": 12.2,
+     "loai": "noi_that",
+     "thoi_luong": 1.57,
+     "lech_loi_s": 0,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "teaser nội thất ~1,5s/cảnh đúng phách để khoe nhanh nhiều không gian, giữ người xem tới màn tiết lộ giá",
+     "gan_loi": "khong_loi_nhac"
+    },
+    {
+     "giay": 13.77,
+     "loai": "noi_that",
+     "thoi_luong": 1.46,
+     "lech_loi_s": 0,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "teaser nội thất ~1,5s/cảnh đúng phách để khoe nhanh nhiều không gian, giữ người xem tới màn tiết lộ giá",
+     "gan_loi": "khong_loi_nhac"
+    },
+    {
+     "giay": 15.23,
+     "loai": "noi_that",
+     "thoi_luong": 2.94,
+     "lech_loi_s": 0,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "teaser nội thất ~1,5s/cảnh đúng phách để khoe nhanh nhiều không gian, giữ người xem tới màn tiết lộ giá",
+     "gan_loi": "khong_loi_nhac"
+    }
+   ],
+   "chu": [],
+   "mg": [],
+   "an": [],
+   "sfx": [],
+   "chuyen_canh": {
+    "giay": 3.2,
+    "ma": "cut",
+    "so_khung": 0,
+    "easing": ""
+   },
+   "cat": [
+    3.2,
+    4.73,
+    6.23,
+    7.73,
+    10.7,
+    12.2,
+    13.77,
+    15.23
+   ],
+   "nhac": {
+    "phach": [
+     3.2,
+     4.73,
+     6.23,
+     7.73,
+     10.7,
+     12.2,
+     13.77,
+     15.23
+    ],
+    "dien_bien": "len",
+    "muc_so_voi_giong_db": 0
+   },
+   "loi": {
+    "vai_tro": "khong_loi",
+    "o_dien": ""
+   }
+  },
+  {
+   "tu": 18.17,
+   "den": 24.03,
+   "vai_tro": "gia",
+   "canh": {
+    "co": "trung",
+    "goc": "ngang",
+    "chuyen_dong_may": "theo_nguoi",
+    "host": true
+   },
+   "broll": [],
+   "mg": [],
+   "an": [],
+   "chu": [
+    {
+     "giay": 18.35,
+     "ma": "pop",
+     "vai_tro": "gia",
+     "mau": "#F9C945",
+     "vao": "pop",
+     "vi_tri_pct": [
+      7,
+      27
+     ],
+     "muc_dich": "nhan_gia",
+     "ly_do": "con số đắt nhất bật 0,2s sau cú cắt, đúng phách: trả lời câu nhử ở caption"
+    },
+    {
+     "giay": 19.85,
+     "ma": "go_chu",
+     "vai_tro": "phu_gia",
+     "mau": "#FFFFFF",
+     "vao": "go_chu",
+     "vi_tri_pct": [
+      40,
+      30
+     ],
+     "muc_dich": "nhan_gia",
+     "ly_do": "dòng nhỏ giải thích con số, hiện sau 1,5s để mắt đọc xong số trước"
+    },
+    {
+     "giay": 20.6,
+     "ma": "go_chu",
+     "vai_tro": "phu",
+     "mau": "#FFFFFF",
+     "vao": "go_chu",
+     "vi_tri_pct": [
+      8,
+      44
+     ],
+     "muc_dich": "chuyen_y",
+     "ly_do": "dòng nhỏ nối sang loại nhà"
+    },
+    {
+     "giay": 20.85,
+     "ma": "pop",
+     "vai_tro": "loai_nha",
+     "mau": "#8FDEC2",
+     "vao": "pop",
+     "vi_tri_pct": [
+      10,
+      49
+     ],
+     "muc_dich": "nhan_gia",
+     "ly_do": "tên loại nhà màu khác (xanh ngọc) để tách tầng thông tin với giá vàng"
+    },
+    {
+     "giay": 21.6,
+     "ma": "hien_tung_ky_tu",
+     "vai_tro": "dien_tich",
+     "mau": "#FFFFFF",
+     "vao": "hien_tung_ky_tu",
+     "vi_tri_pct": [
+      15,
+      65
+     ],
+     "muc_dich": "chung_minh_so_lieu",
+     "ly_do": "diện tích hiện dần từng ký tự như bộ đếm — bằng chứng cho giá"
+    }
+   ],
+   "sfx": [
+    {
+     "giay": 18.35,
+     "vai_tro": "phach_nhac",
+     "gan_voi": "nhac",
+     "db_so_voi_nhac": 0
+    },
+    {
+     "giay": 19.85,
+     "vai_tro": "phach_nhac",
+     "gan_voi": "nhac",
+     "db_so_voi_nhac": 0
+    },
+    {
+     "giay": 20.6,
+     "vai_tro": "phach_nhac",
+     "gan_voi": "nhac",
+     "db_so_voi_nhac": 0
+    },
+    {
+     "giay": 20.85,
+     "vai_tro": "phach_nhac",
+     "gan_voi": "nhac",
+     "db_so_voi_nhac": 0
+    },
+    {
+     "giay": 21.6,
+     "vai_tro": "phach_nhac",
+     "gan_voi": "nhac",
+     "db_so_voi_nhac": 0
+    }
+   ],
+   "chuyen_canh": {
+    "giay": 18.17,
+    "ma": "whip_blur",
+    "so_khung": 15,
+    "easing": "out"
+   },
+   "cat": [
+    18.17
+   ],
+   "nhac": {
+    "phach": [
+     18.17
+    ],
+    "dien_bien": "giu",
+    "muc_so_voi_giong_db": 0
+   },
+   "loi": {
+    "vai_tro": "khong_loi",
+    "o_dien": ""
+   }
+  },
+  {
+   "tu": 24.03,
+   "den": 54.1,
+   "vai_tro": "bang_chung",
+   "canh": {
+    "co": "trung",
+    "goc": "ngang",
+    "chuyen_dong_may": "lia_cham",
+    "host": true
+   },
+   "broll": [
+    {
+     "giay": 27.23,
+     "loai": "noi_that",
+     "thoi_luong": 1.14,
+     "lech_loi_s": 0,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "thân video: tour nội thất 1–4,5s/cảnh trên đoạn nhạc lớn, xen người dẫn để giữ yếu tố con người",
+     "gan_loi": "khong_loi_nhac"
+    },
+    {
+     "giay": 28.37,
+     "loai": "noi_that",
+     "thoi_luong": 1.1,
+     "lech_loi_s": 0,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "thân video: tour nội thất 1–4,5s/cảnh trên đoạn nhạc lớn, xen người dẫn để giữ yếu tố con người",
+     "gan_loi": "khong_loi_nhac"
+    },
+    {
+     "giay": 29.47,
+     "loai": "noi_that",
+     "thoi_luong": 0.76,
+     "lech_loi_s": 0,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "thân video: tour nội thất 1–4,5s/cảnh trên đoạn nhạc lớn, xen người dẫn để giữ yếu tố con người",
+     "gan_loi": "khong_loi_nhac"
+    },
+    {
+     "giay": 31.33,
+     "loai": "noi_that",
+     "thoi_luong": 3.04,
+     "lech_loi_s": 0,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "thân video: tour nội thất 1–4,5s/cảnh trên đoạn nhạc lớn, xen người dẫn để giữ yếu tố con người",
+     "gan_loi": "khong_loi_nhac"
+    },
+    {
+     "giay": 34.37,
+     "loai": "noi_that",
+     "thoi_luong": 1.1,
+     "lech_loi_s": 0,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "thân video: tour nội thất 1–4,5s/cảnh trên đoạn nhạc lớn, xen người dẫn để giữ yếu tố con người",
+     "gan_loi": "khong_loi_nhac"
+    },
+    {
+     "giay": 35.47,
+     "loai": "noi_that",
+     "thoi_luong": 3.7,
+     "lech_loi_s": 0,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "thân video: tour nội thất 1–4,5s/cảnh trên đoạn nhạc lớn, xen người dẫn để giữ yếu tố con người",
+     "gan_loi": "khong_loi_nhac"
+    },
+    {
+     "giay": 39.17,
+     "loai": "noi_that",
+     "thoi_luong": 4.46,
+     "lech_loi_s": 0,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "thân video: tour nội thất 1–4,5s/cảnh trên đoạn nhạc lớn, xen người dẫn để giữ yếu tố con người",
+     "gan_loi": "khong_loi_nhac"
+    },
+    {
+     "giay": 45.23,
+     "loai": "noi_that",
+     "thoi_luong": 1.44,
+     "lech_loi_s": 0,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "thân video: tour nội thất 1–4,5s/cảnh trên đoạn nhạc lớn, xen người dẫn để giữ yếu tố con người",
+     "gan_loi": "khong_loi_nhac"
+    },
+    {
+     "giay": 46.67,
+     "loai": "noi_that",
+     "thoi_luong": 1.53,
+     "lech_loi_s": 0,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "thân video: tour nội thất 1–4,5s/cảnh trên đoạn nhạc lớn, xen người dẫn để giữ yếu tố con người",
+     "gan_loi": "khong_loi_nhac"
+    },
+    {
+     "giay": 48.2,
+     "loai": "noi_that",
+     "thoi_luong": 3.0,
+     "lech_loi_s": 0,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "thân video: tour nội thất 1–4,5s/cảnh trên đoạn nhạc lớn, xen người dẫn để giữ yếu tố con người",
+     "gan_loi": "khong_loi_nhac"
+    },
+    {
+     "giay": 51.2,
+     "loai": "noi_that",
+     "thoi_luong": 1.13,
+     "lech_loi_s": 0,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "thân video: tour nội thất 1–4,5s/cảnh trên đoạn nhạc lớn, xen người dẫn để giữ yếu tố con người",
+     "gan_loi": "khong_loi_nhac"
+    },
+    {
+     "giay": 52.33,
+     "loai": "noi_that",
+     "thoi_luong": 1.77,
+     "lech_loi_s": 0,
+     "muc_dich": "doi_nhip_giu_chan",
+     "ly_do": "thân video: tour nội thất 1–4,5s/cảnh trên đoạn nhạc lớn, xen người dẫn để giữ yếu tố con người",
+     "gan_loi": "khong_loi_nhac"
+    }
+   ],
+   "chu": [],
+   "mg": [],
+   "an": [],
+   "sfx": [],
+   "chuyen_canh": {
+    "giay": 24.03,
+    "ma": "light_leak",
+    "so_khung": 15,
+    "easing": "inout"
+   },
+   "cat": [
+    24.03,
+    27.23,
+    28.37,
+    29.47,
+    30.23,
+    31.33,
+    34.37,
+    35.47,
+    39.17,
+    43.63,
+    45.23,
+    46.67,
+    48.2,
+    51.2,
+    52.33
+   ],
+   "nhac": {
+    "phach": [
+     27.23,
+     28.37,
+     29.47,
+     30.23,
+     31.33,
+     34.37,
+     35.47,
+     39.17,
+     45.23,
+     46.67,
+     48.2,
+     51.2,
+     52.33
+    ],
+    "dien_bien": "giu",
+    "muc_so_voi_giong_db": 0
+   },
+   "loi": {
+    "vai_tro": "khong_loi",
+    "o_dien": ""
+   }
+  },
+  {
+   "tu": 54.1,
+   "den": 58.9,
+   "vai_tro": "cta",
+   "canh": {
+    "co": "trung",
+    "goc": "ngang",
+    "chuyen_dong_may": "dung",
+    "host": true
+   },
+   "broll": [],
+   "an": [],
+   "chu": [
+    {
+     "giay": 55.25,
+     "ma": "truot_len",
+     "vai_tro": "loai_nha",
+     "mau": "#6FE889",
+     "vao": "truot_len",
+     "vi_tri_pct": [
+      30,
+      28
+     ],
+     "muc_dich": "keu_goi",
+     "ly_do": "nhắc lại loại nhà trên đầu người dẫn ở cảnh kết để chốt trí nhớ"
+    }
+   ],
+   "mg": [
+    {
+     "giay": 55.75,
+     "ma": "chu_ky",
+     "mo_ta": "chữ ký viết tay thương hiệu bên trái",
+     "thoi_luong": 3,
+     "muc_dich": "keu_goi",
+     "ly_do": "khép video bằng nhận diện người bán thay vì lời kêu gọi",
+     "gan_loi": "khong_loi_nhac",
+     "ket_hop": [
+      "chu loai_nha"
+     ]
+    }
+   ],
+   "sfx": [
+    {
+     "giay": 55.25,
+     "vai_tro": "phach_nhac",
+     "gan_voi": "nhac",
+     "db_so_voi_nhac": 0
+    }
+   ],
+   "chuyen_canh": {
+    "giay": 54.1,
+    "ma": "light_leak",
+    "so_khung": 15,
+    "easing": "inout"
+   },
+   "cat": [
+    54.1
+   ],
+   "nhac": {
+    "phach": [],
+    "dien_bien": "ha",
+    "muc_so_voi_giong_db": 0
+   },
+   "loi": {
+    "vai_tro": "khong_loi",
+    "o_dien": ""
+   }
+  }
+ ],
+ "su_kien_do_duoc": {
+  "cat": 25,
+  "chu": 6,
+  "mg": 1,
+  "broll": 19,
+  "an": 0,
+  "chuyen_canh": 4,
+  "sfx": 6,
+  "phach_manh": 22
+ },
+ "ket_hop": [
+  {
+   "dau_hieu_loi": "giá (video không lời: màn tiết lộ)",
+   "combo": "shot người dẫn dài nhất + whip vào + chữ giá vàng pop → dòng nhỏ gõ → loại nhà xanh ngọc → diện tích đếm ký tự + light leak ra",
+   "thoi_diem": "31% thời lượng, chữ đầu +0,2s sau cú cắt",
+   "nguon": "https://www.tiktok.com/@quynhanhbds/video/7676404843660987655 · 18,2–24,0s"
+  }
+ ],
+ "diem_yeu_da_sua": [
+  "mẫu không SFX cho chữ (dùng phách nhạc) — áp cho Dũng thì thêm SFX theo phân loại (luật /dung-video)",
+  "khung mẫu 720p 30fps — bản Dũng 1728x3072 60fps"
+ ],
+ "trang_thai": "Dung duoc",
+ "so_lan_dung": 0,
+ "dung_cham": [],
+ "kiem_giong_mau": {
+  "vong": [
+   {
+    "v": 1,
+    "diem": 90.4,
+    "loi": "sót 4 cú cắt (lóe sáng dâng chậm, 2 cặp cảnh cùng tông), BPM đo nhầm bậc 107,7"
+   },
+   {
+    "v": 2,
+    "diem": 97.7,
+    "loi": "sót 2 cú cắt lóe sáng"
+   },
+   {
+    "v": 3,
+    "diem": 100.0,
+    "loi": ""
+   }
+  ],
+  "chua_cham": [
+   "tỷ lệ cắt đúng phách: mẫu 88% / bản dựng 36% (thang chưa có mục này)",
+   "3 dòng chữ nhỏ chấm theo kế hoạch, chưa đo pixel"
+  ],
+  "ban_dung": "<HD_VIDEO_HOME>\\Videos\\_TV01_dung_lai\\ban_dung_v3.mp4"
+ }
+}

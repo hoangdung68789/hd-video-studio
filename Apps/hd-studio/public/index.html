@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HD Studio</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23e8b64c'/%3E%3Cpath d='M12 9l12 7-12 7z' fill='%23181a1f'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="uiBg" aria-hidden="true"></div>
+<header id="top">
+  <strong class="brand">HD Studio</strong>
+  <select id="project" title="Chọn dự án" aria-label="Chọn dự án"></select>
+  <span id="status" role="status">Đang mở…</span>
+  <span class="grow"></span>
+  <div class="platWrap"><div id="xuyenMenu" hidden></div></div>
+  <div class="menuWrap">
+    <button class="menuBtn" aria-haspopup="true" aria-expanded="false">Thư viện ▾</button>
+    <div class="topMenu" hidden>
+      <button id="capcutBtn" title="Nhãn dán, hiệu ứng, chuyển tiếp lấy danh mục từ CapCut">CapCut</button>
+      <button id="mgBtn" title="Thư viện motion graphics mẫu Opus 5.5">Thư viện MG</button>
+      <button id="tplBtn" title="Chọn và xem trước template trước khi dựng">Template</button>
+    </div>
+  </div>
+  <div class="menuWrap">
+    <button class="menuBtn" aria-haspopup="true" aria-expanded="false">Hiển thị ▾</button>
+    <div class="topMenu" hidden>
+      <button id="toggleLeft" title="Ẩn / hiện bảng trái">◧ Bảng trái</button>
+      <button id="toggleRight" title="Ẩn / hiện bảng thuộc tính">◨ Bảng thuộc tính</button>
+      <button id="toggleStage" title="Ẩn / hiện khung xem video">▣ Khung xem</button>
+      <button id="toggleTimeline" title="Ẩn / hiện timeline">⬓ Timeline</button>
+      <hr>
+      <button id="xuyenBtn" title="Chọn vùng muốn nhìn xuyên ảnh hoặc video nền" aria-haspopup="true" aria-expanded="false">Nhìn xuyên</button>
+      <button id="themeBtn" title="Đổi sáng tối, màu và hình nền của Studio">Giao diện</button>
+    </div>
+  </div>
+  <div class="menuWrap">
+    <button class="menuBtn" aria-haspopup="true" aria-expanded="false">Công cụ ▾</button>
+    <div class="topMenu" hidden>
+      <button id="openHistory">Lịch sử chỉnh sửa</button>
+      <button id="openCode">Mã nguồn</button>
+      <button id="openRenders">Video đã xuất</button>
+      <button id="openPaths">Thư mục tài nguyên</button>
+      <hr>
+      <button id="lint" title="Dò lỗi trong dự án">Kiểm lỗi</button>
+      <button id="help" title="Xem phím tắt">Phím tắt</button>
+    </div>
+  </div>
+  <button id="export" class="primary" title="Xuất video cuối bằng GPU">Xuất video</button>
+</header>
+
+<main id="work">
+  <aside id="left">
+    <nav class="tabs" role="tablist">
+      <button data-tab="list" class="on">Nội dung</button>
+      <button data-tab="layers">Lớp</button>
+      <button data-tab="assets">Tư liệu</button>
+      <button data-tab="sfx">SFX</button>
+      <button data-tab="colors">Màu</button>
+      <button data-tab="history">Lịch sử</button>
+      <button data-tab="code" hidden>Mã</button>
+      <button data-tab="renders" hidden>Xuất</button>
+    </nav>
+    <section id="tab-list" class="tab on">
+      <div id="chips" class="row"></div>
+      <input id="search" type="search" placeholder="Tìm nội dung…" aria-label="Tìm nội dung">
+      <div id="items"></div>
+    </section>
+    <section id="tab-history" class="tab">
+      <p class="hint">Cập nhật ngay khi có thay đổi. Bấm Khôi phục để quay về đúng lúc trước thao tác đó.</p>
+      <div id="histList"></div>
+    </section>
+    <section id="tab-layers" class="tab">
+      <input id="layerSearch" type="search" placeholder="Tìm lớp…" aria-label="Tìm lớp">
+      <div id="layerTree"></div>
+    </section>
+    <section id="tab-assets" class="tab">
+      <div class="row">
+        <label class="btn" title="Tải video, ảnh, nhạc từ máy">Tải tệp lên<input id="upload" type="file" multiple hidden></label>
+        <button id="addText">Thêm chữ</button>
+      </div>
+      <p class="hint">Bấm vào tệp để đưa vào timeline tại playhead.</p>
+      <div id="assets"></div>
+    </section>
+    <section id="tab-sfx" class="tab">
+      <select id="sfxGroup" aria-label="Phân loại SFX"></select>
+      <input id="sfxSearch" type="search" placeholder="Tìm tên SFX…" aria-label="Tìm tên SFX">
+      <p id="sfxHint" class="hint"></p>
+      <div id="sfxItems"></div>
+    </section>
+    <section id="tab-colors" class="tab">
+      <p class="hint">Bảng màu chung của video. Đổi ở đây, mọi chữ dùng màu đó đổi theo.</p>
+      <div id="vars"></div>
+    </section>
+    <section id="tab-code" class="tab">
+      <textarea id="code" spellcheck="false" aria-label="Mã index.html"></textarea>
+      <button id="saveCode">Lưu mã</button>
+    </section>
+    <section id="tab-renders" class="tab">
+      <div class="row"><button id="openFolder">Mở thư mục</button></div>
+      <div id="renders"></div>
+    </section>
+  </aside>
+
+  <section id="stageWrap">
+    <div id="stage">
+      <div id="ratioBox" hidden><span id="ratioTag"></span></div>
+      <div id="frameBox">
+        <div id="guideV" class="guide" hidden></div>
+        <div id="guideH" class="guide" hidden></div>
+        <div id="safe" hidden></div>
+        <div id="platform" hidden></div>
+        <div id="pick"><div id="selBox" hidden></div></div>
+      </div>
+    </div>
+    <div id="leftSize" class="sizer" title="Kéo để đổi độ rộng bảng trái"></div>
+    <div id="rightSize" class="sizer" title="Kéo để đổi độ rộng bảng thuộc tính"></div>
+    <button id="leftTab" aria-controls="left"></button>
+    <button id="rightTab" aria-controls="right"></button>
+    <div id="aiLog" hidden><div id="aiHead" title="Kéo để di chuyển"><b>✦ AI</b><span class="grow"></span><button id="aiLink" title="Chép lệnh mở phiên Claude của dự án này">Mở trong Claude</button><button id="aiHist" title="Xem lịch sử chat và các phiên Claude trên máy">Lịch sử</button><button id="aiNew" title="Bắt đầu cuộc trò chuyện mới">Mới</button><button id="aiMin" class="icon" title="Thu gọn / mở rộng" aria-label="Thu gọn khung AI">–</button><button id="aiHide" class="icon" title="Ẩn" aria-label="Ẩn khung AI">×</button></div><div id="aiLines"></div><div id="aiFiles" hidden></div><form id="aiChat"><button id="aiAttach" type="button" title="Đính kèm ảnh hoặc video (Ctrl+Shift+A). Cũng dán được bằng Ctrl+V hoặc kéo thả vào khung" aria-label="Đính kèm ảnh hoặc video">📎</button><input id="aiFileInput" type="file" accept="image/*,video/*" multiple hidden><textarea id="aiChatInput" rows="1" placeholder="Chat tiếp… Enter để gửi, Shift+Enter xuống dòng" aria-label="Chat tiếp với AI"></textarea><button id="aiChatMic" class="micBtn" type="button" title="Bật micro" aria-label="Bật micro"><span class="micText">Micro</span></button><button id="aiChatSend" class="primary" type="submit">Gửi</button></form></div>
+    <div id="aiCtx"></div>
+    <form id="aiBar">
+      <span class="spark">✦</span><span id="aiNoi" title="Chưa nối phiên Claude đang mở. Trong chat Claude, gõ: kết nối Studio">Phiên riêng</span>
+      <input id="aiInput" autocomplete="off" placeholder="Nhờ AI sửa… ví dụ: đổi chữ này sang màu vàng, dời cảnh 3 sớm 0,5 giây (Ctrl+K)" aria-label="Yêu cầu AI">
+      <button id="aiMic" class="micBtn" type="button" aria-pressed="false" title="Bật micro để nói thay vì gõ" aria-label="Bật micro"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span class="micText">Micro</span></button>
+      <button id="aiSend" class="primary" type="submit">Gửi</button>
+      <button id="aiCopy" type="button" title="Sao chép yêu cầu kèm bối cảnh để dán vào AI khác">Sao chép</button>
+    </form>
+    <div id="transport">
+      <div class="tLeft">
+        <span id="clock">00:00.00 / 00:00.00</span>
+        <button id="note" title="Ghi lại chỗ cần AI sửa tại playhead (N)">Ghi chú cho AI</button>
+      </div>
+      <button id="play" class="icon big" title="Phát / dừng (Space)" aria-label="Phát">▶</button>
+      <div class="tRight">
+        <div class="platWrap">
+          <button id="ratioBtn" title="Chọn khung hình theo nơi đăng video" aria-haspopup="true" aria-expanded="false">Gốc</button>
+          <div id="ratioMenu" hidden></div>
+        </div>
+        <div class="platWrap">
+          <button id="platBtn" class="icon" title="Xem trước cách video hiển thị trên mạng xã hội" aria-label="Xem trước giao diện mạng xã hội" aria-haspopup="true" aria-expanded="false"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M10 18.5h4"/></svg></button>
+          <div id="platMenu" hidden></div>
+        </div>
+        <button id="mute" class="icon" title="Tắt / bật tiếng khi xem" aria-label="Tắt tiếng">🔊</button>
+        <input id="masterVol" type="range" min="0" max="100" step="1" value="100" title="Âm lượng khi xem, không ảnh hưởng video xuất" aria-label="Âm lượng khi xem">
+        <select id="speed" title="Tốc độ xem" aria-label="Tốc độ xem"><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="1.5">1.5x</option><option value="2">2x</option></select>
+        <button id="loop" class="toggle" title="Phát lặp">Lặp</button>
+        <button id="safeBtn" class="toggle" title="Vùng an toàn TikTok">An toàn</button>
+        <button id="full" class="icon" title="Toàn màn hình" aria-label="Toàn màn hình">⛶</button>
+      </div>
+    </div>
+  </section>
+
+  <aside id="right"><div id="props"></div></aside>
+</main>
+
+<section id="timeline">
+  <div id="tools">
+    <div class="menuWrap">
+      <button class="menuBtn primary" aria-haspopup="true" aria-expanded="false">＋ Thêm ▾</button>
+      <div class="topMenu" hidden>
+        <button id="newText" title="Tạo chữ mới tại playhead">T Chữ</button>
+        <label class="btn" title="Chọn tệp từ máy, thêm vào timeline tại playhead. Hoặc kéo thả tệp thẳng vào timeline">⤒ Video, ảnh, âm thanh<input id="tlUpload" type="file" multiple hidden></label>
+        <hr>
+        <button data-shape="vuong">▭ Hình chữ nhật</button>
+        <button data-shape="bo">▢ Hình bo góc</button>
+        <button data-shape="tron">◯ Hình tròn</button>
+        <button data-shape="tamgiac">△ Tam giác</button>
+        <button data-shape="sao">☆ Ngôi sao</button>
+        <button data-shape="duong">― Đường kẻ</button>
+        <hr>
+        <button data-cc="Nhãn dán">Nhãn dán</button>
+        <button data-cc="Hiệu ứng">Hiệu ứng</button>
+        <button data-cc="Chuyển tiếp">Chuyển cảnh</button>
+        <button data-mg>Motion graphics</button>
+        <button id="newGrade" title="Tạo lớp Màu trên timeline cho vùng chọn hoặc cảnh đang phát">◐ Lớp màu, bộ lọc</button>
+      </div>
+    </div>
+    <button id="split" title="Tách clip tại playhead (S hoặc Ctrl+B). Không chọn gì thì tách cảnh video đang phát">✂ Tách</button>
+    <button id="trimIn" title="Trim đầu clip về playhead (Q)">Trim đầu</button>
+    <button id="trimOut" title="Trim đuôi clip về playhead (W)">Trim đuôi</button>
+    <button id="dup" title="Nhân đôi clip (Ctrl+D)">Nhân đôi</button>
+    <button id="del" title="Xóa clip (Delete)">Xóa</button>
+    <span class="sep"></span>
+    <span class="sep"></span>
+    <button id="snap" class="toggle on" title="Hít vào mép clip và playhead">Snap</button>
+    <button id="rangeBtn" class="toggle" title="Kéo trên thước thời gian để chọn vùng cần AI sửa (hoặc giữ Shift rồi kéo)">Chọn vùng</button>
+    <button id="askAi" title="Nhờ AI sửa vùng hoặc clip đang chọn, tự chụp khung hình gửi kèm (Ctrl+K)">✦ Nhờ AI sửa</button>
+    <span class="grow"></span>
+    <button id="zoomSel" title="Phóng vào clip đang chọn (Z)">Phóng vào</button>
+    <button id="fit" title="Vừa khung">Vừa khung</button>
+    <button id="zoomOut" class="icon" title="Thu nhỏ (-)" aria-label="Thu nhỏ">−</button>
+    <input id="zoom" type="range" min="4" max="300" value="20" aria-label="Thu phóng timeline">
+    <button id="zoomIn" class="icon" title="Phóng to (+)" aria-label="Phóng to">+</button>
+    <span class="sep"></span>
+    <button id="metersBtn" class="toggle" title="Ẩn / hiện đồng hồ âm thanh">Đồng hồ</button>
+    <button id="undo" class="icon" title="Hoàn tác (Ctrl+Z)" aria-label="Hoàn tác">↶</button>
+    <button id="redo" class="icon" title="Làm lại (Ctrl+Y)" aria-label="Làm lại">↷</button>
+  </div>
+  <div id="clipBar" hidden></div>
+  <div id="tlBody">
+    <div id="lanes"><div id="laneRows"></div></div>
+    <div id="tracksScroll"><div id="tracks"><div id="ruler"></div><div id="rows"></div><div id="playhead"></div><div id="rangeBox" hidden></div><div id="snapLine" hidden></div><div id="dragTip" hidden></div></div></div>
+    <div id="meters" aria-label="Đồng hồ âm thanh">
+      <button id="clipLight" title="Sáng khi âm thanh chạm −1 dBFS. Bấm để tắt.">CLIP</button>
+      <div class="mBody">
+        <input id="monitorVol" type="range" min="0" max="100" step="1" value="100" title="Âm lượng nghe khi xem, không ảnh hưởng video xuất" aria-label="Âm lượng nghe">
+        <div class="mScale"><span style="top:0%">0</span><span style="top:20%">-3</span><span style="top:40%">-6</span><span style="top:60%">-12</span><span style="top:80%">-24</span></div>
+        <div class="mBar"><i></i><b></b></div>
+        <div class="mBar"><i></i><b></b></div>
+      </div>
+      <small>Nghe</small>
+    </div>
+  </div>
+</section>
+
+<dialog id="modal"><div id="modalBar"><button id="modalBack" hidden>← Quay lại</button><span class="grow"></span><button id="modalX" class="icon" title="Đóng (Esc)" aria-label="Đóng">×</button></div><div id="modalBody"></div></dialog>
+<div id="toast" role="alert" hidden></div>
+<script src="app.js" type="module"></script>
+</body>
+</html>

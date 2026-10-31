@@ -1,0 +1,675 @@
+{
+ "id": "TV-02",
+ "ten": "Vlog 1 ngày đi làm của sale BĐS (nhãn mốc giờ gõ chữ, không lời)",
+ "the_loai": [
+  "vlog"
+ ],
+ "nguon": {
+  "url": "https://www.tiktok.com/@_honghanhbds/video/7628195579390102804",
+  "ngay_xem": "2026-10-30",
+  "chi_so": "394,7K xem · 9,4K thích · 183 bình luận · 1,3K chia sẻ · đăng 13/04/2026 (video.info.json)",
+  "nhan": "XM"
+ },
+ "thong_so": {
+  "khung": "9:16",
+  "fps": 30,
+  "thoi_luong": 48.2,
+  "lufs": null,
+  "bpm": 136.0,
+  "shot_tb": 2.1,
+  "su_kien_moi_giay": 0.75
+ },
+ "giu_chan": {
+  "hook": "montage 8 cảnh/3 s + tiêu đề câu hỏi gõ chữ + màn trập theo cú cắt",
+  "open_loops": [
+   {
+    "mo": 0.38,
+    "tra_loi": 41.38
+   }
+  ],
+  "doi_nhip_moi_giay": 8.0,
+  "cao_trao": 41.18,
+  "keu_goi_theo_doi": {
+   "giay": 44.88,
+   "cach": "không có lời kêu gọi; kết bằng đời sống cá nhân để tạo thiện cảm [Ước đoán]"
+  }
+ },
+ "doan": [
+  {
+   "tu": 0,
+   "den": 3.0,
+   "vai_tro": "hook",
+   "canh": {
+    "co": "trung",
+    "goc": "ngang/selfie",
+    "chuyen_dong_may": "cam_tay",
+    "host": true
+   },
+   "chu": [
+    {
+     "giay": 0.38,
+     "ma": "go_chu_trang_vien_den",
+     "vai_tro": "tieu_de_hook",
+     "font": "sans đậm nét tròn (chưa rõ tên)",
+     "co_pct": 7,
+     "vi_tri_pct": [
+      50,
+      22
+     ],
+     "mau": "#FDFBFB",
+     "vao": "go_chu ~0,5s",
+     "ra": "cat_cung theo canh",
+     "muc_dich": "tao_to_mo",
+     "ly_do": "tiêu đề + dòng phụ dạng câu hỏi gõ ra ngay 0,4s: hứa hẹn 'xem 1 ngày của sale BĐS' (câu nhử)"
+    }
+   ],
+   "broll": [],
+   "an": [],
+   "mg": [],
+   "chuyen_canh": {
+    "giay": 0.4,
+    "ma": "cat_nhanh_man_trap",
+    "so_khung": 0,
+    "easing": ""
+   },
+   "ly_do_dung": "montage 8 cảnh trong 3 s (shot 0,25–0,7 s), mỗi cú cắt có màn trập/riser ngắn — teaser cả ngày",
+   "cat": [
+    0.4,
+    0.7,
+    1.3,
+    1.65,
+    1.97,
+    2.22,
+    2.95
+   ],
+   "sfx": [
+    {
+     "giay": 0.06,
+     "vai_tro": "click_go_chu",
+     "gan_voi": "chu",
+     "db_so_voi_nhac": 7.7,
+     "nguon": "do_mau"
+    },
+    {
+     "giay": 0.3,
+     "vai_tro": "man_trap",
+     "gan_voi": "chuyen_canh",
+     "db_so_voi_nhac": 6.0,
+     "nguon": "do_mau"
+    },
+    {
+     "giay": 0.8,
+     "vai_tro": "man_trap",
+     "gan_voi": "chuyen_canh",
+     "db_so_voi_nhac": 9.6,
+     "nguon": "do_mau"
+    },
+    {
+     "giay": 1.1,
+     "vai_tro": "riser_ngan",
+     "gan_voi": "chuyen_canh",
+     "db_so_voi_nhac": 5.6,
+     "nguon": "do_mau"
+    },
+    {
+     "giay": 1.5,
+     "vai_tro": "riser_ngan",
+     "gan_voi": "chuyen_canh",
+     "db_so_voi_nhac": 8.7,
+     "nguon": "do_mau"
+    },
+    {
+     "giay": 1.9,
+     "vai_tro": "riser_ngan",
+     "gan_voi": "chuyen_canh",
+     "db_so_voi_nhac": 6.3,
+     "nguon": "do_mau"
+    },
+    {
+     "giay": 2.28,
+     "vai_tro": "riser_ngan",
+     "gan_voi": "chuyen_canh",
+     "db_so_voi_nhac": 11.1,
+     "nguon": "do_mau"
+    },
+    {
+     "giay": 2.52,
+     "vai_tro": "click_go_chu",
+     "gan_voi": "chu",
+     "db_so_voi_nhac": 9.9,
+     "nguon": "do_mau"
+    }
+   ],
+   "nhac": {
+    "phach": [
+     1.3,
+     1.65,
+     2.22,
+     2.95
+    ],
+    "dien_bien": "len",
+    "muc_so_voi_giong_db": null
+   },
+   "loi": {
+    "vai_tro": "khong_loi (whisper: 0 câu)",
+    "o_dien": ""
+   }
+  },
+  {
+   "tu": 3.0,
+   "den": 15.5,
+   "vai_tro": "mo_bai",
+   "canh": {
+    "co": "toan/trung",
+    "goc": "ngang",
+    "chuyen_dong_may": "dung (máy đặt cố định)",
+    "host": true
+   },
+   "chu": [
+    {
+     "giay": 3.12,
+     "ma": "go_chu_trang_vien_den",
+     "vai_tro": "moc_gio",
+     "font": "sans đậm nét tròn (chưa rõ tên)",
+     "co_pct": 4.5,
+     "vi_tri_pct": [
+      50,
+      15
+     ],
+     "mau": "#FDFBFB",
+     "vao": "go_chu ~0,5s",
+     "ra": "cat_cung theo canh",
+     "muc_dich": "dinh_vi",
+     "ly_do": "nhãn mốc giờ gõ chữ ngay đầu cảnh mới để người xem biết đang ở khoảnh khắc nào trong ngày — thay lời dẫn"
+    },
+    {
+     "giay": 4.12,
+     "ma": "go_chu_trang_vien_den",
+     "vai_tro": "moc_gio",
+     "font": "sans đậm nét tròn (chưa rõ tên)",
+     "co_pct": 4.5,
+     "vi_tri_pct": [
+      50,
+      15
+     ],
+     "mau": "#FDFBFB",
+     "vao": "go_chu ~0,5s",
+     "ra": "cat_cung theo canh",
+     "muc_dich": "dinh_vi",
+     "ly_do": "nhãn mốc giờ gõ chữ ngay đầu cảnh mới để người xem biết đang ở khoảnh khắc nào trong ngày — thay lời dẫn"
+    }
+   ],
+   "broll": [],
+   "an": [],
+   "mg": [],
+   "chuyen_canh": {
+    "giay": 13.4,
+    "ma": "dip_den",
+    "so_khung": 6,
+    "easing": "cat"
+   },
+   "ly_do_dung": "đoạn thay đồ 8 s một góc máy: giữ chân bằng thay trang phục liên tục (biến đổi trong khung)",
+   "cat": [
+    3.82,
+    5.35,
+    13.5
+   ],
+   "sfx": [
+    {
+     "giay": 3.12,
+     "vai_tro": "click_go_chu",
+     "gan_voi": "chu",
+     "db_so_voi_nhac": 4,
+     "nguon": "them_theo_luat_dung_video (mẫu im)"
+    },
+    {
+     "giay": 4.12,
+     "vai_tro": "click_go_chu",
+     "gan_voi": "chu",
+     "db_so_voi_nhac": 4,
+     "nguon": "them_theo_luat_dung_video (mẫu im)"
+    },
+    {
+     "giay": 11.04,
+     "vai_tro": "riser_ngan",
+     "gan_voi": "chuyen_canh",
+     "db_so_voi_nhac": 4.1,
+     "nguon": "do_mau"
+    }
+   ],
+   "nhac": {
+    "phach": [
+     3.82,
+     13.5
+    ],
+    "dien_bien": "giu",
+    "muc_so_voi_giong_db": null
+   },
+   "loi": {
+    "vai_tro": "khong_loi (whisper: 0 câu)",
+    "o_dien": ""
+   }
+  },
+  {
+   "tu": 15.5,
+   "den": 29.7,
+   "vai_tro": "bang_chung",
+   "canh": {
+    "co": "trung/toan",
+    "goc": "ngang, đi theo",
+    "chuyen_dong_may": "cam_tay theo người",
+    "host": true
+   },
+   "chu": [
+    {
+     "giay": 15.62,
+     "ma": "go_chu_trang_vien_den",
+     "vai_tro": "moc_gio",
+     "font": "sans đậm nét tròn (chưa rõ tên)",
+     "co_pct": 4.5,
+     "vi_tri_pct": [
+      50,
+      15
+     ],
+     "mau": "#FDFBFB",
+     "vao": "go_chu ~0,5s",
+     "ra": "cat_cung theo canh",
+     "muc_dich": "dinh_vi",
+     "ly_do": "nhãn mốc giờ gõ chữ ngay đầu cảnh mới để người xem biết đang ở khoảnh khắc nào trong ngày — thay lời dẫn"
+    },
+    {
+     "giay": 23.12,
+     "ma": "go_chu_trang_vien_den",
+     "vai_tro": "moc_gio_2_dong",
+     "font": "sans đậm nét tròn (chưa rõ tên)",
+     "co_pct": 4.5,
+     "vi_tri_pct": [
+      50,
+      15
+     ],
+     "mau": "#FDFBFB",
+     "vao": "go_chu ~0,5s",
+     "ra": "cat_cung theo canh",
+     "muc_dich": "dinh_vi",
+     "ly_do": "nhãn 2 dòng nêu tên dự án khi vào buổi training — chứng minh công việc thật"
+    }
+   ],
+   "broll": [
+    {
+     "giay": 22.4,
+     "loai": "chi_tiet",
+     "thoi_luong": 0.6,
+     "lech_loi_s": 0,
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "cận máy chấm công vân tay: chi tiết 'đi làm đúng giờ' thay lời",
+     "gan_loi": "nhan_moc_gio (không lời)"
+    },
+    {
+     "giay": 23.02,
+     "loai": "toan",
+     "thoi_luong": 1.56,
+     "lech_loi_s": 0,
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "toàn cảnh hội trường đông người mở mốc training — cho thấy quy mô dự án",
+     "gan_loi": "nhan_moc_gio (không lời)"
+    }
+   ],
+   "an": [],
+   "mg": [],
+   "chuyen_canh": {
+    "giay": 15.5,
+    "ma": "cut",
+    "so_khung": 0,
+    "easing": ""
+   },
+   "cat": [
+    17.83,
+    19.75,
+    23.02,
+    24.58,
+    27.28
+   ],
+   "sfx": [
+    {
+     "giay": 15.62,
+     "vai_tro": "click_go_chu",
+     "gan_voi": "chu",
+     "db_so_voi_nhac": 4,
+     "nguon": "them_theo_luat_dung_video (mẫu im)"
+    },
+    {
+     "giay": 23.12,
+     "vai_tro": "click_go_chu",
+     "gan_voi": "chu",
+     "db_so_voi_nhac": 4,
+     "nguon": "them_theo_luat_dung_video (mẫu im)"
+    }
+   ],
+   "nhac": {
+    "phach": [
+     17.83,
+     23.02
+    ],
+    "dien_bien": "giu",
+    "muc_so_voi_giong_db": null
+   },
+   "loi": {
+    "vai_tro": "khong_loi (whisper: 0 câu)",
+    "o_dien": ""
+   }
+  },
+  {
+   "tu": 29.7,
+   "den": 41.2,
+   "vai_tro": "bang_chung",
+   "canh": {
+    "co": "trung",
+    "goc": "ngang",
+    "chuyen_dong_may": "dung/cam_tay",
+    "host": true
+   },
+   "chu": [
+    {
+     "giay": 29.88,
+     "ma": "go_chu_trang_vien_den",
+     "vai_tro": "moc_gio",
+     "font": "sans đậm nét tròn (chưa rõ tên)",
+     "co_pct": 4.5,
+     "vi_tri_pct": [
+      50,
+      15
+     ],
+     "mau": "#FDFBFB",
+     "vao": "go_chu ~0,5s",
+     "ra": "cat_cung theo canh",
+     "muc_dich": "dinh_vi",
+     "ly_do": "nhãn telesale đi cùng SFX hit 29,76 s đúng cú cắt — đổi nhịp giữa video"
+    },
+    {
+     "giay": 32.88,
+     "ma": "go_chu_trang_vien_den",
+     "vai_tro": "moc_gio",
+     "font": "sans đậm nét tròn (chưa rõ tên)",
+     "co_pct": 4.5,
+     "vi_tri_pct": [
+      50,
+      15
+     ],
+     "mau": "#FDFBFB",
+     "vao": "go_chu ~0,5s",
+     "ra": "cat_cung theo canh",
+     "muc_dich": "dinh_vi",
+     "ly_do": "nhãn mốc giờ gõ chữ ngay đầu cảnh mới để người xem biết đang ở khoảnh khắc nào trong ngày — thay lời dẫn"
+    }
+   ],
+   "broll": [
+    {
+     "giay": 36.83,
+     "loai": "chi_tiet",
+     "thoi_luong": 1.54,
+     "lech_loi_s": 0,
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "cận sa bàn dự án khi dẫn khách xem nhà mẫu — bằng chứng sản phẩm",
+     "gan_loi": "nhan_moc_gio (không lời)"
+    }
+   ],
+   "an": [],
+   "mg": [],
+   "chuyen_canh": {
+    "giay": 29.73,
+    "ma": "cut_hit",
+    "so_khung": 0,
+    "easing": ""
+   },
+   "cat": [
+    29.73,
+    34.48,
+    36.83,
+    38.37,
+    41.18
+   ],
+   "sfx": [
+    {
+     "giay": 29.76,
+     "vai_tro": "hit_nhan",
+     "gan_voi": "chu",
+     "db_so_voi_nhac": 4.0,
+     "nguon": "do_mau"
+    },
+    {
+     "giay": 30.16,
+     "vai_tro": "hit_nhan",
+     "gan_voi": "chu",
+     "db_so_voi_nhac": 4.5,
+     "nguon": "do_mau"
+    },
+    {
+     "giay": 32.88,
+     "vai_tro": "click_go_chu",
+     "gan_voi": "chu",
+     "db_so_voi_nhac": 4,
+     "nguon": "them_theo_luat_dung_video (mẫu im)"
+    }
+   ],
+   "nhac": {
+    "phach": [],
+    "dien_bien": "giu",
+    "muc_so_voi_giong_db": null
+   },
+   "loi": {
+    "vai_tro": "khong_loi (whisper: 0 câu)",
+    "o_dien": ""
+   }
+  },
+  {
+   "tu": 41.2,
+   "den": 43.8,
+   "vai_tro": "cao_trao",
+   "canh": {
+    "co": "chi_tiet",
+    "goc": "từ trên",
+    "chuyen_dong_may": "cam_tay",
+    "host": false
+   },
+   "chu": [
+    {
+     "giay": 41.38,
+     "ma": "go_chu_trang_vien_den",
+     "vai_tro": "chu_thich_hanh_dong",
+     "font": "sans đậm nét tròn (chưa rõ tên)",
+     "co_pct": 3.5,
+     "vi_tri_pct": [
+      50,
+      18
+     ],
+     "mau": "#FDFBFB",
+     "vao": "go_chu ~0,5s",
+     "ra": "cat_cung theo canh",
+     "muc_dich": "chung_minh_so_lieu",
+     "ly_do": "chú thích nhỏ giữa khung + emoji tay viết: kết quả của ngày (chốt cọc) — trả lời câu nhử"
+    }
+   ],
+   "broll": [
+    {
+     "giay": 41.18,
+     "loai": "chi_tiet",
+     "thoi_luong": 1.67,
+     "lech_loi_s": 0,
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "cận tay viết giá + giấy chốt cọc: cao trào 'có khách chốt'",
+     "gan_loi": "nhan_moc_gio (không lời)"
+    }
+   ],
+   "an": [],
+   "mg": [],
+   "chuyen_canh": {
+    "giay": 41.18,
+    "ma": "cut",
+    "so_khung": 0,
+    "easing": ""
+   },
+   "cat": [
+    42.85
+   ],
+   "sfx": [
+    {
+     "giay": 41.38,
+     "vai_tro": "click_go_chu",
+     "gan_voi": "chu",
+     "db_so_voi_nhac": 4,
+     "nguon": "them_theo_luat_dung_video (mẫu im)"
+    }
+   ],
+   "nhac": {
+    "phach": [],
+    "dien_bien": "giu",
+    "muc_so_voi_giong_db": null
+   },
+   "loi": {
+    "vai_tro": "khong_loi (whisper: 0 câu)",
+    "o_dien": ""
+   }
+  },
+  {
+   "tu": 43.8,
+   "den": 48.2,
+   "vai_tro": "chot",
+   "canh": {
+    "co": "trung",
+    "goc": "selfie gương thang máy / theo sau",
+    "chuyen_dong_may": "cam_tay",
+    "host": true
+   },
+   "chu": [
+    {
+     "giay": 43.88,
+     "ma": "go_chu_trang_vien_den",
+     "vai_tro": "moc_gio",
+     "font": "sans đậm nét tròn (chưa rõ tên)",
+     "co_pct": 4.5,
+     "vi_tri_pct": [
+      50,
+      22
+     ],
+     "mau": "#FDFBFB",
+     "vao": "go_chu ~0,5s",
+     "ra": "cat_cung theo canh",
+     "muc_dich": "dinh_vi",
+     "ly_do": "nhãn mốc giờ gõ chữ ngay đầu cảnh mới để người xem biết đang ở khoảnh khắc nào trong ngày — thay lời dẫn"
+    },
+    {
+     "giay": 44.88,
+     "ma": "go_chu_trang_vien_den",
+     "vai_tro": "moc_gio_2_dong",
+     "font": "sans đậm nét tròn (chưa rõ tên)",
+     "co_pct": 3.5,
+     "vi_tri_pct": [
+      50,
+      22
+     ],
+     "mau": "#FDFBFB",
+     "vao": "go_chu ~0,5s",
+     "ra": "cat_cung theo canh",
+     "muc_dich": "chuyen_y",
+     "ly_do": "chuyển sang đời sống cá nhân (pickleball) — kết mềm, tạo thiện cảm"
+    }
+   ],
+   "broll": [],
+   "an": [],
+   "mg": [],
+   "chuyen_canh": {
+    "giay": 43.8,
+    "ma": "cut",
+    "so_khung": 0,
+    "easing": ""
+   },
+   "cat": [
+    46.37
+   ],
+   "sfx": [
+    {
+     "giay": 43.88,
+     "vai_tro": "click_go_chu",
+     "gan_voi": "chu",
+     "db_so_voi_nhac": 4,
+     "nguon": "them_theo_luat_dung_video (mẫu im)"
+    },
+    {
+     "giay": 44.88,
+     "vai_tro": "click_go_chu",
+     "gan_voi": "chu",
+     "db_so_voi_nhac": 4,
+     "nguon": "them_theo_luat_dung_video (mẫu im)"
+    },
+    {
+     "giay": 47.34,
+     "vai_tro": "riser_ngan",
+     "gan_voi": "chuyen_canh",
+     "db_so_voi_nhac": 4.0,
+     "nguon": "do_mau"
+    },
+    {
+     "giay": 47.78,
+     "vai_tro": "click_go_chu",
+     "gan_voi": "chu",
+     "db_so_voi_nhac": 4.3,
+     "nguon": "do_mau"
+    }
+   ],
+   "nhac": {
+    "phach": [],
+    "dien_bien": "giu",
+    "muc_so_voi_giong_db": null
+   },
+   "loi": {
+    "vai_tro": "khong_loi (whisper: 0 câu)",
+    "o_dien": ""
+   }
+  }
+ ],
+ "su_kien_do_duoc": {
+  "cat": 22,
+  "chu": 10,
+  "mg": 0,
+  "broll": 4,
+  "an": 0,
+  "chuyen_canh": 6,
+  "sfx": 21,
+  "phach_manh": 8
+ },
+ "ghi_chu_do": {
+  "sfx_mau_do_that": 13,
+  "sfx_them_theo_luat": 8,
+  "chu_do_tai": "dải 4 fps vùng y 6–26 % (do_mau/chu_4fps.jpg), sai số ±0,13 s",
+  "loi": "whisper large-v3 (Antigravity) ra 0 câu → video chỉ nhạc"
+ },
+ "ket_hop": [
+  {
+   "dau_hieu_loi": "chuyển sang việc/khoảnh khắc mới trong ngày",
+   "combo": "cú cắt + nhãn mốc giờ trắng viền đen gõ chữ ~0,5 s ở y≈15 % + click gõ phím",
+   "thoi_diem": "+0,1–0,3 s sau cú cắt",
+   "nguon": "https://www.tiktok.com/@_honghanhbds/video/7628195579390102804 · 3,1/15,6/23,1/29,9/32,9 s"
+  },
+  {
+   "dau_hieu_loi": "hook mở video dạng nhật ký",
+   "combo": "8 cảnh cắt 0,25–0,7 s + màn trập/riser ngắn mỗi cắt + tiêu đề 2 tầng (chữ to + dòng phụ câu hỏi)",
+   "thoi_diem": "0–3 s",
+   "nguon": "https://www.tiktok.com/@_honghanhbds/video/7628195579390102804 · 0–3 s"
+  },
+  {
+   "dau_hieu_loi": "kết quả / chốt khách",
+   "combo": "b-roll cận tay viết giấy cọc + chú thích nhỏ giữa khung + emoji",
+   "thoi_diem": "đúng cú cắt +0,2 s",
+   "nguon": "https://www.tiktok.com/@_honghanhbds/video/7628195579390102804 · 41,2–42,8 s"
+  }
+ ],
+ "diem_yeu_da_sua": [
+  "mẫu chỉ 3/10 lần chữ có SFX → thêm click gõ chữ theo luật /dung-video (ghi nguon)",
+  "mẫu đặt '16h tan làm' trước '15h pickleball' (sai thứ tự giờ) → áp cho Dũng giữ đúng thứ tự thời gian",
+  "nhãn mốc giờ ở y≈15 % nằm trong vùng an toàn TikTok trên; tiêu đề hook y≈22 % OK",
+  "đoạn 6h30 dài 11 s một góc máy — bản Dũng chia ≤4 s/cảnh (luật nhịp)"
+ ],
+ "trang_thai": "Thu nghiem",
+ "so_lan_dung": 0,
+ "dung_cham": []
+}

@@ -1,0 +1,331 @@
+{
+ "id": "TV-05",
+ "ten": "Luật sư trả lời bình luận (1 cảnh liền, chữ ở 3 ý then chốt)",
+ "the_loai": [
+  "phap ly",
+  "q&a"
+ ],
+ "nguon": {
+  "url": "https://www.tiktok.com/@haluatsu/video/7223355603610012934",
+  "ngay_xem": "2026-10-30",
+  "chi_so": "251K xem · 5,1K thích · 156 bình luận · 667 chia sẻ · đăng 18/04/2023 (video.info.json)",
+  "nhan": "XM"
+ },
+ "thong_so": {
+  "khung": "9:16",
+  "fps": 30,
+  "thoi_luong": 154.67,
+  "lufs": null,
+  "bpm": null,
+  "shot_tb": 154.67,
+  "su_kien_moi_giay": 0.026
+ },
+ "giu_chan": {
+  "hook": "thẻ bình luận thật + câu hỏi tóm 1 dòng ngay giây 0",
+  "open_loops": [
+   {
+    "mo": 0.0,
+    "tra_loi": 78.0
+   }
+  ],
+  "doi_nhip_moi_giay": 25.8,
+  "cao_trao": 78.0,
+  "keu_goi_theo_doi": {
+   "giay": 101.4,
+   "cach": "không kêu gọi; dạng trả lời bình luận mời người xem hỏi tiếp [Ước đoán]"
+  }
+ },
+ "doan": [
+  {
+   "tu": 0,
+   "den": 12.2,
+   "vai_tro": "hook",
+   "loi": {
+    "vai_tro": "nhac lai cau hoi cua nguoi xem",
+    "o_dien": ""
+   },
+   "chu": [
+    {
+     "giay": 0.0,
+     "ma": "hop_do_chu_trang (mẫu)",
+     "vai_tro": "tieu_de_cau_hoi",
+     "font": "sans thường (chưa rõ tên)",
+     "co_pct": 3,
+     "vi_tri_pct": [
+      50,
+      75
+     ],
+     "mau": "#FFFCFA trên hộp #EA3F40",
+     "vao": "cat_cung",
+     "ra": "cat_cung",
+     "muc_dich": "tao_to_mo",
+     "ly_do": "câu hỏi tóm 1 dòng hiện ngay từ đầu, khớp thẻ bình luận — người cùng hoàn cảnh dừng xem"
+    }
+   ],
+   "mg": [
+    {
+     "giay": 0.0,
+     "ma": "the_tra_loi_binh_luan",
+     "mo_ta": "thẻ bình luận trắng của người hỏi ở góc trên, suốt video",
+     "thoi_luong": 154.67,
+     "muc_dich": "dinh_vi",
+     "ly_do": "dạng 'trả lời bình luận': chứng minh câu hỏi thật, kéo người hỏi + người cùng hoàn cảnh",
+     "gan_loi": "toàn video",
+     "ket_hop": [
+      "tiêu đề câu hỏi"
+     ]
+    }
+   ],
+   "sfx": [
+    {
+     "giay": 0.0,
+     "vai_tro": "pop_nhe",
+     "gan_voi": "chu",
+     "db_so_voi_nhac": 4,
+     "nguon": "them_theo_luat_dung_video (mẫu chỉ có giọng, không tách được)"
+    }
+   ],
+   "canh": {
+    "co": "can_trung",
+    "goc": "ngang, nói thẳng máy, văn phòng",
+    "chuyen_dong_may": "dung (1 cảnh liền 154,7 s)",
+    "host": true
+   },
+   "broll": [],
+   "an": [],
+   "cat": [],
+   "chuyen_canh": {},
+   "nhac": {
+    "phach": [],
+    "dien_bien": "ha",
+    "muc_so_voi_giong_db": null
+   }
+  },
+  {
+   "tu": 12.2,
+   "den": 29.4,
+   "vai_tro": "phan_tich_tinh_huong",
+   "loi": {
+    "vai_tro": "hai cach thuong gap (chuyen nhuong / uy quyen)",
+    "o_dien": ""
+   },
+   "chu": [],
+   "mg": [],
+   "sfx": [],
+   "ly_do_tinh": "1 cảnh liền không cắt; giữ chân bằng nội dung chuyên môn + tay diễn tả, chữ chỉ ở 3 ý then chốt",
+   "canh": {
+    "co": "can_trung",
+    "goc": "ngang, nói thẳng máy, văn phòng",
+    "chuyen_dong_may": "dung (1 cảnh liền 154,7 s)",
+    "host": true
+   },
+   "broll": [],
+   "an": [],
+   "cat": [],
+   "chuyen_canh": {},
+   "nhac": {
+    "phach": [],
+    "dien_bien": "ha",
+    "muc_so_voi_giong_db": null
+   }
+  },
+  {
+   "tu": 29.4,
+   "den": 49.4,
+   "vai_tro": "can_cu_phap_ly",
+   "loi": {
+    "vai_tro": "dan dieu khoan",
+    "o_dien": ""
+   },
+   "chu": [
+    {
+     "giay": 29.4,
+     "ma": "hop_do_chu_trang (mẫu)",
+     "vai_tro": "trich_dan_luat",
+     "font": "sans thường (chưa rõ tên)",
+     "co_pct": 3,
+     "vi_tri_pct": [
+      50,
+      75
+     ],
+     "mau": "#FFFCFA trên hộp #EA3F40",
+     "vao": "cat_cung",
+     "ra": "cat_cung",
+     "muc_dich": "chung_minh_so_lieu",
+     "ly_do": "điều khoản hiện suốt lúc nói (20 s) để người xem chụp màn hình/ghi lại — tăng lưu"
+    }
+   ],
+   "mg": [],
+   "sfx": [
+    {
+     "giay": 29.4,
+     "vai_tro": "pop_nhe",
+     "gan_voi": "chu",
+     "db_so_voi_nhac": 4,
+     "nguon": "them_theo_luat_dung_video (mẫu chỉ có giọng, không tách được)"
+    }
+   ],
+   "canh": {
+    "co": "can_trung",
+    "goc": "ngang, nói thẳng máy, văn phòng",
+    "chuyen_dong_may": "dung (1 cảnh liền 154,7 s)",
+    "host": true
+   },
+   "broll": [],
+   "an": [],
+   "cat": [],
+   "chuyen_canh": {},
+   "nhac": {
+    "phach": [],
+    "dien_bien": "len",
+    "muc_so_voi_giong_db": null
+   }
+  },
+  {
+   "tu": 49.4,
+   "den": 78.0,
+   "vai_tro": "huong_dan",
+   "loi": {
+    "vai_tro": "cac buoc nop ho so",
+    "o_dien": ""
+   },
+   "chu": [],
+   "mg": [],
+   "sfx": [],
+   "ly_do_tinh": "1 cảnh liền không cắt; giữ chân bằng nội dung chuyên môn + tay diễn tả, chữ chỉ ở 3 ý then chốt",
+   "canh": {
+    "co": "can_trung",
+    "goc": "ngang, nói thẳng máy, văn phòng",
+    "chuyen_dong_may": "dung (1 cảnh liền 154,7 s)",
+    "host": true
+   },
+   "broll": [],
+   "an": [],
+   "cat": [],
+   "chuyen_canh": {},
+   "nhac": {
+    "phach": [],
+    "dien_bien": "giu",
+    "muc_so_voi_giong_db": null
+   }
+  },
+  {
+   "tu": 78.0,
+   "den": 101.4,
+   "vai_tro": "giai_phap",
+   "loi": {
+    "vai_tro": "loi khuyen chinh: khoi kien + de nghi ngan chan",
+    "o_dien": ""
+   },
+   "chu": [
+    {
+     "giay": 78.0,
+     "ma": "hop_do_chu_trang (mẫu)",
+     "vai_tro": "giai_phap_chinh",
+     "font": "sans thường (chưa rõ tên)",
+     "co_pct": 3,
+     "vi_tri_pct": [
+      50,
+      75
+     ],
+     "mau": "#FFFCFA trên hộp #EA3F40",
+     "vao": "cat_cung",
+     "ra": "cat_cung",
+     "muc_dich": "chung_minh_so_lieu",
+     "ly_do": "lời khuyên quan trọng nhất hiện đúng lúc nói, giữ 23 s — trả lời câu hỏi ở hook"
+    }
+   ],
+   "mg": [],
+   "sfx": [
+    {
+     "giay": 78.0,
+     "vai_tro": "pop_nhe",
+     "gan_voi": "chu",
+     "db_so_voi_nhac": 4,
+     "nguon": "them_theo_luat_dung_video (mẫu chỉ có giọng, không tách được)"
+    }
+   ],
+   "canh": {
+    "co": "can_trung",
+    "goc": "ngang, nói thẳng máy, văn phòng",
+    "chuyen_dong_may": "dung (1 cảnh liền 154,7 s)",
+    "host": true
+   },
+   "broll": [],
+   "an": [],
+   "cat": [],
+   "chuyen_canh": {},
+   "nhac": {
+    "phach": [],
+    "dien_bien": "giu",
+    "muc_so_voi_giong_db": null
+   }
+  },
+  {
+   "tu": 101.4,
+   "den": 154.67,
+   "vai_tro": "chot",
+   "loi": {
+    "vai_tro": "truong hop khac + ket",
+    "o_dien": ""
+   },
+   "chu": [],
+   "mg": [],
+   "sfx": [],
+   "ly_do_tinh": "1 cảnh liền không cắt; giữ chân bằng nội dung chuyên môn + tay diễn tả, chữ chỉ ở 3 ý then chốt",
+   "canh": {
+    "co": "can_trung",
+    "goc": "ngang, nói thẳng máy, văn phòng",
+    "chuyen_dong_may": "dung (1 cảnh liền 154,7 s)",
+    "host": true
+   },
+   "broll": [],
+   "an": [],
+   "cat": [],
+   "chuyen_canh": {},
+   "nhac": {
+    "phach": [],
+    "dien_bien": "ha",
+    "muc_so_voi_giong_db": null
+   }
+  }
+ ],
+ "su_kien_do_duoc": {
+  "cat": 0,
+  "chu": 3,
+  "mg": 1,
+  "broll": 0,
+  "an": 0,
+  "chuyen_canh": 0,
+  "sfx": 3,
+  "phach_manh": 0
+ },
+ "ghi_chu_do": {
+  "cat": "0 cú cắt (scene > 0,3)",
+  "chu_do_tai": "mặt nạ màu đỏ 10 fps vùng y 60–90 %: 0–12,2 · 29,4–49,4 · 78,0–101,4 s",
+  "sfx": "294 sự kiện âm đều là giọng nói; không có nhạc nền rõ (BPM đo được là nhịp giọng, bỏ)",
+  "loi": "whisper large-v3 114 câu — chỉ dùng vai trò"
+ },
+ "ket_hop": [
+  {
+   "dau_hieu_loi": "câu hỏi của người xem (Q&A)",
+   "combo": "thẻ bình luận thật góc trên suốt video + câu hỏi tóm 1 dòng dưới khung",
+   "thoi_diem": "giây 0",
+   "nguon": "https://www.tiktok.com/@haluatsu/video/7223355603610012934 · 0–12 s"
+  },
+  {
+   "dau_hieu_loi": "dẫn điều luật / lời khuyên chính",
+   "combo": "chữ hiện suốt lúc nói (20 s+) để chụp màn hình; bản Dũng: không hộp, chữ viền/bóng + pop nhẹ",
+   "thoi_diem": "đúng câu ±0,2 s",
+   "nguon": "https://www.tiktok.com/@haluatsu/video/7223355603610012934 · 29,4 / 78,0 s"
+  }
+ ],
+ "diem_yeu_da_sua": [
+  "mẫu dùng hộp đỏ sau chữ → bản Dũng bỏ nền hộp (luật), giữ màu đỏ #EA3F40 làm màu chữ nhấn/viền",
+  "1 cảnh 154 s không đổi nhịp, không nhạc → bản Dũng thêm nhạc nền nhẹ (luật luôn có BGM) và b-roll giấy tờ ở đoạn dài không chữ",
+  "câu trả lời chính đến ở 50 % thời lượng → bản Dũng đưa sớm hơn hoặc hứa ở hook"
+ ],
+ "trang_thai": "Thu nghiem",
+ "so_lan_dung": 0,
+ "dung_cham": []
+}

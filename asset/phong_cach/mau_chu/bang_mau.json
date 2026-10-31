@@ -1,0 +1,162 @@
+{
+ "ghi_chu": "Bộ màu chữ đo từ video mẫu thật (khung tải bằng skill watch 29/10/2026, lấy trung vị pixel chữ). Dùng: copy 1 bộ vào PALETTE trong project.py; trong Studio đổi ở khối :root (tab Code) của index.html. Vai: gia, so-lieu, nhan, nhan-vang, vi-tri, cau-hoi, phong, phap-ly, tot, cta, nhan-phong.",
+ "bo_mau": {
+  "KV1_kem_vang_sang_trong": {
+   "nguon": "https://www.tiktok.com/@quynhanhbds/video/7676404843660987655 · chữ '60 TỶ / PENTHOUSE / 342 m²' ~5–6s [Đã đo màu; mốc giây Ước đoán ±1s]",
+   "do_duoc": {
+    "60 TỶ": "#FAE7A7",
+    "PENTHOUSE": "#FEFEFC",
+    "lóe sáng chuyển cảnh": "#E39B52"
+   },
+   "PALETTE": {
+    "gia": "#FAE7A7",
+    "so-lieu": "#FAE7A7",
+    "nhan": "#FFFFFF",
+    "nhan-vang": "#FAE7A7",
+    "vi-tri": "#FFFFFF",
+    "cau-hoi": "#E39B52",
+    "phong": "#FFFFFF",
+    "phap-ly": "#FAE7A7",
+    "tot": "#FFFFFF",
+    "cta": "#FAE7A7",
+    "nhan-phong": "#FFFFFF"
+   }
+  },
+  "KV2_champagne_serif": {
+   "nguon": "https://www.tiktok.com/@lamgiaorealty/video/7690586383311719688 · '40 TIỆN ÍCH NỘI KHU' (khung ~38/52) [Đã đo màu; mốc Ước đoán]",
+   "do_duoc": {
+    "số 40": "#DEC093",
+    "TIỆN ÍCH NỘI KHU": "#F9FFFF",
+    "DỰ ÁN THE RIVANA": "#FCFFFF"
+   },
+   "PALETTE": {
+    "gia": "#DEC093",
+    "so-lieu": "#DEC093",
+    "nhan": "#F9FFFF",
+    "nhan-vang": "#DEC093",
+    "vi-tri": "#F9FFFF",
+    "cau-hoi": "#DEC093",
+    "phong": "#F9FFFF",
+    "phap-ly": "#DEC093",
+    "tot": "#F9FFFF",
+    "cta": "#DEC093",
+    "nhan-phong": "#F9FFFF"
+   }
+  },
+  "KV3_nhan_phong_trang": {
+   "nguon": "https://www.tiktok.com/@vietnamhousetour/video/7557630369000951048 · nhãn 'Tầng 2: Phòng khách - Bếp' [Đã đo màu]",
+   "do_duoc": {
+    "nhãn phòng": "#FDFEFD"
+   },
+   "PALETTE": {
+    "nhan-phong": "#FDFEFD"
+   }
+  },
+  "KV4_am_tron_ket_hop": {
+   "nguon": "Phối từ KV1 + KV2 (chỉ dùng màu đã đo) — dùng cho video cần nhiều sắc độ ấm khác nhau theo vai",
+   "PALETTE": {
+    "gia": "#FAE7A7",
+    "so-lieu": "#DEC093",
+    "nhan": "#FFFFFF",
+    "nhan-vang": "#FAE7A7",
+    "vi-tri": "#F9FFFF",
+    "cau-hoi": "#E39B52",
+    "phong": "#DEC093",
+    "phap-ly": "#FAE7A7",
+    "tot": "#DEC093",
+    "cta": "#E39B52",
+    "nhan-phong": "#FDFEFD"
+   }
+  },
+  "KV5_quynhanh_do_tu_khung_day": {
+   "nguon": "https://www.tiktok.com/@quynhanhbds/video/7676404843660987655 · 18,2–24,0s và 55–58s, đo pixel khung 720p 30/10/2026 [Đã đo]",
+   "do_duoc": {
+    "60 TỶ": "#F9C945",
+    "PENTHOUSE (giữa)": "#8FDEC2",
+    "PENTHOUSE (cuối)": "#6FE889",
+    "342 m²": "#FBFCFC",
+    "lóe sáng": "#FBFCB3"
+   },
+   "PALETTE": {
+    "gia": "#F9C945",
+    "so-lieu": "#FFFFFF",
+    "nhan": "#FFFFFF",
+    "nhan-vang": "#F9C945",
+    "vi-tri": "#8FDEC2",
+    "cau-hoi": "#F9C945",
+    "phong": "#8FDEC2",
+    "phap-ly": "#6FE889",
+    "tot": "#6FE889",
+    "cta": "#6FE889",
+    "nhan-phong": "#FFFFFF"
+   }
+  },
+  "KV-TV02_vlog_trang_vien_den": {
+   "nguon": "https://www.tiktok.com/@_honghanhbds/video/7628195579390102804 · nhãn giờ khung 25s [Đã đo màu]",
+   "do_duoc": {
+    "nhãn mốc giờ": "#FDFBFB",
+    "viền/bóng": "#010000"
+   },
+   "PALETTE": {
+    "nhan": "#FDFBFB",
+    "vien": "#010000"
+   }
+  },
+  "KV-TV03_phu_de_trang_so_cam": {
+   "nguon": "https://www.tiktok.com/@quynhkechuyennha/video/7424415111038700807 · khung 1,9s/4,9s/16,6s [Đã đo màu]",
+   "do_duoc": {
+    "phụ đề": "#E6F6F7",
+    "số 30/30%": "#FA7602",
+    "sticker cười": "#FB8A1B"
+   },
+   "PALETTE": {
+    "nhan": "#E6F6F7",
+    "so-lieu": "#FA7602",
+    "gia": "#FA7602"
+   }
+  },
+  "KV-TV04_xanh_ngoc_trang": {
+   "nguon": "https://www.tiktok.com/@quyettranlux/video/7558268872336362759 · khung 20s [Đã đo màu]",
+   "do_duoc": {
+    "dòng 1 câu hỏi": "#00F8ED",
+    "dòng 2": "#FFFCF8"
+   },
+   "PALETTE": {
+    "cau-hoi": "#00F8ED",
+    "nhan": "#FFFCF8"
+   }
+  },
+  "KV-TV05_do_phap_ly": {
+   "nguon": "https://www.tiktok.com/@haluatsu/video/7223355603610012934 · khung 35s [Đã đo màu; mẫu dùng làm hộp — Dũng dùng làm màu chữ/viền]",
+   "do_duoc": {
+    "hộp": "#EA3F40",
+    "chữ": "#FFFCFA"
+   },
+   "PALETTE": {
+    "phap-ly": "#EA3F40",
+    "nhan": "#FFFCFA"
+   }
+  },
+  "KV-TV06_gladia_nhieu_mau": {
+   "nguon": "https://www.tiktok.com/@lakimmyduyen/video/7622295518382804245 · khung 0,2/1,6/2,3/30,6/46,6/47,7/52,6s [Đã đo màu, chữ gradient lấy trung vị]",
+   "do_duoc": {
+    "pháp lý": "#25638F",
+    "nhà": "#CE2B3F",
+    "viết tay đỏ": "#C4303F",
+    "viết tay xanh lá": "#2E6053",
+    "diện tích": "#B68A48",
+    "số đỏ": "#C65B57",
+    "giá": "#201FF0"
+   },
+   "PALETTE": {
+    "gia": "#201FF0",
+    "so-lieu": "#B68A48",
+    "nhan": "#FFFFFF",
+    "nhan-vang": "#B68A48",
+    "phap-ly": "#25638F",
+    "cau-hoi": "#C4303F",
+    "tot": "#2E6053"
+   }
+  }
+ }
+}

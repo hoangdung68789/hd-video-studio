@@ -1,0 +1,71 @@
+{
+  "style_id": "avpropertiesofficial_7225793122825964805",
+  "learned_at": "2026-10-28",
+  "category": "real_estate",
+  "ref_videos": [
+    {
+      "url": "https://www.tiktok.com/@avpropertiesofficial/video/7225793122825964805",
+      "author": "@avpropertiesofficial",
+      "video_id": "7225793122825964805",
+      "highlight_timestamps": [
+        "00:00-36.5s (chưa ghi mốc tiêu biểu)"
+      ],
+      "highlight_label": "[Chưa ghi]",
+      "metrics": {
+        "view_count": 930600,
+        "like_count": 17600,
+        "comment_count": 222,
+        "track": "âm thanh gốc",
+        "label": "[XM]"
+      }
+    }
+  ],
+  "technical_specs": {
+    "width": 576,
+    "height": 1024,
+    "fps": 29.97,
+    "duration_s": 36.48,
+    "total_cuts": 4,
+    "cuts_per_10s": 0.82,
+    "audio": {
+      "integrated_lufs": -14.7,
+      "lra_lu": 8.4,
+      "label": "[Đã đo]"
+    },
+    "measurement_label": "[Đã đo]"
+  },
+  "dictionary_effects_mapped": [],
+  "effects_label_rule": "Chỉ dùng khi dựng các dòng có source_url hoặc nhãn [Dũng xác nhận]",
+  "measure_mode": {
+    "is_timeline_breakdown": false,
+    "crop": null,
+    "scene_threshold": 0.2
+  },
+  "shots": [
+    {
+      "shot_index": 1,
+      "start_s": 0.0,
+      "end_s": 20.69,
+      "duration_s": 20.69
+    },
+    {
+      "shot_index": 2,
+      "start_s": 20.69,
+      "end_s": 23.22,
+      "duration_s": 2.53
+    },
+    {
+      "shot_index": 3,
+      "start_s": 23.22,
+      "end_s": 33.2,
+      "duration_s": 9.98
+    },
+    {
+      "shot_index": 4,
+      "start_s": 33.2,
+      "end_s": 36.48,
+      "duration_s": 3.28
+    }
+  ],
+  "local_sample_video": "~\\AppData\\Local\\Temp\\claude\\C--Users-Admin-HDRE-AI\\bfce2a2b-542c-4f90-8a5c-b7c995b3f4b2\\scratchpad\\dl_re5\\7225793122825964805.mp4"
+}

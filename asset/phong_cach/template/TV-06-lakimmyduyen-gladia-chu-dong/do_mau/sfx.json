@@ -1,0 +1,5795 @@
+{
+  "video_path": "~\\AppData\\Local\\Temp\\claude\\C--Users-Admin-HDRE-AI\\18c63b28-1f3a-4f78-aa16-6ae8fc34c370\\scratchpad\\hoc30c\\7622295518382804245.mp4",
+  "duration_s": 62.48,
+  "total_sfx_events_heard": 115,
+  "music_beats_detected": 127,
+  "measurement_label": "[Đã đo từ luồng âm thanh 48kHz + đối chiếu điểm cắt, đã loại nhịp nhạc nền]",
+  "sfx_timeline_events": [
+    {
+      "event_index": 1,
+      "onset_s": 0.02,
+      "peak_s": 0.08,
+      "end_s": 0.14,
+      "duration_s": 0.12,
+      "rms_dbfs": -16.9,
+      "spectral_centroid_hz": 1888,
+      "attack_ratio": 0.5,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 14.1,
+      "on_music_beat": true,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWISH 6.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH 6.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.459,
+          "onset_s": 0.035,
+          "peak_t_s": 0.1,
+          "bright_hz": 1873,
+          "match_score": 64.9
+        },
+        {
+          "path": "Swipe & Swish/SWIPE 6.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWIPE 6.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.8,
+          "onset_s": 0.03,
+          "peak_t_s": 0.275,
+          "bright_hz": 1846,
+          "match_score": 64.8
+        }
+      ]
+    },
+    {
+      "event_index": 2,
+      "onset_s": 0.16,
+      "peak_s": 0.34,
+      "end_s": 0.44,
+      "duration_s": 0.28,
+      "rms_dbfs": -18.0,
+      "spectral_centroid_hz": 1935,
+      "attack_ratio": 0.64,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "whoosh_swish",
+      "inferred_vai": "chuyen_canh",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Tiếng lướt (Swish) đi kèm chuyển động chữ/camera",
+      "when_and_how_to_use": "Bắt đầu sớm 0.10–0.15s để phần dày nhất (peak) nằm đúng giữa điểm cắt",
+      "db_above_music": 12.9,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWISH SWIPE 13.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH SWIPE 13.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.693,
+          "onset_s": 0.035,
+          "peak_t_s": 0.17,
+          "bright_hz": 1944,
+          "match_score": 65.0
+        },
+        {
+          "path": "Swipe & Swish/SWISH B 2.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH B 2.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.176,
+          "onset_s": 0.0,
+          "peak_t_s": 0.03,
+          "bright_hz": 1952,
+          "match_score": 64.9
+        }
+      ]
+    },
+    {
+      "event_index": 3,
+      "onset_s": 1.14,
+      "peak_s": 1.38,
+      "end_s": 1.54,
+      "duration_s": 0.4,
+      "rms_dbfs": -19.6,
+      "spectral_centroid_hz": 2372,
+      "attack_ratio": 0.6,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 13.3,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/Metalic Riser.mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\Metalic Riser.mp3",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 3.056,
+          "onset_s": 1.525,
+          "peak_t_s": 2.99,
+          "bright_hz": 2084,
+          "match_score": 38.6
+        },
+        {
+          "path": "Riser/ES_Riser Metallic - SFX Producer.mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\ES_Riser Metallic - SFX Producer.mp3",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 1.707,
+          "onset_s": 0.34,
+          "peak_t_s": 1.675,
+          "bright_hz": 2027,
+          "match_score": 38.3
+        }
+      ]
+    },
+    {
+      "event_index": 4,
+      "onset_s": 1.58,
+      "peak_s": 1.82,
+      "end_s": 1.88,
+      "duration_s": 0.3,
+      "rms_dbfs": -19.4,
+      "spectral_centroid_hz": 1899,
+      "attack_ratio": 0.8,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 11.0,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_4.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_4.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.305,
+          "peak_t_s": 3.525,
+          "bright_hz": 1990,
+          "match_score": 39.5
+        },
+        {
+          "path": "Riser/ES_Riser Metallic - SFX Producer.mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\ES_Riser Metallic - SFX Producer.mp3",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 1.707,
+          "onset_s": 0.34,
+          "peak_t_s": 1.675,
+          "bright_hz": 2027,
+          "match_score": 39.4
+        }
+      ]
+    },
+    {
+      "event_index": 5,
+      "onset_s": 2.1,
+      "peak_s": 2.34,
+      "end_s": 2.52,
+      "duration_s": 0.42,
+      "rms_dbfs": -17.6,
+      "spectral_centroid_hz": 2086,
+      "attack_ratio": 0.57,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "whoosh_swish",
+      "inferred_vai": "chuyen_canh",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Tiếng lướt (Swish) đi kèm chuyển động chữ/camera",
+      "when_and_how_to_use": "Bắt đầu sớm 0.10–0.15s để phần dày nhất (peak) nằm đúng giữa điểm cắt",
+      "db_above_music": 16.3,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWISH B 1.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH B 1.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.154,
+          "onset_s": 0.0,
+          "peak_t_s": 0.025,
+          "bright_hz": 2092,
+          "match_score": 65.0
+        },
+        {
+          "path": "Swipe & Swish/SWISH 4.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH 4.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.328,
+          "onset_s": 0.015,
+          "peak_t_s": 0.085,
+          "bright_hz": 2098,
+          "match_score": 64.9
+        }
+      ]
+    },
+    {
+      "event_index": 6,
+      "onset_s": 2.8,
+      "peak_s": 2.92,
+      "end_s": 2.96,
+      "duration_s": 0.16,
+      "rms_dbfs": -18.9,
+      "spectral_centroid_hz": 1491,
+      "attack_ratio": 0.75,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 9.9,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWIPE 5.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWIPE 5.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.827,
+          "onset_s": 0.06,
+          "peak_t_s": 0.31,
+          "bright_hz": 1501,
+          "match_score": 65.0
+        },
+        {
+          "path": "Swipe & Swish/SWISH B 6.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH B 6.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.308,
+          "onset_s": 0.005,
+          "peak_t_s": 0.055,
+          "bright_hz": 1480,
+          "match_score": 64.9
+        }
+      ]
+    },
+    {
+      "event_index": 7,
+      "onset_s": 2.98,
+      "peak_s": 3.2,
+      "end_s": 3.28,
+      "duration_s": 0.3,
+      "rms_dbfs": -22.1,
+      "spectral_centroid_hz": 1909,
+      "attack_ratio": 0.73,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 6.5,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_4.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_4.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.305,
+          "peak_t_s": 3.525,
+          "bright_hz": 1990,
+          "match_score": 39.6
+        },
+        {
+          "path": "Riser/ES_Riser Metallic - SFX Producer.mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\ES_Riser Metallic - SFX Producer.mp3",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 1.707,
+          "onset_s": 0.34,
+          "peak_t_s": 1.675,
+          "bright_hz": 2027,
+          "match_score": 39.4
+        }
+      ]
+    },
+    {
+      "event_index": 8,
+      "onset_s": 3.92,
+      "peak_s": 4.18,
+      "end_s": 4.34,
+      "duration_s": 0.42,
+      "rms_dbfs": -15.7,
+      "spectral_centroid_hz": 2152,
+      "attack_ratio": 0.62,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 11.9,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/Metalic Riser.mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\Metalic Riser.mp3",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 3.056,
+          "onset_s": 1.525,
+          "peak_t_s": 2.99,
+          "bright_hz": 2084,
+          "match_score": 39.7
+        },
+        {
+          "path": "Riser/ES_Riser Metallic - SFX Producer.mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\ES_Riser Metallic - SFX Producer.mp3",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 1.707,
+          "onset_s": 0.34,
+          "peak_t_s": 1.675,
+          "bright_hz": 2027,
+          "match_score": 39.4
+        }
+      ]
+    },
+    {
+      "event_index": 9,
+      "onset_s": 4.38,
+      "peak_s": 4.44,
+      "end_s": 4.52,
+      "duration_s": 0.14,
+      "rms_dbfs": -17.7,
+      "spectral_centroid_hz": 1548,
+      "attack_ratio": 0.43,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 8.9,
+      "on_music_beat": true,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWISH B 5.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH B 5.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.264,
+          "onset_s": 0.005,
+          "peak_t_s": 0.05,
+          "bright_hz": 1569,
+          "match_score": 64.9
+        },
+        {
+          "path": "Swipe & Swish/SWISH 9.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH 9.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.656,
+          "onset_s": 0.025,
+          "peak_t_s": 0.145,
+          "bright_hz": 1577,
+          "match_score": 64.9
+        }
+      ]
+    },
+    {
+      "event_index": 10,
+      "onset_s": 4.56,
+      "peak_s": 4.76,
+      "end_s": 4.84,
+      "duration_s": 0.28,
+      "rms_dbfs": -16.4,
+      "spectral_centroid_hz": 1462,
+      "attack_ratio": 0.71,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "whoosh_swish",
+      "inferred_vai": "chuyen_canh",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Tiếng lướt (Swish) đi kèm chuyển động chữ/camera",
+      "when_and_how_to_use": "Bắt đầu sớm 0.10–0.15s để phần dày nhất (peak) nằm đúng giữa điểm cắt",
+      "db_above_music": 10.1,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWIPE 3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWIPE 3.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 1.536,
+          "onset_s": 0.045,
+          "peak_t_s": 0.55,
+          "bright_hz": 1470,
+          "match_score": 65.0
+        },
+        {
+          "path": "Swipe & Swish/SWISH B 6.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH B 6.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.308,
+          "onset_s": 0.005,
+          "peak_t_s": 0.055,
+          "bright_hz": 1480,
+          "match_score": 64.9
+        }
+      ]
+    },
+    {
+      "event_index": 11,
+      "onset_s": 5.46,
+      "peak_s": 5.74,
+      "end_s": 5.78,
+      "duration_s": 0.32,
+      "rms_dbfs": -20.0,
+      "spectral_centroid_hz": 1514,
+      "attack_ratio": 0.88,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 6.0,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_2.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_2.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.405,
+          "peak_t_s": 2.76,
+          "bright_hz": 1535,
+          "match_score": 39.9
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 37.6
+        }
+      ]
+    },
+    {
+      "event_index": 12,
+      "onset_s": 6.08,
+      "peak_s": 6.36,
+      "end_s": 6.4,
+      "duration_s": 0.32,
+      "rms_dbfs": -18.1,
+      "spectral_centroid_hz": 1870,
+      "attack_ratio": 0.88,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 9.3,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_4.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_4.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.305,
+          "peak_t_s": 3.525,
+          "bright_hz": 1990,
+          "match_score": 39.4
+        },
+        {
+          "path": "Riser/ES_Riser Metallic - SFX Producer.mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\ES_Riser Metallic - SFX Producer.mp3",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 1.707,
+          "onset_s": 0.34,
+          "peak_t_s": 1.675,
+          "bright_hz": 2027,
+          "match_score": 39.2
+        }
+      ]
+    },
+    {
+      "event_index": 13,
+      "onset_s": 6.74,
+      "peak_s": 6.82,
+      "end_s": 6.92,
+      "duration_s": 0.18,
+      "rms_dbfs": -17.4,
+      "spectral_centroid_hz": 2099,
+      "attack_ratio": 0.44,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 9.8,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWISH 4.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH 4.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.328,
+          "onset_s": 0.015,
+          "peak_t_s": 0.085,
+          "bright_hz": 2098,
+          "match_score": 65.0
+        },
+        {
+          "path": "Swipe & Swish/SWISH B 1.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH B 1.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.154,
+          "onset_s": 0.0,
+          "peak_t_s": 0.025,
+          "bright_hz": 2092,
+          "match_score": 65.0
+        }
+      ]
+    },
+    {
+      "event_index": 14,
+      "onset_s": 7.02,
+      "peak_s": 7.3,
+      "end_s": 7.38,
+      "duration_s": 0.36,
+      "rms_dbfs": -17.8,
+      "spectral_centroid_hz": 1923,
+      "attack_ratio": 0.78,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 9.5,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_4.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_4.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.305,
+          "peak_t_s": 3.525,
+          "bright_hz": 1990,
+          "match_score": 39.7
+        },
+        {
+          "path": "Riser/ES_Riser Metallic - SFX Producer.mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\ES_Riser Metallic - SFX Producer.mp3",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 1.707,
+          "onset_s": 0.34,
+          "peak_t_s": 1.675,
+          "bright_hz": 2027,
+          "match_score": 39.5
+        }
+      ]
+    },
+    {
+      "event_index": 15,
+      "onset_s": 7.64,
+      "peak_s": 7.9,
+      "end_s": 8.1,
+      "duration_s": 0.46,
+      "rms_dbfs": -18.5,
+      "spectral_centroid_hz": 1462,
+      "attack_ratio": 0.57,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "whoosh_swish",
+      "inferred_vai": "chuyen_canh",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Tiếng lướt (Swish) đi kèm chuyển động chữ/camera",
+      "when_and_how_to_use": "Bắt đầu sớm 0.10–0.15s để phần dày nhất (peak) nằm đúng giữa điểm cắt",
+      "db_above_music": 8.8,
+      "on_music_beat": true,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWIPE 3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWIPE 3.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 1.536,
+          "onset_s": 0.045,
+          "peak_t_s": 0.55,
+          "bright_hz": 1470,
+          "match_score": 65.0
+        },
+        {
+          "path": "Swipe & Swish/SWISH B 6.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH B 6.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.308,
+          "onset_s": 0.005,
+          "peak_t_s": 0.055,
+          "bright_hz": 1480,
+          "match_score": 64.9
+        }
+      ]
+    },
+    {
+      "event_index": 16,
+      "onset_s": 8.54,
+      "peak_s": 8.74,
+      "end_s": 8.76,
+      "duration_s": 0.22,
+      "rms_dbfs": -18.9,
+      "spectral_centroid_hz": 1527,
+      "attack_ratio": 0.91,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "whoosh_swish",
+      "inferred_vai": "chuyen_canh",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Tiếng lướt (Swish) đi kèm chuyển động chữ/camera",
+      "when_and_how_to_use": "Bắt đầu sớm 0.10–0.15s để phần dày nhất (peak) nằm đúng giữa điểm cắt",
+      "db_above_music": 5.7,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWIPE 5.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWIPE 5.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.827,
+          "onset_s": 0.06,
+          "peak_t_s": 0.31,
+          "bright_hz": 1501,
+          "match_score": 64.9
+        },
+        {
+          "path": "Swipe & Swish/SWISH B 5.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH B 5.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.264,
+          "onset_s": 0.005,
+          "peak_t_s": 0.05,
+          "bright_hz": 1569,
+          "match_score": 64.8
+        }
+      ]
+    },
+    {
+      "event_index": 17,
+      "onset_s": 9.7,
+      "peak_s": 9.82,
+      "end_s": 10.04,
+      "duration_s": 0.34,
+      "rms_dbfs": -15.1,
+      "spectral_centroid_hz": 1111,
+      "attack_ratio": 0.35,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "whoosh_swish",
+      "inferred_vai": "chuyen_canh",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Tiếng lướt (Swish) đi kèm chuyển động chữ/camera",
+      "when_and_how_to_use": "Bắt đầu sớm 0.10–0.15s để phần dày nhất (peak) nằm đúng giữa điểm cắt",
+      "db_above_music": 10.5,
+      "on_music_beat": true,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWISH A 3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH A 3.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.475,
+          "onset_s": 0.095,
+          "peak_t_s": 0.13,
+          "bright_hz": 1110,
+          "match_score": 65.0
+        },
+        {
+          "path": "Swipe & Swish/SWISH A 5.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH A 5.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.381,
+          "onset_s": 0.025,
+          "peak_t_s": 0.075,
+          "bright_hz": 1138,
+          "match_score": 64.9
+        }
+      ]
+    },
+    {
+      "event_index": 18,
+      "onset_s": 10.04,
+      "peak_s": 10.06,
+      "end_s": 10.12,
+      "duration_s": 0.08,
+      "rms_dbfs": -19.6,
+      "spectral_centroid_hz": 1327,
+      "attack_ratio": 0.25,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 5.3,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWISH SWIPE 16.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH SWIPE 16.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.656,
+          "onset_s": 0.03,
+          "peak_t_s": 0.15,
+          "bright_hz": 1350,
+          "match_score": 64.9
+        },
+        {
+          "path": "Swipe & Swish/SWISH SWIPE 17.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH SWIPE 17.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 1.133,
+          "onset_s": 0.07,
+          "peak_t_s": 0.225,
+          "bright_hz": 1365,
+          "match_score": 64.8
+        }
+      ]
+    },
+    {
+      "event_index": 19,
+      "onset_s": 11.2,
+      "peak_s": 11.48,
+      "end_s": 11.7,
+      "duration_s": 0.5,
+      "rms_dbfs": -15.0,
+      "spectral_centroid_hz": 1601,
+      "attack_ratio": 0.56,
+      "Synced_with_cut_s": 11.63,
+      "acoustic_class": "whoosh_swish",
+      "inferred_vai": "chuyen_canh",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Tiếng vút chuyển cảnh (Whoosh/Swish) khớp cú cắt tại 11.63s",
+      "when_and_how_to_use": "Bắt đầu sớm 0.10–0.15s để phần dày nhất (peak) nằm đúng giữa điểm cắt",
+      "db_above_music": 10.0,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWISH 9.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH 9.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.656,
+          "onset_s": 0.025,
+          "peak_t_s": 0.145,
+          "bright_hz": 1577,
+          "match_score": 64.9
+        },
+        {
+          "path": "Swipe & Swish/SWISH SWIPE 7.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH SWIPE 7.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.343,
+          "onset_s": 0.045,
+          "peak_t_s": 0.155,
+          "bright_hz": 1632,
+          "match_score": 64.8
+        }
+      ]
+    },
+    {
+      "event_index": 20,
+      "onset_s": 11.7,
+      "peak_s": 11.96,
+      "end_s": 12.06,
+      "duration_s": 0.36,
+      "rms_dbfs": -15.5,
+      "spectral_centroid_hz": 524,
+      "attack_ratio": 0.72,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 9.4,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.12,
+          "peak_t_s": 1.02,
+          "bright_hz": 803,
+          "match_score": 38.6
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 37.4
+        }
+      ]
+    },
+    {
+      "event_index": 21,
+      "onset_s": 12.18,
+      "peak_s": 12.44,
+      "end_s": 12.54,
+      "duration_s": 0.36,
+      "rms_dbfs": -16.5,
+      "spectral_centroid_hz": 297,
+      "attack_ratio": 0.72,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 8.3,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.12,
+          "peak_t_s": 1.02,
+          "bright_hz": 803,
+          "match_score": 37.5
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 36.3
+        }
+      ]
+    },
+    {
+      "event_index": 22,
+      "onset_s": 12.66,
+      "peak_s": 12.92,
+      "end_s": 13.0,
+      "duration_s": 0.34,
+      "rms_dbfs": -16.7,
+      "spectral_centroid_hz": 302,
+      "attack_ratio": 0.76,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 6.6,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.12,
+          "peak_t_s": 1.02,
+          "bright_hz": 803,
+          "match_score": 37.5
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 36.3
+        }
+      ]
+    },
+    {
+      "event_index": 23,
+      "onset_s": 13.14,
+      "peak_s": 13.4,
+      "end_s": 13.5,
+      "duration_s": 0.36,
+      "rms_dbfs": -16.5,
+      "spectral_centroid_hz": 315,
+      "attack_ratio": 0.72,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 8.3,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.12,
+          "peak_t_s": 1.02,
+          "bright_hz": 803,
+          "match_score": 37.6
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 36.4
+        }
+      ]
+    },
+    {
+      "event_index": 24,
+      "onset_s": 13.82,
+      "peak_s": 13.88,
+      "end_s": 13.98,
+      "duration_s": 0.16,
+      "rms_dbfs": -16.4,
+      "spectral_centroid_hz": 264,
+      "attack_ratio": 0.38,
+      "Synced_with_cut_s": 14.03,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 9.3,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "UI/Whoosh and Hit (2).mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Whoosh and Hit (2).mp3",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 2.703,
+          "onset_s": 0.235,
+          "peak_t_s": 0.575,
+          "bright_hz": 690,
+          "match_score": 52.9
+        },
+        {
+          "path": "UI/Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [
+            "gio"
+          ],
+          "dur_s": 1.964,
+          "onset_s": 0.245,
+          "peak_t_s": 0.39,
+          "bright_hz": 1354,
+          "match_score": 49.5
+        }
+      ]
+    },
+    {
+      "event_index": 25,
+      "onset_s": 14.08,
+      "peak_s": 14.36,
+      "end_s": 14.44,
+      "duration_s": 0.36,
+      "rms_dbfs": -16.7,
+      "spectral_centroid_hz": 278,
+      "attack_ratio": 0.78,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 8.1,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.12,
+          "peak_t_s": 1.02,
+          "bright_hz": 803,
+          "match_score": 37.4
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 36.2
+        }
+      ]
+    },
+    {
+      "event_index": 26,
+      "onset_s": 14.56,
+      "peak_s": 14.84,
+      "end_s": 14.94,
+      "duration_s": 0.38,
+      "rms_dbfs": -16.6,
+      "spectral_centroid_hz": 292,
+      "attack_ratio": 0.74,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 8.7,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.12,
+          "peak_t_s": 1.02,
+          "bright_hz": 803,
+          "match_score": 37.4
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 36.2
+        }
+      ]
+    },
+    {
+      "event_index": 27,
+      "onset_s": 15.02,
+      "peak_s": 15.3,
+      "end_s": 15.42,
+      "duration_s": 0.4,
+      "rms_dbfs": -18.6,
+      "spectral_centroid_hz": 392,
+      "attack_ratio": 0.7,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 6.8,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.12,
+          "peak_t_s": 1.02,
+          "bright_hz": 803,
+          "match_score": 37.9
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 36.7
+        }
+      ]
+    },
+    {
+      "event_index": 28,
+      "onset_s": 15.5,
+      "peak_s": 15.78,
+      "end_s": 15.9,
+      "duration_s": 0.4,
+      "rms_dbfs": -18.6,
+      "spectral_centroid_hz": 934,
+      "attack_ratio": 0.7,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 6.4,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 39.5
+        },
+        {
+          "path": "Riser/AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.12,
+          "peak_t_s": 1.02,
+          "bright_hz": 803,
+          "match_score": 39.3
+        }
+      ]
+    },
+    {
+      "event_index": 29,
+      "onset_s": 16.0,
+      "peak_s": 16.28,
+      "end_s": 16.38,
+      "duration_s": 0.38,
+      "rms_dbfs": -16.5,
+      "spectral_centroid_hz": 377,
+      "attack_ratio": 0.74,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 9.1,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.12,
+          "peak_t_s": 1.02,
+          "bright_hz": 803,
+          "match_score": 37.9
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 36.7
+        }
+      ]
+    },
+    {
+      "event_index": 30,
+      "onset_s": 16.74,
+      "peak_s": 16.76,
+      "end_s": 16.86,
+      "duration_s": 0.12,
+      "rms_dbfs": -16.4,
+      "spectral_centroid_hz": 273,
+      "attack_ratio": 0.17,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 8.4,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "UI/Whoosh and Hit (2).mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Whoosh and Hit (2).mp3",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 2.703,
+          "onset_s": 0.235,
+          "peak_t_s": 0.575,
+          "bright_hz": 690,
+          "match_score": 52.9
+        },
+        {
+          "path": "UI/Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [
+            "gio"
+          ],
+          "dur_s": 1.964,
+          "onset_s": 0.245,
+          "peak_t_s": 0.39,
+          "bright_hz": 1354,
+          "match_score": 49.6
+        }
+      ]
+    },
+    {
+      "event_index": 31,
+      "onset_s": 16.96,
+      "peak_s": 17.24,
+      "end_s": 17.32,
+      "duration_s": 0.36,
+      "rms_dbfs": -16.6,
+      "spectral_centroid_hz": 253,
+      "attack_ratio": 0.78,
+      "Synced_with_cut_s": 17.27,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "kich_tinh",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 8.0,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.12,
+          "peak_t_s": 1.02,
+          "bright_hz": 803,
+          "match_score": 47.2
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 46.0
+        }
+      ]
+    },
+    {
+      "event_index": 32,
+      "onset_s": 17.7,
+      "peak_s": 17.72,
+      "end_s": 17.82,
+      "duration_s": 0.12,
+      "rms_dbfs": -16.6,
+      "spectral_centroid_hz": 254,
+      "attack_ratio": 0.17,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 7.5,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "UI/Whoosh and Hit (2).mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Whoosh and Hit (2).mp3",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 2.703,
+          "onset_s": 0.235,
+          "peak_t_s": 0.575,
+          "bright_hz": 690,
+          "match_score": 52.8
+        },
+        {
+          "path": "UI/Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [
+            "gio"
+          ],
+          "dur_s": 1.964,
+          "onset_s": 0.245,
+          "peak_t_s": 0.39,
+          "bright_hz": 1354,
+          "match_score": 49.5
+        }
+      ]
+    },
+    {
+      "event_index": 33,
+      "onset_s": 17.94,
+      "peak_s": 18.2,
+      "end_s": 18.3,
+      "duration_s": 0.36,
+      "rms_dbfs": -16.9,
+      "spectral_centroid_hz": 257,
+      "attack_ratio": 0.72,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 6.6,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.12,
+          "peak_t_s": 1.02,
+          "bright_hz": 803,
+          "match_score": 37.3
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 36.1
+        }
+      ]
+    },
+    {
+      "event_index": 34,
+      "onset_s": 18.62,
+      "peak_s": 18.7,
+      "end_s": 18.76,
+      "duration_s": 0.14,
+      "rms_dbfs": -16.7,
+      "spectral_centroid_hz": 240,
+      "attack_ratio": 0.57,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 6.5,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "UI/Whoosh and Hit (2).mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Whoosh and Hit (2).mp3",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 2.703,
+          "onset_s": 0.235,
+          "peak_t_s": 0.575,
+          "bright_hz": 690,
+          "match_score": 52.8
+        },
+        {
+          "path": "UI/Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [
+            "gio"
+          ],
+          "dur_s": 1.964,
+          "onset_s": 0.245,
+          "peak_t_s": 0.39,
+          "bright_hz": 1354,
+          "match_score": 49.4
+        }
+      ]
+    },
+    {
+      "event_index": 35,
+      "onset_s": 18.86,
+      "peak_s": 18.94,
+      "end_s": 19.0,
+      "duration_s": 0.14,
+      "rms_dbfs": -16.0,
+      "spectral_centroid_hz": 1620,
+      "attack_ratio": 0.57,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 7.4,
+      "on_music_beat": true,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWISH SWIPE 7.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH SWIPE 7.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.343,
+          "onset_s": 0.045,
+          "peak_t_s": 0.155,
+          "bright_hz": 1632,
+          "match_score": 64.9
+        },
+        {
+          "path": "UI/UI Clicks - Notification Pop - Royalty Free Sound Effects.aac",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\UI Clicks - Notification Pop - Royalty Free Sound Effects.aac",
+          "vai": [
+            "giao_dien",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [
+            "thong_bao"
+          ],
+          "dur_s": 0.348,
+          "onset_s": 0.105,
+          "peak_t_s": 0.115,
+          "bright_hz": 1605,
+          "match_score": 64.9
+        }
+      ]
+    },
+    {
+      "event_index": 36,
+      "onset_s": 19.12,
+      "peak_s": 19.18,
+      "end_s": 19.26,
+      "duration_s": 0.14,
+      "rms_dbfs": -16.4,
+      "spectral_centroid_hz": 239,
+      "attack_ratio": 0.43,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 6.9,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "UI/Whoosh and Hit (2).mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Whoosh and Hit (2).mp3",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 2.703,
+          "onset_s": 0.235,
+          "peak_t_s": 0.575,
+          "bright_hz": 690,
+          "match_score": 52.7
+        },
+        {
+          "path": "UI/Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [
+            "gio"
+          ],
+          "dur_s": 1.964,
+          "onset_s": 0.245,
+          "peak_t_s": 0.39,
+          "bright_hz": 1354,
+          "match_score": 49.4
+        }
+      ]
+    },
+    {
+      "event_index": 37,
+      "onset_s": 19.62,
+      "peak_s": 19.68,
+      "end_s": 19.72,
+      "duration_s": 0.1,
+      "rms_dbfs": -17.5,
+      "spectral_centroid_hz": 171,
+      "attack_ratio": 0.6,
+      "Synced_with_cut_s": 19.5,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 5.8,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "UI/Whoosh and Hit (2).mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Whoosh and Hit (2).mp3",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 2.703,
+          "onset_s": 0.235,
+          "peak_t_s": 0.575,
+          "bright_hz": 690,
+          "match_score": 52.4
+        },
+        {
+          "path": "UI/Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [
+            "gio"
+          ],
+          "dur_s": 1.964,
+          "onset_s": 0.245,
+          "peak_t_s": 0.39,
+          "bright_hz": 1354,
+          "match_score": 49.1
+        }
+      ]
+    },
+    {
+      "event_index": 38,
+      "onset_s": 20.1,
+      "peak_s": 20.12,
+      "end_s": 20.2,
+      "duration_s": 0.1,
+      "rms_dbfs": -16.5,
+      "spectral_centroid_hz": 271,
+      "attack_ratio": 0.2,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 7.6,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "UI/Whoosh and Hit (2).mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Whoosh and Hit (2).mp3",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 2.703,
+          "onset_s": 0.235,
+          "peak_t_s": 0.575,
+          "bright_hz": 690,
+          "match_score": 52.9
+        },
+        {
+          "path": "UI/Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [
+            "gio"
+          ],
+          "dur_s": 1.964,
+          "onset_s": 0.245,
+          "peak_t_s": 0.39,
+          "bright_hz": 1354,
+          "match_score": 49.6
+        }
+      ]
+    },
+    {
+      "event_index": 39,
+      "onset_s": 20.54,
+      "peak_s": 20.6,
+      "end_s": 20.7,
+      "duration_s": 0.16,
+      "rms_dbfs": -16.7,
+      "spectral_centroid_hz": 602,
+      "attack_ratio": 0.38,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 7.3,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "UI/Whoosh and Hit (2).mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Whoosh and Hit (2).mp3",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 2.703,
+          "onset_s": 0.235,
+          "peak_t_s": 0.575,
+          "bright_hz": 690,
+          "match_score": 54.6
+        },
+        {
+          "path": "UI/Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [
+            "gio"
+          ],
+          "dur_s": 1.964,
+          "onset_s": 0.245,
+          "peak_t_s": 0.39,
+          "bright_hz": 1354,
+          "match_score": 51.2
+        }
+      ]
+    },
+    {
+      "event_index": 40,
+      "onset_s": 20.8,
+      "peak_s": 21.08,
+      "end_s": 21.18,
+      "duration_s": 0.38,
+      "rms_dbfs": -16.5,
+      "spectral_centroid_hz": 269,
+      "attack_ratio": 0.74,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 9.3,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.12,
+          "peak_t_s": 1.02,
+          "bright_hz": 803,
+          "match_score": 37.3
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 36.1
+        }
+      ]
+    },
+    {
+      "event_index": 41,
+      "onset_s": 21.3,
+      "peak_s": 21.56,
+      "end_s": 21.66,
+      "duration_s": 0.36,
+      "rms_dbfs": -16.7,
+      "spectral_centroid_hz": 249,
+      "attack_ratio": 0.72,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 9.9,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.12,
+          "peak_t_s": 1.02,
+          "bright_hz": 803,
+          "match_score": 37.2
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 36.0
+        }
+      ]
+    },
+    {
+      "event_index": 42,
+      "onset_s": 21.76,
+      "peak_s": 22.04,
+      "end_s": 22.14,
+      "duration_s": 0.38,
+      "rms_dbfs": -16.8,
+      "spectral_centroid_hz": 276,
+      "attack_ratio": 0.74,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 9.2,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.12,
+          "peak_t_s": 1.02,
+          "bright_hz": 803,
+          "match_score": 37.4
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 36.2
+        }
+      ]
+    },
+    {
+      "event_index": 43,
+      "onset_s": 22.26,
+      "peak_s": 22.52,
+      "end_s": 22.62,
+      "duration_s": 0.36,
+      "rms_dbfs": -16.6,
+      "spectral_centroid_hz": 264,
+      "attack_ratio": 0.72,
+      "Synced_with_cut_s": 22.67,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 8.0,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.12,
+          "peak_t_s": 1.02,
+          "bright_hz": 803,
+          "match_score": 37.3
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 36.1
+        }
+      ]
+    },
+    {
+      "event_index": 44,
+      "onset_s": 22.74,
+      "peak_s": 23.0,
+      "end_s": 23.1,
+      "duration_s": 0.36,
+      "rms_dbfs": -16.7,
+      "spectral_centroid_hz": 276,
+      "attack_ratio": 0.72,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 7.1,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.12,
+          "peak_t_s": 1.02,
+          "bright_hz": 803,
+          "match_score": 37.4
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 36.2
+        }
+      ]
+    },
+    {
+      "event_index": 45,
+      "onset_s": 23.18,
+      "peak_s": 23.46,
+      "end_s": 23.58,
+      "duration_s": 0.4,
+      "rms_dbfs": -18.8,
+      "spectral_centroid_hz": 450,
+      "attack_ratio": 0.7,
+      "Synced_with_cut_s": 23.63,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 5.9,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.12,
+          "peak_t_s": 1.02,
+          "bright_hz": 803,
+          "match_score": 38.2
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 37.0
+        }
+      ]
+    },
+    {
+      "event_index": 46,
+      "onset_s": 23.66,
+      "peak_s": 23.94,
+      "end_s": 24.08,
+      "duration_s": 0.42,
+      "rms_dbfs": -17.6,
+      "spectral_centroid_hz": 348,
+      "attack_ratio": 0.67,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 8.2,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.12,
+          "peak_t_s": 1.02,
+          "bright_hz": 803,
+          "match_score": 37.7
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 36.5
+        }
+      ]
+    },
+    {
+      "event_index": 47,
+      "onset_s": 24.14,
+      "peak_s": 24.42,
+      "end_s": 24.56,
+      "duration_s": 0.42,
+      "rms_dbfs": -17.9,
+      "spectral_centroid_hz": 1420,
+      "attack_ratio": 0.67,
+      "Synced_with_cut_s": 24.55,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 8.1,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_2.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_2.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.405,
+          "peak_t_s": 2.76,
+          "bright_hz": 1535,
+          "match_score": 39.4
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 38.1
+        }
+      ]
+    },
+    {
+      "event_index": 48,
+      "onset_s": 24.84,
+      "peak_s": 25.04,
+      "end_s": 25.08,
+      "duration_s": 0.24,
+      "rms_dbfs": -26.1,
+      "spectral_centroid_hz": 1598,
+      "attack_ratio": 0.83,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "whoosh_swish",
+      "inferred_vai": "chuyen_canh",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Tiếng lướt (Swish) đi kèm chuyển động chữ/camera",
+      "when_and_how_to_use": "Bắt đầu sớm 0.10–0.15s để phần dày nhất (peak) nằm đúng giữa điểm cắt",
+      "db_above_music": 4.8,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWISH 9.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH 9.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.656,
+          "onset_s": 0.025,
+          "peak_t_s": 0.145,
+          "bright_hz": 1577,
+          "match_score": 64.9
+        },
+        {
+          "path": "Swipe & Swish/SWISH B 5.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH B 5.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.264,
+          "onset_s": 0.005,
+          "peak_t_s": 0.05,
+          "bright_hz": 1569,
+          "match_score": 64.9
+        }
+      ]
+    },
+    {
+      "event_index": 49,
+      "onset_s": 25.5,
+      "peak_s": 25.7,
+      "end_s": 25.74,
+      "duration_s": 0.24,
+      "rms_dbfs": -26.5,
+      "spectral_centroid_hz": 1390,
+      "attack_ratio": 0.83,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "whoosh_swish",
+      "inferred_vai": "chuyen_canh",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Tiếng lướt (Swish) đi kèm chuyển động chữ/camera",
+      "when_and_how_to_use": "Bắt đầu sớm 0.10–0.15s để phần dày nhất (peak) nằm đúng giữa điểm cắt",
+      "db_above_music": 6.8,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWISH B 7.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH B 7.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.352,
+          "onset_s": 0.005,
+          "peak_t_s": 0.065,
+          "bright_hz": 1374,
+          "match_score": 64.9
+        },
+        {
+          "path": "Swipe & Swish/SWISH SWIPE 17.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH SWIPE 17.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 1.133,
+          "onset_s": 0.07,
+          "peak_t_s": 0.225,
+          "bright_hz": 1365,
+          "match_score": 64.9
+        }
+      ]
+    },
+    {
+      "event_index": 50,
+      "onset_s": 26.7,
+      "peak_s": 26.78,
+      "end_s": 26.9,
+      "duration_s": 0.2,
+      "rms_dbfs": -26.3,
+      "spectral_centroid_hz": 1710,
+      "attack_ratio": 0.4,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 7.7,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWIPE 2.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWIPE 2.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.946,
+          "onset_s": 0.01,
+          "peak_t_s": 0.195,
+          "bright_hz": 1711,
+          "match_score": 65.0
+        },
+        {
+          "path": "Swipe & Swish/SWISH SWIPE 11.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH SWIPE 11.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.453,
+          "onset_s": 0.025,
+          "peak_t_s": 0.145,
+          "bright_hz": 1696,
+          "match_score": 64.9
+        }
+      ]
+    },
+    {
+      "event_index": 51,
+      "onset_s": 27.18,
+      "peak_s": 27.3,
+      "end_s": 27.32,
+      "duration_s": 0.14,
+      "rms_dbfs": -27.3,
+      "spectral_centroid_hz": 1159,
+      "attack_ratio": 0.86,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 6.3,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWIPE 7.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWIPE 7.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.8,
+          "onset_s": 0.065,
+          "peak_t_s": 0.285,
+          "bright_hz": 1152,
+          "match_score": 65.0
+        },
+        {
+          "path": "Pop/POP 9.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Pop\\POP 9.wav",
+          "vai": [
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.082,
+          "onset_s": 0.015,
+          "peak_t_s": 0.02,
+          "bright_hz": 1150,
+          "match_score": 65.0
+        }
+      ]
+    },
+    {
+      "event_index": 52,
+      "onset_s": 27.66,
+      "peak_s": 27.9,
+      "end_s": 28.02,
+      "duration_s": 0.36,
+      "rms_dbfs": -25.5,
+      "spectral_centroid_hz": 1858,
+      "attack_ratio": 0.67,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 7.6,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_4.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_4.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.305,
+          "peak_t_s": 3.525,
+          "bright_hz": 1990,
+          "match_score": 39.3
+        },
+        {
+          "path": "Riser/ES_Riser Metallic - SFX Producer.mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\ES_Riser Metallic - SFX Producer.mp3",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 1.707,
+          "onset_s": 0.34,
+          "peak_t_s": 1.675,
+          "bright_hz": 2027,
+          "match_score": 39.2
+        }
+      ]
+    },
+    {
+      "event_index": 53,
+      "onset_s": 28.1,
+      "peak_s": 28.22,
+      "end_s": 28.28,
+      "duration_s": 0.18,
+      "rms_dbfs": -23.3,
+      "spectral_centroid_hz": 2308,
+      "attack_ratio": 0.67,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 9.8,
+      "on_music_beat": true,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWISH SWIPE 10.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH SWIPE 10.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.4,
+          "onset_s": 0.0,
+          "peak_t_s": 0.045,
+          "bright_hz": 2313,
+          "match_score": 65.0
+        },
+        {
+          "path": "Swipe & Swish/SWISH 3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH 3.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.262,
+          "onset_s": 0.015,
+          "peak_t_s": 0.085,
+          "bright_hz": 2269,
+          "match_score": 64.8
+        }
+      ]
+    },
+    {
+      "event_index": 54,
+      "onset_s": 28.32,
+      "peak_s": 28.46,
+      "end_s": 28.56,
+      "duration_s": 0.24,
+      "rms_dbfs": -27.2,
+      "spectral_centroid_hz": 1789,
+      "attack_ratio": 0.58,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "whoosh_swish",
+      "inferred_vai": "chuyen_canh",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Tiếng lướt (Swish) đi kèm chuyển động chữ/camera",
+      "when_and_how_to_use": "Bắt đầu sớm 0.10–0.15s để phần dày nhất (peak) nằm đúng giữa điểm cắt",
+      "db_above_music": 6.3,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWISH 7.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH 7.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.525,
+          "onset_s": 0.025,
+          "peak_t_s": 0.115,
+          "bright_hz": 1763,
+          "match_score": 64.9
+        },
+        {
+          "path": "Swipe & Swish/SWISH 1.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH 1.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.22,
+          "onset_s": 0.005,
+          "peak_t_s": 0.04,
+          "bright_hz": 1747,
+          "match_score": 64.8
+        }
+      ]
+    },
+    {
+      "event_index": 55,
+      "onset_s": 28.86,
+      "peak_s": 29.02,
+      "end_s": 29.12,
+      "duration_s": 0.26,
+      "rms_dbfs": -24.3,
+      "spectral_centroid_hz": 959,
+      "attack_ratio": 0.62,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "whoosh_swish",
+      "inferred_vai": "chuyen_canh",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Tiếng lướt (Swish) đi kèm chuyển động chữ/camera",
+      "when_and_how_to_use": "Bắt đầu sớm 0.10–0.15s để phần dày nhất (peak) nằm đúng giữa điểm cắt",
+      "db_above_music": 9.1,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWIPE 11.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWIPE 11.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.939,
+          "onset_s": 0.025,
+          "peak_t_s": 0.205,
+          "bright_hz": 974,
+          "match_score": 64.9
+        },
+        {
+          "path": "Swipe & Swish/SWIPE 1.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWIPE 1.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.939,
+          "onset_s": 0.04,
+          "peak_t_s": 0.195,
+          "bright_hz": 979,
+          "match_score": 64.9
+        }
+      ]
+    },
+    {
+      "event_index": 56,
+      "onset_s": 29.76,
+      "peak_s": 29.84,
+      "end_s": 29.86,
+      "duration_s": 0.1,
+      "rms_dbfs": -29.4,
+      "spectral_centroid_hz": 3645,
+      "attack_ratio": 0.8,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "shutter_or_digital_click",
+      "inferred_vai": "danh_sach",
+      "inferred_emotion": "cong_nghe",
+      "purpose_in_video": "Tiếng gõ chữ kỹ thuật số / đếm thông số (Digital Tick / Typewriter)",
+      "when_and_how_to_use": "Canh ĐỈNH (peak_t) trùng từng ký tự/từng lớp mask bật lên",
+      "db_above_music": 4.6,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Click digital/Click Digital (19).mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Click digital\\Click Digital (19).mp3",
+          "vai": [
+            "danh_sach",
+            "nhan_chu"
+          ],
+          "sac_thai": "cong_nghe",
+          "nghia": [],
+          "dur_s": 0.268,
+          "onset_s": 0.015,
+          "peak_t_s": 0.17,
+          "bright_hz": 3704,
+          "match_score": 64.7
+        },
+        {
+          "path": "Click digital/Click Digital (1).mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Click digital\\Click Digital (1).mp3",
+          "vai": [
+            "danh_sach",
+            "nhan_chu"
+          ],
+          "sac_thai": "cong_nghe",
+          "nghia": [],
+          "dur_s": 0.203,
+          "onset_s": 0.005,
+          "peak_t_s": 0.015,
+          "bright_hz": 3893,
+          "match_score": 63.8
+        }
+      ]
+    },
+    {
+      "event_index": 57,
+      "onset_s": 30.54,
+      "peak_s": 30.68,
+      "end_s": 30.78,
+      "duration_s": 0.24,
+      "rms_dbfs": -27.5,
+      "spectral_centroid_hz": 1727,
+      "attack_ratio": 0.58,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "whoosh_swish",
+      "inferred_vai": "chuyen_canh",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Tiếng lướt (Swish) đi kèm chuyển động chữ/camera",
+      "when_and_how_to_use": "Bắt đầu sớm 0.10–0.15s để phần dày nhất (peak) nằm đúng giữa điểm cắt",
+      "db_above_music": 8.1,
+      "on_music_beat": true,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWIPE 2.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWIPE 2.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.946,
+          "onset_s": 0.01,
+          "peak_t_s": 0.195,
+          "bright_hz": 1711,
+          "match_score": 64.9
+        },
+        {
+          "path": "Swipe & Swish/SWISH 1.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH 1.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.22,
+          "onset_s": 0.005,
+          "peak_t_s": 0.04,
+          "bright_hz": 1747,
+          "match_score": 64.9
+        }
+      ]
+    },
+    {
+      "event_index": 58,
+      "onset_s": 31.02,
+      "peak_s": 31.3,
+      "end_s": 31.34,
+      "duration_s": 0.32,
+      "rms_dbfs": -27.8,
+      "spectral_centroid_hz": 1868,
+      "attack_ratio": 0.88,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 8.6,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_4.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_4.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.305,
+          "peak_t_s": 3.525,
+          "bright_hz": 1990,
+          "match_score": 39.4
+        },
+        {
+          "path": "Riser/ES_Riser Metallic - SFX Producer.mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\ES_Riser Metallic - SFX Producer.mp3",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 1.707,
+          "onset_s": 0.34,
+          "peak_t_s": 1.675,
+          "bright_hz": 2027,
+          "match_score": 39.2
+        }
+      ]
+    },
+    {
+      "event_index": 59,
+      "onset_s": 31.66,
+      "peak_s": 31.94,
+      "end_s": 31.98,
+      "duration_s": 0.32,
+      "rms_dbfs": -29.3,
+      "spectral_centroid_hz": 1421,
+      "attack_ratio": 0.88,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 4.5,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_2.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_2.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.405,
+          "peak_t_s": 2.76,
+          "bright_hz": 1535,
+          "match_score": 39.4
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 38.1
+        }
+      ]
+    },
+    {
+      "event_index": 60,
+      "onset_s": 32.06,
+      "peak_s": 32.3,
+      "end_s": 32.34,
+      "duration_s": 0.28,
+      "rms_dbfs": -28.7,
+      "spectral_centroid_hz": 1195,
+      "attack_ratio": 0.86,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "whoosh_swish",
+      "inferred_vai": "chuyen_canh",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Tiếng lướt (Swish) đi kèm chuyển động chữ/camera",
+      "when_and_how_to_use": "Bắt đầu sớm 0.10–0.15s để phần dày nhất (peak) nằm đúng giữa điểm cắt",
+      "db_above_music": 4.7,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWISH A 1.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH A 1.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.586,
+          "onset_s": 0.15,
+          "peak_t_s": 0.2,
+          "bright_hz": 1194,
+          "match_score": 65.0
+        },
+        {
+          "path": "Swipe & Swish/SWISH A 2.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH A 2.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.57,
+          "onset_s": 0.115,
+          "peak_t_s": 0.16,
+          "bright_hz": 1185,
+          "match_score": 65.0
+        }
+      ]
+    },
+    {
+      "event_index": 61,
+      "onset_s": 32.54,
+      "peak_s": 32.74,
+      "end_s": 32.78,
+      "duration_s": 0.24,
+      "rms_dbfs": -25.9,
+      "spectral_centroid_hz": 1953,
+      "attack_ratio": 0.83,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "whoosh_swish",
+      "inferred_vai": "chuyen_canh",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Tiếng lướt (Swish) đi kèm chuyển động chữ/camera",
+      "when_and_how_to_use": "Bắt đầu sớm 0.10–0.15s để phần dày nhất (peak) nằm đúng giữa điểm cắt",
+      "db_above_music": 5.4,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWIPE 4.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWIPE 4.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.831,
+          "onset_s": 0.045,
+          "peak_t_s": 0.545,
+          "bright_hz": 1953,
+          "match_score": 65.0
+        },
+        {
+          "path": "Swipe & Swish/SWISH B 2.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH B 2.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.176,
+          "onset_s": 0.0,
+          "peak_t_s": 0.03,
+          "bright_hz": 1952,
+          "match_score": 65.0
+        }
+      ]
+    },
+    {
+      "event_index": 62,
+      "onset_s": 32.94,
+      "peak_s": 33.22,
+      "end_s": 33.32,
+      "duration_s": 0.38,
+      "rms_dbfs": -18.1,
+      "spectral_centroid_hz": 1262,
+      "attack_ratio": 0.74,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 11.3,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 38.9
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_2.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_2.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.405,
+          "peak_t_s": 2.76,
+          "bright_hz": 1535,
+          "match_score": 38.6
+        }
+      ]
+    },
+    {
+      "event_index": 63,
+      "onset_s": 33.42,
+      "peak_s": 33.7,
+      "end_s": 33.8,
+      "duration_s": 0.38,
+      "rms_dbfs": -16.5,
+      "spectral_centroid_hz": 327,
+      "attack_ratio": 0.74,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 11.8,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.12,
+          "peak_t_s": 1.02,
+          "bright_hz": 803,
+          "match_score": 37.6
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 36.4
+        }
+      ]
+    },
+    {
+      "event_index": 64,
+      "onset_s": 34.14,
+      "peak_s": 34.18,
+      "end_s": 34.26,
+      "duration_s": 0.12,
+      "rms_dbfs": -16.5,
+      "spectral_centroid_hz": 1244,
+      "attack_ratio": 0.33,
+      "Synced_with_cut_s": 34.13,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "kich_tinh",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 9.8,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "UI/Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [
+            "gio"
+          ],
+          "dur_s": 1.964,
+          "onset_s": 0.245,
+          "peak_t_s": 0.39,
+          "bright_hz": 1354,
+          "match_score": 64.5
+        },
+        {
+          "path": "UI/Whoosh and Hit (2).mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Whoosh and Hit (2).mp3",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 2.703,
+          "onset_s": 0.235,
+          "peak_t_s": 0.575,
+          "bright_hz": 690,
+          "match_score": 62.2
+        }
+      ]
+    },
+    {
+      "event_index": 65,
+      "onset_s": 34.38,
+      "peak_s": 34.66,
+      "end_s": 34.76,
+      "duration_s": 0.38,
+      "rms_dbfs": -16.5,
+      "spectral_centroid_hz": 231,
+      "attack_ratio": 0.74,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 9.4,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.12,
+          "peak_t_s": 1.02,
+          "bright_hz": 803,
+          "match_score": 37.1
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 35.9
+        }
+      ]
+    },
+    {
+      "event_index": 66,
+      "onset_s": 35.08,
+      "peak_s": 35.14,
+      "end_s": 35.24,
+      "duration_s": 0.16,
+      "rms_dbfs": -16.6,
+      "spectral_centroid_hz": 1285,
+      "attack_ratio": 0.38,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 8.4,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWISH B 8.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH B 8.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.396,
+          "onset_s": 0.01,
+          "peak_t_s": 0.075,
+          "bright_hz": 1288,
+          "match_score": 65.0
+        },
+        {
+          "path": "Swipe & Swish/SWISH C.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH C.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.656,
+          "onset_s": 0.055,
+          "peak_t_s": 0.19,
+          "bright_hz": 1254,
+          "match_score": 64.8
+        }
+      ]
+    },
+    {
+      "event_index": 67,
+      "onset_s": 35.44,
+      "peak_s": 35.62,
+      "end_s": 35.7,
+      "duration_s": 0.26,
+      "rms_dbfs": -16.5,
+      "spectral_centroid_hz": 263,
+      "attack_ratio": 0.69,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 7.6,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "UI/Whoosh and Hit (2).mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Whoosh and Hit (2).mp3",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 2.703,
+          "onset_s": 0.235,
+          "peak_t_s": 0.575,
+          "bright_hz": 690,
+          "match_score": 52.9
+        },
+        {
+          "path": "UI/Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [
+            "gio"
+          ],
+          "dur_s": 1.964,
+          "onset_s": 0.245,
+          "peak_t_s": 0.39,
+          "bright_hz": 1354,
+          "match_score": 49.5
+        }
+      ]
+    },
+    {
+      "event_index": 68,
+      "onset_s": 36.04,
+      "peak_s": 36.1,
+      "end_s": 36.2,
+      "duration_s": 0.16,
+      "rms_dbfs": -16.6,
+      "spectral_centroid_hz": 1258,
+      "attack_ratio": 0.38,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 7.5,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWISH C.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH C.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.656,
+          "onset_s": 0.055,
+          "peak_t_s": 0.19,
+          "bright_hz": 1254,
+          "match_score": 65.0
+        },
+        {
+          "path": "Swipe & Swish/SWISH B 8.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH B 8.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.396,
+          "onset_s": 0.01,
+          "peak_t_s": 0.075,
+          "bright_hz": 1288,
+          "match_score": 64.8
+        }
+      ]
+    },
+    {
+      "event_index": 69,
+      "onset_s": 36.28,
+      "peak_s": 36.56,
+      "end_s": 36.68,
+      "duration_s": 0.4,
+      "rms_dbfs": -17.0,
+      "spectral_centroid_hz": 466,
+      "attack_ratio": 0.7,
+      "Synced_with_cut_s": 36.57,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "kich_tinh",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 6.5,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.12,
+          "peak_t_s": 1.02,
+          "bright_hz": 803,
+          "match_score": 48.3
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 47.1
+        }
+      ]
+    },
+    {
+      "event_index": 70,
+      "onset_s": 37.0,
+      "peak_s": 37.1,
+      "end_s": 37.16,
+      "duration_s": 0.16,
+      "rms_dbfs": -16.4,
+      "spectral_centroid_hz": 545,
+      "attack_ratio": 0.62,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 7.6,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "UI/Whoosh and Hit (2).mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Whoosh and Hit (2).mp3",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 2.703,
+          "onset_s": 0.235,
+          "peak_t_s": 0.575,
+          "bright_hz": 690,
+          "match_score": 54.3
+        },
+        {
+          "path": "UI/Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [
+            "gio"
+          ],
+          "dur_s": 1.964,
+          "onset_s": 0.245,
+          "peak_t_s": 0.39,
+          "bright_hz": 1354,
+          "match_score": 51.0
+        }
+      ]
+    },
+    {
+      "event_index": 71,
+      "onset_s": 37.4,
+      "peak_s": 37.54,
+      "end_s": 37.62,
+      "duration_s": 0.22,
+      "rms_dbfs": -16.6,
+      "spectral_centroid_hz": 262,
+      "attack_ratio": 0.64,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 7.3,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "UI/Whoosh and Hit (2).mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Whoosh and Hit (2).mp3",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 2.703,
+          "onset_s": 0.235,
+          "peak_t_s": 0.575,
+          "bright_hz": 690,
+          "match_score": 52.9
+        },
+        {
+          "path": "UI/Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [
+            "gio"
+          ],
+          "dur_s": 1.964,
+          "onset_s": 0.245,
+          "peak_t_s": 0.39,
+          "bright_hz": 1354,
+          "match_score": 49.5
+        }
+      ]
+    },
+    {
+      "event_index": 72,
+      "onset_s": 37.74,
+      "peak_s": 38.02,
+      "end_s": 38.12,
+      "duration_s": 0.38,
+      "rms_dbfs": -16.5,
+      "spectral_centroid_hz": 1235,
+      "attack_ratio": 0.74,
+      "Synced_with_cut_s": 37.97,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "kich_tinh",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 7.7,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 49.0
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_2.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_2.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.405,
+          "peak_t_s": 2.76,
+          "bright_hz": 1535,
+          "match_score": 48.5
+        }
+      ]
+    },
+    {
+      "event_index": 73,
+      "onset_s": 38.44,
+      "peak_s": 38.48,
+      "end_s": 38.66,
+      "duration_s": 0.22,
+      "rms_dbfs": -16.2,
+      "spectral_centroid_hz": 435,
+      "attack_ratio": 0.18,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 8.6,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "UI/Whoosh and Hit (2).mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Whoosh and Hit (2).mp3",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 2.703,
+          "onset_s": 0.235,
+          "peak_t_s": 0.575,
+          "bright_hz": 690,
+          "match_score": 53.7
+        },
+        {
+          "path": "UI/Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [
+            "gio"
+          ],
+          "dur_s": 1.964,
+          "onset_s": 0.245,
+          "peak_t_s": 0.39,
+          "bright_hz": 1354,
+          "match_score": 50.4
+        }
+      ]
+    },
+    {
+      "event_index": 74,
+      "onset_s": 38.92,
+      "peak_s": 39.02,
+      "end_s": 39.06,
+      "duration_s": 0.14,
+      "rms_dbfs": -16.9,
+      "spectral_centroid_hz": 546,
+      "attack_ratio": 0.71,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 7.5,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "UI/Whoosh and Hit (2).mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Whoosh and Hit (2).mp3",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 2.703,
+          "onset_s": 0.235,
+          "peak_t_s": 0.575,
+          "bright_hz": 690,
+          "match_score": 54.3
+        },
+        {
+          "path": "UI/Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [
+            "gio"
+          ],
+          "dur_s": 1.964,
+          "onset_s": 0.245,
+          "peak_t_s": 0.39,
+          "bright_hz": 1354,
+          "match_score": 51.0
+        }
+      ]
+    },
+    {
+      "event_index": 75,
+      "onset_s": 39.18,
+      "peak_s": 39.46,
+      "end_s": 39.56,
+      "duration_s": 0.38,
+      "rms_dbfs": -16.6,
+      "spectral_centroid_hz": 253,
+      "attack_ratio": 0.74,
+      "Synced_with_cut_s": 39.33,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 7.3,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.12,
+          "peak_t_s": 1.02,
+          "bright_hz": 803,
+          "match_score": 37.2
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 36.0
+        }
+      ]
+    },
+    {
+      "event_index": 76,
+      "onset_s": 39.88,
+      "peak_s": 39.94,
+      "end_s": 40.02,
+      "duration_s": 0.14,
+      "rms_dbfs": -16.6,
+      "spectral_centroid_hz": 1245,
+      "attack_ratio": 0.43,
+      "Synced_with_cut_s": 40.07,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 6.7,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWISH C.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH C.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.656,
+          "onset_s": 0.055,
+          "peak_t_s": 0.19,
+          "bright_hz": 1254,
+          "match_score": 65.0
+        },
+        {
+          "path": "Pop/POP 3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Pop\\POP 3.wav",
+          "vai": [
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.213,
+          "onset_s": 0.01,
+          "peak_t_s": 0.015,
+          "bright_hz": 1220,
+          "match_score": 64.9
+        }
+      ]
+    },
+    {
+      "event_index": 77,
+      "onset_s": 40.38,
+      "peak_s": 40.46,
+      "end_s": 40.52,
+      "duration_s": 0.14,
+      "rms_dbfs": -16.6,
+      "spectral_centroid_hz": 209,
+      "attack_ratio": 0.57,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 6.5,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "UI/Whoosh and Hit (2).mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Whoosh and Hit (2).mp3",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 2.703,
+          "onset_s": 0.235,
+          "peak_t_s": 0.575,
+          "bright_hz": 690,
+          "match_score": 52.6
+        },
+        {
+          "path": "UI/Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [
+            "gio"
+          ],
+          "dur_s": 1.964,
+          "onset_s": 0.245,
+          "peak_t_s": 0.39,
+          "bright_hz": 1354,
+          "match_score": 49.3
+        }
+      ]
+    },
+    {
+      "event_index": 78,
+      "onset_s": 40.62,
+      "peak_s": 40.9,
+      "end_s": 40.98,
+      "duration_s": 0.36,
+      "rms_dbfs": -16.0,
+      "spectral_centroid_hz": 1294,
+      "attack_ratio": 0.78,
+      "Synced_with_cut_s": 40.97,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "kich_tinh",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 7.4,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_2.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_2.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.405,
+          "peak_t_s": 2.76,
+          "bright_hz": 1535,
+          "match_score": 48.8
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 48.8
+        }
+      ]
+    },
+    {
+      "event_index": 79,
+      "onset_s": 41.1,
+      "peak_s": 41.38,
+      "end_s": 41.46,
+      "duration_s": 0.36,
+      "rms_dbfs": -16.8,
+      "spectral_centroid_hz": 281,
+      "attack_ratio": 0.78,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 6.7,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.12,
+          "peak_t_s": 1.02,
+          "bright_hz": 803,
+          "match_score": 37.4
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 36.2
+        }
+      ]
+    },
+    {
+      "event_index": 80,
+      "onset_s": 41.6,
+      "peak_s": 41.86,
+      "end_s": 41.94,
+      "duration_s": 0.34,
+      "rms_dbfs": -17.0,
+      "spectral_centroid_hz": 1353,
+      "attack_ratio": 0.76,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 6.6,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_2.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_2.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.405,
+          "peak_t_s": 2.76,
+          "bright_hz": 1535,
+          "match_score": 39.1
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 38.5
+        }
+      ]
+    },
+    {
+      "event_index": 81,
+      "onset_s": 42.3,
+      "peak_s": 42.38,
+      "end_s": 42.44,
+      "duration_s": 0.14,
+      "rms_dbfs": -15.4,
+      "spectral_centroid_hz": 1314,
+      "attack_ratio": 0.57,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 9.3,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWISH B 8.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH B 8.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.396,
+          "onset_s": 0.01,
+          "peak_t_s": 0.075,
+          "bright_hz": 1288,
+          "match_score": 64.9
+        },
+        {
+          "path": "Swipe & Swish/SWISH SWIPE 16.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH SWIPE 16.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.656,
+          "onset_s": 0.03,
+          "peak_t_s": 0.15,
+          "bright_hz": 1350,
+          "match_score": 64.8
+        }
+      ]
+    },
+    {
+      "event_index": 82,
+      "onset_s": 42.54,
+      "peak_s": 42.82,
+      "end_s": 42.92,
+      "duration_s": 0.38,
+      "rms_dbfs": -16.6,
+      "spectral_centroid_hz": 1284,
+      "attack_ratio": 0.74,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 8.7,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 38.8
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_2.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_2.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.405,
+          "peak_t_s": 2.76,
+          "bright_hz": 1535,
+          "match_score": 38.7
+        }
+      ]
+    },
+    {
+      "event_index": 83,
+      "onset_s": 43.02,
+      "peak_s": 43.3,
+      "end_s": 43.4,
+      "duration_s": 0.38,
+      "rms_dbfs": -16.4,
+      "spectral_centroid_hz": 257,
+      "attack_ratio": 0.74,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 10.5,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.12,
+          "peak_t_s": 1.02,
+          "bright_hz": 803,
+          "match_score": 37.3
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 36.1
+        }
+      ]
+    },
+    {
+      "event_index": 84,
+      "onset_s": 43.5,
+      "peak_s": 43.78,
+      "end_s": 43.88,
+      "duration_s": 0.38,
+      "rms_dbfs": -18.1,
+      "spectral_centroid_hz": 1285,
+      "attack_ratio": 0.74,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 10.3,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 38.8
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_2.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_2.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.405,
+          "peak_t_s": 2.76,
+          "bright_hz": 1535,
+          "match_score": 38.8
+        }
+      ]
+    },
+    {
+      "event_index": 85,
+      "onset_s": 43.96,
+      "peak_s": 44.24,
+      "end_s": 44.3,
+      "duration_s": 0.34,
+      "rms_dbfs": -19.8,
+      "spectral_centroid_hz": 839,
+      "attack_ratio": 0.82,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 10.5,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.12,
+          "peak_t_s": 1.02,
+          "bright_hz": 803,
+          "match_score": 39.8
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 39.0
+        }
+      ]
+    },
+    {
+      "event_index": 86,
+      "onset_s": 44.76,
+      "peak_s": 44.92,
+      "end_s": 44.98,
+      "duration_s": 0.22,
+      "rms_dbfs": -28.2,
+      "spectral_centroid_hz": 1164,
+      "attack_ratio": 0.73,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "whoosh_swish",
+      "inferred_vai": "chuyen_canh",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Tiếng lướt (Swish) đi kèm chuyển động chữ/camera",
+      "when_and_how_to_use": "Bắt đầu sớm 0.10–0.15s để phần dày nhất (peak) nằm đúng giữa điểm cắt",
+      "db_above_music": 4.7,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWIPE 7.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWIPE 7.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.8,
+          "onset_s": 0.065,
+          "peak_t_s": 0.285,
+          "bright_hz": 1152,
+          "match_score": 64.9
+        },
+        {
+          "path": "Swipe & Swish/SWISH A 2.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH A 2.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.57,
+          "onset_s": 0.115,
+          "peak_t_s": 0.16,
+          "bright_hz": 1185,
+          "match_score": 64.9
+        }
+      ]
+    },
+    {
+      "event_index": 87,
+      "onset_s": 45.76,
+      "peak_s": 45.96,
+      "end_s": 46.0,
+      "duration_s": 0.24,
+      "rms_dbfs": -31.5,
+      "spectral_centroid_hz": 5937,
+      "attack_ratio": 0.83,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "shutter_or_digital_click",
+      "inferred_vai": "danh_sach",
+      "inferred_emotion": "cong_nghe",
+      "purpose_in_video": "Tiếng gõ chữ kỹ thuật số / đếm thông số (Digital Tick / Typewriter)",
+      "when_and_how_to_use": "Canh ĐỈNH (peak_t) trùng từng ký tự/từng lớp mask bật lên",
+      "db_above_music": 4.6,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Futuristic/TELEMETRY TYPING DIGITAL COMPUTER 1.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Futuristic\\TELEMETRY TYPING DIGITAL COMPUTER 1.wav",
+          "vai": [
+            "giao_dien",
+            "danh_sach"
+          ],
+          "sac_thai": "cong_nghe",
+          "nghia": [
+            "thong_bao",
+            "ban_phim"
+          ],
+          "dur_s": 2.541,
+          "onset_s": 0.01,
+          "peak_t_s": 0.01,
+          "bright_hz": 5984,
+          "match_score": 64.8
+        },
+        {
+          "path": "Futuristic/TELEMETRY TYPING DIGITAL COMPUTER 3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Futuristic\\TELEMETRY TYPING DIGITAL COMPUTER 3.wav",
+          "vai": [
+            "giao_dien",
+            "danh_sach"
+          ],
+          "sac_thai": "cong_nghe",
+          "nghia": [
+            "thong_bao",
+            "ban_phim"
+          ],
+          "dur_s": 2.752,
+          "onset_s": 0.01,
+          "peak_t_s": 0.01,
+          "bright_hz": 5551,
+          "match_score": 63.1
+        }
+      ]
+    },
+    {
+      "event_index": 88,
+      "onset_s": 46.78,
+      "peak_s": 46.84,
+      "end_s": 46.88,
+      "duration_s": 0.1,
+      "rms_dbfs": -27.7,
+      "spectral_centroid_hz": 978,
+      "attack_ratio": 0.6,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 8.1,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWIPE 1.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWIPE 1.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.939,
+          "onset_s": 0.04,
+          "peak_t_s": 0.195,
+          "bright_hz": 979,
+          "match_score": 65.0
+        },
+        {
+          "path": "Pop/POP 10.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Pop\\POP 10.wav",
+          "vai": [
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.184,
+          "onset_s": 0.01,
+          "peak_t_s": 0.015,
+          "bright_hz": 981,
+          "match_score": 65.0
+        }
+      ]
+    },
+    {
+      "event_index": 89,
+      "onset_s": 47.3,
+      "peak_s": 47.42,
+      "end_s": 47.48,
+      "duration_s": 0.18,
+      "rms_dbfs": -31.3,
+      "spectral_centroid_hz": 1721,
+      "attack_ratio": 0.67,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 5.1,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWIPE 2.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWIPE 2.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.946,
+          "onset_s": 0.01,
+          "peak_t_s": 0.195,
+          "bright_hz": 1711,
+          "match_score": 65.0
+        },
+        {
+          "path": "Swipe & Swish/SWISH SWIPE 11.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH SWIPE 11.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.453,
+          "onset_s": 0.025,
+          "peak_t_s": 0.145,
+          "bright_hz": 1696,
+          "match_score": 64.9
+        }
+      ]
+    },
+    {
+      "event_index": 90,
+      "onset_s": 47.68,
+      "peak_s": 47.8,
+      "end_s": 47.92,
+      "duration_s": 0.24,
+      "rms_dbfs": -30.8,
+      "spectral_centroid_hz": 4044,
+      "attack_ratio": 0.5,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "shutter_or_digital_click",
+      "inferred_vai": "danh_sach",
+      "inferred_emotion": "cong_nghe",
+      "purpose_in_video": "Tiếng gõ chữ kỹ thuật số / đếm thông số (Digital Tick / Typewriter)",
+      "when_and_how_to_use": "Canh ĐỈNH (peak_t) trùng từng ký tự/từng lớp mask bật lên",
+      "db_above_music": 5.7,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Click digital/Click Digital (15).mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Click digital\\Click Digital (15).mp3",
+          "vai": [
+            "danh_sach",
+            "nhan_chu"
+          ],
+          "sac_thai": "cong_nghe",
+          "nghia": [],
+          "dur_s": 0.173,
+          "onset_s": 0.01,
+          "peak_t_s": 0.1,
+          "bright_hz": 4035,
+          "match_score": 65.0
+        },
+        {
+          "path": "Click digital/Click-3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Click digital\\Click-3.wav",
+          "vai": [
+            "danh_sach",
+            "nhan_chu"
+          ],
+          "sac_thai": "cong_nghe",
+          "nghia": [],
+          "dur_s": 0.5,
+          "onset_s": 0.05,
+          "peak_t_s": 0.135,
+          "bright_hz": 4034,
+          "match_score": 65.0
+        }
+      ]
+    },
+    {
+      "event_index": 91,
+      "onset_s": 48.2,
+      "peak_s": 48.48,
+      "end_s": 48.54,
+      "duration_s": 0.34,
+      "rms_dbfs": -25.6,
+      "spectral_centroid_hz": 1415,
+      "attack_ratio": 0.82,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 10.9,
+      "on_music_beat": true,
+      "recommended_library_files": [
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_2.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_2.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.405,
+          "peak_t_s": 2.76,
+          "bright_hz": 1535,
+          "match_score": 39.4
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 38.1
+        }
+      ]
+    },
+    {
+      "event_index": 92,
+      "onset_s": 48.92,
+      "peak_s": 49.06,
+      "end_s": 49.1,
+      "duration_s": 0.18,
+      "rms_dbfs": -27.8,
+      "spectral_centroid_hz": 927,
+      "attack_ratio": 0.78,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 9.7,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWISH 10.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH 10.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.235,
+          "onset_s": 0.015,
+          "peak_t_s": 0.05,
+          "bright_hz": 930,
+          "match_score": 65.0
+        },
+        {
+          "path": "Pop/POP 14.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Pop\\POP 14.wav",
+          "vai": [
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.088,
+          "onset_s": 0.0,
+          "peak_t_s": 0.0,
+          "bright_hz": 952,
+          "match_score": 64.9
+        }
+      ]
+    },
+    {
+      "event_index": 93,
+      "onset_s": 49.4,
+      "peak_s": 49.66,
+      "end_s": 49.74,
+      "duration_s": 0.34,
+      "rms_dbfs": -28.0,
+      "spectral_centroid_hz": 1669,
+      "attack_ratio": 0.76,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 9.4,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_2.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_2.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.405,
+          "peak_t_s": 2.76,
+          "bright_hz": 1535,
+          "match_score": 39.3
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_4.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_4.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.305,
+          "peak_t_s": 3.525,
+          "bright_hz": 1990,
+          "match_score": 38.4
+        }
+      ]
+    },
+    {
+      "event_index": 94,
+      "onset_s": 49.88,
+      "peak_s": 50.16,
+      "end_s": 50.26,
+      "duration_s": 0.38,
+      "rms_dbfs": -30.1,
+      "spectral_centroid_hz": 625,
+      "attack_ratio": 0.74,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 6.9,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.12,
+          "peak_t_s": 1.02,
+          "bright_hz": 803,
+          "match_score": 39.1
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 37.9
+        }
+      ]
+    },
+    {
+      "event_index": 95,
+      "onset_s": 50.82,
+      "peak_s": 51.0,
+      "end_s": 51.08,
+      "duration_s": 0.26,
+      "rms_dbfs": -28.8,
+      "spectral_centroid_hz": 1534,
+      "attack_ratio": 0.69,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "whoosh_swish",
+      "inferred_vai": "chuyen_canh",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Tiếng lướt (Swish) đi kèm chuyển động chữ/camera",
+      "when_and_how_to_use": "Bắt đầu sớm 0.10–0.15s để phần dày nhất (peak) nằm đúng giữa điểm cắt",
+      "db_above_music": 8.3,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWIPE 5.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWIPE 5.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.827,
+          "onset_s": 0.06,
+          "peak_t_s": 0.31,
+          "bright_hz": 1501,
+          "match_score": 64.8
+        },
+        {
+          "path": "Swipe & Swish/SWISH B 5.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH B 5.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.264,
+          "onset_s": 0.005,
+          "peak_t_s": 0.05,
+          "bright_hz": 1569,
+          "match_score": 64.8
+        }
+      ]
+    },
+    {
+      "event_index": 96,
+      "onset_s": 51.34,
+      "peak_s": 51.62,
+      "end_s": 51.68,
+      "duration_s": 0.34,
+      "rms_dbfs": -30.5,
+      "spectral_centroid_hz": 866,
+      "attack_ratio": 0.82,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 6.8,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.12,
+          "peak_t_s": 1.02,
+          "bright_hz": 803,
+          "match_score": 39.7
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 39.1
+        }
+      ]
+    },
+    {
+      "event_index": 97,
+      "onset_s": 51.68,
+      "peak_s": 51.96,
+      "end_s": 52.04,
+      "duration_s": 0.36,
+      "rms_dbfs": -30.0,
+      "spectral_centroid_hz": 1382,
+      "attack_ratio": 0.78,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 5.9,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_2.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_2.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.405,
+          "peak_t_s": 2.76,
+          "bright_hz": 1535,
+          "match_score": 39.2
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 38.3
+        }
+      ]
+    },
+    {
+      "event_index": 98,
+      "onset_s": 52.78,
+      "peak_s": 53.06,
+      "end_s": 53.2,
+      "duration_s": 0.42,
+      "rms_dbfs": -23.7,
+      "spectral_centroid_hz": 735,
+      "attack_ratio": 0.67,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 6.0,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.12,
+          "peak_t_s": 1.02,
+          "bright_hz": 803,
+          "match_score": 39.7
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 38.5
+        }
+      ]
+    },
+    {
+      "event_index": 99,
+      "onset_s": 53.48,
+      "peak_s": 53.52,
+      "end_s": 53.62,
+      "duration_s": 0.14,
+      "rms_dbfs": -14.9,
+      "spectral_centroid_hz": 1710,
+      "attack_ratio": 0.29,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 12.6,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWIPE 2.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWIPE 2.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.946,
+          "onset_s": 0.01,
+          "peak_t_s": 0.195,
+          "bright_hz": 1711,
+          "match_score": 65.0
+        },
+        {
+          "path": "Swipe & Swish/SWISH SWIPE 11.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH SWIPE 11.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.453,
+          "onset_s": 0.025,
+          "peak_t_s": 0.145,
+          "bright_hz": 1696,
+          "match_score": 64.9
+        }
+      ]
+    },
+    {
+      "event_index": 100,
+      "onset_s": 53.7,
+      "peak_s": 53.98,
+      "end_s": 54.12,
+      "duration_s": 0.42,
+      "rms_dbfs": -16.7,
+      "spectral_centroid_hz": 453,
+      "attack_ratio": 0.67,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 8.2,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.12,
+          "peak_t_s": 1.02,
+          "bright_hz": 803,
+          "match_score": 38.2
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 37.0
+        }
+      ]
+    },
+    {
+      "event_index": 101,
+      "onset_s": 54.42,
+      "peak_s": 54.48,
+      "end_s": 54.56,
+      "duration_s": 0.14,
+      "rms_dbfs": -16.6,
+      "spectral_centroid_hz": 1138,
+      "attack_ratio": 0.43,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 6.7,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWISH A 5.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH A 5.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.381,
+          "onset_s": 0.025,
+          "peak_t_s": 0.075,
+          "bright_hz": 1138,
+          "match_score": 65.0
+        },
+        {
+          "path": "Pop/POP 3 APPEAR 1.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Pop\\POP 3 APPEAR 1.wav",
+          "vai": [
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.103,
+          "onset_s": 0.005,
+          "peak_t_s": 0.01,
+          "bright_hz": 1136,
+          "match_score": 65.0
+        }
+      ]
+    },
+    {
+      "event_index": 102,
+      "onset_s": 55.02,
+      "peak_s": 55.02,
+      "end_s": 55.08,
+      "duration_s": 0.06,
+      "rms_dbfs": -18.9,
+      "spectral_centroid_hz": 251,
+      "attack_ratio": 0.0,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 4.1,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "UI/Whoosh and Hit (2).mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Whoosh and Hit (2).mp3",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 2.703,
+          "onset_s": 0.235,
+          "peak_t_s": 0.575,
+          "bright_hz": 690,
+          "match_score": 52.8
+        },
+        {
+          "path": "UI/Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [
+            "gio"
+          ],
+          "dur_s": 1.964,
+          "onset_s": 0.245,
+          "peak_t_s": 0.39,
+          "bright_hz": 1354,
+          "match_score": 49.5
+        }
+      ]
+    },
+    {
+      "event_index": 103,
+      "onset_s": 55.16,
+      "peak_s": 55.42,
+      "end_s": 55.52,
+      "duration_s": 0.36,
+      "rms_dbfs": -16.7,
+      "spectral_centroid_hz": 1560,
+      "attack_ratio": 0.72,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 6.7,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_2.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_2.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.405,
+          "peak_t_s": 2.76,
+          "bright_hz": 1535,
+          "match_score": 39.9
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_4.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_4.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.305,
+          "peak_t_s": 3.525,
+          "bright_hz": 1990,
+          "match_score": 37.9
+        }
+      ]
+    },
+    {
+      "event_index": 104,
+      "onset_s": 55.64,
+      "peak_s": 55.92,
+      "end_s": 56.0,
+      "duration_s": 0.36,
+      "rms_dbfs": -17.1,
+      "spectral_centroid_hz": 219,
+      "attack_ratio": 0.78,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 6.4,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.12,
+          "peak_t_s": 1.02,
+          "bright_hz": 803,
+          "match_score": 37.1
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 35.9
+        }
+      ]
+    },
+    {
+      "event_index": 105,
+      "onset_s": 56.34,
+      "peak_s": 56.4,
+      "end_s": 56.48,
+      "duration_s": 0.14,
+      "rms_dbfs": -16.9,
+      "spectral_centroid_hz": 1163,
+      "attack_ratio": 0.43,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 6.7,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWIPE 7.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWIPE 7.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.8,
+          "onset_s": 0.065,
+          "peak_t_s": 0.285,
+          "bright_hz": 1152,
+          "match_score": 64.9
+        },
+        {
+          "path": "Pop/POP 9.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Pop\\POP 9.wav",
+          "vai": [
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.082,
+          "onset_s": 0.015,
+          "peak_t_s": 0.02,
+          "bright_hz": 1150,
+          "match_score": 64.9
+        }
+      ]
+    },
+    {
+      "event_index": 106,
+      "onset_s": 56.6,
+      "peak_s": 56.86,
+      "end_s": 56.98,
+      "duration_s": 0.38,
+      "rms_dbfs": -15.0,
+      "spectral_centroid_hz": 1387,
+      "attack_ratio": 0.68,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 9.8,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_2.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_2.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.405,
+          "peak_t_s": 2.76,
+          "bright_hz": 1535,
+          "match_score": 39.3
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 38.3
+        }
+      ]
+    },
+    {
+      "event_index": 107,
+      "onset_s": 57.32,
+      "peak_s": 57.36,
+      "end_s": 57.44,
+      "duration_s": 0.12,
+      "rms_dbfs": -16.7,
+      "spectral_centroid_hz": 1162,
+      "attack_ratio": 0.33,
+      "Synced_with_cut_s": 57.47,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "kich_tinh",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 8.3,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "UI/Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [
+            "gio"
+          ],
+          "dur_s": 1.964,
+          "onset_s": 0.245,
+          "peak_t_s": 0.39,
+          "bright_hz": 1354,
+          "match_score": 64.0
+        },
+        {
+          "path": "UI/Whoosh and Hit (2).mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Whoosh and Hit (2).mp3",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 2.703,
+          "onset_s": 0.235,
+          "peak_t_s": 0.575,
+          "bright_hz": 690,
+          "match_score": 62.6
+        }
+      ]
+    },
+    {
+      "event_index": 108,
+      "onset_s": 57.56,
+      "peak_s": 57.84,
+      "end_s": 57.92,
+      "duration_s": 0.36,
+      "rms_dbfs": -16.5,
+      "spectral_centroid_hz": 234,
+      "attack_ratio": 0.78,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 7.6,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.12,
+          "peak_t_s": 1.02,
+          "bright_hz": 803,
+          "match_score": 37.2
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 36.0
+        }
+      ]
+    },
+    {
+      "event_index": 109,
+      "onset_s": 58.26,
+      "peak_s": 58.32,
+      "end_s": 58.4,
+      "duration_s": 0.14,
+      "rms_dbfs": -16.7,
+      "spectral_centroid_hz": 1168,
+      "attack_ratio": 0.43,
+      "Synced_with_cut_s": 58.2,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "kich_tinh",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 7.0,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "UI/Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [
+            "gio"
+          ],
+          "dur_s": 1.964,
+          "onset_s": 0.245,
+          "peak_t_s": 0.39,
+          "bright_hz": 1354,
+          "match_score": 64.1
+        },
+        {
+          "path": "UI/Whoosh and Hit (2).mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Whoosh and Hit (2).mp3",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 2.703,
+          "onset_s": 0.235,
+          "peak_t_s": 0.575,
+          "bright_hz": 690,
+          "match_score": 62.6
+        }
+      ]
+    },
+    {
+      "event_index": 110,
+      "onset_s": 58.5,
+      "peak_s": 58.78,
+      "end_s": 58.9,
+      "duration_s": 0.4,
+      "rms_dbfs": -17.9,
+      "spectral_centroid_hz": 399,
+      "attack_ratio": 0.7,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 5.8,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.12,
+          "peak_t_s": 1.02,
+          "bright_hz": 803,
+          "match_score": 38.0
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 36.8
+        }
+      ]
+    },
+    {
+      "event_index": 111,
+      "onset_s": 59.24,
+      "peak_s": 59.3,
+      "end_s": 59.46,
+      "duration_s": 0.22,
+      "rms_dbfs": -17.2,
+      "spectral_centroid_hz": 837,
+      "attack_ratio": 0.27,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "whoosh_swish",
+      "inferred_vai": "chuyen_canh",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Tiếng lướt (Swish) đi kèm chuyển động chữ/camera",
+      "when_and_how_to_use": "Bắt đầu sớm 0.10–0.15s để phần dày nhất (peak) nằm đúng giữa điểm cắt",
+      "db_above_music": 6.1,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "whoosh/Fast Whooshes/Fast Whooshes/Fast Whoosh 9.aif",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\whoosh\\Fast Whooshes\\Fast Whooshes\\Fast Whoosh 9.aif",
+          "vai": [
+            "chuyen_canh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 2.0,
+          "onset_s": 0.275,
+          "peak_t_s": 0.51,
+          "bright_hz": 899,
+          "match_score": 54.7
+        },
+        {
+          "path": "whoosh/Whoosh/Whoosh (6).mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\whoosh\\Whoosh\\Whoosh (6).mp3",
+          "vai": [
+            "chuyen_canh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 0.34,
+          "onset_s": 0.085,
+          "peak_t_s": 0.115,
+          "bright_hz": 762,
+          "match_score": 54.6
+        }
+      ]
+    },
+    {
+      "event_index": 112,
+      "onset_s": 59.46,
+      "peak_s": 59.74,
+      "end_s": 59.84,
+      "duration_s": 0.38,
+      "rms_dbfs": -16.4,
+      "spectral_centroid_hz": 484,
+      "attack_ratio": 0.74,
+      "Synced_with_cut_s": 59.77,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "kich_tinh",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 7.1,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Riser/AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\AMUSIA  - Riser Whoosh Reverse Light Switch Rumble Faint Click.wav",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.12,
+          "peak_t_s": 1.02,
+          "bright_hz": 803,
+          "match_score": 48.4
+        },
+        {
+          "path": "Transition strong/MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Transition strong\\MA_OriginalSound_ActionTrailerStingers_3.wav",
+          "vai": [
+            "cham_manh",
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 8.0,
+          "onset_s": 0.275,
+          "peak_t_s": 3.065,
+          "bright_hz": 1044,
+          "match_score": 47.2
+        }
+      ]
+    },
+    {
+      "event_index": 113,
+      "onset_s": 60.2,
+      "peak_s": 60.26,
+      "end_s": 60.34,
+      "duration_s": 0.14,
+      "rms_dbfs": -17.1,
+      "spectral_centroid_hz": 843,
+      "attack_ratio": 0.43,
+      "Synced_with_cut_s": null,
+      "acoustic_class": "accent_pop_hit",
+      "inferred_vai": "nhan_chu",
+      "inferred_emotion": "sang_trong",
+      "purpose_in_video": "Âm nhấn ngắn (Accent / Pop / Hit) đánh dấu sự kiện thị giác trên màn hình",
+      "when_and_how_to_use": "Đặt ĐỈNH âm trùng khung hình phần tử xuất hiện",
+      "db_above_music": 7.1,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "UI/Whoosh and Hit (2).mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Whoosh and Hit (2).mp3",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 2.703,
+          "onset_s": 0.235,
+          "peak_t_s": 0.575,
+          "bright_hz": 690,
+          "match_score": 54.2
+        },
+        {
+          "path": "UI/Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\UI\\Andy Rapaporte - Vibrant Transitions - Airy Light Metal Hit Whoosh Left to Right.wav",
+          "vai": [
+            "giao_dien",
+            "nhan_chu",
+            "cham_manh"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [
+            "gio"
+          ],
+          "dur_s": 1.964,
+          "onset_s": 0.245,
+          "peak_t_s": 0.39,
+          "bright_hz": 1354,
+          "match_score": 52.4
+        }
+      ]
+    },
+    {
+      "event_index": 114,
+      "onset_s": 60.88,
+      "peak_s": 61.08,
+      "end_s": 61.12,
+      "duration_s": 0.24,
+      "rms_dbfs": -20.8,
+      "spectral_centroid_hz": 1653,
+      "attack_ratio": 0.83,
+      "Synced_with_cut_s": 61.25,
+      "acoustic_class": "whoosh_swish",
+      "inferred_vai": "chuyen_canh",
+      "inferred_emotion": "vui_tuoi",
+      "purpose_in_video": "Tiếng vút chuyển cảnh (Whoosh/Swish) khớp cú cắt tại 61.25s",
+      "when_and_how_to_use": "Bắt đầu sớm 0.10–0.15s để phần dày nhất (peak) nằm đúng giữa điểm cắt",
+      "db_above_music": 5.7,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Swipe & Swish/SWISH SWIPE 7.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH SWIPE 7.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.343,
+          "onset_s": 0.045,
+          "peak_t_s": 0.155,
+          "bright_hz": 1632,
+          "match_score": 64.9
+        },
+        {
+          "path": "Swipe & Swish/SWISH 8.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Swipe & Swish\\SWISH 8.wav",
+          "vai": [
+            "chuyen_canh",
+            "nhan_chu"
+          ],
+          "sac_thai": "vui_tuoi",
+          "nghia": [],
+          "dur_s": 0.59,
+          "onset_s": 0.03,
+          "peak_t_s": 0.13,
+          "bright_hz": 1688,
+          "match_score": 64.8
+        }
+      ]
+    },
+    {
+      "event_index": 115,
+      "onset_s": 61.16,
+      "peak_s": 61.42,
+      "end_s": 61.56,
+      "duration_s": 0.4,
+      "rms_dbfs": -21.7,
+      "spectral_centroid_hz": 2641,
+      "attack_ratio": 0.65,
+      "Synced_with_cut_s": 61.25,
+      "acoustic_class": "riser_swell",
+      "inferred_vai": "du_bao",
+      "inferred_emotion": "cong_nghe",
+      "purpose_in_video": "Âm dâng (Riser/Swell) báo hiệu trước điểm cắt hoặc tiêu đề lớn",
+      "when_and_how_to_use": "Đặt ĐỈNH (điểm kết) trùng khớp khung hình chuyển cảnh/chữ đập vào",
+      "db_above_music": 4.8,
+      "on_music_beat": false,
+      "recommended_library_files": [
+        {
+          "path": "Sine/SINE RISE LONG SWEEP RISING GRAPH.wav",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Sine\\SINE RISE LONG SWEEP RISING GRAPH.wav",
+          "vai": [
+            "nhan_chu",
+            "danh_sach",
+            "du_bao"
+          ],
+          "sac_thai": "cong_nghe",
+          "nghia": [
+            "ban_do",
+            "so_lieu"
+          ],
+          "dur_s": 9.109,
+          "onset_s": 0.01,
+          "peak_t_s": 0.245,
+          "bright_hz": 230,
+          "match_score": 52.9
+        },
+        {
+          "path": "Riser/Metalic Riser.mp3",
+          "full_path": "~\\Downloads\\SOUNDEFFECT TAKING HEARD\\Riser\\Metalic Riser.mp3",
+          "vai": [
+            "du_bao"
+          ],
+          "sac_thai": "kich_tinh",
+          "nghia": [],
+          "dur_s": 3.056,
+          "onset_s": 1.525,
+          "peak_t_s": 2.99,
+          "bright_hz": 2084,
+          "match_score": 37.2
+        }
+      ]
+    }
+  ]
+}

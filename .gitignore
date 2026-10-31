@@ -1,0 +1,10 @@
+.du-lieu/
+node_modules/
+__pycache__/
+Videos/*
+!Videos/_TEMPLATE_BDS_Review_2phut/
+!Videos/vi-du-mau/
+*.mp4
+*.mov
+*.wav
+!Videos/vi-du-mau/**/*.mp4
