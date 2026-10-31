@@ -1,6 +1,6 @@
 # AI Wars Stick Figure Video
 
-An Opus 5.5 video by [@jasondainter](https://x.com/jasondainter) · [Original post with the video](https://x.com/jasondainter/status/2103455402604028222)
+An Opus 5.5 video by [@jasondainter](https://x.com/jasondainter) · [Original post with the video](https://x.com/jasondainter/status/2103DU-AN-MAU02604028222)
 
 - **Category:** Motion graphics
 - **Author:** [@jasondainter](https://x.com/jasondainter)

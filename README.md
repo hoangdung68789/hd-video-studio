@@ -51,6 +51,9 @@ Nếu bạn được cấp mật khẩu tải tài nguyên, chạy lệnh sau tr
 ```
 Chỉ tải một vài gói: thêm `-Goi SFX,Font` (các gói: `SFX`, `Font`, `FontCapCutGoc`, `LUT`, `Mau`). Toàn bộ khoảng 7,8 GB. Tệp đã tải không tải lại. Repo không chứa tài nguyên. Dùng thư mục Drive của riêng bạn: thêm `-Link "<link>"`, khi đó không cần mật khẩu.
 
+## Nối Studio với phiên Claude
+Đang mở Studio, nhắn bất kỳ gì trong một phiên Claude Code mở ở thư mục cài thì phiên đó tự nối (nhờ hook trong `.claude/settings.json`). Mỗi phiên có hộp thư riêng. Khung AI tự gửi vào phiên vừa dùng gần nhất, hoặc chọn phiên khác trong danh sách cạnh ô nhập. Không có phiên nào nối thì dự án dùng phiên riêng.
+
 ## Cấu trúc
 | Thư mục | Nội dung |
 |---|---|

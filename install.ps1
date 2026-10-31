@@ -91,6 +91,14 @@ if (Test-Path $launch) {
   [IO.File]::WriteAllText($launch, $cfg)
 }
 
+# Hook tự nối phiên Claude với Studio. Có settings.json rồi thì không ghi đè, chỉ báo.
+$settings = Join-Path $Dest ".claude\settings.json"
+if (Test-Path $settings) {
+  if (-not (Select-String -Path $settings -Pattern 'hook_studio' -Quiet)) { Write-Warning "Hãy thêm hook hook_studio.mjs vào $settings, xem README." }
+} else {
+  [IO.File]::WriteAllText($settings, '{ "hooks": { "UserPromptSubmit": [ { "hooks": [ { "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/Apps/hd-studio/lib/hook_studio.mjs\"", "timeout": 5 } ] } ] } }')
+}
+
 # Thay đường dẫn mẫu bằng đường dẫn thật trên máy này.
 $roots = (Join-Path $ClaudeHome "skills"), (Join-Path $ClaudeHome "agents"), (Join-Path $Dest "asset"), (Join-Path $Dest "Videos\_TEMPLATE_BDS_Review_2phut")
 # Trong .json, .py, .sh dùng dấu / để không làm hỏng chuỗi có dấu \. Tệp .ps1 phải giữ BOM.

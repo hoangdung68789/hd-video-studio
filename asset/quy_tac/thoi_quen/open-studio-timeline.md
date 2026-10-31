@@ -5,10 +5,12 @@ metadata:
   node_type: memory
   type: feedback
   originSessionId: 2d9cbbd0-2a3d-4ce5-815d-21068638c179
-  modified: 2026-10-30T12:17:50.516Z
+  modified: 2026-10-31T15:48:44.647Z
 ---
 
 Mỗi khi tiến hành dựng video, luôn mở dự án timeline trong Studio cho Dũng xem (không đợi Dũng hỏi).
+
+31/10/2026 Dũng chốt thành luật số 0 của skill: tạo dự án + `hf/index.html` khung và mở Studio là VIỆC ĐẦU TIÊN, trước cả đo footage; không được bỏ qua (lần DU-AN-MAU làm muộn nên Dũng không tìm thấy dự án). Cổng có thể khác 4700: dùng cổng preview_start trả về.
 
 **Why:** Dũng muốn theo dõi timeline trực tiếp trong lúc dựng (yêu cầu 25/10/2026, dự án DU-AN-MAU).
 

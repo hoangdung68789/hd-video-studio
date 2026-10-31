@@ -1,6 +1,6 @@
 # Opus 5.5 video by @andre_lucaxxs
 
-[▶ Watch the original and a live remake on Skillry](https://skillry.dev/ai-videos/opus-5-5/andre-lucaxxs-846347?utm_source=github&utm_medium=readme&utm_campaign=awesome-opus5-5-videos) · [Original post](https://x.com/andre_lucaxxs/status/2103292636945846347)
+[▶ Watch the original and a live remake on Skillry](https://skillry.dev/ai-videos/opus-5-5/andre-lucaxxs-846347?utm_source=github&utm_medium=readme&utm_campaign=awesome-opus5-5-videos) · [Original post](https://x.com/andre_lucaxxs/status/21032926369DU-AN-MAU6347)
 
 - **Category:** Motion graphics
 - **Remake built with:** Canvas · SVG · GSAP

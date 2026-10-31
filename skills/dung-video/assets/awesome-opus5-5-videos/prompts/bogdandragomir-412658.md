@@ -1,6 +1,6 @@
 # Animated Intro with Synced Music
 
-An Opus 5.5 video by [@BogdanDragomir](https://x.com/BogdanDragomir) · [Original post with the video](https://x.com/BogdanDragomir/status/2104045641538412658)
+An Opus 5.5 video by [@BogdanDragomir](https://x.com/BogdanDragomir) · [Original post with the video](https://x.com/BogdanDragomir/status/21040DU-AN-MAU1538412658)
 
 - **Category:** Motion graphics
 - **Author:** [@BogdanDragomir](https://x.com/BogdanDragomir)

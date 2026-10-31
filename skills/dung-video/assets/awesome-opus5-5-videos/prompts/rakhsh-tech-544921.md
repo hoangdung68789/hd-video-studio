@@ -1,6 +1,6 @@
 # Opus 5.5 video by @Rakhsh_Tech
 
-[▶ Watch the original and a live remake on Skillry](https://skillry.dev/ai-videos/opus-5-5/rakhsh-tech-544921?utm_source=github&utm_medium=readme&utm_campaign=awesome-opus5-5-videos) · [Original post](https://x.com/Rakhsh_Tech/status/2104144532644544921)
+[▶ Watch the original and a live remake on Skillry](https://skillry.dev/ai-videos/opus-5-5/rakhsh-tech-544921?utm_source=github&utm_medium=readme&utm_campaign=awesome-opus5-5-videos) · [Original post](https://x.com/Rakhsh_Tech/status/210414453264DU-AN-MAU921)
 
 - **Category:** Explainers
 - **Remake built with:** Canvas · Web Audio

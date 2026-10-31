@@ -1,6 +1,6 @@
 # Opus 5.5 video by @jake11moran
 
-[▶ Watch the original and a live remake on Skillry](https://skillry.dev/ai-videos/opus-5-5/jake11moran-414633?utm_source=github&utm_medium=readme&utm_campaign=awesome-opus5-5-videos) · [Original post](https://x.com/jake11moran/status/2103237884564414633)
+[▶ Watch the original and a live remake on Skillry](https://skillry.dev/ai-videos/opus-5-5/jake11moran-414633?utm_source=github&utm_medium=readme&utm_campaign=awesome-opus5-5-videos) · [Original post](https://x.com/jake11moran/status/210323788DU-AN-MAU414633)
 
 - **Category:** Motion graphics
 - **Remake built with:** Canvas · SVG · GSAP · AI image

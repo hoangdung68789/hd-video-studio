@@ -15,7 +15,7 @@ Luôn đi cùng `hoang-dung-agent-orchestrator`. Trả lời tiếng Việt. B�
 ## Quy trình cốt lõi
 | Bước | Việc | Đọc khi tới bước |
 |---|---|---|
-| 0 | Đọc sổ tự học, phân công, mở HD Studio | `rules/studio-timeline.md` |
+| 0 | **Việc đầu tiên, không được bỏ qua: tạo dự án + `hf/index.html` khung và tự mở HD Studio đúng dự án** (luật số 0 ở `rules/luat-cung.md`); sau đó đọc sổ tự học, phân công | `rules/studio-timeline.md` |
 | 1 | Đo footage, phân loại thể loại, chọn Chế độ A hoặc T, chọn style | `templates/che-do-va-template.md`, `references/presets.md`, `references/chon-phong-cach.md` |
 | 2 | Chép lời, cắt dựng, che địa chỉ | `references/giai-doan.md`, `references/che-dia-chi.md` |
 | 3 | Màu theo từng clip, không mặc định LUT | `references/chon-lut.md` |

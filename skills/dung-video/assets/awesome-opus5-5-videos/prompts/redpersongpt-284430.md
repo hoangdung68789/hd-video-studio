@@ -1,6 +1,6 @@
 # Opus 5.5 video by @redpersongpt
 
-[▶ Watch the original and a live remake on Skillry](https://skillry.dev/ai-videos/opus-5-5/redpersongpt-284430?utm_source=github&utm_medium=readme&utm_campaign=awesome-opus5-5-videos) · [Original post](https://x.com/redpersongpt/status/2103807094554284430)
+[▶ Watch the original and a live remake on Skillry](https://skillry.dev/ai-videos/opus-5-5/redpersongpt-284430?utm_source=github&utm_medium=readme&utm_campaign=awesome-opus5-5-videos) · [Original post](https://x.com/redpersongpt/status/210380709DU-AN-MAU284430)
 
 - **Category:** Games & interactive
 - **Remake built with:** SVG

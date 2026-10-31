@@ -805,7 +805,8 @@ function startAi(p, body) {
       if (job.status !== "dang_chay") return;
       job.lines.push({ kind: "tool", text: job.images.length ? `Đã chụp ${job.images.length} khung hình gửi kèm AI` : "Không chụp được khung hình, gửi yêu cầu không kèm ảnh" });
     }
-    if (bridgeAlive()) sendBridge(p, body, job);
+    const nhan = pickBridge(p.name);
+    if (nhan) sendBridge(p, body, job, nhan);
     else runClaude(p, body, bin, job, prevSession);
   })();
   return publicAi(job);
@@ -825,32 +826,65 @@ function mgRequest({ mg, range, time, text }) {
 }
 
 // ---- Cầu nối với phiên Claude đang mở: phiên đó chạy lib/lang_nghe.mjs, yêu cầu đi qua hộp thư ----
-const BRIDGE = path.join(DATA, "cau-noi");
-function bridgeAlive() {
-  try { return Date.now() - fs.statSync(path.join(BRIDGE, "song.json")).mtimeMs < 15000; } catch { return false; }
+// Mỗi phiên một hộp thư. Mỗi dự án tự gửi vào phiên vừa dùng gần nhất, hoặc phiên chọn trong khung AI.
+const BRIDGE = path.join(DATA, "cau-noi", "phien");
+const bridgeChoiceFile = (name) => path.join(DATA, "chat", path.basename(String(name || "_")), "_noi.txt");
+const bridgeAlive = (id) => { try { return Date.now() - fs.statSync(path.join(BRIDGE, `${id}.json`)).mtimeMs < 15000; } catch { return false; } };
+const bridgeTitles = new Map();
+function bridgeTitle(id, f) {
+  if (bridgeTitles.has(id)) return bridgeTitles.get(id);
+  let title = "";
+  if (f) {
+    const fd = fs.openSync(f, "r"), buf = Buffer.alloc(300000), n = fs.readSync(fd, buf, 0, buf.length, 0);
+    fs.closeSync(fd);
+    for (const l of buf.subarray(0, n).toString("utf8").split("\n")) {
+      try {
+        const ev = JSON.parse(l);
+        const t = ev.type === "user" ? claudeTextOf(ev) : "";
+        if (t && !/^(<|This session is being continued|Base directory for this skill)/.test(t)) { title = t.slice(0, 50); break; }
+      } catch { /* dòng bị cắt */ }
+    }
+  }
+  if (title) bridgeTitles.set(id, title);
+  return title || `Phiên ${id.slice(0, 8)}`;
 }
-function sendBridge(p, body, job) {
+function bridgeList() {
+  if (!fs.existsSync(BRIDGE)) return [];
+  return fs.readdirSync(BRIDGE).filter((x) => x.endsWith(".json")).map((x) => x.slice(0, -5)).filter(bridgeAlive).map((id) => {
+    const f = claudeFile(id);
+    return { id, ten: bridgeTitle(id, f), at: f ? fs.statSync(f).mtimeMs : 0 };
+  }).sort((a, b) => b.at - a.at);
+}
+function bridgeChoice(name) {
+  try { return fs.readFileSync(bridgeChoiceFile(name), "utf8").trim() || "auto"; } catch { return "auto"; }
+}
+function pickBridge(name) {
+  const chon = bridgeChoice(name), ds = bridgeList();
+  if (chon === "rieng") return null;
+  return ds.find((x) => x.id === chon) || ds[0] || null;
+}
+function sendBridge(p, body, job, nhan) {
   job.before = fs.readFileSync(p.file, "utf8");
   job.p = p;
   job.body = body;
-  job.bridge = true;
+  job.bridge = nhan.id;
   fs.mkdirSync(BRIDGE, { recursive: true });
   // Thông báo của Monitor bị cắt nếu dài: lời nhắn đi kèm, bối cảnh đầy đủ nằm trong tệp.
   const detail = path.join(p.root, "work", "studio_ai", `yeu-cau-${Date.now()}.txt`);
   fs.mkdirSync(path.dirname(detail), { recursive: true });
   fs.writeFileSync(detail, aiPrompt(p, { ...body, images: job.images }));
-  fs.appendFileSync(path.join(BRIDGE, "hop-thu.jsonl"), JSON.stringify({ du_an: p.name, loi_nhan: String(body.text || "").slice(0, 300), chi_tiet: detail.split(path.sep).join("/") }) + "\n");
-  job.lines.push({ kind: "tool", text: "Đã gửi vào phiên Claude đang mở, đang chờ trả lời…" });
+  fs.appendFileSync(path.join(BRIDGE, `${nhan.id}.jsonl`), JSON.stringify({ du_an: p.name, cong: PORT, loi_nhan: String(body.text || "").slice(0, 300), chi_tiet: detail.split(path.sep).join("/") }) + "\n");
+  job.lines.push({ kind: "tool", text: `Đã gửi vào phiên Claude "${nhan.ten}", đang chờ trả lời…` });
 }
-function bridgeReply(text) {
+function bridgeReply(text, phien) {
   const job = aiJob;
-  if (job?.status !== "dang_chay" || !job.bridge) throw httpError(409, "Không có yêu cầu nào đang chờ trả lời");
+  if (job?.status !== "dang_chay" || !job.bridge || (phien && phien !== job.bridge)) throw httpError(409, "Không có yêu cầu nào đang chờ trả lời");
   job.lines.push({ kind: "ai", text: String(text || "Xong.") });
   finishAi(job.p, job, job.body, job.before, 0);
 }
 // Phiên Claude ngừng nghe khi đang có yêu cầu: báo lỗi, không để khung AI chờ mãi.
 function checkBridge() {
-  if (aiJob?.status === "dang_chay" && aiJob.bridge && !bridgeAlive()) {
+  if (aiJob?.status === "dang_chay" && aiJob.bridge && !bridgeAlive(aiJob.bridge)) {
     aiJob.error = "Phiên Claude đã ngừng nghe. Gửi lại để dùng phiên riêng của dự án.";
     aiJob.lines.push({ kind: "err", text: aiJob.error });
     finishAi(aiJob.p, aiJob, aiJob.body, aiJob.before, 1);
@@ -1229,8 +1263,18 @@ async function route(req, res, url) {
 
   if (seg === "render" && m === "GET") return send(res, 200, { job: publicJob(renderJob) });
   if (seg === "ai" && m === "GET") { checkBridge(); return send(res, 200, { job: publicAi(aiJob) }); }
-  if (seg === "cau-noi" && m === "GET") { checkBridge(); return send(res, 200, { noi: bridgeAlive() }); }
-  if (seg === "ai-tra-loi" && m === "POST") { bridgeReply((await readJson(req)).text); return send(res, 200, { ok: true }); }
+  if (seg === "cau-noi" && m === "GET") {
+    checkBridge();
+    const name = q.get("du-an");
+    return send(res, 200, { ds: bridgeList(), chon: bridgeChoice(name), dang: pickBridge(name)?.id || null });
+  }
+  if (seg === "cau-noi-chon" && m === "POST") {
+    const f = bridgeChoiceFile(q.get("du-an"));
+    fs.mkdirSync(path.dirname(f), { recursive: true });
+    fs.writeFileSync(f, String((await readJson(req)).chon || "auto"));
+    return send(res, 200, { ok: true });
+  }
+  if (seg === "ai-tra-loi" && m === "POST") { const b = await readJson(req); bridgeReply(b.text, b.phien); return send(res, 200, { ok: true }); }
   if (seg === "ai/stop" && m === "POST") {
     if (aiJob?.status === "dang_chay") { aiJob.status = "da_dung"; if (aiJob.child) killTree(aiJob.child); else if (aiJob.bridge) saveChatEnd(aiJob.p, aiJob); aiJob.lines.push({ kind: "err", text: "Đã dừng" }); }
     return send(res, 200, { job: publicAi(aiJob) });

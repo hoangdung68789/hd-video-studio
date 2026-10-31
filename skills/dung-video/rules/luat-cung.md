@@ -1,6 +1,9 @@
 # Luật cứng của /video
 Cộng thêm Luật cứng video của `hoang-dung-agent-orchestrator`. Đọc trước khi dựng.
 
+## Luật cứng số 0, không được bỏ qua (Dũng chốt 31/10/2026)
+**Việc đầu tiên của mọi lần chạy /video: tạo dự án và tự động mở Studio, trước khi đo footage, chép lời hay chỉnh màu.** Tạo `Videos\<tên>\hf\`, ghi ngay `hf\index.html` khung (Studio chỉ thấy dự án khi có file này) cùng `hf\meta.json`, gọi `preview_start {name: "hd-studio"}`, rồi `navigate` tới `http://localhost:<cổng preview_start trả về>/?du-an=<tên>`. Kiểm Studio đã hiện đúng dự án rồi mới làm bước tiếp theo.
+
 ## Luật cứng riêng của /video (cộng thêm Luật cứng video của orchestrator)
 1. Skill Hoàng Dũng dùng được: orchestrator, `hoang-dung-viral-style-scout`, `hoang-dung-auto-style-learner`. Skill khác được nhắc mà không có → bỏ qua, ghi `skipped_refs`.
 2. Địa chỉ chỉ ở mức khu vực (đường lớn, phường/quận); không số nhà, số hẻm, tên chủ. Nhãn bản đồ là chữ ngoại lệ duy nhất.

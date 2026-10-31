@@ -1,6 +1,6 @@
 # Opus 5.5 video by @itsahmedharoon
 
-[▶ Watch the original and a live remake on Skillry](https://skillry.dev/ai-videos/opus-5-5/itsahmedharoon-544194?utm_source=github&utm_medium=readme&utm_campaign=awesome-opus5-5-videos) · [Original post](https://x.com/itsahmedharoon/status/2103986344414544194)
+[▶ Watch the original and a live remake on Skillry](https://skillry.dev/ai-videos/opus-5-5/itsahmedharoon-544194?utm_source=github&utm_medium=readme&utm_campaign=awesome-opus5-5-videos) · [Original post](https://x.com/itsahmedharoon/status/210398634441DU-AN-MAU194)
 
 - **Category:** Explainers
 - **Remake built with:** SVG
