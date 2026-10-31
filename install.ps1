@@ -37,8 +37,9 @@ if (-not $SkipTools) { npm install -g hyperframes@0.8.171 }
 # WhisperX, tùy chọn vì tải thêm vài GB. Lỗi thì chỉ báo, không dừng phần cài còn lại.
 if ($WhisperX) {
   if (Get-Command python -ErrorAction SilentlyContinue) {
-    python -m pip install (Join-Path $here "vendorwhisperX")
-    if ($LASTEXITCODE) { Write-Warning "Chưa cài được WhisperX, xem vendorwhisperXREADME.md" }
+    # torchaudio phải cùng đời với torch, nếu không lệnh whisperx báo WinError 127 trên Windows.
+    python -m pip install "git+https://github.com/m-bain/whisperX.git" "torchaudio~=2.8.0"
+    if ($LASTEXITCODE) { Write-Warning "Chưa cài được WhisperX, xem https://github.com/m-bain/whisperX" }
   } else { Write-Warning "Cần Python 3.10–3.13 để cài WhisperX." }
 }
 

@@ -26,7 +26,12 @@ Windows 10 hoặc 11, [Node.js](https://nodejs.org) 20.11 trở lên, [FFmpeg](h
 ```powershell
 iex (irm https://raw.githubusercontent.com/hoangdung68789/hd-video-studio/main/install.ps1).TrimStart([char]0xFEFF)
 ```
-Cài kèm WhisperX (tùy chọn, tải thêm vài GB gồm PyTorch, cần Python 3.10–3.13): tải repo về rồi chạy `.install.ps1 -WhisperX`.
+Cài WhisperX từ repo gốc (tùy chọn, tải thêm vài GB gồm PyTorch, cần Python 3.10–3.13 và Git):
+```powershell
+python -m pip install "git+https://github.com/m-bain/whisperX.git" "torchaudio~=2.8.0"
+```
+Hoặc khi cài bộ này từ thư mục repo: `.\install.ps1 -WhisperX`.
+
 Mặc định cài vào `%USERPROFILE%\HDRE AI`. Skill và agent đang có cùng tên được sao lưu trong `.claude` trước khi thay.
 
 ## Bắt đầu

@@ -15,7 +15,13 @@ Node.js 20+, FFmpeg/FFprobe, Git, Python 3, `hyperframes@0.8.171` (trình cài t
 - Thiếu các mục này thì Studio vẫn chạy, chỉ trống phần tương ứng.
 
 ## WhisperX tùy chọn
-Mã nguồn ở `vendor/whisperX`. Cài bằng `.\install.ps1 -WhisperX`, cần Python 3.10–3.13; không cài thì mọi phần khác vẫn chạy. Thử trên Windows 11, Python 3.12: thư viện nạp được nhưng lệnh `whisperx` báo lỗi DLL (WinError 127), nên hiện chưa dùng được trên Windows.
+Cài từ repo gốc [m-bain/whisperX](https://github.com/m-bain/whisperX), cần Python 3.10–3.13 và Git:
+
+```powershell
+python -m pip install "git+https://github.com/m-bain/whisperX.git" "torchaudio~=2.8.0"
+```
+
+Phải ghim `torchaudio~=2.8.0` cho cùng đời với `torch` 2.8, nếu không lệnh `whisperx` báo WinError 127 trên Windows. Không cài thì mọi phần khác vẫn chạy. Bản sao mã nguồn nằm ở `vendor/whisperX`.
 
 ## MCP tùy chọn
 `antigravity-video-bridge`: nghe SFX, chép lời, dò vấp. Không có thì dùng số đo `ebur128` và WhisperX của skill `watch`.
