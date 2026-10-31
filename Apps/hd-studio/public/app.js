@@ -2460,6 +2460,8 @@ async function syncNoi() {
   if (!state.project) return;
   const { ds, chon, dang } = await api("cau-noi");
   const b = $("#aiNoi");
+  // Máy chủ Studio còn chạy bản cũ: báo mở lại thay vì để danh sách trống.
+  if (!ds) { b.replaceChildren(el("option", { textContent: "Hãy tắt và mở lại Studio" })); return; }
   const cur = ds.find((x) => x.id === dang);
   b.classList.toggle("on", !!cur);
   if (document.activeElement === b) return;
