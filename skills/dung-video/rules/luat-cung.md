@@ -4,11 +4,27 @@ Cộng thêm Luật cứng video của `hoang-dung-agent-orchestrator`. Đọc t
 ## Luật cứng số 0, không được bỏ qua (Dũng chốt 31/10/2026)
 **Việc đầu tiên của mọi lần chạy /video: tạo dự án và tự động mở Studio, trước khi đo footage, chép lời hay chỉnh màu.** Tạo `Videos\<tên>\hf\`, ghi ngay `hf\index.html` khung (Studio chỉ thấy dự án khi có file này) cùng `hf\meta.json`, gọi `preview_start {name: "hd-studio"}`, rồi `navigate` tới `http://localhost:<cổng preview_start trả về>/?du-an=<tên>`. Kiểm Studio đã hiện đúng dự án rồi mới làm bước tiếp theo.
 
+## Luật cứng về điều phối, không đoán (Dũng chốt 01/11/2026)
+- `smart-dispatcher-portable` và `hoang-dung-agent-orchestrator` là **luật cứng** của /video, luôn nạp và làm theo.
+- **AI không đoán.** Mỗi yêu cầu sửa: (1) tách đúng việc, (2) đo hoặc xem file thật để tìm nguyên nhân, ghi số đo, (3) nêu kế hoạch có tiêu chí đạt đo được, (4) sửa, (5) đo lại cùng cách trên chính bản xuất. Chưa đo lại đạt thì không được nói "đã sửa".
+- Lỗi đã mắc ở video DU-AN-MAU: Dũng yêu cầu sửa rung và zoom 3 lần mà AI chỉ đoán nguyên nhân, không xử lý đúng chỗ. Một yêu cầu bị nhắc lại nghĩa là cách trước đã sai: bỏ cách đó, đo lại từ đầu.
+
+## Luật xuất video, bắt buộc (Dũng chốt 31/10/2026)
+- **Luôn xuất trong HD Studio bằng GPU:** `POST http://localhost:<cổng>/vn/render?du-an=<tên>` với `{"fps":60,"gpu":true,"quality":"delivery"}`, để Dũng thấy tiến độ trong Studio. Kiểm kết quả `gpu: true` trong job; máy không có NVENC thì dừng và báo Dũng, không âm thầm xuất bằng CPU.
+- **Không chạy `hyperframes render` trực tiếp và không dùng Studio HyperFrames** (`hyperframes preview`) để xem hay xuất.
+- Máy render bên trong HD Studio hiện vẫn là lõi HyperFrames; khi Dũng hỏi phải nói đúng điều này.
+
+## Thứ tự ưu tiên hiệu ứng (Dũng chốt 31/10/2026, áp dụng từ video sau)
+1. **Motion graphics và motion design để minh họa** là ưu tiên số 1; chuyển động phải mượt.
+2. **Chữ đa dạng và kết hợp cùng nhau:** màu sắc, font, hiệu ứng chữ, SFX. Chưa có mẫu tham chiếu thì yêu cầu Dũng cung cấp hoặc học từ video mẫu (`hoang-dung-auto-style-learner`), không tự nghĩ kiểu chữ.
+3. **Animation** luôn đi kèm 2 mục trên, không đứng riêng.
+4. **Mọi video phải hội tụ đủ 3 mục trên.** Trước khi dựng, AI chủ động lập bảng phân loại: `thời điểm | loại (MG / chữ / animation) | mục đích sử dụng`, ghi vào `edit-state.json`. Thiếu loại nào hoặc mốc không có mục đích thì chưa đạt cổng G4.
+
 ## Luật cứng riêng của /video (cộng thêm Luật cứng video của orchestrator)
 1. Skill Hoàng Dũng dùng được: orchestrator, `hoang-dung-viral-style-scout`, `hoang-dung-auto-style-learner`. Skill khác được nhắc mà không có → bỏ qua, ghi `skipped_refs`.
 2. Địa chỉ chỉ ở mức khu vực (đường lớn, phường/quận); không số nhà, số hẻm, tên chủ. Nhãn bản đồ là chữ ngoại lệ duy nhất.
 3. Chữ: không khung/nền tối sau chữ; không lặp chữ; MỌI chữ có SFX; chữ hero chạm đúng từ ±2 khung; vùng an toàn TikTok (~230px trên, ~480px dưới, ~160px phải).
-4. Zoom, Ken Burns, punch-in, rung footage: AI tự quyết theo nội dung (Dũng bỏ luật cấm 31/10/2026). Dũng yêu cầu cụ thể thì làm theo.
+4. **Không dùng hiệu ứng rung** (rung khung, rung chữ, chữ nhấp nhô) trừ khi Dũng yêu cầu rõ (Dũng chốt 31/10/2026). Zoom, Ken Burns: AI tự quyết, tên hiệu ứng trên timeline là "Zoom in - Zoom out", phải mượt: gia tốc mềm (`sine.inOut`), xen kẽ vào/ra, nguồn khác fps bản xuất thì đổi về đúng fps xuất trước khi dựng (50→60), không để giật khung.
 5. Không xuất video câm hoặc chỉ có SFX; không tổng hợp nhạc nền bằng code.
 6. Không nói "100 điểm" khi chưa có scorecard do script sinh; không nới ngưỡng. AI không nghe được: kết luận âm thanh là số đo.
 7. Font giống mẫu nhất (từ phiếu font); lỗi tiếng Việt → chạy `assets/textfx-kit/scripts/vn_font_gate.py`, báo đúng mẫu cảnh báo, dùng font thay thế.

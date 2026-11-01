@@ -10,7 +10,7 @@ metadata:
 
 Mỗi khi tiến hành dựng video, luôn mở dự án timeline trong Studio cho Dũng xem (không đợi Dũng hỏi).
 
-31/10/2026 Dũng chốt thành luật số 0 của skill: tạo dự án + `hf/index.html` khung và mở Studio là VIỆC ĐẦU TIÊN, trước cả đo footage; không được bỏ qua (lần 45.4 làm muộn nên Dũng không tìm thấy dự án). Cổng có thể khác 4700: dùng cổng preview_start trả về.
+31/10/2026 Dũng chốt thành luật số 0 của skill: tạo dự án + `hf/index.html` khung và mở Studio là VIỆC ĐẦU TIÊN, trước cả đo footage; không được bỏ qua (lần DU-AN-MAU làm muộn nên Dũng không tìm thấy dự án). Cổng có thể khác 4700: dùng cổng preview_start trả về.
 
 **Why:** Dũng muốn theo dõi timeline trực tiếp trong lúc dựng (yêu cầu 25/10/2026, dự án DU-AN-MAU).
 

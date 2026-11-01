@@ -10,7 +10,7 @@ Lệnh:
 - `/video text-fx <dự án>`: chỉ giai đoạn 4–6 (chữ + SFX). `/video sfx <moments.json>`: chỉ SFX.
 - `/video hoc <mẫu>`: học từ mẫu bằng `hoang-dung-auto-style-learner`.
 
-Luôn đi cùng `hoang-dung-agent-orchestrator`. Trả lời tiếng Việt. Bắt đầu dựng thì đọc `rules/luat-cung.md` trước, các file khác đọc khi tới bước cần.
+`smart-dispatcher-portable` và `hoang-dung-agent-orchestrator` là luật cứng, luôn nạp cùng skill này. Không đoán: có kế hoạch, sửa xong phải đo lại trên bản xuất rồi mới báo. Trả lời tiếng Việt. Bắt đầu dựng thì đọc `rules/luat-cung.md` trước, các file khác đọc khi tới bước cần.
 
 ## Quy trình cốt lõi
 | Bước | Việc | Đọc khi tới bước |
@@ -27,6 +27,7 @@ Giai đoạn 2–6 chạy song song sau khi xong bước 1. Bảng đầy đủ:
 
 ## Điều không được quên
 - Mọi hiệu ứng và khối edit (chữ, video, ảnh, MG, chuyển cảnh, màu, thoại, SFX, nhạc) phải xuất hiện trên timeline Studio để chỉnh được. Không che mặt người dẫn.
+- Thứ tự ưu tiên hiệu ứng: MG/motion design minh họa mượt → chữ đa dạng (màu, font, hiệu ứng, SFX; chưa có mẫu thì xin Dũng hoặc học từ video mẫu) → animation đi kèm; có bảng `thời điểm | loại | mục đích` trước khi dựng.
 - Ngoài luật ở `rules/luat-cung.md`, AI được tự do chọn cách làm; Dũng sẽ yêu cầu sửa khi cần.
 - Chưa qua cổng thì không sang bước sau; chưa 100/100 có dẫn chứng thì không gửi Dũng.
 - Mỗi dự án ghi trạng thái vào `edit-state.json` theo `templates/edit-state.json`.

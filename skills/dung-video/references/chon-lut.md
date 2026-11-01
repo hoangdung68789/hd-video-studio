@@ -1,6 +1,7 @@
 # Chọn LUT tự động
 
 ### Chọn LUT tự động (giai đoạn 3)
+**Dũng chốt 31/10/2026, thắng các mục dưới khi xung đột:** không mặc định LUT DJI. Quét kho LUT của Dũng (`Downloads\freshluts-LUT-phan-loai_DAY-DU.zip`) trên khung người dẫn + cảnh nhà, gửi ảnh so ~6 LUT **gốc, chưa chỉnh gì** để Dũng chọn. Dùng nguyên bản; ổn thì không tự thêm WB, gamma hay chỉnh riêng da.
 0. Footage đã là bản CapCut Dũng chỉnh màu (Rec.709) → không LUT, chỉ chuyển khổ; cảnh lấy thêm từ clip gốc phẳng → `match_grade.py` học đường cong màu từ các cặp cùng cảnh rồi áp.
 1. **Đo từng clip** (3 khung đầu/giữa/cuối): `ffprobe` color_transfer/primaries; `signalstats` YAVG, YMIN/YMAX, SATAVG, UAVG/VAVG (độ ám); mở ảnh khung để xem ngoài trời/trong nhà, nguồn sáng, giờ quay.
 2. **Xếp môi trường** theo bảng ENV-01…06 của `hoang-dung-bds-color-master` (nắng gắt, hẻm tối, đèn vàng, cửa sổ chênh sáng, đêm, D-Log), cộng giờ vàng/hoàng hôn. Ghi lý do bằng số đo.

@@ -3,6 +3,9 @@
 ## Công cụ
 Node.js 20+, FFmpeg/FFprobe, Git, Python 3, `hyperframes@0.8.171` (trình cài tự cài).
 
+## Repo tích hợp
+HyperFrames, Remotion và WhisperX cài từ repo gốc bằng `cai-thanh-phan.ps1`, xem README. `vendor/hyperframes` và `vendor/remotion` là submodule, tải bằng `git submodule update --init --depth 1 vendor/hyperframes`.
+
 ## Skill bên ngoài mà bộ này gọi tới (có thì dùng, không có thì skill tự bỏ qua và ghi vào `skipped_refs`)
 - HyperFrames: hyperframes, hyperframes-animation, hyperframes-audio, hyperframes-keyframes, hyperframes-registry, media-use, motion-graphics, embedded-captions, talking-head-recut.
 - Remotion: remotion-best-practices, remotion-captions, remotion-maps, remotion-markup, remotion-to-hyperframes, remotion-upgrade.

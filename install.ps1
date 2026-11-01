@@ -1,22 +1,28 @@
 ﻿# Cài HD Video Studio. Trong thư mục repo:  .\install.ps1
 # Một lệnh:  iex (irm https://raw.githubusercontent.com/hoangdung68789/hd-video-studio/main/install.ps1).TrimStart([char]0xFEFF)
 # Kèm tài nguyên riêng:  .\install.ps1 -TaiNguyen "D:\tai-nguyen"   (thư mục chứa các gói .zip, hoặc một tệp .zip)
+# Kèm mọi repo tích hợp:  .\install.ps1 -TatCa     Chỉ vài phần:  .\install.ps1 -ThanhPhan remotion,whisperx
 param(
   [string]$Dest = (Join-Path $HOME "HDRE AI"),
   [string]$ClaudeHome = (Join-Path $HOME ".claude"),
   [string]$Repo = "https://github.com/hoangdung68789/hd-video-studio.git",
   [string]$TaiNguyen = "",
   [switch]$SkipTools,
-  [switch]$WhisperX
+  [switch]$WhisperX,
+  [switch]$TatCa,
+  [string[]]$ThanhPhan = @()
 )
 $ErrorActionPreference = "Stop"
+
+# Windows mặc định chặn chạy tệp .ps1. Chỉ nới cho tiến trình cài này, đóng cửa sổ là hết.
+try { Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force } catch { Write-Warning "Không nới được quyền chạy script: $($_.Exception.Message)" }
 
 $here = $PSScriptRoot
 if (-not $here -or -not (Test-Path (Join-Path $here "skills"))) {
   if (-not (Get-Command git -ErrorAction SilentlyContinue)) { throw "Cần cài Git trước: https://git-scm.com" }
   $tmp = Join-Path $env:TEMP "hd-video-studio-$(Get-Random)"
   git clone --depth 1 $Repo $tmp
-  & (Join-Path $tmp "install.ps1") -Dest $Dest -ClaudeHome $ClaudeHome -TaiNguyen $TaiNguyen -SkipTools:$SkipTools -WhisperX:$WhisperX
+  & (Join-Path $tmp "install.ps1") -Dest $Dest -ClaudeHome $ClaudeHome -TaiNguyen $TaiNguyen -SkipTools:$SkipTools -WhisperX:$WhisperX -TatCa:$TatCa -ThanhPhan $ThanhPhan
   Remove-Item $tmp -Recurse -Force -ErrorAction SilentlyContinue
   return
 }
@@ -33,15 +39,6 @@ if ($thieu.Count) { throw ("Còn thiếu:" + [Environment]::NewLine + ($thieu -j
 if (-not (Get-Command python -ErrorAction SilentlyContinue)) { Write-Warning "Không thấy Python 3: các script của skill sẽ không chạy, Studio vẫn mở được." }
 if (-not (Get-Command claude -ErrorAction SilentlyContinue) -and -not (Test-Path (Join-Path $env:LOCALAPPDATA "Claude-Data"))) { Write-Warning "Không thấy Claude Code: lệnh /video và thanh AI cần cài Claude Code." }
 if (-not $SkipTools) { npm install -g hyperframes@0.8.171 }
-
-# WhisperX, tùy chọn vì tải thêm vài GB. Lỗi thì chỉ báo, không dừng phần cài còn lại.
-if ($WhisperX) {
-  if (Get-Command python -ErrorAction SilentlyContinue) {
-    # torchaudio phải cùng đời với torch, nếu không lệnh whisperx báo WinError 127 trên Windows.
-    python -m pip install "git+https://github.com/m-bain/whisperX.git" "torchaudio~=2.8.0"
-    if ($LASTEXITCODE) { Write-Warning "Chưa cài được WhisperX, xem https://github.com/m-bain/whisperX" }
-  } else { Write-Warning "Cần Python 3.10–3.13 để cài WhisperX." }
-}
 
 # Skill và agent: có bản cũ thì sao lưu trước khi thay.
 $stamp = Get-Date -Format "yyyyMMdd-HHmmss"
@@ -64,7 +61,7 @@ foreach ($d in "Apps", "asset", "Videos") {
   Copy-Item (Join-Path $here "$d\*") (Join-Path $Dest $d) -Recurse -Force
 }
 
-Copy-Item (Join-Path $here "tai-tai-nguyen.ps1") $Dest -Force
+Copy-Item (Join-Path $here "tai-tai-nguyen.ps1"), (Join-Path $here "cai-thanh-phan.ps1") $Dest -Force
 
 # Tài nguyên riêng, tùy chọn: các gói giải nén thẳng vào thư mục cài, phần Claude/ vào .claude.
 if ($TaiNguyen) {
@@ -110,6 +107,13 @@ foreach ($f in Get-ChildItem $roots -Recurse -File -Include *.md, *.py, *.json, 
     $by = if ($f.Extension -in ".md", ".ps1") { $Dest } else { $destSlash }
     [IO.File]::WriteAllText($f.FullName, $t.Replace("<HD_VIDEO_HOME>", $by), (New-Object Text.UTF8Encoding($f.Extension -eq ".ps1")))
   }
+}
+
+# Thành phần từ repo gốc, cài sau cùng: skill từ repo gốc không bị bước sao lưu ở trên chuyển đi.
+if ($WhisperX) { $ThanhPhan += "whisperx" }
+if ($TatCa -or $ThanhPhan.Count) {
+  $cai = Join-Path $Dest "cai-thanh-phan.ps1"
+  if ($TatCa) { & $cai -TatCa -Dest $Dest } else { & $cai -ThanhPhan $ThanhPhan -Dest $Dest }
 }
 
 Write-Host "Đã cài xong vào $Dest"

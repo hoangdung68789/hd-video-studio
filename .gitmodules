@@ -1,0 +1,8 @@
+[submodule "vendor/hyperframes"]
+	path = vendor/hyperframes
+	url = https://github.com/heygen-com/hyperframes.git
+	shallow = true
+[submodule "vendor/remotion"]
+	path = vendor/remotion
+	url = https://github.com/remotion-dev/remotion.git
+	shallow = true
