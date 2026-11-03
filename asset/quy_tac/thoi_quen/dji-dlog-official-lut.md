@@ -4,7 +4,6 @@ description: "Không mặc định LUT DJI nữa (29/10/2026): AI đo footage r�
 metadata:
   node_type: memory
   type: feedback
-  originSessionId: 3dd155e1-96d3-4a6a-b577-4d340776d6c8
   modified: 2026-10-29T14:31:55.699Z
 ---
 

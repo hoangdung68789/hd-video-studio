@@ -4,7 +4,6 @@ description: Mỗi lần báo cáo đều phải nói rõ phương án kế ti�
 metadata:
   node_type: memory
   type: feedback
-  originSessionId: 974c8f95-b32e-476a-84d0-2e4d7df540b1
   modified: 2026-11-01T14:50:43.561Z
 ---
 

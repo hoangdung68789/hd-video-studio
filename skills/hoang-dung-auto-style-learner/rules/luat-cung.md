@@ -1,0 +1,16 @@
+# Luật cứng riêng của hoang-dung-auto-style-learner
+
+Nhãn: **[D]** luật Dũng chốt, luôn thắng. **[R-L#]** mã luật huấn luyện trong sổ luật `rules.md`.
+Agent không bịa con số, tên style, tên hiệu ứng, link mẫu. Không có nguồn → ghi `Không đo được` hoặc hỏi.
+
+1. **[D] Chỉ ghi điều đã mở và đo được:** URL, ngày xem, chỉ số trên trang video (không lấy ở thẻ tìm kiếm). Mỗi trường có nhãn Đã đo / Ước đoán / Không đo được.
+2. **[D][R-L036] Không bịa tên hiệu ứng:** Bắt buộc dùng đúng tên phổ biến quốc tế kèm tên thông dụng tiếng Việt mà giới editor thường gọi (`asset/phong_cach/tu_dien_hieu_ung.md`). Mỗi hiệu ứng có nhãn [Tên có nguồn] (kèm URL) / [Tên gần đúng] / [Chưa rõ tên]. `/dung-video` chỉ dùng [Tên có nguồn], tên Dũng xác nhận, hoặc mã có điểm giống ≥80/100.
+3. **[D][R-L040] Bóc tách Hệ sinh thái Sound Design & Ý đồ Dẫn dắt SFX Đa tầng:** Không đoán mò tên bài/SFX; bóc tách trung thực theo 5 nhóm chức năng sinh học (`ambience`, `foley`, `transitions`, `impacts`, `textures`) và 4 tầng ý nghĩa tự sự (`visual_sync`, `cognitive_anchor`, `emotional_arc`, `negative_space / dead silence`) theo cẩm nang `references/sfx-sound-design-chuyen-sau.md`. SFX chỉ giữ khi phục vụ ý đồ tự sự hoặc khớp chuyển cảnh vĩ mô (kèm J-Cut `-3f`); giải mã rõ lý do "vì sao mẫu đặt SFX tại mốc đó"; đo khoảng thở âm thanh giữa các cú Accent Hits (chuẩn `≥2.5s`); CẤM bóc tách SFX cơ học phẳng lì hoặc tự ý thêm SFX hoạt hình/meme rẻ tiền ngoài mẫu vào template.
+4. **[D] Bản quyền & Bảo mật:** Chỉ học kỹ thuật; không chép lời, hình, nhạc, template trả phí, preset có bản quyền. Video mạng xã hội chỉ được tải để học (qua `watch` hoặc Antigravity), học xong xóa video tạm, chỉ giữ dữ liệu đo và template.
+5. **[D] CAPTCHA / Xác minh robot:** Tải lại ≤3 lần rồi báo Dũng, dừng. Không giải CAPTCHA, không nhập mật khẩu, không tạo tài khoản, không gọi công cụ tốn credit khi chưa hỏi.
+6. **[D] Không tự sửa skill:** Thay đổi skill chỉ là đề xuất chờ Dũng duyệt. Dữ liệu học (thẻ, từ điển, danh mục hiệu ứng, recipe, template, luật) tự ghi được, không cần hỏi.
+7. **[D][R-L033] Cổng 100/100 cho Template Video Trọn Bộ:** Template phải khớp TOÀN BỘ video mẫu để dùng ngay. Tự dựng bản tái tạo bằng HyperFrames và chấm qua `template_similarity.py` (tối đa 3 vòng) đạt đủ 100/100 điểm thì mới được chuyển sang trạng thái "Dùng được". Điểm <100 thì ghi "Chưa đạt — <điểm>/100" và CẤM gợi ý sử dụng.
+8. **[D][R-L034–R-L036] Chuẩn 3 Pha & Bảng tên hiệu ứng Editor Pro:** Mọi hiệu ứng trong 7 nhóm (`CH`, `CC`, `CM`, `MG/AN`, `VFX/LP`, `MA`, `SF`) phải bóc tách đủ 3 pha: Entrance (Mở đầu) → Hold (Duy trì) → Exit (Kết thúc) và SFX Pre-Roll `-3f` khớp đỉnh `0f`.
+9. **[D][R-L037] Hệ thống 2 dạng Template song song:** Dạng 1 (`TV-xx` — Giống hoàn toàn mẫu 100%) và Dạng 2 (`TX-01..TX-08` & `TX-<TV>-xx` — Mẫu VFX/Effects Text + 24 Icon SVG động `IC-01..IC-24` cài sẵn tùy chỉnh 9 thông số).
+10. **[D][R-L038] Kiến trúc 6 tầng Z-index cho Overlay (`OV-xx`) & Khung Background (`BG-xx`):** CẤM hộp nền tối đặc sau chữ trên cảnh nhà thật; ảnh ngang/sổ hồng bọc bằng `BG-03 Blurred Glass Canvas`.
+11. **[D][R-L039] Chuẩn 3 Pha Phụ đề Động (`CAP-01..CAP-06`):** Entrance 0.08–0.12s → Active Highlight Vàng Gold `#FFD700` + Soft Glow từ khóa đắt giá → Exit 0.05–0.08s, tự động né Chữ Hook Hero `T3`.

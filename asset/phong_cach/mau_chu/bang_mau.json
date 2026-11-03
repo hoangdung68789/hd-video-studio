@@ -157,6 +157,29 @@
     "cau-hoi": "#C4303F",
     "tot": "#2E6053"
    }
+  },
+  "KV-TV10_xanh_ngoc_vang_so_to": {
+   "nguon": "https://www.tiktok.com/@editortapsu78/video/7632750597493591314 · đo trong thẻ EDITED ở 3,6/8,6/14,6/72,3/75,8s [Đã đo màu trung vị pixel]",
+   "do_duoc": {
+    "TẦNG HẦM": "#11B0B0",
+    "BIỆT THỰ": "#2FDDD4",
+    "604": "#FEE170",
+    "24 tháng": "#FCE070",
+    "10%": "#FBDF6F"
+   },
+   "PALETTE": {
+    "gia": "#2FDDD4",
+    "so-lieu": "#FEE170",
+    "nhan": "#FFFFFF",
+    "nhan-vang": "#FEE170",
+    "vi-tri": "#FFFFFF",
+    "cau-hoi": "#11B0B0",
+    "phong": "#FFFFFF",
+    "phap-ly": "#FEE170",
+    "tot": "#FFFFFF",
+    "cta": "#FFFFFF",
+    "nhan-phong": "#FFFFFF"
+   }
   }
  }
 }

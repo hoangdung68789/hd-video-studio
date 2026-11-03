@@ -1,0 +1,1090 @@
+{
+ "id": "TV-10",
+ "ten": "Review dự án biệt thự: chữ số to xanh ngọc-vàng theo lời",
+ "the_loai": [
+  "review du an (co loi)",
+  "MG/chu dong"
+ ],
+ "nguon": {
+  "url": "https://www.tiktok.com/@editortapsu78/video/7632750597493591314",
+  "ngay_xem": "2026-11-02",
+  "chi_so": "36,8K xem · 1.054 thích · 244 bình luận · 507 lưu · 205 chia sẻ (dữ liệu trang video)",
+  "nhan": "Đã đo",
+  "ghi_chu": "video trình bày RAW vs EDITED của editor; mọi số đo lấy trong thẻ EDITED (cắt 68% khung)"
+ },
+ "thong_so": {
+  "khung": "9:16",
+  "fps": 30,
+  "thoi_luong": 91.79,
+  "bpm": null,
+  "shot_tb": 3.17,
+  "su_kien_moi_giay": 1.41
+ },
+ "bang_mau": {
+  "xanh_ngoc": "#2FDDD4",
+  "xanh_ngoc_dam": "#11B0B0",
+  "vang": "#FEE170",
+  "trang": "#FFFFFF",
+  "nhan": "Đã đo trung vị pixel ở 3,6/8,6/14,6/72,3/75,8s"
+ },
+ "giu_chan": {
+  "hook": "câu hỏi nghịch lý 'tầng hầm mới là nơi đáng sống nhất' + 'đừng bỏ qua video này' trong 9,9s",
+  "open_loops": [
+   {
+    "mo": 3.0,
+    "tra_loi": 23.0,
+    "ghi_chu": "tầng hầm đáng sống, giải thích ở 'tầng hầm trải nghiệm'"
+   },
+   {
+    "mo": 50.0,
+    "tra_loi": 54.0,
+    "ghi_chu": "báo giá rồi số 17 tỷ"
+   }
+  ],
+  "doi_nhip_moi_giay": 3.17,
+  "cao_trao": 54.0,
+  "keu_goi_theo_doi": {
+   "giay": 87.0,
+   "cach": "tên người dẫn + 'inbox nhận layout'"
+  }
+ },
+ "doan": [
+  {
+   "tu": 0,
+   "den": 9.9,
+   "vai_tro": "hook",
+   "canh": {
+    "co": "trung",
+    "goc": "người dẫn đứng giữa vườn, chính diện ngang ngực",
+    "chuyen_dong_may": "tĩnh hoặc trượt chậm (Ước đoán)",
+    "host": true
+   },
+   "nhac": {
+    "dien_bien": "nhạc nền nhẹ dưới giọng suốt đoạn (giọng át, không đo được phách)",
+    "phach": []
+   },
+   "cat": [],
+   "chu": [
+    {
+     "giay": 0.9,
+     "noi_dung": "Bạn thấy",
+     "kieu": "phụ đề từ khóa sans nhỏ",
+     "mau": "#F0EFEF",
+     "vi_tri": "giữa-trên thẻ, không che mặt",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "mở câu hỏi bằng chữ nhỏ để chữ to sau đó nổi hơn",
+     "nhan": "Đã đo mốc 10 fps; nội dung theo khung 1 fps",
+     "mau_do": "#F0EFEF",
+     "nhan_mau": "Đã đo (trung vị pixel vùng chữ, cùng hàm với bản dựng)"
+    },
+    {
+     "giay": 2.9,
+     "noi_dung": "mới là nơi TẦNG HẦM đáng sống nhất",
+     "kieu": "in đậm xanh ngọc + sans nhỏ",
+     "mau": "#2FCFD6",
+     "vi_tri": "giữa-trên thẻ, không che mặt",
+     "muc_dich": "tao_to_mo",
+     "ly_do": "nghịch lý 'tầng hầm đáng sống nhất' là câu nhử của hook",
+     "nhan": "Đã đo mốc 10 fps; nội dung theo khung 1 fps",
+     "mau_do": "#2FCFD6",
+     "nhan_mau": "Đã đo (trung vị pixel vùng chữ, cùng hàm với bản dựng)"
+    },
+    {
+     "giay": 5.0,
+     "noi_dung": "Video này",
+     "kieu": "serif to trắng",
+     "mau": "#F7F8F4",
+     "vi_tri": "giữa-trên thẻ, không che mặt",
+     "muc_dich": "giu_chan",
+     "ly_do": "nói thẳng với người xem 'đừng bỏ qua video này'",
+     "nhan": "Đã đo mốc 10 fps; nội dung theo khung 1 fps",
+     "mau_do": "#F7F8F4",
+     "nhan_mau": "Đã đo (trung vị pixel vùng chữ, cùng hàm với bản dựng)"
+    },
+    {
+     "giay": 7.8,
+     "noi_dung": "BIỆT THỰ Rừng",
+     "kieu": "in đậm xanh ngọc + chữ viết tay trắng",
+     "mau": "#31E1E2",
+     "vi_tri": "giữa-trên thẻ, không che mặt",
+     "muc_dich": "dinh_vi",
+     "ly_do": "chốt chủ đề ở cuối hook, đúng lúc nhắc tên sản phẩm",
+     "nhan": "Đã đo mốc 10 fps; nội dung theo khung 1 fps",
+     "mau_do": "#31E1E2",
+     "nhan_mau": "Đã đo (trung vị pixel vùng chữ, cùng hàm với bản dựng)"
+    }
+   ],
+   "mg": [],
+   "broll": [],
+   "an": [],
+   "sfx": [
+    {
+     "giay": 8.94,
+     "vai_tro": "accent_pop_hit",
+     "nguon": "mau (Đã đo, trùng sự kiện hình ±0,15s)"
+    },
+    {
+     "giay": 0.9,
+     "vai_tro": "accent_pop_hit",
+     "nguon": "them_theo_luat_dung_video (mẫu: Không đo được vì lẫn giọng); khi áp 02/11: chỉ chữ hook/số giá giữ SFX"
+    },
+    {
+     "giay": 2.9,
+     "vai_tro": "accent_pop_hit",
+     "nguon": "them_theo_luat_dung_video (mẫu: Không đo được vì lẫn giọng); khi áp 02/11: chỉ chữ hook/số giá giữ SFX"
+    },
+    {
+     "giay": 5.0,
+     "vai_tro": "accent_pop_hit",
+     "nguon": "them_theo_luat_dung_video (mẫu: Không đo được vì lẫn giọng); khi áp 02/11: chỉ chữ hook/số giá giữ SFX"
+    },
+    {
+     "giay": 7.8,
+     "vai_tro": "accent_pop_hit",
+     "nguon": "them_theo_luat_dung_video (mẫu: Không đo được vì lẫn giọng); khi áp 02/11: chỉ chữ hook/số giá giữ SFX"
+    }
+   ],
+   "chuyen_canh": {}
+  },
+  {
+   "tu": 9.9,
+   "den": 16.4,
+   "vai_tro": "gioi_thieu",
+   "canh": {
+    "co": "toan",
+    "goc": "người dẫn toàn thân trước biệt thự rồi flycam",
+    "chuyen_dong_may": "tĩnh hoặc trượt chậm (Ước đoán)",
+    "host": true
+   },
+   "nhac": {
+    "dien_bien": "nhạc nền nhẹ dưới giọng suốt đoạn (giọng át, không đo được phách)",
+    "phach": []
+   },
+   "cat": [
+    9.9,
+    13.2
+   ],
+   "chu": [
+    {
+     "giay": 10.7,
+     "noi_dung": "Retreat Forest · phân khu tâm điểm",
+     "kieu": "viết tay trắng + chữ đỏ nhấn",
+     "mau": "#DB3958",
+     "vi_tri": "giữa-trên thẻ, không che mặt",
+     "muc_dich": "dinh_vi",
+     "ly_do": "tên phân khu khi người dẫn nói tới",
+     "nhan": "Đã đo mốc 10 fps; nội dung theo khung 1 fps",
+     "mau_do": "#DB3958",
+     "nhan_mau": "Đã đo (trung vị pixel vùng chữ, cùng hàm với bản dựng)"
+    },
+    {
+     "giay": 14.1,
+     "noi_dung": "Chỉ vỏn vẹn 604 căn biệt thự",
+     "kieu": "số to vàng + viết tay",
+     "mau": "#FEE26F",
+     "vi_tri": "giữa-trên thẻ, không che mặt",
+     "muc_dich": "chung_minh_so_lieu",
+     "ly_do": "số lượng ít = khan hiếm, số to dễ nhớ",
+     "nhan": "Đã đo mốc 10 fps; nội dung theo khung 1 fps",
+     "mau_do": "#FEE26F",
+     "nhan_mau": "Đã đo (trung vị pixel vùng chữ, cùng hàm với bản dựng)"
+    }
+   ],
+   "mg": [],
+   "broll": [
+    {
+     "giay": 13.2,
+     "loai": "toan",
+     "thoi_luong": 3.2,
+     "gan_loi": "câu đang nói trong đoạn",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "đổi hình mỗi ~3.2s theo ý của câu, giữ mắt không chán (Ước đoán)"
+    }
+   ],
+   "an": [],
+   "sfx": [
+    {
+     "giay": 12.6,
+     "vai_tro": "whoosh_swish",
+     "nguon": "mau (Đã đo, trùng sự kiện hình ±0,15s)"
+    },
+    {
+     "giay": 10.7,
+     "vai_tro": "accent_pop_hit",
+     "nguon": "them_theo_luat_dung_video (mẫu: Không đo được vì lẫn giọng); khi áp 02/11: chỉ chữ hook/số giá giữ SFX"
+    },
+    {
+     "giay": 14.1,
+     "vai_tro": "accent_pop_hit",
+     "nguon": "them_theo_luat_dung_video (mẫu: Không đo được vì lẫn giọng); khi áp 02/11: chỉ chữ hook/số giá giữ SFX"
+    }
+   ],
+   "chuyen_canh": {}
+  },
+  {
+   "tu": 16.4,
+   "den": 25.7,
+   "vai_tro": "san_pham",
+   "canh": {
+    "co": "toan",
+    "goc": "người dẫn đứng mép hồ rồi MG 3 thẻ villa",
+    "chuyen_dong_may": "tĩnh hoặc trượt chậm (Ước đoán)",
+    "host": true
+   },
+   "nhac": {
+    "dien_bien": "nhạc nền nhẹ dưới giọng suốt đoạn (giọng át, không đo được phách)",
+    "phach": []
+   },
+   "cat": [
+    16.4,
+    19.03,
+    22.73
+   ],
+   "chu": [
+    {
+     "giay": 22.0,
+     "noi_dung": "Điểm đặc biệt nhất · Tầng hầm trải nghiệm",
+     "kieu": "sans trắng + viết tay",
+     "mau": "#6CABD9",
+     "vi_tri": "giữa-trên thẻ, không che mặt",
+     "muc_dich": "chuyen_y",
+     "ly_do": "báo chuyển sang ý chính của video",
+     "nhan": "Đã đo mốc 10 fps; nội dung theo khung 1 fps",
+     "mau_do": "#6CABD9",
+     "nhan_mau": "Đã đo (trung vị pixel vùng chữ, cùng hàm với bản dựng)"
+    }
+   ],
+   "mg": [
+    {
+     "giay": 19.3,
+     "mo_ta": "3 thẻ ảnh villa xếp dọc, viền xanh ngọc, nhãn tên dòng sản phẩm",
+     "muc_dich": "liet_ke",
+     "ly_do": "nói '3 dòng sản phẩm' thì hiện đủ 3 thẻ cùng lúc để so sánh"
+    }
+   ],
+   "broll": [
+    {
+     "giay": 19.03,
+     "loai": "toan",
+     "thoi_luong": 3.7,
+     "gan_loi": "câu đang nói trong đoạn",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "đổi hình mỗi ~3.7s theo ý của câu, giữ mắt không chán (Ước đoán)"
+    },
+    {
+     "giay": 22.73,
+     "loai": "toan",
+     "thoi_luong": 2.97,
+     "gan_loi": "câu đang nói trong đoạn",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "đổi hình mỗi ~3.0s theo ý của câu, giữ mắt không chán (Ước đoán)"
+    }
+   ],
+   "an": [],
+   "sfx": [
+    {
+     "giay": 19.24,
+     "vai_tro": "accent_pop_hit",
+     "nguon": "mau (Đã đo, trùng sự kiện hình ±0,15s)"
+    },
+    {
+     "giay": 22.0,
+     "vai_tro": "accent_pop_hit",
+     "nguon": "them_theo_luat_dung_video (mẫu: Không đo được vì lẫn giọng); khi áp 02/11: chỉ chữ hook/số giá giữ SFX"
+    }
+   ],
+   "chuyen_canh": {}
+  },
+  {
+   "tu": 25.7,
+   "den": 42.03,
+   "vai_tro": "diem_manh",
+   "canh": {
+    "co": "trung",
+    "goc": "b-roll nội thất tầng hầm, trượt chậm",
+    "chuyen_dong_may": "tĩnh hoặc trượt chậm (Ước đoán)",
+    "host": false
+   },
+   "nhac": {
+    "dien_bien": "nhạc nền nhẹ dưới giọng suốt đoạn (giọng át, không đo được phách)",
+    "phach": []
+   },
+   "cat": [
+    25.7,
+    27.9,
+    30.4,
+    32.57,
+    34.33,
+    35.23,
+    37.4
+   ],
+   "chu": [
+    {
+     "giay": 26.0,
+     "noi_dung": "Không hề tối",
+     "kieu": "sans nhỏ trắng",
+     "mau": "#F6FCFA",
+     "vi_tri": "giữa-trên thẻ, không che mặt",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "phá định kiến tầng hầm tối",
+     "nhan": "Đã đo mốc 10 fps; nội dung theo khung 1 fps",
+     "mau_do": "#F6FCFA",
+     "nhan_mau": "Đã đo (trung vị pixel vùng chữ, cùng hàm với bản dựng)"
+    },
+    {
+     "giay": 28.8,
+     "noi_dung": "mở · đón ánh nắng tự nhiên",
+     "kieu": "viết tay to trắng + sans",
+     "mau": "#D1B064",
+     "vi_tri": "giữa-trên thẻ, không che mặt",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "chữ đặt trên cảnh phòng ngủ có nắng: hình chứng minh lời",
+     "nhan": "Đã đo mốc 10 fps; nội dung theo khung 1 fps",
+     "mau_do": "#D1B064",
+     "nhan_mau": "Đã đo (trung vị pixel vùng chữ, cùng hàm với bản dựng)"
+    },
+    {
+     "giay": 30.7,
+     "noi_dung": "Hệ sinh thái 24 tuổi rừng",
+     "kieu": "in xanh lá + số to vàng + viết tay",
+     "mau": "#F9F9F9",
+     "vi_tri": "giữa-trên thẻ, không che mặt",
+     "muc_dich": "chung_minh_so_lieu",
+     "ly_do": "con số tuổi rừng làm bằng chứng cho 'sống giữa rừng'",
+     "nhan": "Đã đo mốc 10 fps; nội dung theo khung 1 fps",
+     "mau_do": "#F9F9F9",
+     "nhan_mau": "Đã đo (trung vị pixel vùng chữ, cùng hàm với bản dựng)"
+    },
+    {
+     "giay": 33.0,
+     "noi_dung": "Không gian · Hầm rượu",
+     "kieu": "viết tay trắng",
+     "mau": "#FCFCFA",
+     "vi_tri": "giữa-trên thẻ, không che mặt",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "nhãn công năng đúng lúc cảnh hầm rượu",
+     "nhan": "Đã đo mốc 10 fps; nội dung theo khung 1 fps",
+     "mau_do": "#FCFCFA",
+     "nhan_mau": "Đã đo (trung vị pixel vùng chữ, cùng hàm với bản dựng)"
+    },
+    {
+     "giay": 35.8,
+     "noi_dung": "Vô cực · khu làm việc giữa lòng thiên nhiên",
+     "kieu": "viết tay trắng + sans",
+     "mau": "#FCFCFA",
+     "vi_tri": "giữa-trên thẻ, không che mặt",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "nhãn công năng đúng lúc cảnh phòng làm việc",
+     "nhan": "Đã đo mốc 10 fps; nội dung theo khung 1 fps",
+     "mau_do": "#FCFCFA",
+     "nhan_mau": "Đã đo (trung vị pixel vùng chữ, cùng hàm với bản dựng)"
+    },
+    {
+     "giay": 38.0,
+     "noi_dung": "12 ha diện tích mặt nước",
+     "kieu": "số to trắng-vàng + sans",
+     "mau": "#76B7CE",
+     "vi_tri": "giữa-trên thẻ, không che mặt",
+     "muc_dich": "chung_minh_so_lieu",
+     "ly_do": "số liệu quy mô trên flycam mặt nước",
+     "nhan": "Đã đo mốc 10 fps; nội dung theo khung 1 fps",
+     "mau_do": "#76B7CE",
+     "nhan_mau": "Đã đo (trung vị pixel vùng chữ, cùng hàm với bản dựng)"
+    },
+    {
+     "giay": 39.8,
+     "noi_dung": "13 ha diện tích rừng",
+     "kieu": "số to trắng-vàng + sans",
+     "mau": "#FFE773",
+     "vi_tri": "giữa-trên thẻ, không che mặt",
+     "muc_dich": "chung_minh_so_lieu",
+     "ly_do": "số liệu quy mô trên flycam rừng",
+     "nhan": "Đã đo mốc 10 fps; nội dung theo khung 1 fps",
+     "mau_do": "#FFE773",
+     "nhan_mau": "Đã đo (trung vị pixel vùng chữ, cùng hàm với bản dựng)"
+    }
+   ],
+   "mg": [],
+   "broll": [
+    {
+     "giay": 25.7,
+     "loai": "trung",
+     "thoi_luong": 2.2,
+     "gan_loi": "câu đang nói trong đoạn",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "đổi hình mỗi ~2.2s theo ý của câu, giữ mắt không chán (Ước đoán)"
+    },
+    {
+     "giay": 27.9,
+     "loai": "trung",
+     "thoi_luong": 2.5,
+     "gan_loi": "câu đang nói trong đoạn",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "đổi hình mỗi ~2.5s theo ý của câu, giữ mắt không chán (Ước đoán)"
+    },
+    {
+     "giay": 30.4,
+     "loai": "trung",
+     "thoi_luong": 2.17,
+     "gan_loi": "câu đang nói trong đoạn",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "đổi hình mỗi ~2.2s theo ý của câu, giữ mắt không chán (Ước đoán)"
+    },
+    {
+     "giay": 32.57,
+     "loai": "trung",
+     "thoi_luong": 1.76,
+     "gan_loi": "câu đang nói trong đoạn",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "đổi hình mỗi ~1.8s theo ý của câu, giữ mắt không chán (Ước đoán)"
+    },
+    {
+     "giay": 34.33,
+     "loai": "trung",
+     "thoi_luong": 0.9,
+     "gan_loi": "câu đang nói trong đoạn",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "đổi hình mỗi ~0.9s theo ý của câu, giữ mắt không chán (Ước đoán)"
+    },
+    {
+     "giay": 35.23,
+     "loai": "trung",
+     "thoi_luong": 2.17,
+     "gan_loi": "câu đang nói trong đoạn",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "đổi hình mỗi ~2.2s theo ý của câu, giữ mắt không chán (Ước đoán)"
+    },
+    {
+     "giay": 37.4,
+     "loai": "trung",
+     "thoi_luong": 4.63,
+     "gan_loi": "câu đang nói trong đoạn",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "đổi hình mỗi ~4.6s theo ý của câu, giữ mắt không chán (Ước đoán)"
+    }
+   ],
+   "an": [],
+   "sfx": [
+    {
+     "giay": 30.86,
+     "vai_tro": "riser_swell",
+     "nguon": "mau (Đã đo, trùng sự kiện hình ±0,15s)"
+    },
+    {
+     "giay": 31.96,
+     "vai_tro": "whoosh_swish",
+     "nguon": "mau (Đã đo, trùng sự kiện hình ±0,15s)"
+    },
+    {
+     "giay": 26.0,
+     "vai_tro": "accent_pop_hit",
+     "nguon": "them_theo_luat_dung_video (mẫu: Không đo được vì lẫn giọng); khi áp 02/11: chỉ chữ hook/số giá giữ SFX"
+    },
+    {
+     "giay": 28.8,
+     "vai_tro": "accent_pop_hit",
+     "nguon": "them_theo_luat_dung_video (mẫu: Không đo được vì lẫn giọng); khi áp 02/11: chỉ chữ hook/số giá giữ SFX"
+    },
+    {
+     "giay": 30.7,
+     "vai_tro": "accent_pop_hit",
+     "nguon": "them_theo_luat_dung_video (mẫu: Không đo được vì lẫn giọng); khi áp 02/11: chỉ chữ hook/số giá giữ SFX"
+    },
+    {
+     "giay": 33.0,
+     "vai_tro": "accent_pop_hit",
+     "nguon": "them_theo_luat_dung_video (mẫu: Không đo được vì lẫn giọng); khi áp 02/11: chỉ chữ hook/số giá giữ SFX"
+    },
+    {
+     "giay": 35.8,
+     "vai_tro": "accent_pop_hit",
+     "nguon": "them_theo_luat_dung_video (mẫu: Không đo được vì lẫn giọng); khi áp 02/11: chỉ chữ hook/số giá giữ SFX"
+    },
+    {
+     "giay": 38.0,
+     "vai_tro": "accent_pop_hit",
+     "nguon": "them_theo_luat_dung_video (mẫu: Không đo được vì lẫn giọng); khi áp 02/11: chỉ chữ hook/số giá giữ SFX"
+    },
+    {
+     "giay": 39.8,
+     "vai_tro": "accent_pop_hit",
+     "nguon": "them_theo_luat_dung_video (mẫu: Không đo được vì lẫn giọng); khi áp 02/11: chỉ chữ hook/số giá giữ SFX"
+    }
+   ],
+   "chuyen_canh": {}
+  },
+  {
+   "tu": 42.03,
+   "den": 51.93,
+   "vai_tro": "tien_ich",
+   "canh": {
+    "co": "toan",
+    "goc": "flycam rừng, mặt nước, sông suối",
+    "chuyen_dong_may": "tĩnh hoặc trượt chậm (Ước đoán)",
+    "host": false
+   },
+   "nhac": {
+    "dien_bien": "nhạc nền nhẹ dưới giọng suốt đoạn (giọng át, không đo được phách)",
+    "phach": []
+   },
+   "cat": [
+    42.03,
+    45.33,
+    46.53,
+    49.63
+   ],
+   "chu": [
+    {
+     "giay": 44.9,
+     "noi_dung": "Shinrin-Yoku · tắm rừng",
+     "kieu": "sans trắng + viết tay",
+     "mau": "#FEFFFF",
+     "vi_tri": "giữa-trên thẻ, không che mặt",
+     "muc_dich": "tao_to_mo",
+     "ly_do": "từ lạ tiếng Nhật gây tò mò rồi giải nghĩa",
+     "nhan": "Đã đo mốc 10 fps; nội dung theo khung 1 fps",
+     "mau_do": "#FEFFFF",
+     "nhan_mau": "Đã đo (trung vị pixel vùng chữ, cùng hàm với bản dựng)"
+    },
+    {
+     "giay": 50.0,
+     "noi_dung": "Giá chỉ từ ... thanh toán",
+     "kieu": "sans nhỏ vàng",
+     "mau": "#FEE170",
+     "vi_tri": "giữa-trên thẻ, không che mặt",
+     "muc_dich": "nhan_gia",
+     "ly_do": "báo trước phần giá",
+     "nhan": "Đã đo mốc 10 fps; nội dung theo khung 1 fps",
+     "mau_do": null,
+     "nhan_mau": "Đã đo (trung vị pixel vùng chữ, cùng hàm với bản dựng)"
+    }
+   ],
+   "mg": [
+    {
+     "giay": 42.3,
+     "mo_ta": "logo phân khu Retreat Forest nhỏ giữa-trên",
+     "muc_dich": "dinh_vi",
+     "ly_do": "mở phần tiện ích bằng nhận diện dự án"
+    }
+   ],
+   "broll": [
+    {
+     "giay": 42.03,
+     "loai": "toan",
+     "thoi_luong": 3.3,
+     "gan_loi": "câu đang nói trong đoạn",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "đổi hình mỗi ~3.3s theo ý của câu, giữ mắt không chán (Ước đoán)"
+    },
+    {
+     "giay": 45.33,
+     "loai": "toan",
+     "thoi_luong": 1.2,
+     "gan_loi": "câu đang nói trong đoạn",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "đổi hình mỗi ~1.2s theo ý của câu, giữ mắt không chán (Ước đoán)"
+    },
+    {
+     "giay": 46.53,
+     "loai": "toan",
+     "thoi_luong": 3.1,
+     "gan_loi": "câu đang nói trong đoạn",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "đổi hình mỗi ~3.1s theo ý của câu, giữ mắt không chán (Ước đoán)"
+    },
+    {
+     "giay": 49.63,
+     "loai": "toan",
+     "thoi_luong": 2.3,
+     "gan_loi": "câu đang nói trong đoạn",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "đổi hình mỗi ~2.3s theo ý của câu, giữ mắt không chán (Ước đoán)"
+    }
+   ],
+   "an": [],
+   "sfx": [
+    {
+     "giay": 42.2,
+     "vai_tro": "whoosh_swish",
+     "nguon": "mau (Đã đo, trùng sự kiện hình ±0,15s)"
+    },
+    {
+     "giay": 43.22,
+     "vai_tro": "whoosh_swish",
+     "nguon": "mau (Đã đo, trùng sự kiện hình ±0,15s)"
+    },
+    {
+     "giay": 44.74,
+     "vai_tro": "whoosh_swish",
+     "nguon": "mau (Đã đo, trùng sự kiện hình ±0,15s)"
+    },
+    {
+     "giay": 45.18,
+     "vai_tro": "riser_swell",
+     "nguon": "mau (Đã đo, trùng sự kiện hình ±0,15s)"
+    },
+    {
+     "giay": 45.9,
+     "vai_tro": "whoosh_swish",
+     "nguon": "mau (Đã đo, trùng sự kiện hình ±0,15s)"
+    },
+    {
+     "giay": 44.9,
+     "vai_tro": "accent_pop_hit",
+     "nguon": "them_theo_luat_dung_video (mẫu: Không đo được vì lẫn giọng); khi áp 02/11: chỉ chữ hook/số giá giữ SFX"
+    },
+    {
+     "giay": 50.0,
+     "vai_tro": "accent_pop_hit",
+     "nguon": "them_theo_luat_dung_video (mẫu: Không đo được vì lẫn giọng); khi áp 02/11: chỉ chữ hook/số giá giữ SFX"
+    }
+   ],
+   "chuyen_canh": {
+    "ma": "whip_nhoe_chum",
+    "giay": 44.07,
+    "den": 44.87,
+    "mo_ta": "cụm khung đổi liên tục 0,8s (lia nhanh nhòe) + whoosh 44,74s",
+    "muc_dich": "doi_nhip_giu_chan",
+    "ly_do": "ngắt giữa phần nội thất và phần thiên nhiên"
+   }
+  },
+  {
+   "tu": 51.93,
+   "den": 68.83,
+   "vai_tro": "gia",
+   "canh": {
+    "co": "trung",
+    "goc": "người dẫn đi trong phòng tắm rồi nội thất",
+    "chuyen_dong_may": "tĩnh hoặc trượt chậm (Ước đoán)",
+    "host": true
+   },
+   "nhac": {
+    "dien_bien": "nhạc nền nhẹ dưới giọng suốt đoạn (giọng át, không đo được phách)",
+    "phach": []
+   },
+   "cat": [
+    51.93,
+    58.4,
+    60.53,
+    65.47
+   ],
+   "chu": [
+    {
+     "giay": 54.1,
+     "noi_dung": "Chỉ từ Biệt Thự Rừng 17 tỷ",
+     "kieu": "số to xanh ngọc + sans",
+     "mau": "#6DABE2",
+     "vi_tri": "giữa-trên thẻ, không che mặt",
+     "muc_dich": "nhan_gia",
+     "ly_do": "tiết lộ giá ở 59% video, người dẫn đi trong phòng tắm",
+     "nhan": "Đã đo mốc 10 fps; nội dung theo khung 1 fps",
+     "mau_do": "#6DABE2",
+     "nhan_mau": "Đã đo (trung vị pixel vùng chữ, cùng hàm với bản dựng)"
+    },
+    {
+     "giay": 56.9,
+     "noi_dung": "tương đương 99 Triệu/m²",
+     "kieu": "số to vàng + sans",
+     "mau": "#F0F4F5",
+     "vi_tri": "giữa-trên thẻ, không che mặt",
+     "muc_dich": "nhan_gia",
+     "ly_do": "quy giá ra m² để so sánh",
+     "nhan": "Đã đo mốc 10 fps; nội dung theo khung 1 fps",
+     "mau_do": "#F0F4F5",
+     "nhan_mau": "Đã đo (trung vị pixel vùng chữ, cùng hàm với bản dựng)"
+    },
+    {
+     "giay": 61.0,
+     "noi_dung": "4,5 tỷ",
+     "kieu": "số to trắng",
+     "mau": "#FCFDF6",
+     "vi_tri": "giữa-trên thẻ, không che mặt",
+     "muc_dich": "nhan_gia",
+     "ly_do": "vốn ban đầu thấp, giảm rào cản",
+     "nhan": "Đã đo mốc 10 fps; nội dung theo khung 1 fps",
+     "mau_do": "#FCFDF6",
+     "nhan_mau": "Đã đo (trung vị pixel vùng chữ, cùng hàm với bản dựng)"
+    },
+    {
+     "giay": 62.8,
+     "noi_dung": "25% vốn tự có ban đầu",
+     "kieu": "số to xanh đậm + sans",
+     "mau": "#FBFCFC",
+     "vi_tri": "giữa-trên thẻ, không che mặt",
+     "muc_dich": "chung_minh_so_lieu",
+     "ly_do": "tỷ lệ % dễ hiểu",
+     "nhan": "Đã đo mốc 10 fps; nội dung theo khung 1 fps",
+     "mau_do": "#FBFCFC",
+     "nhan_mau": "Đã đo (trung vị pixel vùng chữ, cùng hàm với bản dựng)"
+    },
+    {
+     "giay": 64.8,
+     "noi_dung": "cho đến khi nhận nhà",
+     "kieu": "sans nhỏ trắng",
+     "mau": "#FCFCFB",
+     "vi_tri": "giữa-trên thẻ, không che mặt",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "phụ chú điều kiện",
+     "nhan": "Đã đo mốc 10 fps; nội dung theo khung 1 fps",
+     "mau_do": "#FCFCFB",
+     "nhan_mau": "Đã đo (trung vị pixel vùng chữ, cùng hàm với bản dựng)"
+    }
+   ],
+   "mg": [],
+   "broll": [
+    {
+     "giay": 58.4,
+     "loai": "trung",
+     "thoi_luong": 2.13,
+     "gan_loi": "câu đang nói trong đoạn",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "đổi hình mỗi ~2.1s theo ý của câu, giữ mắt không chán (Ước đoán)"
+    },
+    {
+     "giay": 60.53,
+     "loai": "trung",
+     "thoi_luong": 4.94,
+     "gan_loi": "câu đang nói trong đoạn",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "đổi hình mỗi ~4.9s theo ý của câu, giữ mắt không chán (Ước đoán)"
+    },
+    {
+     "giay": 65.47,
+     "loai": "trung",
+     "thoi_luong": 3.36,
+     "gan_loi": "câu đang nói trong đoạn",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "đổi hình mỗi ~3.4s theo ý của câu, giữ mắt không chán (Ước đoán)"
+    }
+   ],
+   "an": [],
+   "sfx": [
+    {
+     "giay": 58.54,
+     "vai_tro": "whoosh_swish",
+     "nguon": "mau (Đã đo, trùng sự kiện hình ±0,15s)"
+    },
+    {
+     "giay": 60.68,
+     "vai_tro": "accent_pop_hit",
+     "nguon": "mau (Đã đo, trùng sự kiện hình ±0,15s)"
+    },
+    {
+     "giay": 54.1,
+     "vai_tro": "accent_pop_hit",
+     "nguon": "them_theo_luat_dung_video (mẫu: Không đo được vì lẫn giọng); khi áp 02/11: chỉ chữ hook/số giá giữ SFX"
+    },
+    {
+     "giay": 56.9,
+     "vai_tro": "accent_pop_hit",
+     "nguon": "them_theo_luat_dung_video (mẫu: Không đo được vì lẫn giọng); khi áp 02/11: chỉ chữ hook/số giá giữ SFX"
+    },
+    {
+     "giay": 61.0,
+     "vai_tro": "accent_pop_hit",
+     "nguon": "them_theo_luat_dung_video (mẫu: Không đo được vì lẫn giọng); khi áp 02/11: chỉ chữ hook/số giá giữ SFX"
+    },
+    {
+     "giay": 62.8,
+     "vai_tro": "accent_pop_hit",
+     "nguon": "them_theo_luat_dung_video (mẫu: Không đo được vì lẫn giọng); khi áp 02/11: chỉ chữ hook/số giá giữ SFX"
+    },
+    {
+     "giay": 64.8,
+     "vai_tro": "accent_pop_hit",
+     "nguon": "them_theo_luat_dung_video (mẫu: Không đo được vì lẫn giọng); khi áp 02/11: chỉ chữ hook/số giá giữ SFX"
+    }
+   ],
+   "chuyen_canh": {}
+  },
+  {
+   "tu": 68.83,
+   "den": 86.27,
+   "vai_tro": "uu_dai",
+   "canh": {
+    "co": "trung",
+    "goc": "nội thất phòng khách, cầu thang, phòng ngủ",
+    "chuyen_dong_may": "tĩnh hoặc trượt chậm (Ước đoán)",
+    "host": false
+   },
+   "nhac": {
+    "dien_bien": "nhạc nền nhẹ dưới giọng suốt đoạn (giọng át, không đo được phách)",
+    "phach": []
+   },
+   "cat": [
+    68.83,
+    70.83,
+    73.0,
+    75.1,
+    77.13,
+    79.3,
+    81.93
+   ],
+   "chu": [
+    {
+     "giay": 70.0,
+     "noi_dung": "Chủ đầu tư hỗ trợ · Miễn Lãi",
+     "kieu": "viết tay vàng",
+     "mau": "#ECFFFE",
+     "vi_tri": "giữa-trên thẻ, không che mặt",
+     "muc_dich": "nhan_gia",
+     "ly_do": "ưu đãi thứ nhất",
+     "nhan": "Đã đo mốc 10 fps; nội dung theo khung 1 fps",
+     "mau_do": "#ECFFFE",
+     "nhan_mau": "Đã đo (trung vị pixel vùng chữ, cùng hàm với bản dựng)"
+    },
+    {
+     "giay": 72.2,
+     "noi_dung": "Ân hạn gốc trong vòng 24 tháng",
+     "kieu": "số to vàng",
+     "mau": "#FEE170",
+     "vi_tri": "giữa-trên thẻ, không che mặt",
+     "muc_dich": "chung_minh_so_lieu",
+     "ly_do": "ưu đãi có con số thời gian",
+     "nhan": "Đã đo mốc 10 fps; nội dung theo khung 1 fps",
+     "mau_do": null,
+     "nhan_mau": "Đã đo (trung vị pixel vùng chữ, cùng hàm với bản dựng)"
+    },
+    {
+     "giay": 72.2,
+     "noi_dung": "Chiết khấu 10%",
+     "kieu": "số to vàng + vệt sáng",
+     "mau": "#FEE170",
+     "vi_tri": "giữa-trên thẻ, không che mặt",
+     "muc_dich": "nhan_gia",
+     "ly_do": "chiết khấu là điểm chốt, kèm vệt sáng",
+     "nhan": "Đã đo mốc 10 fps; nội dung theo khung 1 fps",
+     "mau_do": null,
+     "nhan_mau": "Đã đo (trung vị pixel vùng chữ, cùng hàm với bản dựng)"
+    },
+    {
+     "giay": 74.2,
+     "noi_dung": "Khách hàng thanh toán sớm 10%",
+     "kieu": "số to vàng + sans",
+     "mau": "#FDFCF4",
+     "vi_tri": "giữa-trên thẻ, không che mặt",
+     "muc_dich": "nhan_gia",
+     "ly_do": "điều kiện nhận chiết khấu",
+     "nhan": "Đã đo mốc 10 fps; nội dung theo khung 1 fps",
+     "mau_do": "#FDFCF4",
+     "nhan_mau": "Đã đo (trung vị pixel vùng chữ, cùng hàm với bản dựng)"
+    },
+    {
+     "giay": 76.4,
+     "noi_dung": "Khách hàng thân thiết",
+     "kieu": "sans nhỏ trắng",
+     "mau": "#FFFFFF",
+     "vi_tri": "giữa-trên thẻ, không che mặt",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "đối tượng ưu đãi",
+     "nhan": "Đã đo mốc 10 fps; nội dung theo khung 1 fps",
+     "mau_do": null,
+     "nhan_mau": "Đã đo (trung vị pixel vùng chữ, cùng hàm với bản dựng)"
+    },
+    {
+     "giay": 79.6,
+     "noi_dung": "ECO PARK 0,5%",
+     "kieu": "in đậm xanh ngọc + số vàng",
+     "mau": "#2FDDD4",
+     "vi_tri": "giữa-trên thẻ, không che mặt",
+     "muc_dich": "nhan_gia",
+     "ly_do": "ưu đãi riêng khách Ecopark",
+     "nhan": "Đã đo mốc 10 fps; nội dung theo khung 1 fps",
+     "mau_do": null,
+     "nhan_mau": "Đã đo (trung vị pixel vùng chữ, cùng hàm với bản dựng)"
+    },
+    {
+     "giay": 83.0,
+     "noi_dung": "Khu vườn trải nghiệm 300 Triệu",
+     "kieu": "sans trắng + số vàng",
+     "mau": "#FAFCFB",
+     "vi_tri": "giữa-trên thẻ, không che mặt",
+     "muc_dich": "nhan_gia",
+     "ly_do": "quà tặng có giá trị tiền",
+     "nhan": "Đã đo mốc 10 fps; nội dung theo khung 1 fps",
+     "mau_do": "#FAFCFB",
+     "nhan_mau": "Đã đo (trung vị pixel vùng chữ, cùng hàm với bản dựng)"
+    }
+   ],
+   "mg": [
+    {
+     "giay": 73.0,
+     "mo_ta": "vệt sáng chéo quét qua số 10%",
+     "muc_dich": "nhan_gia",
+     "ly_do": "làm con số chiết khấu lấp lánh, mắt dừng lại"
+    }
+   ],
+   "broll": [
+    {
+     "giay": 68.83,
+     "loai": "trung",
+     "thoi_luong": 2.0,
+     "gan_loi": "câu đang nói trong đoạn",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "đổi hình mỗi ~2.0s theo ý của câu, giữ mắt không chán (Ước đoán)"
+    },
+    {
+     "giay": 70.83,
+     "loai": "trung",
+     "thoi_luong": 2.17,
+     "gan_loi": "câu đang nói trong đoạn",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "đổi hình mỗi ~2.2s theo ý của câu, giữ mắt không chán (Ước đoán)"
+    },
+    {
+     "giay": 73.0,
+     "loai": "trung",
+     "thoi_luong": 2.1,
+     "gan_loi": "câu đang nói trong đoạn",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "đổi hình mỗi ~2.1s theo ý của câu, giữ mắt không chán (Ước đoán)"
+    },
+    {
+     "giay": 75.1,
+     "loai": "trung",
+     "thoi_luong": 2.03,
+     "gan_loi": "câu đang nói trong đoạn",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "đổi hình mỗi ~2.0s theo ý của câu, giữ mắt không chán (Ước đoán)"
+    },
+    {
+     "giay": 77.13,
+     "loai": "trung",
+     "thoi_luong": 2.17,
+     "gan_loi": "câu đang nói trong đoạn",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "đổi hình mỗi ~2.2s theo ý của câu, giữ mắt không chán (Ước đoán)"
+    },
+    {
+     "giay": 79.3,
+     "loai": "trung",
+     "thoi_luong": 2.63,
+     "gan_loi": "câu đang nói trong đoạn",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "đổi hình mỗi ~2.6s theo ý của câu, giữ mắt không chán (Ước đoán)"
+    },
+    {
+     "giay": 81.93,
+     "loai": "trung",
+     "thoi_luong": 4.34,
+     "gan_loi": "câu đang nói trong đoạn",
+     "muc_dich": "minh_hoa_loi",
+     "ly_do": "đổi hình mỗi ~4.3s theo ý của câu, giữ mắt không chán (Ước đoán)"
+    }
+   ],
+   "an": [],
+   "sfx": [
+    {
+     "giay": 70.0,
+     "vai_tro": "accent_pop_hit",
+     "nguon": "them_theo_luat_dung_video (mẫu: Không đo được vì lẫn giọng); khi áp 02/11: chỉ chữ hook/số giá giữ SFX"
+    },
+    {
+     "giay": 72.2,
+     "vai_tro": "accent_pop_hit",
+     "nguon": "them_theo_luat_dung_video (mẫu: Không đo được vì lẫn giọng); khi áp 02/11: chỉ chữ hook/số giá giữ SFX"
+    },
+    {
+     "giay": 74.2,
+     "vai_tro": "accent_pop_hit",
+     "nguon": "them_theo_luat_dung_video (mẫu: Không đo được vì lẫn giọng); khi áp 02/11: chỉ chữ hook/số giá giữ SFX"
+    },
+    {
+     "giay": 76.4,
+     "vai_tro": "accent_pop_hit",
+     "nguon": "them_theo_luat_dung_video (mẫu: Không đo được vì lẫn giọng); khi áp 02/11: chỉ chữ hook/số giá giữ SFX"
+    },
+    {
+     "giay": 79.6,
+     "vai_tro": "accent_pop_hit",
+     "nguon": "them_theo_luat_dung_video (mẫu: Không đo được vì lẫn giọng); khi áp 02/11: chỉ chữ hook/số giá giữ SFX"
+    },
+    {
+     "giay": 83.0,
+     "vai_tro": "accent_pop_hit",
+     "nguon": "them_theo_luat_dung_video (mẫu: Không đo được vì lẫn giọng); khi áp 02/11: chỉ chữ hook/số giá giữ SFX"
+    }
+   ],
+   "chuyen_canh": {}
+  },
+  {
+   "tu": 86.27,
+   "den": 91.79,
+   "vai_tro": "cta",
+   "canh": {
+    "co": "toan",
+    "goc": "người dẫn toàn thân trước biệt thự",
+    "chuyen_dong_may": "tĩnh hoặc trượt chậm (Ước đoán)",
+    "host": true
+   },
+   "nhac": {
+    "dien_bien": "nhạc nền nhẹ dưới giọng suốt đoạn (giọng át, không đo được phách)",
+    "phach": []
+   },
+   "cat": [
+    86.27
+   ],
+   "chu": [
+    {
+     "giay": 87.1,
+     "noi_dung": "Nghĩa · Biệt thự tầng hầm đẹp nhất dự án",
+     "kieu": "tên in đậm trắng + viết tay",
+     "mau": "#FCFBF8",
+     "vi_tri": "giữa-trên thẻ, không che mặt",
+     "muc_dich": "keu_goi",
+     "ly_do": "tên người dẫn + lời mời inbox nhận layout",
+     "nhan": "Đã đo mốc 10 fps; nội dung theo khung 1 fps",
+     "mau_do": "#FCFBF8",
+     "nhan_mau": "Đã đo (trung vị pixel vùng chữ, cùng hàm với bản dựng)"
+    }
+   ],
+   "mg": [],
+   "broll": [],
+   "an": [],
+   "sfx": [
+    {
+     "giay": 89.76,
+     "vai_tro": "whoosh_swish",
+     "nguon": "mau (Đã đo, trùng sự kiện hình ±0,15s)"
+    },
+    {
+     "giay": 87.1,
+     "vai_tro": "accent_pop_hit",
+     "nguon": "them_theo_luat_dung_video (mẫu: Không đo được vì lẫn giọng); khi áp 02/11: chỉ chữ hook/số giá giữ SFX"
+    }
+   ],
+   "chuyen_canh": {}
+  }
+ ],
+ "su_kien_do_duoc": {
+  "cat": 28,
+  "chu": 29,
+  "mg": 3,
+  "broll": 24,
+  "an": 0,
+  "sfx": 41,
+  "chuyen_canh": 1,
+  "phach_manh": 0
+ },
+ "khong_do_duoc": [
+  "30 sự kiện âm lẫn giọng (Antigravity) không trùng hình",
+  "phách nhạc (giọng át)",
+  "font chữ (chưa rõ tên)"
+ ],
+ "diem_yeu_da_sua": [
+  "chữ viết tay nhỏ khó đọc trên nền sáng: khi dựng thêm bóng mờ, không thêm hộp nền",
+  "video gốc là bản trình bày RAW/EDITED: khi dựng dùng toàn khung 9:16"
+ ],
+ "trang_thai": "Chưa đạt (83/100 giống mẫu)",
+ "giong_mau": {
+  "ngay": "2026-11-02",
+  "footage": "canh_tam",
+  "vong": [
+   null,
+   83.01,
+   80.62
+  ],
+  "tot_nhat": 83.01,
+  "ghi_chu": "xem the.md"
+ }
+}

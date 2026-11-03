@@ -1,12 +1,15 @@
 ---
 name: video-dispatcher-no-style-question
-description: /dung-video luôn chạy kèm smart-dispatcher-portable; không hỏi phong cách ở 1b; chỉ dùng template khi Dũng yêu cầu
+description: "/dung-video không nạp dispatcher, đi cùng orchestrator; không hỏi phong cách ở 1b; chỉ dùng template khi Dũng yêu cầu"
 metadata:
   node_type: memory
   type: feedback
-  originSessionId: 79db6271-a8f2-477a-a30d-bac9ac760881
   modified: 2026-10-27T14:25:02.462Z
 ---
+
+> Cập nhật tối 02/11/2026 (Dũng chọn thay nguyên xi gói skill): `dung-video` đi cùng orchestrator, không nạp dispatcher. Font theo vai: phụ đề và nhãn Be Vietnam Pro, chữ hook font display. SFX chỉ cho chữ hook. Phần bên dưới trái các điểm này là luật cũ.
+
+> Cập nhật 01/11/2026: smart-dispatcher-portable và hoang-dung-agent-orchestrator không còn tự nạp kèm dung-video; điều phối đã gộp vào dung-video/rules/dieu-phoi.md (3 vòng + 1 QA). Chỗ nào bên dưới nói "luôn nạp" là luật cũ.
 
 Mỗi lần chạy `/video` / `dung-video`: nạp luôn skill `smart-dispatcher-portable` cùng lúc. Bỏ câu hỏi chọn phong cách (giai đoạn 1b): dựng thẳng theo sở thích của Dũng (quy tắc dựng trong memory), ghi `style.source = so_thich`. KHÔNG tự dùng template (vd `_TEMPLATE_BDS_Review_2phut`) — chỉ dựng theo template khi Dũng yêu cầu rõ.
 

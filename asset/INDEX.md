@@ -11,5 +11,8 @@
 | `quy_tac/` | Hồ sơ, quy tắc làm việc, bàn giao, dự án đang làm. ĐỌC TRƯỚC khi dựng. | 42 |
 | `sfx/` | Danh mục SFX, vai trò SFX, PLAYBOOK, nguồn và giấy phép. File âm thanh lớn nằm ngoài kho này. | 12 |
 | `thu_vien_hdre/` | README, thương hiệu, nhật ký phân tích, chính sách của HDRE_Library. | 5 |
+| `icon/` | 384 icon tĩnh và động (SVG, Lottie); nguồn ở NGUON.md, icon Noto phải ghi công. | 673 |
+| `background/` | 29 video nền; nguồn và giấy phép ở NGUON.md. | 31 |
+| `overlay/` | 117 video overlay; nguồn và giấy phép ở NGUON.md. | 119 |
 
 Manifest đầy đủ (kích thước, sha256): `manifest.json`. Chạy `python tools/audit_and_scaffold.py` để làm mới.

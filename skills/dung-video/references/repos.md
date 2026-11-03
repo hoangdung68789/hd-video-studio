@@ -1,7 +1,7 @@
 # 19 repo công nghệ — dùng khi nào, nạp thế nào
 
 Kiểm 2026-10-23 bằng: README gốc trên GitHub (raw.githubusercontent.com), `npm view <gói> version`, file thật trên máy.
-Chỉ ghi điều xác minh được; chỗ không chắc ghi [chưa xác minh]. Cài/clone/`npx skills add`/`remotion add` → HỎI Dũng trước (luật cứng 6).
+Chỉ ghi điều xác minh được; chỗ không chắc ghi [chưa xác minh]. Cài/clone/`npx skills add`/`remotion add` → HỎI Dũng trước.
 Luật render chung: mọi chuyển động phải **định thời theo khung, seek được** (HyperFrames: GSAP timeline / `hf-seek`; Remotion: `useCurrentFrame()`). Không dùng đồng hồ thời gian thực, không `autoplay`, không random không seed. 3D và Lottie render **từng khung** theo thời gian timeline.
 
 ## Bảng đối chiếu
@@ -17,7 +17,7 @@ Luật render chung: mọi chuyển động phải **định thời theo khung, 
 | Animation | motiondivision/motion | chưa có gói | motion 14.6.0 | 5 [chưa xác minh có adapter seek] | không có adapter HyperFrames trong `runtimes.md` → ưu tiên GSAP |
 | Animation | rive-app/rive-wasm | chưa có | @rive-app/canvas 2.45.1 | 5 [chưa xác minh] | không có trong bảng runtime HyperFrames → chỉ dùng nếu vẽ canvas từ `hf-seek` [chưa xác minh] |
 | Animation | LottieFiles/dotlottie-web | adapter `hyperframes-animation/adapters/lottie.md`; `remotion-markup/lottie.md`; gói chưa cài | @lottiefiles/dotlottie-web 0.81.0 | 5 | HyperFrames (`window.__hfLottie`), Remotion (`@remotion/lottie` 4.0.538, chưa cài) |
-| Video | remotion-dev/remotion | `HDRE AI\my-video` 4.0.536 | 4.0.538 | toàn luồng khi engine = Remotion | Remotion |
+| Video | remotion-dev/remotion | `HDRE AI\my-video` 4.0.536; template `hoang-dung-remotion-studio` 4.0.536 | 4.0.540 (kiểm 2026-11-03) | toàn luồng khi engine = Remotion | Remotion |
 | Video | motion-canvas/motion-canvas | chưa có | @motion-canvas/core 3.17.2 | KHÔNG dùng | trùng vai engine; luật chọn engine 1 lần (engines.md) |
 | 3D | mrdoob/three.js | `HDRE AI\my-video` three 0.186.1; adapter `hyperframes-animation/adapters/three.md` | 0.186.1 | 5 (chỉ khi Dũng chỉ định 3D) | HyperFrames (`hf-seek` + `data-duration` bắt buộc), Remotion (`@remotion/three`) |
 | 3D | pmndrs/react-three-fiber | `HDRE AI\my-video` 9.8.2 | 9.8.2 | 5 (3D trong Remotion) | Remotion (`@remotion/three` → `<ThreeCanvas>`) |
@@ -38,7 +38,7 @@ Luật render chung: mọi chuyển động phải **định thời theo khung, 
 - **motion (motion.dev)** — `npm install motion` (README). Không có trong bảng runtime HyperFrames → không dùng cho render video; dùng làm tham khảo spring/easing qua skill `motion`.
 - **rive-wasm** — gói `@rive-app/canvas` / `@rive-app/webgl2` (npm 2.45.1). README không nêu cách seek theo khung → [chưa xác minh]; chỉ thử khi Dũng có file .riv và đồng ý.
 - **dotlottie-web** — `npm install @lottiefiles/dotlottie-web` (README). HyperFrames: `autoplay:false`, luôn đặt `loop`, đẩy instance vào `window.__hfLottie` (runtimes.md, adapters/lottie.md). Remotion: `npx remotion add @remotion/lottie` (hỏi trước).
-- **remotion** — `npx create-video@latest` (README) để tạo mới; dự án Dũng dùng `HDRE AI\my-video` làm mẫu. Chỉ khi engine = Remotion.
+- **remotion** — https://github.com/remotion-dev/remotion. Dự án mới lấy từ template `hoang-dung-remotion-studio` (engines.md), không dùng `create-video` trống. Chỉ khi engine = Remotion. Không clone repo (khoảng 4,3 GB, không cần để dựng); tra cứu qua skill `remotion-docs`. Giấy phép (LICENSE.md): miễn phí cho cá nhân, công ty tối đa 3 nhân viên, phi lợi nhuận; công ty lớn hơn cần company license.
 - **motion-canvas** — KHÔNG dùng: là một engine dựng video thứ 3, trùng vai HyperFrames/Remotion; luật chọn engine 1 lần.
 - **three.js** — HyperFrames: vẽ theo `e.detail.time` trong listener `hf-seek`, BẮT BUỘC `data-duration` ở root (adapters/three.md: thiếu thì lỗi "Composition has zero duration"). Remotion: `npx remotion add @remotion/three` (remotion-markup/3d.md). 3D chỉ khi Dũng chỉ định (presets.md).
 - **react-three-fiber / drei / postprocessing** — chỉ trong Remotion qua `@remotion/three`; `npm install @react-three/drei`, `npm install @react-three/postprocessing` (README). Hỏi trước khi cài. Hiệu ứng hậu kỳ nặng → render chậm.

@@ -1,0 +1,26 @@
+{
+ "tong": 80.62,
+ "diem": {
+  "nhip_cat": 20.0,
+  "bo_cuc": 15.0,
+  "chu": 15.38,
+  "broll_an_mg": 20.0,
+  "sfx": 0.24,
+  "nhac": 5.0,
+  "giu_chan": 5.0
+ },
+ "lech": [
+  "chữ 0.9s lệch màu #F0EFEF≠#41C3C3",
+  "chữ 2.9s lệch màu #2FCFD6≠#FFFDF7",
+  "chữ 7.8s lệch màu #31E1E2≠#49CFC9",
+  "chữ 22.0s lệch màu #6CABD9≠#F3F6F3",
+  "chữ 28.8s lệch màu #D1B064≠#FFFFFC",
+  "chữ 35.8s lệch màu #FCFCFA≠#E8CF6B",
+  "chữ 38.0s lệch màu #76B7CE≠#E5D16D",
+  "chữ 50.0s lệch màu #FEE170≠#E1C76D",
+  "chữ 72.2s lệch màu #FEE170≠#FFFFFC",
+  "chữ: mẫu 29, bản dựng 28, khớp 25",
+  "SFX: mẫu 41, bản dựng 24, khớp 24, cùng vai 1",
+  "nhạc: BPM 0/0, diễn biến khớp 100%"
+ ]
+}

@@ -4,7 +4,6 @@ description: "Always reply to Dũng in Vietnamese, even when the request is just
 metadata:
   node_type: memory
   type: feedback
-  originSessionId: 563fcdb8-578f-4099-8cd7-4e640f0da36c
   modified: 2026-10-21T13:42:44.462Z
 ---
 

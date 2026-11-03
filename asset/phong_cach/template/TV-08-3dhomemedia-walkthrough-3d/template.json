@@ -1,0 +1,180 @@
+{
+ "id": "TV-08",
+ "ten": "3D walkthrough nhà hiện đại: đi xuyên cửa",
+ "the_loai": [
+  "review nha",
+  "animation/3D"
+ ],
+ "che_do": "bo_cuc_gon (video không thoại — Dũng 02/11/2026)",
+ "nguon": {
+  "url": "https://www.tiktok.com/@3dhomemedia/video/7392003384112581934",
+  "ngay_xem": "2026-11-02",
+  "chi_so": "47K thích · 361 bình luận · 33,1K chia sẻ (trang video; lượt xem không hiện)",
+  "nhan": "Đã đo"
+ },
+ "thong_so": {
+  "khung": "9:16",
+  "fps": 30,
+  "thoi_luong": 49.13,
+  "bpm": 136.0,
+  "so_shot": 16,
+  "shot_tb": 3.07,
+  "ty_le_cat_dung_phach": 0.73,
+  "thoai": false
+ },
+ "goc_may_chung": "ngang tầm mắt (~1,5 m), ống kính rộng, chuyển động chậm đều; không rung, không zoom số [Ước đoán từ khung]",
+ "canh": [
+  {
+   "tu": 0,
+   "den": 0.87,
+   "co": "can",
+   "goc": "ngang mắt, chính diện cánh cửa",
+   "chuyen_dong_may": "đứng yên, cửa mở",
+   "vao": "—",
+   "noi_dung": "hook: cận tay nắm cửa gỗ đang mở"
+  },
+  {
+   "tu": 0.87,
+   "den": 7.47,
+   "co": "toan→can",
+   "goc": "ngang mắt",
+   "chuyen_dong_may": "teaser cắt nhanh ~0,3 s/cảnh (0,9–2,5 s) rồi đi xuyên cửa",
+   "vao": "cắt cứng",
+   "noi_dung": "teaser phòng khách/bếp → máy lướt qua cánh cửa vào nhà"
+  },
+  {
+   "tu": 7.47,
+   "den": 9.1,
+   "co": "trung",
+   "goc": "ngang mắt, nhìn thẳng hành lang",
+   "chuyen_dong_may": "đẩy tới (dolly-in)",
+   "vao": "cắt cứng đúng phách",
+   "noi_dung": "hành lang dẫn tới cửa"
+  },
+  {
+   "tu": 9.1,
+   "den": 10.83,
+   "co": "toan",
+   "goc": "ngang mắt",
+   "chuyen_dong_may": "trượt ngang chậm",
+   "vao": "cắt cứng",
+   "noi_dung": "bàn ăn + lò sưởi"
+  },
+  {
+   "tu": 10.83,
+   "den": 12.6,
+   "co": "trung",
+   "goc": "ngang mắt",
+   "chuyen_dong_may": "trượt ngang trái→phải",
+   "vao": "cắt cứng",
+   "noi_dung": "đảo bếp, đèn thả"
+  },
+  {
+   "tu": 12.6,
+   "den": 14.47,
+   "co": "can",
+   "goc": "hơi thấp",
+   "chuyen_dong_may": "trượt ngang",
+   "vao": "cắt cứng",
+   "noi_dung": "lò sưởi + bàn gỗ"
+  },
+  {
+   "tu": 14.47,
+   "den": 16.23,
+   "co": "trung",
+   "goc": "ngang mắt",
+   "chuyen_dong_may": "lướt qua vách tiền cảnh (wipe)",
+   "vao": "wipe vật cản",
+   "noi_dung": "phòng tắm bồn"
+  },
+  {
+   "tu": 16.23,
+   "den": 17.9,
+   "co": "trung",
+   "goc": "ngang mắt",
+   "chuyen_dong_may": "trượt nhẹ",
+   "vao": "cắt cứng",
+   "noi_dung": "gương lavabo"
+  },
+  {
+   "tu": 17.9,
+   "den": 19.63,
+   "co": "trung",
+   "goc": "ngang mắt",
+   "chuyen_dong_may": "gần như tĩnh",
+   "vao": "cắt cứng",
+   "noi_dung": "WC + kệ"
+  },
+  {
+   "tu": 19.63,
+   "den": 25.03,
+   "co": "toan",
+   "goc": "ngang mắt",
+   "chuyen_dong_may": "lướt qua cánh cửa tiền cảnh rồi trượt",
+   "vao": "wipe vật cản",
+   "noi_dung": "phòng khách-bếp-ăn, cửa kính lớn"
+  },
+  {
+   "tu": 25.03,
+   "den": 29.4,
+   "co": "can→trung",
+   "goc": "thấp ngang bàn",
+   "chuyen_dong_may": "đẩy tới chậm",
+   "vao": "cắt cứng",
+   "noi_dung": "sofa + đồ trang trí"
+  },
+  {
+   "tu": 29.4,
+   "den": 33.0,
+   "co": "trung",
+   "goc": "ngang mắt",
+   "chuyen_dong_may": "trượt ngang",
+   "vao": "cắt cứng",
+   "noi_dung": "bếp đèn thả"
+  },
+  {
+   "tu": 33.0,
+   "den": 37.37,
+   "co": "toan",
+   "goc": "ngang mắt",
+   "chuyen_dong_may": "lướt qua cánh cửa tiền cảnh",
+   "vao": "wipe vật cản",
+   "noi_dung": "mở ra không gian chung"
+  },
+  {
+   "tu": 37.37,
+   "den": 39.1,
+   "co": "toan",
+   "goc": "ngang mắt",
+   "chuyen_dong_may": "trượt ngang",
+   "vao": "cắt cứng",
+   "noi_dung": "lò sưởi phòng khách"
+  },
+  {
+   "tu": 39.1,
+   "den": 43.53,
+   "co": "toan",
+   "goc": "ngang mắt",
+   "chuyen_dong_may": "lùi/trượt chậm",
+   "vao": "cắt cứng",
+   "noi_dung": "phòng khách cửa kính"
+  },
+  {
+   "tu": 43.53,
+   "den": 49.13,
+   "co": "toan",
+   "goc": "ngang mắt",
+   "chuyen_dong_may": "trượt chậm, tắt dần đen",
+   "vao": "mờ về đen ở cuối",
+   "noi_dung": "bếp — kết"
+  }
+ ],
+ "bai_hoc": [
+  "Hook 1 s bằng cận cánh cửa đang mở + teaser cắt nhanh 4–5 cảnh rồi mới vào tour",
+  "Mỗi phòng 1 shot 1,7–5 s, máy luôn chuyển động chậm (trượt/đẩy), không có shot tĩnh dài",
+  "Chuyển phòng bằng lướt qua cửa/vách tiền cảnh (4 lần) thay hiệu ứng",
+  "Thứ tự: cửa → hành lang → ăn → bếp → tắm → khách → bếp, kết mờ đen"
+ ],
+ "ap_cho_dung": "Footage flycam/gimbal tour nhà của Dũng: xếp cảnh theo thứ tự trên, chọn cảnh máy đi qua khung cửa làm chuyển cảnh tự nhiên; không cần camera giả.",
+ "trang_thai": "Bố cục tham khảo"
+}

@@ -4,7 +4,6 @@ description: Dũng yêu cầu (2026-10-23) luôn áp quy tắc skill hoang-dung-
 metadata:
   node_type: memory
   type: feedback
-  originSessionId: 0862decb-916a-49fa-b6ad-9ca34597eb17
   modified: 2026-10-22T19:26:28.795Z
 ---
 

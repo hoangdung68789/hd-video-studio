@@ -4,7 +4,6 @@ description: "whisper (large-v3) luôn nghe sai câu chữ của Dũng — đi�
 metadata:
   node_type: memory
   type: feedback
-  originSessionId: 79db6271-a8f2-477a-a30d-bac9ac760881
   modified: 2026-10-27T14:53:15.582Z
 ---
 

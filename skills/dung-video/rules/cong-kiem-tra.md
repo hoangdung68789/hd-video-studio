@@ -1,4 +1,0 @@
-# Cổng kiểm tra
-
-## Cổng (orchestrator có quyền veto; đoạn chưa qua không sang giai đoạn sau)
-G0 Thể loại + Style: chế độ A có thể loại + lý do + bảng công cụ đã chọn; chế độ T có template PASS `template_check.py` + `template.map` phủ hết video; style có tên + nguồn + 1–2 link mẫu đã kiểm · G1 Lời: 100%, đúng dấu, số/giá khớp Dũng · G2 Cắt: đủ lý do, không mất chữ, không trùng cảnh · G3 Màu: bảng phân loại môi trường ↔ LUT có số đo, qua đủ 3 vòng rà soát, đồng nhất, da tự nhiên · G4 Chữ/MG: đủ nguồn, không chữ tự thêm, mọi chữ có SFX, font qua cổng tiếng Việt, không punch-in; bản đồ đúng OSM · G4b Địa chỉ: 0 khung lộ (agent độc lập soát lại) · G5 Âm thanh: audio-gate + 100/100 + ebur128 thật, nhạc bắt tai · G6 Render: đúng khung, fps, thời lượng, có nhạc, phát hết · G7 QA: xem bằng mắt, 0 lỗi; so bản dựng với template (mật độ sự kiện/giây, hook, câu nhử, mốc theo dõi) lệch ≤15%.

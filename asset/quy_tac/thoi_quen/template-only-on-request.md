@@ -4,7 +4,6 @@ description: Không tự dùng template dựng video; chỉ dùng khi Dũng yêu
 metadata:
   node_type: memory
   type: feedback
-  originSessionId: 98723c4a-6d4f-45cf-a836-b99cfeb10aa6
   modified: 2026-10-28T16:54:46.107Z
 ---
 

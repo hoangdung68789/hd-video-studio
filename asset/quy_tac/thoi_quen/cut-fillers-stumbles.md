@@ -4,7 +4,6 @@ description: "Dũng chê cắt lặng/vấp/à ừm chưa sạch (dự án sổ 
 metadata:
   node_type: memory
   type: feedback
-  originSessionId: 43fd2eed-0651-4bfa-878d-b2e0f06cd240
   modified: 2026-10-23T16:01:38.316Z
 ---
 

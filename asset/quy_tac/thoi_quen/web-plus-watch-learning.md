@@ -4,7 +4,6 @@ description: "Học video = web (tìm, chỉ số trang, bình luận làm \"vì
 metadata:
   node_type: memory
   type: feedback
-  originSessionId: 18c63b28-1f3a-4f78-aa16-6ae8fc34c370
   modified: 2026-10-29T17:50:52.789Z
 ---
 

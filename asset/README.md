@@ -13,6 +13,9 @@ AI đọc thư mục này ở đầu mỗi lần dựng video (giai đoạn 0 c�
 | `motion_prompts/` | 703 prompt repo awesome-opus5-5-videos (MIT), chỉ dùng cho đoạn chèn MG/explainer |
 | `lut/` | LUT DJI D-Log → Rec.709 và LUT đã dùng |
 | `thu_vien_hdre/` | README, thương hiệu, nhật ký phân tích, chính sách của HDRE_Library |
+| `icon/` | 384 icon tĩnh và động (SVG, Lottie), nguồn ở NGUON.md; icon Noto phải ghi công |
+| `background/` | 29 video nền, nguồn và giấy phép ở NGUON.md |
+| `overlay/` | 117 video overlay, nguồn và giấy phép ở NGUON.md |
 
 Quy tắc: không có khóa/mật khẩu ở đây; không chèn chữ tự thêm; xem `quy_tac/preferences.md` trước khi dựng.
 Ghi chú: để /dung-video tự đọc thư mục này cần sửa SKILL.md của nó (chờ Dũng duyệt).

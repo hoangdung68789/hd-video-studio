@@ -1,19 +1,16 @@
 ---
 name: parallel-agents-3-round-scoring
-description: "29/10/2026: agent dựng video chạy song song cùng lúc; quản lý tổng tự rà 3 vòng, tự chấm có dẫn chứng thật, chỉ gửi Dũng khi 100/100; LUT tự phân loại theo môi trường"
+description: "Cập nhật 03/11/2026: Sub-Agents chạy đồng thời 100%, kiểm tra chéo & sửa lỗi ngay tại chỗ; bỏ rà 3 vòng cuối, thay bằng Agent Tổng kiểm nhanh tổng thể đạt ≥98/100 là bàn giao ngay kèm giải trình chi tiết"
 metadata:
   node_type: memory
   type: feedback
-  originSessionId: 8873daa7-426f-4da9-b980-b4726bba8515
-  modified: 2026-10-29T14:44:45.501Z
+  modified: 2026-11-03T12:25:00.000Z
 ---
 
-Dũng chốt 29/10/2026:
-- Các agent `dung-*` làm **cùng lúc**, mỗi agent một nhiệm vụ, dùng bản nháp trong edit-state rồi cập nhật; không làm xong phần này mới tới phần kia.
-- Quản lý tổng (trợ lý cấp cao) liên tục rà lỗi + chấm điểm; trước khi chấm đạt phải tự rà **đủ 3 vòng**, không giao skill khác chấm thay; mỗi điểm có dẫn chứng thật (số đo, ảnh khung, timecode, log). Chỉ gửi Dũng khi 100/100.
-- Màu: AI tự phân loại môi trường từng clip (bảng ENV color-master + nhóm freshluts) và chọn LUT theo môi trường + camera.
-- AI không nghe được âm thanh → dùng MCP `antigravity-video-bridge` (đã thử 29/10 chạy được; file phải có luồng tiếng).
+> **Cập nhật 03/11/2026 (Dũng chốt — thắng luật rà 3 vòng cũ):**
+> - **Tất cả tác vụ làm ĐỒNG THỜI & Sửa ngay tại chỗ (In-line Fix):** Cấm đợi làm xong mới rà soát lỗi video rồi mới sửa. Mỗi Sub-Agent tự kiểm và sửa ngay lúc làm theo chuẩn quy trình Editor chuyên nghiệp (không tự bịa, không đoán).
+> - **Kiểm tra chéo giữa các Sub-Agents (Peer Cross-Check):** Các Sub-Agents có quyền kiểm tra lỗi của nhau và **yêu cầu sửa ngay trước khi đảm nhiệm công việc của chính Sub-Agent đó**.
+> - **Bỏ rà 3 vòng nặng nề ở cuối → Thay bằng Kiểm tra nhanh tổng thể (`≥ 98/100`):** Agent Tổng kiểm tra nhanh tổng thể video (bằng số đo thật + contact sheet tổng hợp) và **bàn giao ngay cho Dũng nếu đạt tối thiểu từ `98/100` trở lên (`≥ 98/100`)**, nói rõ chi tiết cho Dũng; nếu có lỗi thì **chỉ sửa ngay đúng đoạn có lỗi** để khớp toàn bộ video.
+> - **Màu/LUT:** Luôn hỏi Dũng 3 lựa chọn (giữ màu gốc / theo video mẫu / gợi ý ≤3 LUT kho) theo quyết định 02/11/2026.
 
-**Why:** Dũng muốn nhanh (song song) nhưng không đổi lấy chất lượng; ghét kết luận suông.
-
-**How to apply:** Luật nằm trong `dung-video` (Chạy song song, Chọn LUT tự động, Nghe âm thanh) và orchestrator. Liên quan: [[orchestrator-100-point-rule]], [[ai-auto-genre-or-template]], [[dji-dlog-official-lut]]
+**Why:** Dũng muốn quy trình theo chuẩn mô hình công ty chuyên sản xuất nội dung mạng xã hội chuyên nghiệp, tiết kiệm thời gian, tối ưu hiệu quả, giao đúng 1 bản cuối chất lượng cao dùng ngay.

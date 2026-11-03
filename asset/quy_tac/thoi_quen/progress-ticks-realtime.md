@@ -4,7 +4,6 @@ description: Tích tiến độ phải cập nhật ngay khi xong từng bước
 metadata:
   node_type: memory
   type: feedback
-  originSessionId: 18c63b28-1f3a-4f78-aa16-6ae8fc34c370
   modified: 2026-10-30T11:39:56.780Z
 ---
 

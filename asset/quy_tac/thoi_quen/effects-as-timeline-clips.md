@@ -4,7 +4,6 @@ description: Từ 30/10/2026 mọi hiệu ứng AI áp vào video phải là cli
 metadata:
   node_type: memory
   type: feedback
-  originSessionId: 91e0c686-94c0-49cf-809b-2b47d9f31020
   modified: 2026-10-30T16:45:13.947Z
 ---
 

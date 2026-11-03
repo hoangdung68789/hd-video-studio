@@ -15,7 +15,7 @@ Tổng Quản là luồng chính: lập bảng phân công, giao việc, tổng 
 | **Thủ Kho** | Sao lưu hằng ngày | `asset/` → chạy `tools/audit_and_scaffold.py` (làm mới INDEX/manifest, quét khóa bí mật), đẩy file mới/đổi lên GitHub riêng tư hdre-ai-backup (khi Dũng đã cho phép) | đối chiếu số file với manifest; báo file không đẩy được; không đẩy khóa/mật khẩu/.env/lịch sử chat |
 | **Kiểm Định** | QA cuối (agent chưa làm công đoạn nào) | toàn bộ kết quả → kết luận Đạt/Không đạt theo 6 tiêu chí: đủ hạn mức, không trùng, số liệu khớp trang gốc, không bỏ sót, mọi hiệu ứng có nhóm + nhãn tên không bịa, không vi phạm luật cứng | 0 lỗi; còn lỗi thì trả đúng agent sửa |
 
-Trình tự (học hằng ngày): Trinh Sát → Kiểm Chứng → Thợ Đo → Định Danh → Soát Sót → Biên Tập Trưởng → Thư Ký → Thủ Kho → Kiểm Định. Thợ Đo và Định Danh có thể chạy song song theo thể loại (tối đa 3 agent cùng lúc). Hạng việc theo orchestrator: học 1 thể loại = M; học đủ ngày = L.
+Trình tự (học hằng ngày): Trinh Sát → Kiểm Chứng → Thợ Đo → Định Danh → Soát Sót → Biên Tập Trưởng → Thư Ký → Thủ Kho → Kiểm Định. Thợ Đo và Định Danh có thể chạy song song theo thể loại (số agent vừa đủ theo orchestrator, tối đa 50, không tạo dư). Hạng việc theo orchestrator: học 1 thể loại = M; học đủ ngày = L.
 
 ## Lịch hằng ngày (chỉ khi Dũng duyệt giờ chạy)
 Mỗi ngày một lượt gồm 2 phần liền nhau:
@@ -43,6 +43,6 @@ Mục tiêu: học đúng hiệu ứng trong 1 video Dũng đưa (font + hiệu 
 - Dưới 80/100: chưa dùng; sửa tối đa 3 lượt, vẫn dưới ngưỡng thì báo Dũng kèm clip so sánh.
 - Bộ chữ Dũng chấm ≥4 → thêm vào «gu quen dùng» (habit-memory A3); chấm <3 hai lần → bỏ, giữ 1 dòng lý do.
 
-**Giới hạn (giữ luật cứng):** link mạng xã hội không tải video về, chỉ đo trên khung trình duyệt (thiếu thì ghi «Không đo được»; muốn chính xác thì Dũng gửi file gốc). Không đoán tên bài nhạc/SFX: chỉ ghi vai trò, mốc, độ to; chọn âm thay thế có giấy phép từ kho của Dũng. Chỉ học kỹ thuật, không chép chữ, hình, nhạc của người khác.
+**Giới hạn (giữ luật cứng):** video mạng xã hội chỉ tải để học qua `watch` hoặc Antigravity, học xong xóa (trừ video của template); không tải được thì ghi «Không đo được». Không đoán tên bài nhạc/SFX: chỉ ghi vai trò, mốc, độ to; chọn âm thay thế có giấy phép từ kho của Dũng. Chỉ học kỹ thuật, không chép chữ, hình, nhạc của người khác.
 
 **Báo cáo (≤8 dòng):** nguồn; số lần chữ/hiệu ứng đã đo, % phủ; phiếu font (font gốc ↔ font thay thế, độ tin cậy); danh sách Thẻ Bộ chữ mới + điểm giống; mục [Chưa rõ tên]; mục «Không đo được»; clip so sánh để Dũng chấm 1–5; nơi đã lưu.

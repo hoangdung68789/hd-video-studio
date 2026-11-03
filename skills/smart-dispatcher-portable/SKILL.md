@@ -1,6 +1,6 @@
 ---
 name: smart-dispatcher-portable
-description: "Tự kích hoạt KHI người dùng gọi một skill, lệnh (/ten-lenh), MCP/tool, hoặc làm việc với repo/GitHub, cho bất kỳ mục đích nào. Không cần thêm lệnh nào khác. Trò chuyện thường thì không bật. Tổng điều phối chạy trên mọi AI và thiết bị: tự rà môi trường, nạp luật của skill được gọi, phân rã, giao đúng chuyên gia/công cụ có thật, thực thi, kiểm chứng có dẫn chứng."
+description: "Chỉ dùng khi Dũng gọi tên skill này; không tự bật kèm lệnh khác (việc video đã có điều phối riêng trong dung-video). Tổng điều phối chạy trên mọi AI và thiết bị: tự rà môi trường, nạp luật của skill được gọi, phân rã, giao đúng chuyên gia/công cụ có thật, thực thi, kiểm chứng có dẫn chứng."
 ---
 
 # SMART DISPATCHER (bản dùng cho mọi AI)

@@ -14,9 +14,20 @@
     "map": []
   },
   "engine": "hyperframes",
+  "segments": [
+    {"segment_id": "S1", "tu": 0, "den": 0, "segment_lock": false}
+  ],
   "stages": {},
+  "agent_roster": {
+    "allocated_count": 0,
+    "max_allowed": 50,
+    "agents": {}
+  },
+  "peer_checks": [],
+  "holistic_score": {"total": 0, "threshold": 98, "details": {}},
   "missing": [],
   "skipped_refs": [],
+  "asks": [],
   "lufs": {},
   "final": ""
 }

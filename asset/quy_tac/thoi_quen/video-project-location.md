@@ -4,7 +4,6 @@ description: "Every new video project folder goes under <HD_VIDEO_HOME>\\Videos\
 metadata:
   node_type: memory
   type: feedback
-  originSessionId: 7a7e7c33-0b88-40a1-af2a-8f5461c4df67
   modified: 2026-10-22T13:32:08.342Z
 ---
 

@@ -1,6 +1,8 @@
 # HD Studio
 
-Studio tiếng Việt cho dự án HyperFrames trong `HDRE AI\Videos`. Máy xem trước và máy render vẫn là HyperFrames `0.8.171`.
+Trình dựng video tiếng Việt HD Studio cho các dự án trong `HDRE AI\Videos`. Máy xem trước và máy xuất dùng lõi mã nguồn HyperFrames `0.8.171`.
+
+Tracking cần OpenCV trong `HDRE AI\venv`: `venv\Scripts\python -m pip install "opencv-python-headless<5"`.
 
 - Mở: bấm đúp `Mo Studio.bat`, hoặc AI gọi `preview_start {name: "hd-studio"}`.
 - Địa chỉ: `http://localhost:4700/?du-an=<tên thư mục dự án>`.

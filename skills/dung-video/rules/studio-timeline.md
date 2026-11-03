@@ -1,8 +1,10 @@
 # HD Studio và quy tắc timeline
 
+> **HD Studio đang TẮT từ 03/11/2026.** Không mở, không nối, không xuất qua Studio; chỉ bật lại khi Dũng yêu cầu. Các bước cần Studio bên dưới không áp dụng khi đang tắt.
+
 ### HD Studio (Dũng chốt 30/10/2026, thay Studio HyperFrames gốc)
-- **Template Dũng chọn trong Studio:** đầu giai đoạn 1 đọc `asset/phong_cach/template/chon_cho_video_tiep.json`. Có file và lệnh không có `tpl:` → chạy Chế độ T theo `ma` trong file, báo 1 dòng mã đang dùng; dựng xong xóa file. Lệnh có `tpl:` thì `tpl:` thắng.
-- **Mở:** có `hf/index.html` là gọi `preview_start {name: "hd-studio"}` rồi `navigate` tới `http://localhost:4700/?du-an=<tên thư mục trong Videos>`. Không tạo thêm cấu hình `<tên>-studio`.
+- **Template Dũng chọn trong Studio:** đầu giai đoạn 1 đọc `asset/phong_cach/template/chon_cho_video_tiep.json`. Có file và lệnh không có `tpl:` → đưa `ma` trong file vào câu hỏi template làm lựa chọn đầu, không tự áp; dựng xong xóa file. Lệnh có `tpl:` thì `tpl:` thắng.
+- **Mở:** chỉ khi Dũng yêu cầu dựng video (luật số 0). Có `hf/index.html` là gọi `preview_start {name: "hd-studio"}` rồi `navigate` tới `http://localhost:4700/?du-an=<tên thư mục trong Videos>`. Không tạo thêm cấu hình `<tên>-studio`.
 - **Dũng tự sửa trong Studio:** mọi sửa đổi ghi thẳng vào `hf/index.html`, Studio tự tải lại khi AI sửa file. Khác `work/index_built.html` là đúng, không phải lỗi.
 - **Trước khi sửa tiếp hoặc xuất:** đọc `<dự án>/studio_chinh_sua.jsonl` (Dũng đã sửa gì) và `<dự án>/studio_ghi_chu.json` (việc Dũng giao tại từng giây). Làm xong ghi chú nào thì xóa ghi chú đó.
 - **Không chạy lại `build.py` nếu chưa đưa các sửa đổi trên vào `project.py`**, vì build ghi đè `hf/index.html`. Sửa nhỏ thì sửa thẳng `hf/index.html`.

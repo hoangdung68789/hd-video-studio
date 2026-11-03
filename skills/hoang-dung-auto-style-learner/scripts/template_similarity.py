@@ -1,22 +1,24 @@
 #!/usr/bin/env python3
 """Chấm độ giống giữa template ĐO TỪ VIDEO MẪU và template ĐO LẠI TỪ BẢN TỰ DỰNG (cùng định dạng template.json).
 Dùng: python template_similarity.py <mau.json> <ban_dung.json> [--out diem.json]
-Thang 100 (7 lớp). So theo thời gian TƯƠNG ĐỐI (0–1 thời lượng) nên video khác độ dài vẫn so được.
+Thang 100 (8 thành phần, Dũng 03/11). So theo thời gian TƯƠNG ĐỐI (0–1 thời lượng) nên video khác độ dài vẫn so được.
 100 điểm chỉ khi mọi lớp nằm trong dung sai; in bảng lệch từng lớp để sửa ở vòng sau (tối đa 3 vòng)."""
 import json, sys
 
 TOL_T = 0.03      # lệch thời điểm tương đối cho phép (3% thời lượng)
 TOL_POS = 5.0     # lệch vị trí % khung
 TOL_RGB = 25.0    # lệch màu (khoảng cách RGB)
-W = {"nhip_cat": 20, "bo_cuc": 15, "chu": 20, "broll_an_mg": 20, "sfx": 10, "nhac": 10, "giu_chan": 5}
+W = {"text": 15, "sfx": 10, "vfx": 10, "motion_graphics": 15, "effect": 10, "bgm": 10, "a_b_roll": 15, "bo_cuc": 15}
 
 
 def load(p):
     t = json.load(open(p, encoding="utf-8"))
     dur = float(t["thong_so"]["thoi_luong"])
     seg = sorted(t.get("doan", []), key=lambda d: d["tu"])
-    ev = {k: [] for k in ("cat", "chu", "mg", "broll", "an", "sfx", "cc")}
+    ev = {k: [] for k in ("cat", "chu", "mg", "aroll", "broll", "an", "vfx", "effect", "sfx", "cc")}
     for d in seg:
+        for k in ("aroll", "vfx", "effect"):
+            ev[k] += [dict(x, r=x["giay"] / dur) for x in d.get(k, [])]
         ev["cat"] += [c / dur for c in d.get("cat", [])]
         ev["chu"] += [dict(c, r=c["giay"] / dur) for c in d.get("chu", [])]
         ev["mg"] += [dict(m, r=m["giay"] / dur) for m in d.get("mg", [])]
@@ -50,19 +52,36 @@ def rgb(h):
     return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4)) if len(h) == 6 else None
 
 
+def layer(em, eb, k, fields, lech):
+    """điểm một lớp: số lần + giờ + các trường phải trùng"""
+    p = match(em[k], eb[k])
+    same = sum(1 for x, y in p if all(x.get(f) == y.get(f) for f in fields))
+    s = ratio(em[k], eb[k], p) * (same / len(p) if p else (1 if not em[k] else 0))
+    if s < 1: lech.append(f"{k}: mẫu {len(em[k])}, bản dựng {len(eb[k])}, khớp giờ {len(p)}, trùng {'/'.join(fields)} {same}")
+    return s
+
+
 def main(pm, pb, out=None):
     tm, dm, em, rm = load(pm)
     tb, db, eb, rb = load(pb)
     S, lech = {}, []
-    # 1 nhịp cắt
+    # 8 bố trí, cấu trúc, bố cục: nhịp cắt + vai trò đoạn + kiểu bố cục + giữ chân
     p = match(em["cat"], eb["cat"], key=lambda x: x)
-    S["nhip_cat"] = ratio(em["cat"], eb["cat"], p)
-    if S["nhip_cat"] < 1: lech.append(f"cú cắt: mẫu {len(em['cat'])}, bản dựng {len(eb['cat'])}, khớp giờ {len(p)}")
-    # 2 bố cục vai trò đoạn
+    s_cat = ratio(em["cat"], eb["cat"], p)
+    if s_cat < 1: lech.append(f"cú cắt: mẫu {len(em['cat'])}, bản dựng {len(eb['cat'])}, khớp giờ {len(p)}")
     ok = sum(1 for a0, a1, r in rm if any(b0 <= (a0 + a1) / 2 <= b1 and r == rr for b0, b1, rr in rb))
-    S["bo_cuc"] = ok / max(1, len(rm))
-    if S["bo_cuc"] < 1: lech.append(f"vai trò đoạn khớp {ok}/{len(rm)}")
-    # 3 chữ: số lần + giờ + vị trí + màu + kiểu vào
+    s_vt = ok / max(1, len(rm))
+    if s_vt < 1: lech.append(f"vai trò đoạn khớp {ok}/{len(rm)}")
+    bm_ = [(d.get("bo_cuc") or {}).get("loai") for d in sorted(tm["doan"], key=lambda d: d["tu"])]
+    bb_ = [(d.get("bo_cuc") or {}).get("loai") for d in sorted(tb["doan"], key=lambda d: d["tu"])]
+    s_bc = sum(1 for a, b in zip(bm_, bb_) if a == b) / max(1, len(bm_), len(bb_))
+    if s_bc < 1: lech.append(f"kiểu bố cục khớp {s_bc:.0%}")
+    gm, gb = tm.get("giu_chan", {}), tb.get("giu_chan", {})
+    lm = [o["mo"] / dm for o in gm.get("open_loops", [])]; lb = [o["mo"] / db for o in gb.get("open_loops", [])]
+    s_gc = (0.5 if bool(gm.get("hook")) == bool(gb.get("hook")) else 0) + 0.5 * ratio(lm, lb, match(lm, lb, key=lambda x: x))
+    if s_gc < 1: lech.append("giữ chân: hook/câu nhử chưa khớp giờ")
+    S["bo_cuc"] = (s_cat + s_vt + s_bc + s_gc) / 4
+    # 1 text: số lần + giờ + vị trí + màu + kiểu vào
     p = match(em["chu"], eb["chu"])
     sc = []
     for x, y in p:
@@ -72,34 +91,26 @@ def main(pm, pb, out=None):
         if cx and cy and sum((a - b) ** 2 for a, b in zip(cx, cy)) ** .5 > TOL_RGB: s -= 0.3; lech.append(f"chữ {x['giay']}s lệch màu {x.get('mau')}≠{y.get('mau')}")
         if x.get("vao") and x.get("vao") != y.get("vao"): s -= 0.4; lech.append(f"chữ {x['giay']}s kiểu vào {x.get('vao')}≠{y.get('vao')}")
         sc.append(max(0, s))
-    S["chu"] = ratio(em["chu"], eb["chu"], p) * (sum(sc) / len(sc) if sc else (1 if not em["chu"] else 0))
+    S["text"] = ratio(em["chu"], eb["chu"], p) * (sum(sc) / len(sc) if sc else (1 if not em["chu"] else 0))
     if len(p) < max(len(em["chu"]), len(eb["chu"])): lech.append(f"chữ: mẫu {len(em['chu'])}, bản dựng {len(eb['chu'])}, khớp {len(p)}")
-    # 4 b-roll / animation / MG: số lần + giờ + mục đích
-    parts = []
-    for k in ("broll", "an", "mg"):
-        p = match(em[k], eb[k])
-        same = sum(1 for x, y in p if x.get("muc_dich") == y.get("muc_dich"))
-        parts.append(ratio(em[k], eb[k], p) * (same / len(p) if p else (1 if not em[k] else 0)))
-        if parts[-1] < 1: lech.append(f"{k}: mẫu {len(em[k])}, bản dựng {len(eb[k])}, khớp giờ {len(p)}, cùng mục đích {same}")
-    S["broll_an_mg"] = sum(parts) / 3
-    # 5 SFX: giờ + vai trò + gắn với gì
-    p = match(em["sfx"], eb["sfx"])
-    same = sum(1 for x, y in p if x.get("vai_tro") == y.get("vai_tro") and x.get("gan_voi") == y.get("gan_voi"))
-    S["sfx"] = ratio(em["sfx"], eb["sfx"], p) * (same / len(p) if p else (1 if not em["sfx"] else 0))
-    if S["sfx"] < 1: lech.append(f"SFX: mẫu {len(em['sfx'])}, bản dựng {len(eb['sfx'])}, khớp {len(p)}, cùng vai {same}")
-    # 6 nhạc: BPM + diễn biến theo đoạn
+    # 2 SFX: giờ + vai trò + gắn với gì
+    S["sfx"] = layer(em, eb, "sfx", ("vai_tro", "gan_voi"), lech)
+    # 3 VFX: giờ + loại + mục đích
+    S["vfx"] = layer(em, eb, "vfx", ("loai", "muc_dich"), lech)
+    # 4 Motion Graphics: thẻ/nhãn + animation minh họa
+    S["motion_graphics"] = (layer(em, eb, "mg", ("muc_dich",), lech) + layer(em, eb, "an", ("muc_dich",), lech)) / 2
+    # 5 Effect: hiệu ứng vào/ra + chuyển cảnh
+    S["effect"] = (layer(em, eb, "effect", ("loai", "gan_voi"), lech) + layer(em, eb, "cc", ("ma",), lech)) / 2
+    # 7 A-roll và B-roll: giờ + loại cảnh + mục đích
+    S["a_b_roll"] = (layer(em, eb, "aroll", ("co", "muc_dich"), lech) + layer(em, eb, "broll", ("loai", "muc_dich"), lech)) / 2
+    # 6 BGM: BPM + diễn biến theo đoạn
     bm, bb = tm["thong_so"].get("bpm") or 0, tb["thong_so"].get("bpm") or 0
     s_bpm = 1.0 if bm and bb and abs(bm - bb) / bm <= 0.05 else 0.0
     dm_ = [(d.get("nhac") or {}).get("dien_bien") for d in sorted(tm["doan"], key=lambda d: d["tu"])]
     db_ = [(d.get("nhac") or {}).get("dien_bien") for d in sorted(tb["doan"], key=lambda d: d["tu"])]
     s_db = sum(1 for a, b in zip(dm_, db_) if a == b) / max(1, len(dm_), len(db_))
-    S["nhac"] = 0.5 * s_bpm + 0.5 * s_db
-    if S["nhac"] < 1: lech.append(f"nhạc: BPM {bm}/{bb}, diễn biến khớp {s_db:.0%}")
-    # 7 giữ chân: hook có, câu nhử mở/trả lời đúng giờ tương đối
-    gm, gb = tm.get("giu_chan", {}), tb.get("giu_chan", {})
-    lm = [o["mo"] / dm for o in gm.get("open_loops", [])]; lb = [o["mo"] / db for o in gb.get("open_loops", [])]
-    S["giu_chan"] = (0.5 if bool(gm.get("hook")) == bool(gb.get("hook")) else 0) + 0.5 * ratio(lm, lb, match(lm, lb, key=lambda x: x))
-    if S["giu_chan"] < 1: lech.append("giữ chân: hook/câu nhử chưa khớp giờ")
+    S["bgm"] = 0.5 * s_bpm + 0.5 * s_db
+    if S["bgm"] < 1: lech.append(f"nhạc: BPM {bm}/{bb}, diễn biến khớp {s_db:.0%}")
     diem = {k: round(W[k] * v, 2) for k, v in S.items()}
     tong = round(sum(diem.values()), 2)
     print(f"TỔNG {tong}/100 | " + " | ".join(f"{k} {v}/{W[k]}" for k, v in diem.items()))

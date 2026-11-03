@@ -37,6 +37,7 @@ else {
 foreach ($t in "ffmpeg", "ffprobe") { if (-not (Get-Command $t -ErrorAction SilentlyContinue)) { $thieu += "$t : https://ffmpeg.org/download.html" } }
 if ($thieu.Count) { throw ("Còn thiếu:" + [Environment]::NewLine + ($thieu -join [Environment]::NewLine)) }
 if (-not (Get-Command python -ErrorAction SilentlyContinue)) { Write-Warning "Không thấy Python 3: các script của skill sẽ không chạy, Studio vẫn mở được." }
+else { python -m pip install --quiet "opencv-python-headless<5"; if ($LASTEXITCODE) { Write-Warning "Chưa cài được OpenCV: tính năng Tracking của Studio sẽ chưa chạy." } }
 if (-not (Get-Command claude -ErrorAction SilentlyContinue) -and -not (Test-Path (Join-Path $env:LOCALAPPDATA "Claude-Data"))) { Write-Warning "Không thấy Claude Code: lệnh /video và thanh AI cần cài Claude Code." }
 if (-not $SkipTools) { npm install -g hyperframes@0.8.171 }
 

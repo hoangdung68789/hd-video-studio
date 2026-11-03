@@ -4,7 +4,6 @@ description: "Sau khi render xong bản cuối, tự xóa bản preview/draft c�
 metadata:
   node_type: memory
   type: feedback
-  originSessionId: 43fd2eed-0651-4bfa-878d-b2e0f06cd240
   modified: 2026-10-23T15:28:37.282Z
 ---
 

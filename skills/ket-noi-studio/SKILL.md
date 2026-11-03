@@ -5,6 +5,8 @@ description: Nối phiên Claude đang mở với khung "Nhờ AI sửa" của H
 
 # Kết nối HD Studio với phiên này
 
+HD Studio đang tắt từ 03/11/2026. Chỉ nối khi Dũng yêu cầu bằng lời; dựng video không tự nối. Studio chưa bật lại thì làm theo `Apps\hd-studio\.du-lieu\tat-studio-03-11\BAT_LAI.md` trước.
+
 Người dùng gọi skill này tức là đồng ý để phiên này làm theo các yêu cầu họ gửi từ khung AI của Studio.
 
 ## Bật
@@ -12,11 +14,11 @@ Mở Monitor, `timeout_ms: 1800000`, mô tả "yêu cầu gửi từ khung AI c�
 ```
 node "<HD_VIDEO_HOME>/Apps/hd-studio/lib/lang_nghe.mjs"
 ```
-Mỗi phiên có hộp thư riêng. Studio gửi vào phiên vừa dùng gần nhất, hoặc phiên người dùng chọn trong khung AI. Bật khi người dùng yêu cầu hoặc khi hook báo Studio đang mở.
+Mỗi phiên có hộp thư riêng. Studio gửi vào phiên vừa dùng gần nhất, hoặc phiên người dùng chọn trong khung AI. Chỉ bật khi người dùng yêu cầu nối, hoặc khi tiến hành dựng video (`/video`, `/dung-video`, `/dung-studio`, hoặc người dùng bảo dựng). Hỏi đáp, học mẫu, sửa luật, tìm tài nguyên thì không bật, kể cả khi Studio đang mở.
 
 Có dòng `STUDIO_DA_NOI` là đã nối. Báo người dùng 1 dòng.
 
-Monitor hết hạn: mở lại nếu trong 3 giờ qua người dùng có nhắn hoặc có yêu cầu từ Studio; nếu không thì để tắt, tin nhắn tiếp theo hook sẽ tự nhắc bật lại.
+Monitor hết hạn: chỉ mở lại khi video vẫn đang dựng hoặc người dùng yêu cầu; nếu không thì để tắt.
 
 ## Khi có dòng `STUDIO_YEU_CAU {du_an, loi_nhan, chi_tiet}`
 1. Đọc tệp `chi_tiet`: có đường dẫn dự án, vị trí đầu phát, phần tử đang chọn, ảnh và tệp đính kèm.

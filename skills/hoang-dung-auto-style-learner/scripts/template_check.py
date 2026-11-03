@@ -22,18 +22,25 @@ def main(path):
         if dur and abs(seg[-1]["den"] - dur) > 0.2:
             err.append(f"đoạn cuối kết thúc {seg[-1]['den']}s ≠ thời lượng {dur}s")
 
-    cnt = {"cat": 0, "chu": 0, "mg": 0, "broll": 0, "an": 0, "chuyen_canh": 0, "sfx": 0, "phach_manh": 0}
-    sfx_t = []
-    chu_t = []
+    # Dũng 03/11: khớp toàn bộ mẫu, AI không tự sửa điểm yếu hay thêm phần mẫu không có
+    if t.get("diem_yeu_da_sua"):
+        err.append("có diem_yeu_da_sua: AI đã tự làm khác mẫu, phải bỏ và ghi vào diem_yeu_bao_dung")
+    if not (t.get("bgm") or {}).get("nguon_nhan"):
+        err.append("bgm.nguon_nhan trống (ghi nguồn nhãn âm thanh hoặc 'Khong do duoc')")
+
+    cnt = {"cat": 0, "chu": 0, "mg": 0, "aroll": 0, "broll": 0, "an": 0, "vfx": 0, "effect": 0, "chuyen_canh": 0, "sfx": 0, "phach_manh": 0}
     for d in seg:
         name = f"đoạn {d.get('tu')}–{d.get('den')}s"
         cnt["cat"] += len(d.get("cat", []))
         cnt["chu"] += len(d.get("chu", []))
         cnt["mg"] += len(d.get("mg", []))
+        cnt["aroll"] += len(d.get("aroll", []))
         cnt["broll"] += len(d.get("broll", []))
         cnt["an"] += len(d.get("an", []))
-        # Dũng 30/10: mỗi b-roll / animation / MG / chữ phải có mục đích + lý do mẫu đặt ở đó (gắn câu nào, giữ chân gì)
-        for k in ("broll", "an", "mg", "chu"):
+        cnt["vfx"] += len(d.get("vfx", []))
+        cnt["effect"] += len(d.get("effect", []))
+        # Dũng 30/10: mỗi phần tử phải có mục đích + lý do mẫu đặt ở đó (gắn câu nào, giữ chân gì)
+        for k in ("aroll", "broll", "an", "mg", "chu", "vfx", "effect"):
             for x in d.get(k, []):
                 if not x.get("muc_dich") or not x.get("ly_do"):
                     err.append(f"{name}: {k} ở {x.get('giay')}s thiếu muc_dich/ly_do")
@@ -42,21 +49,17 @@ def main(path):
             cnt["chuyen_canh"] += 1
         cnt["sfx"] += len(d.get("sfx", []))
         cnt["phach_manh"] += len((d.get("nhac") or {}).get("phach", []))
-        sfx_t += [s.get("giay", -99) for s in d.get("sfx", [])]
-        chu_t += [c.get("giay", -99) for c in d.get("chu", [])]
         if not (d.get("canh") or {}).get("co"):
             err.append(f"{name}: thiếu mô tả cảnh")
+        if not (d.get("bo_cuc") or {}).get("cach_dung"):
+            err.append(f"{name}: thiếu bo_cuc.cach_dung")
         if not (d.get("nhac") or {}).get("dien_bien"):
             err.append(f"{name}: thiếu diễn biến nhạc")
-        has_event = d.get("chu") or d.get("mg") or d.get("broll") or d.get("an") or d.get("cat") or (cc and cc.get("ma"))
+        has_event = d.get("chu") or d.get("mg") or d.get("aroll") or d.get("broll") or d.get("an") or d.get("vfx") or d.get("effect") or d.get("cat") or (cc and cc.get("ma"))
         if not has_event and not d.get("ly_do_tinh"):
             err.append(f"{name}: không có sự kiện nào và không ghi ly_do_tinh")
         if not d.get("vai_tro"):
             err.append(f"{name}: thiếu vai_tro")
-
-    for c in chu_t:
-        if not any(abs(c - s) <= 0.15 for s in sfx_t):
-            err.append(f"chữ ở {c}s không có SFX trong ±0,15s")
 
     measured = t.get("su_kien_do_duoc", {})
     for k, v in cnt.items():
@@ -82,7 +85,7 @@ def main(path):
         for e in err:
             print(" -", e)
         return 1
-    print("PASS — phủ 100% số đo, không bỏ sót")
+    print("PASS — phủ 100% số đo, đủ 8 thành phần (chưa phải template đạt: phải chấm giống mẫu 100/100)")
     return 0
 
 if __name__ == "__main__":

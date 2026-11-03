@@ -1,8 +1,13 @@
 # 08 — SFX theo ý nghĩa lời thoại: quy tắc + quy trình phân loại
 
-Nguồn luật duy nhất về SFX đi kèm chữ/khoảnh khắc trong `dung-video` (bộ `assets/textfx-kit/`, gộp từ dung-text-fx 27/10/2026) và luồng `/video`.
+Nguồn luật duy nhất về SFX đi kèm chữ/khoảnh khắc trong `dung-video` (bộ `textfx-kit/`, gộp từ dung-text-fx 27/10/2026) và luồng `/video`.
 Script thực thi đúng các luật dưới: `scripts/sfx_tag.py` → `sfx_plan.py` → `sfx_render.py` → `sfx_mix.py` → `sfx_audit.py`.
-Ngưỡng nằm trong code; sửa luật ở đây thì sửa code cùng lúc, và chạy lại 5 vòng ở `07-kiem-chung.md`.
+Ngưỡng nằm trong code; sửa luật ở đây thì sửa code cùng lúc, và kiểm lại theo cách ghi trong `library/verification-log.md`.
+
+## Phạm vi (cập nhật 02/11/2026, Dũng chốt)
+- SFX chỉ đi với CHỮ HOOK (T2–T3). Phụ đề (T0) và nhãn (T1) không SFX. `moments.json` chỉ chứa chữ hook, nên không cần sửa code: `sfx_plan.py` và `sfx_audit.py` đối chiếu đúng danh sách đó.
+- Các hàng L4/L6/L8 (T1) bên dưới chỉ dùng khi Dũng nâng mốc đó lên chữ hook.
+- SFX của MG bản đồ gắn vào chuyển động đồ họa (zoom, pin, sonar), không gắn vào nhãn chữ.
 
 ## 0. Vì sao SFX cũ bị "lặp, không rõ" (đã đo 2026-10-23)
 | # | Nguyên nhân | Bằng chứng |
@@ -62,13 +67,13 @@ Nguồn: luật đã được Dũng duyệt trong `hoang-dung-bds-video-master` 
 9. **Trung thực**: AI không nghe được — mọi kết luận "đúng lúc / đủ to" là số đo; Dũng nghe duyệt bằng tai nghe trước khi xuất.
 
 ## 4. Quy trình (giai đoạn 4 → 6 của /video)
-1. Bảng mốc chữ (giai đoạn 4) → `moments.json`: `id, t` (giây chữ CHẠM = khung từ khóa bắt đầu được nói), `text`, `say` (câu đang nói), tùy chọn `L, tier, group`.
+1. Bảng mốc chữ HOOK (T2–T3, giai đoạn 4; phụ đề và nhãn không đưa vào) → `moments.json`: `id, t` (giây chữ CHẠM = khung từ khóa bắt đầu được nói), `text`, `say` (câu đang nói), tùy chọn `L, tier, group`.
 2. `python scripts/sfx_plan.py --moments moments.json --words words.json --out <dự án>/work/sfx --fps <fps> --duration <giây> --seed <tên video> [--style bds|hype|tam_su]`
    → `sfx_plan.json` + `sfx_plan.md` (mỗi lớp có lý do chọn). Đọc ⚠️ "thiếu tiếng thật" → báo Dũng nếu cần bổ sung kho.
 3. `python scripts/sfx_render.py <sfx_plan.json> --out sfx.wav --duration <giây> --voice <giọng timeline 48k>`
 4. `python scripts/sfx_audit.py <sfx_plan.json> --out sfx-scorecard.json --sfx sfx.wav --voice <giọng> --bgm bgm_ducked.wav` (sau bước 5) → phải **100/100**; thiếu điểm mục nào thì sửa đúng mục đó (đổi mốc t, hạ bậc, đổi file trong `sfx_plan.json`) rồi chạy lại 3–4. Tối đa 6 vòng; một mục 2 vòng liền không tăng → dừng, báo Dũng kèm số đo.
 5. Trộn: `python scripts/sfx_mix.py --plan <sfx_plan.json> --voice <giọng> --sfx sfx.wav --bgm <nhạc> --duration <giây> --out <thư mục>` → `bgm_ducked.wav` + `mix.wav` + số đo ebur128 thật; rồi chạy lại bước 4 có thêm `--bgm bgm_ducked.wav`.
-6. Gửi Dũng preview kèm `sfx_plan.md` + scorecard. Dũng chê/khen âm nào → sửa nhãn (`sua_tay`) hoặc luật ở đây.
+6. Ghi `sfx_plan.md` + scorecard vào báo cáo cuối (Dũng chỉ duyệt bản cuối, không duyệt trung gian). Dũng chê/khen âm nào → sửa nhãn (`sua_tay`) hoặc luật ở đây.
 
 ## 5. Bảng chấm 100 (`sfx_audit.py`)
 | Mục | Điểm | Đủ điểm khi |

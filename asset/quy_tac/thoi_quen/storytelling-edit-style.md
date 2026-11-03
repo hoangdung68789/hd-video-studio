@@ -4,7 +4,6 @@ description: "Talking-head kể chuyện/chia sẻ kinh nghiệm cần phong cá
 metadata:
   node_type: memory
   type: feedback
-  originSessionId: 43fd2eed-0651-4bfa-878d-b2e0f06cd240
   modified: 2026-10-23T14:09:10.719Z
 ---
 

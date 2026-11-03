@@ -4,8 +4,7 @@ description: "Mức nhạc nền Dũng duyệt cho video BĐS tour: lời thoạ
 metadata:
   node_type: memory
   type: feedback
-  originSessionId: 2d9cbbd0-2a3d-4ce5-815d-21068638c179
-  modified: 2026-10-27T15:22:38.011Z
+  modified: 2026-11-01T16:25:00.313Z
 ---
 
 Video BĐS có lời dẫn (DU-AN-MAU, ngày 25/10/2026):
@@ -15,6 +14,8 @@ Video BĐS có lời dẫn (DU-AN-MAU, ngày 25/10/2026):
 - Video tour được phép dài khoảng 1:55 khi Dũng muốn mỗi không gian có 2 cảnh. Quy định 60–90s trong preferences của tài khoản <TAI_KHOAN> nhường cho yêu cầu cụ thể này.
 
 - 27/10/2026 (DU-AN-MAU, mới nhất — thay mức −28 khi nói): Dũng "muốn nhạc lên cao trào khi chuyển cảnh quay không người dẫn, giảm nhỏ nhạc vừa phải khi có người dẫn để nghe rõ tiếng nói". Đang dùng: cú drop của bài canh đúng điểm chuyển sang cảnh không người dẫn, lặp đoạn dâng + cao trào theo ô nhịp; cảnh không người −11 LUFS, lúc nói −22 LUFS (giọng −14). Chờ Dũng nghe duyệt mức −22. SFX phải hợp nhạc nền + lời: giữ âm theo phân loại, dịch cao độ âm có tông về hợp âm chủ của bài (`dv_sfx_key.py`).
+
+- 01/11/2026: mức nhạc không còn tính điểm trong `sfx_audit`, chỉ báo số đo; đo `ebur128` từng đoạn ở cổng G5.
 
 **Why:** Dũng cảm nhận theo độ cuốn trên điện thoại. Nhạc nhỏ ở đoạn chỉ cảnh làm teaser và cao trào bị hụt.
 

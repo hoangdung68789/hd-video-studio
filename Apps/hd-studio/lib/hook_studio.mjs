@@ -1,5 +1,5 @@
-// Hook UserPromptSubmit: khi Studio đang mở mà phiên Claude này chưa nghe, nhắc phiên bật kết nối.
-// Studio tắt hoặc phiên đã nối thì không in gì, không tốn thêm token.
+// Hook UserPromptSubmit: chỉ khi người dùng gọi lệnh dựng video mà Studio đang mở và phiên chưa nghe, nhắc phiên bật kết nối.
+// Tin nhắn khác, Studio tắt hoặc phiên đã nối thì không in gì, không tốn thêm token.
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -10,6 +10,8 @@ try { input = JSON.parse(fs.readFileSync(0, "utf8")); } catch { /* không có đ
 const id = String(input.session_id || "").replace(/[^\w-]/g, "");
 // Phiên do chính Studio tạo để chạy AI thì không nối.
 if (!id || String(input.prompt || "").startsWith("Bạn là AI dựng video")) process.exit(0);
+// Chỉ lệnh dựng video mới nối; không dò từ khóa vì câu thường cũng có thể nhắc "dựng video".
+if (!/^\s*\/(video|dung-video|dung-studio)(\s|$)/i.test(String(input.prompt || ""))) process.exit(0);
 
 const beat = path.join(HERE, "..", ".du-lieu", "cau-noi", "phien", `${id}.json`);
 try { if (Date.now() - fs.statSync(beat).mtimeMs < 15000) process.exit(0); } catch { /* chưa nghe */ }

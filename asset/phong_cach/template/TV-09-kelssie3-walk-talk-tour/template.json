@@ -1,0 +1,117 @@
+{
+ "id": "TV-09",
+ "ten": "Môi giới walk-and-talk rồi tour nhạc (Mỹ)",
+ "the_loai": [
+  "review nha",
+  "BDS nuoc ngoai"
+ ],
+ "che_do": "bo_cuc_gon (thoại chỉ đầu/cuối, giữa là tour nhạc — Dũng 02/11/2026)",
+ "nguon": {
+  "url": "https://www.tiktok.com/@kelssie3/video/7632707724748410142",
+  "ngay_xem": "2026-11-02",
+  "chi_so": "15,9K thích · 131 bình luận · 1.829 chia sẻ (trang video)",
+  "nhan": "Đã đo"
+ },
+ "thong_so": {
+  "khung": "9:16",
+  "fps": 30,
+  "thoi_luong": 60.87,
+  "bpm": 184.6,
+  "so_shot": 21,
+  "shot_tb": 2.9,
+  "ty_le_cat_dung_phach": 0.65,
+  "thoai": "0–25 s và 56,6–58,4 s"
+ },
+ "goc_may_chung": "gimbal ngang hông–ngực, ống kính rộng; người dẫn trung–toàn thân giữa khung; chuyển cảnh lia nhanh nhòe (whip) [Ước đoán từ khung]",
+ "canh": [
+  {
+   "tu": 0,
+   "den": 11.63,
+   "co": "toan than",
+   "goc": "ngang ngực, chính diện",
+   "chuyen_dong_may": "máy lùi theo người đi tới (walk-and-talk), xen ngoại thất",
+   "vao": "—",
+   "noi_dung": "hook: 'nếu bạn thích hoàn thiện của căn này…' + chữ trắng nhỏ 1–2 từ giữa khung"
+  },
+  {
+   "tu": 11.63,
+   "den": 12.83,
+   "co": "toan",
+   "goc": "thấp",
+   "chuyen_dong_may": "trượt ngang",
+   "vao": "cắt cứng",
+   "noi_dung": "mặt tiền nhà"
+  },
+  {
+   "tu": 12.83,
+   "den": 16.97,
+   "co": "trung→toan",
+   "goc": "ngang ngực",
+   "chuyen_dong_may": "người nói ở hiên → lia nhanh ra sân",
+   "vao": "whip nhòe",
+   "noi_dung": "giới thiệu khu dân cư"
+  },
+  {
+   "tu": 16.97,
+   "den": 17.93,
+   "co": "toan",
+   "goc": "ngang mắt",
+   "chuyen_dong_may": "tĩnh",
+   "vao": "cắt cứng",
+   "noi_dung": "mặt tiền có tán cây"
+  },
+  {
+   "tu": 17.93,
+   "den": 19.1,
+   "co": "toan",
+   "goc": "ngang ngực",
+   "chuyen_dong_may": "tĩnh",
+   "vao": "cắt cứng",
+   "noi_dung": "người dẫn ngồi sofa nói"
+  },
+  {
+   "tu": 19.1,
+   "den": 25.0,
+   "co": "trung→toan",
+   "goc": "ngang ngực",
+   "chuyen_dong_may": "người nói → lia nhanh ra hiên sau",
+   "vao": "whip nhòe",
+   "noi_dung": "kết phần nói, vào tour"
+  },
+  {
+   "tu": 25.0,
+   "den": 56.6,
+   "co": "toan/trung",
+   "goc": "thấp ngang hông",
+   "chuyen_dong_may": "trượt ngang + đẩy tới; cụm shot 0,6 s dồn đúng phách 44,7–46,6",
+   "vao": "cắt cứng đúng phách + whip nhòe",
+   "noi_dung": "tour nhạc: khách → bếp → tắm → ngủ"
+  },
+  {
+   "tu": 56.6,
+   "den": 58.43,
+   "co": "trung",
+   "goc": "ngang ngực",
+   "chuyen_dong_may": "tĩnh",
+   "vao": "cắt cứng",
+   "noi_dung": "người dẫn ở bếp + thẻ tên/liên hệ nhỏ: kêu gọi"
+  },
+  {
+   "tu": 58.43,
+   "den": 60.87,
+   "co": "flycam",
+   "goc": "nhìn thẳng xuống",
+   "chuyen_dong_may": "bay ngang",
+   "vao": "cắt cứng",
+   "noi_dung": "toàn khu dân cư — kết"
+  }
+ ],
+ "bai_hoc": [
+  "Người dẫn walk-and-talk 10–25 s đầu nói 1 câu cảm xúc + vị trí, sau đó để nhạc dẫn tour",
+  "Tour: shot 1–3 s, gimbal thấp ngang hông làm phòng rộng hơn",
+  "Đổi nhịp bằng cụm shot rất ngắn (0,6 s) đúng phách ở 73% video",
+  "Kêu gọi bằng người dẫn đứng bếp + thẻ liên hệ, kết flycam toàn khu"
+ ],
+ "ap_cho_dung": "Video BĐS có Dũng dẫn: nói phần giá trị ở đầu, giữa để tour theo nhạc; lia nhanh là chuyển động máy thật khi quay (không phải camera giả).",
+ "trang_thai": "Bố cục tham khảo"
+}

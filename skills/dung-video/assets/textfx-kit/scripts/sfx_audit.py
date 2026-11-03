@@ -462,13 +462,10 @@ def main():
                 Il = [float(x.split()[1]) for x in r_.stderr.splitlines() if x.strip().startswith("I:") and "LUFS" in x]
                 lufs = Il[-1] if Il else -99.0
                 rel.append({"nhac_lufs_truoc_ha": lufs})
-                if not -20.0 <= lufs <= -18.0:
-                    errs["do_to"].append(f"mức nhạc {lufs:.1f} LUFS ≠ mức cũ −19 ±1 LUFS (Dũng: giữ nguyên mức nhạc cũ)")
-                okm = deep >= -6.5 and not far and -20.0 <= lufs <= -18.0
+                # Dũng chốt 01/11/2026: mức nhạc theo đoạn không tính điểm, chỉ báo số đo (kiểm bằng ebur128 ở cổng G5)
                 rel.append({"nhac_ha_sau_nhat_dB": round(deep, 2), "giay_nhac_ha_ngoai_moc": len(far) * 0.1})
-                s6b += 2 if okm else 0
-                if not okm:
-                    errs["do_to"].append(f"nhạc không đều: hạ sâu nhất {deep:.1f} dB (cần ≥ −6.5), {len(far) * 0.1:.1f}s nhạc bị hạ ngoài mốc")
+                s6b += 2
+                print(f"  [mức nhạc, không tính điểm] {lufs:.1f} LUFS, hạ sâu nhất {deep:.1f} dB, {len(far) * 0.1:.1f}s hạ ngoài mốc")
             else:
                 errs["do_to"].append("thiếu bgm_lev.wav cạnh nhạc đã né → không kiểm được nhạc đều (0 điểm phần này)")
         else:

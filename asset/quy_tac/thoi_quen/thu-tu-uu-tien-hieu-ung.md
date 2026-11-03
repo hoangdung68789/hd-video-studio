@@ -4,7 +4,6 @@ description: "Từ video sau video DU-AN-MAU: ưu tiên MG/motion design minh h�
 metadata:
   node_type: memory
   type: feedback
-  originSessionId: d3ed198d-a332-4a51-a945-b2b0698816b4
   modified: 2026-10-31T16:46:30.118Z
 ---
 
@@ -12,4 +11,4 @@ metadata:
 
 **Why:** Dũng đánh giá video trước hết ở độ giàu và độ mượt của chuyển động minh họa, không muốn chữ đơn điệu tự nghĩ.
 
-**How to apply:** Đã ghi vào `rules/luat-cung.md` của `dung-video`. Bước 4–5: lập bảng `thời điểm | loại | mục đích` trong `edit-state.json`; thiếu mẫu chữ thì hỏi trước khi dựng. Liên quan [[mg-sample-before-build]], [[gu-chu-dong-gladia]], [[zoom-muot-khong-rung]].
+**How to apply:** Đã ghi vào `rules/luat-cung.md` của `dung-video`. Bước 4–5: lập bảng `thời điểm | loại | mục đích` trong `edit-state.json`; thiếu mẫu chữ thì hỏi trước khi dựng. Liên quan [[mg-sample-before-build]], [[gu-chu-dong-gladia]], [[cam-hdfx-rung-01]].

@@ -4,7 +4,6 @@ description: "/dung-video có 2 chế độ (29/10/2026): AI tự phân loại t
 metadata:
   node_type: memory
   type: feedback
-  originSessionId: 8873daa7-426f-4da9-b980-b4726bba8515
   modified: 2026-10-29T14:31:55.729Z
 ---
 

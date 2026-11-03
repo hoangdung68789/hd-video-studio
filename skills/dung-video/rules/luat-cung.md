@@ -1,40 +1,61 @@
-# Luật cứng của /video
-Cộng thêm Luật cứng video của `hoang-dung-agent-orchestrator`. Đọc trước khi dựng.
+# Luật cứng của /dung-video (Chuẩn Công ty Sản xuất Nội dung MXH Chuyên nghiệp — Cập nhật 03/11/2026)
 
-## Luật cứng số 0, không được bỏ qua (Dũng chốt 31/10/2026)
-**Việc đầu tiên của mọi lần chạy /video: tạo dự án và tự động mở Studio, trước khi đo footage, chép lời hay chỉnh màu.** Tạo `Videos\<tên>\hf\`, ghi ngay `hf\index.html` khung (Studio chỉ thấy dự án khi có file này) cùng `hf\meta.json`, gọi `preview_start {name: "hd-studio"}`, rồi `navigate` tới `http://localhost:<cổng preview_start trả về>/?du-an=<tên>`. Kiểm Studio đã hiện đúng dự án rồi mới làm bước tiếp theo.
+Nhãn: **[D]** luật Dũng chốt, luôn thắng tuyệt đối. **[N#]** có căn cứ ngoài (`resources/nguon-dan-chung.md`), vẫn bị [D] ghi đè. **[Thử]** ý kiến hoặc giả thuyết, KHÔNG phải luật; chỉ áp dụng khi chạy thử A/B trên kênh Dũng có số đo. **[Tính]** suy ra bằng tính toán.
+AI và mọi Sub-Agent tuyệt đối không tự bịa con số, tên style, tên hiệu ứng, link; không tự đoán ý. Không có nguồn → ghi `missing` hoặc hỏi gọn.
 
-## Luật cứng về điều phối, không đoán (Dũng chốt 01/11/2026)
-- `smart-dispatcher-portable` và `hoang-dung-agent-orchestrator` là **luật cứng** của /video, luôn nạp và làm theo.
-- **AI không đoán.** Mỗi yêu cầu sửa: (1) tách đúng việc, (2) đo hoặc xem file thật để tìm nguyên nhân, ghi số đo, (3) nêu kế hoạch có tiêu chí đạt đo được, (4) sửa, (5) đo lại cùng cách trên chính bản xuất. Chưa đo lại đạt thì không được nói "đã sửa".
-- Lỗi đã mắc ở video DU-AN-MAU: Dũng yêu cầu sửa rung và zoom 3 lần mà AI chỉ đoán nguyên nhân, không xử lý đúng chỗ. Một yêu cầu bị nhắc lại nghĩa là cách trước đã sai: bỏ cách đó, đo lại từ đầu.
+## I. LUẬT CỨNG VỀ TỔ CHỨC ĐỘI NGŨ SUB-AGENTS, ĐỒNG THỜI & KIỂM TRA NHANH (Chốt 03/11/2026)
 
-## Luật xuất video, bắt buộc (Dũng chốt 31/10/2026)
-- **Luôn xuất trong HD Studio bằng GPU:** `POST http://localhost:<cổng>/vn/render?du-an=<tên>` với `{"fps":60,"gpu":true,"quality":"delivery"}`, để Dũng thấy tiến độ trong Studio. Kiểm kết quả `gpu: true` trong job; máy không có NVENC thì dừng và báo Dũng, không âm thầm xuất bằng CPU.
-- **Không chạy `hyperframes render` trực tiếp và không dùng Studio HyperFrames** (`hyperframes preview`) để xem hay xuất.
-- Máy render bên trong HD Studio hiện vẫn là lõi HyperFrames; khi Dũng hỏi phải nói đúng điều này.
+1. **[D] Tất cả tác vụ chạy ĐỒNG THỜI & Sửa lỗi NGAY TẠI CHỖ (Zero-Defect In-line Fix):**
+   - CẤM làm xong toàn bộ video mới rà soát lỗi rồi quay lại sửa.
+   - Ngay sau khi chốt khung xương Timecode/Transcript (`master-timeline` ở Pha 0), mọi công đoạn (Cắt dựng theo phân đoạn `segment_id`, Đo/Chỉnh màu, Che địa chỉ, Chữ Hook/Phụ đề/MG/Bản đồ neo theo `word_id`, Xử lý Giọng/Nhạc/SFX) phải chạy **đồng thời (100% Parallel Pipeline)** để tiết kiệm tối đa thời gian.
+   - Mỗi Sub-Agent làm đến đoạn/mốc nào phải tự đo và **sửa lỗi ngay tức khắc tại đoạn/mốc đó** theo đúng chuẩn quy trình Editor chuyên nghiệp trước khi đóng gói đầu ra.
 
-## Thứ tự ưu tiên hiệu ứng (Dũng chốt 31/10/2026, áp dụng từ video sau)
-1. **Motion graphics và motion design để minh họa** là ưu tiên số 1; chuyển động phải mượt.
-2. **Chữ đa dạng và kết hợp cùng nhau:** màu sắc, font, hiệu ứng chữ, SFX. Chưa có mẫu tham chiếu thì yêu cầu Dũng cung cấp hoặc học từ video mẫu (`hoang-dung-auto-style-learner`), không tự nghĩ kiểu chữ.
-3. **Animation** luôn đi kèm 2 mục trên, không đứng riêng.
-4. **Mọi video phải hội tụ đủ 3 mục trên.** Trước khi dựng, AI chủ động lập bảng phân loại: `thời điểm | loại (MG / chữ / animation) | mục đích sử dụng`, ghi vào `edit-state.json`. Thiếu loại nào hoặc mốc không có mục đích thì chưa đạt cổng G4.
+2. **[D] Quyền Kiểm tra Chéo Ngang hàng giữa các Sub-Agents (Peer Cross-Check & Upstream Gate):**
+   - Mỗi Sub-Agent được phân công nhiệm vụ chuyên biệt riêng, nhưng **có toàn quyền và trách nhiệm kiểm tra lỗi của Sub-Agent đứng trước/liên đới** trước khi nhận bàn giao để thực hiện công việc của chính mình.
+   - Khi Sub-Agent nhận đầu vào mà phát hiện lỗi từ Sub-Agent khác (lệch timecode, cắt phạm lời, chữ không nguồn, lộ số nhà, thiếu 3 pha hiệu ứng, sai mức âm...), Sub-Agent đó **bắt buộc yêu cầu Sub-Agent gây lỗi sửa ngay lập tức đoạn bị lỗi** trước khi mình làm tiếp. Tuyệt đối không nhận dữ liệu lỗi để làm sai dây chuyền, không bỏ qua dưới lý do "ngoài phạm vi".
 
-## Luật cứng riêng của /video (cộng thêm Luật cứng video của orchestrator)
-1. Skill Hoàng Dũng dùng được: orchestrator, `hoang-dung-viral-style-scout`, `hoang-dung-auto-style-learner`. Skill khác được nhắc mà không có → bỏ qua, ghi `skipped_refs`.
-2. Địa chỉ chỉ ở mức khu vực (đường lớn, phường/quận); không số nhà, số hẻm, tên chủ. Nhãn bản đồ là chữ ngoại lệ duy nhất.
-3. Chữ: không khung/nền tối sau chữ; không lặp chữ; MỌI chữ có SFX; chữ hero chạm đúng từ ±2 khung; vùng an toàn TikTok (~230px trên, ~480px dưới, ~160px phải).
-4. **Không dùng hiệu ứng rung** (rung khung, rung chữ, chữ nhấp nhô) trừ khi Dũng yêu cầu rõ (Dũng chốt 31/10/2026). Zoom, Ken Burns: AI tự quyết, tên hiệu ứng trên timeline là "Zoom in - Zoom out", phải mượt: gia tốc mềm (`sine.inOut`), xen kẽ vào/ra, nguồn khác fps bản xuất thì đổi về đúng fps xuất trước khi dựng (50→60), không để giật khung.
-5. Không xuất video câm hoặc chỉ có SFX; không tổng hợp nhạc nền bằng code.
-6. Không nói "100 điểm" khi chưa có scorecard do script sinh; không nới ngưỡng. AI không nghe được: kết luận âm thanh là số đo.
-7. Font giống mẫu nhất (từ phiếu font); lỗi tiếng Việt → chạy `assets/textfx-kit/scripts/vn_font_gate.py`, báo đúng mẫu cảnh báo, dùng font thay thế.
-8. Tên style/hiệu ứng chỉ dùng tên có nguồn hoặc Dũng xác nhận; link mẫu chỉ dùng link thật đã mở và đo, kèm mốc giây.
-9. Không sửa memory, không sửa `plugins\cache`, không sửa file skill khi chưa hỏi.
-10. **Không che mặt người dẫn** (Dũng 29/10): dò vùng đầu theo thời gian (`face_zones.py` của template BĐS, tách người tại máy) → chữ/MG tự dời lên trên đầu, cạnh người hoặc thu nhỏ; không bỏ ý chính, không cắt cảnh để né. Chữ theo lời đặt cao vừa (phụ đề đáy ~600/1920, chữ nhấn ~540), vẫn trong vùng an toàn.
-11. **Nói hết câu rồi mới chuyển cảnh**: cảnh sau chỉ bắt đầu mờ vào sau từ cuối ≥0,1s; thiếu chỗ → thêm phách hoặc cắt thẳng đúng phách (`hard_out`), không cắt mất lời.
-12. **SFX theo phân loại** (Dũng 29/10, thay mọi luật cấm âm cũ): đánh giá điểm quan trọng từng câu (ý định L + bậc T, `sfx_plan.py`), chọn âm đúng vai, không spam 1 file/1 họ. Chữ hiệu ứng (kể cả nhãn phòng) + số chạy có SFX; animation hình minh họa (mặt bằng, thước, bản đồ) KHÔNG SFX trừ khi Dũng yêu cầu. Không dùng họ `Sine/` trừ khi Dũng yêu cầu. Dũng chê 1 âm → `SFX_OVERRIDE`, chỉ trộn lại tiếng.
-13. **So mẫu trước khi áp** (R-L025): dùng template/hiệu ứng/mẫu chữ nào → mở lại video gốc (skill `watch`), so khác biệt (vị trí %, màu đo pixel, kiểu vào/ra, nhịp, SFX), áp đúng mẫu, tự rà lỗi chưa khớp và sửa ngay. Màu chữ từ `asset/phong_cach/mau_chu/bang_mau.json`, khai báo biến CSS `:root` để Dũng đổi trong Studio; không tự chọn màu "cầu vồng".
-14. **Review nhà**: sau mỗi cảnh thoại là 3 cảnh nhà ~4,7–5s; mỗi clip 1 lần, không trùng góc (hết cảnh → lấy clip gốc + `match_grade.py`); clip lẫn giọng người khác → tắt tiếng, bỏ chữ theo giọng đó. Chữ + MG + b-roll minh họa đúng câu nói (tra Bảng kết hợp của learner).
+3. **[D] Kiểm tra Nhanh Tổng thể bởi Agent Tổng — Ngưỡng bàn giao `≥ 98/100` & Vá lỗi Cục bộ (Surgical Patch):**
+   - Agent Tổng (Giám đốc Sản xuất / Chief Orchestrator) thực hiện **kiểm tra nhanh tổng thể video** bằng số đo thật (`ffprobe`, `ebur128`, `sfx_audit`, `vn_font_gate`) kết hợp xem nhanh contact sheet toàn cảnh (bỏ quy trình rà 3 vòng lặp lại nặng nề).
+   - **Ngưỡng bàn giao chuẩn: Đạt tối thiểu từ `98/100` trở lên (`≥ 98/100`)** (và đạt 100% các điều kiện chặn an toàn: 0 khung lộ địa chỉ, 0 chữ tự bịa, có nhạc nền bắt tai, đúng 1 file 9:16 H.265) → **Bàn giao ngay bản cuối cho Dũng** kèm **báo cáo giải trình chi tiết rõ ràng** (điểm từng hạng mục, nêu rõ chi tiết các điểm đạt và phần trừ nhỏ ≤2 điểm nếu có).
+   - Nếu điểm `< 98/100` hoặc phát hiện đoạn có lỗi: **chỉ khoanh vùng sửa ngay đúng đoạn/khung có lỗi** để khớp lại toàn bộ video, tuyệt đối không làm lại từ đầu hay render lại phần không lỗi gây tốn thời gian.
 
-15. **Mọi hiệu ứng và các khối edit khác đều phải xuất hiện trên timeline HD Studio** (Dũng chốt lại 31/10/2026): chữ, phụ đề, video, ảnh, hình, nhãn dán, MG, hiệu ứng, chuyển cảnh, lớp màu, lời thoại, SFX, nhạc. Không có khối nào chỉ nằm trong script mà không chỉnh được trên timeline.
-16. Ngoài các luật ở đây, AI được tự do chọn cách làm; Dũng sẽ yêu cầu sửa khi có lỗi hoặc nói rõ đoạn mong muốn.
+4. **[D] Quy mô tối đa 50 Sub-Agents (Không tạo dư) & Đánh giá/Loại bỏ nhân sự (`> 2 lần hỏng việc`):**
+   - Agent Tổng có quyền tạo ra **tối đa 50 nhân viên Sub-Agents** nếu dự án lớn cần thiết và chủ động phân chia nhiệm vụ riêng biệt cho từng Sub-Agent.
+   - **Cấp phát vừa đủ (Right-Sizing):** Dựa theo quy mô thực tế của từng dự án, Agent Tổng chỉ tạo **đủ số lượng Sub-Agents cần thiết** cho dự án đó (**tuyệt đối không tạo dư số lượng**).
+   - **Kỷ luật loại bỏ (`> 2 lần lỗi`):** Sub-Agent nào **làm hỏng việc trên 2 lần** (quá 2 lần lỗi/sửa không đạt trong nhiệm vụ được giao) sẽ bị Agent Tổng **loại bỏ ngay lập tức (Terminate)** và thay bằng Sub-Agent mới kế thừa công việc từ đúng chỗ dở.
+   - **Đánh giá sau mỗi dự án:** Khi kết thúc dự án, Agent Tổng bắt buộc đánh giá hiệu suất từng Sub-Agent vào sổ nhân sự (`agent-roster.json` và báo cáo cuối): Sub-Agent nào hoàn thành tốt nhiệm vụ (`≤ 2 lần lỗi`, nhanh, chuẩn) sẽ được **giữ lại (Retained)** cho các dự án tiếp theo; Sub-Agent hỏng việc `> 2 lần` bị **loại bỏ vĩnh viễn (Terminated)**.
+
+---
+
+## II. LUẬT CỨNG VỀ NỘI DUNG, KỸ THUẬT & CHUẨN EDITOR CHUYÊN NGHIỆP (Chốt 02–03/11/2026)
+
+5. **[D] Công cụ:** Ưu tiên bộ skill của Dũng (`hoang-dung-agent-orchestrator`, `hoang-dung-viral-style-scout`, `hoang-dung-auto-style-learner`). AI được tự chọn công cụ miễn phí phù hợp trên máy miễn tuân thủ tuyệt đối luật cứng. Không dùng công cụ tốn credit khi chưa hỏi Dũng. Skill được nhắc mà không có → bỏ qua, ghi `skipped_refs`.
+6. **[D] Bảo mật địa chỉ:** Địa chỉ trên chữ/lời chỉ ở mức khu vực (đường lớn, phường/quận); cấm lộ số nhà, số hẻm, tên chủ, giấy tờ cá nhân. Tổ Bảo mật quét 0.5s/khung và che mờ bám chuyển động (`boxblur` tracking) ngay từ Pha 1. Nhãn bản đồ là chữ ngoại lệ duy nhất ngoài lời nói.
+7. **[D] Ba vai chữ & Nguồn chữ:**
+   - **Phụ đề (T0)** và **Nhãn (T1)**: KHÔNG hiệu ứng, KHÔNG SFX.
+   - **Chữ hook (T2–T3)**: CÓ hiệu ứng + SFX, đỉnh chạm đúng từ nói `±2 khung`.
+   - Không khung/hộp nền tối sau chữ; không lặp chữ; **cấm tự thêm chữ ngoài lời nói và thông tin Dũng cung cấp**. CTA chỉ thành chữ khi chính người dẫn nói câu đó.
+8. **[D] Chuẩn 3 Pha Hiệu ứng Editor Chuyên nghiệp & Đặt tên Phổ biến (Chốt 03/11/2026):**
+   - Mọi hiệu ứng thuộc 7 nhóm (Chữ `CH`, Chuyển cảnh `CC`, Chuyển động máy/thời gian `CM`, Đồ họa `MG/AN`, Kỹ xảo `VFX/LP`, Màu `MA`, Âm thanh `SF`) phải đủ **3 pha**:
+     1. **Mở đầu (`Entrance` 0.18–0.45s):** Đường cong giảm tốc `Ease-Out` (hoặc `back.out(1.4)`), kết hợp ≥2 thuộc tính + `Stagger 40–70ms` + SFX `Riser/Whoosh` dẫn trước `0.08–0.20s` để đỉnh âm đập trùng khung mở hoàn tất.
+     2. **Duy trì (`Hold` ≥ 1.5s):** Đứng yên đủ đọc (`≥ 1.5s` hoặc `số_ký_tự/12s`).
+     3. **Kết thúc (`Exit` 0.15–0.30s):** Nhanh gọn bằng `60–70%` thời gian mở (`Ease-In`), hoặc ngắt khít trước vết cắt `1–2 frames`, hoặc cuốn theo chuyển cảnh, kèm đuôi âm `Reverb/Fade-out` tự nhiên.
+   - **Gọi đúng tên phổ biến trong nghề:** Định dạng `Tên phổ biến quốc tế (Tên thông dụng tiếng Việt)` theo `tu_dien_hieu_ung.md` (cấm tự bịa tên mô tả code).
+9. **[D] Camera giả (zoom, Ken Burns, punch-in, rung footage):** Mặc định TẮT. Mẫu có dùng thì ghi vào Thẻ phong cách là "cần hỏi Dũng". Muốn áp dụng: hỏi Dũng MỘT câu kèm mốc giây, lý do, mẫu nào dùng; ghi vào `asks` của `edit-state.json`. Không có trả lời → không áp dụng, nhấn bằng chữ động.
+10. **[D] Màu/LUT luôn hỏi Dũng 3 lựa chọn:** (1) Giữ màu gốc (chỉ gợi ý cảnh lỗi có số đo), (2) Tạo theo video mẫu, (3) Dùng tài nguyên có sẵn và gợi ý (tối đa 3 LUT gốc đẹp nhất). Không tự ý áp LUT; chưa có trả lời → giữ màu gốc. Khi chỉnh màu hoặc áp LUT phải đi qua chuỗi 6 tầng bằng `color_engine.py` (`references/color-pipeline.md`): Creative LUT trộn mặc định 55%, trong khung 40–65%; LUT kỹ thuật D-Log áp 100%. Màu phải làm nhà trông đúng thực tế, da tự nhiên, đồng nhất giữa các cảnh [N5][N6].
+11. **[D] Một bản cuối duy nhất:** Xuất đúng **MỘT file 9:16 H.265 60fps** dùng chung cho TikTok, Shorts, Reels; không logo/watermark nền tảng khác; vùng an toàn TikTok (`~230px` trên, `~480px` dưới, `~160px` phải) làm chuẩn chung.
+12. **[D] Âm thanh, Nhạc nền & Hệ sinh thái Sound Design Chuyên nghiệp (Chống lạm dụng SFX):**
+   - Không xuất video câm hoặc chỉ có SFX; chỉ xuất bản có nhạc nền bắt tai từ giây đầu, không át giọng (`giọng ≈ -14 LUFS`, `nhạc dưới giọng -18…-22 LUFS`, `true peak ≤ -1 dBTP`), cấm tổng hợp nhạc bằng code.
+   - **Tuân thủ triệt để cẩm nang `references/sfx-sound-design-chuyen-sau.md`:** SFX là hệ thống điều hướng tiềm thức và đòn bẩy cảm xúc, CẤM dùng bừa bãi theo phản xạ cơ học "thấy hình gì gắn tiếng đó".
+   - **Phối hợp 5 Nhóm chức năng:** Kết hợp cân bằng `Ambience` (-24dB..-32dB làm keo dán), `Foley` (-18dB..-24dB tạo xúc giác ASMR), `Transitions` (J-Cut Lead-in `-3f..-5f` cho chuyển cảnh lớn), `Impacts` (tối đa 2–3 cú impact lớn toàn video cho con số/giá bán sống còn), `Textures` (Drone/Ringing/Heartbeat thao túng tâm lý sâu).
+   - **Quy tắc Khoảng thở Âm thanh (Audio Spacing):** Giữa 2 cú Accent Hits phải cách nhau tối thiểu `2.5s – 3.0s`. Tuyệt đối cấm spam SFX dồn dập gây mệt mỏi thính giác.
+   - **Dải tần bảo mật Giọng nói (Mid-Range Cleansing):** Bắt buộc EQ Cut dải `800Hz – 3.5kHz` trên mọi track SFX phát ra khi có giọng nói; SFX chỉ chiếm dải Sub (<80Hz) hoặc Air (>5kHz) để không đè nát lời người dẫn.
+   - **Khoảng lặng đắt giá (Negative Space):** Tại điểm cao trào / plot twist (45–55s), áp dụng công thức 3 bước: Riser dồn nén → Cắt sạch âm thanh (Dead Silence `0.3s–0.6s`) → Giáng Sub-drop + Shimmer bùng nổ khi sự thật hé lộ.
+   - **SFX Blacklist:** CẤM TIỆT tiếng hoạt hình/meme rẻ tiền (Laser, Boing, Pop bong bóng thô sơ, Chuông keng keng nhà máy, còi xe giật mình, kính vỡ). Vi phạm = lỗi nghiêm trọng, trừ điểm Cổng G5.
+13. **[D] Font chữ tiếng Việt:** Phụ đề và nhãn dùng `Be Vietnam Pro`; chữ hook dùng font display giống mẫu nhất hoặc theo `references/text-fx/06`. Mọi font phải qua `textfx-kit/scripts/vn_font_gate.py` và kiểm dấu ở khung nghỉ.
+14. **[D] Cắt dựng chuẩn Editor Pro:** Cắt khoảng lặng thừa, ậm ừ, vấp/lặp, tiếng ho; giữ quãng ngừng có nghĩa hoặc nhấn ý [N4]; người dẫn phải nói hết câu mới chuyển cảnh (`≥ 0.1s` sau từ cuối).
+15. **[D] Bảo vệ hệ thống:** Không tự ý xóa/ghi đè file gốc của Dũng, không sửa `plugins\cache`. Vòng tự học chỉ ghi vào thư viện học (`HDRE_Library/training`). HD Studio mặc định tắt từ 03/11/2026 trừ khi Dũng yêu cầu bật.
+16. **[D] Không che mặt:** Chữ, MG, overlay không che mặt người dẫn; chữ được núp sau người nhưng không che mặt. Kiểm bằng `face_zones` trên khung thật.
+17. **[D] MG/animation đúng lúc:** Chỉ hiện đúng câu thoại nói tới nó.
+18. **[D] Mọi khối nằm trên timeline:** Mỗi chữ, MG, hiệu ứng, SFX là một clip riêng trên timeline, tween có giây cụ thể (mẫu `templates/khoi-timeline.html`).
+19. **[D] Hai ngưỡng điểm tách biệt (Dũng chốt 03/11/2026):** Video giao cho Dũng đạt `≥ 98/100`. Template `TV-xx` vẫn phải đạt đúng `100/100` (`R-L033`), chưa 100 thì không dùng.

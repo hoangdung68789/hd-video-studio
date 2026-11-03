@@ -4,7 +4,6 @@ description: Dũng has no budget — never spend Higgsfield (or any paid) credit
 metadata:
   node_type: memory
   type: feedback
-  originSessionId: 62605699-a41f-4d4a-9eae-615b6d947b0c
   modified: 2026-10-24T12:54:07.688Z
 ---
 

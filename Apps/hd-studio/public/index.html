@@ -18,6 +18,7 @@
   <div class="menuWrap">
     <button class="menuBtn" aria-haspopup="true" aria-expanded="false">Thư viện ▾</button>
     <div class="topMenu" hidden>
+      <button id="proBtn" title="Mở bảng Mẫu Pro cài sẵn: Chữ VFX (TX-01..08), Motion/Animation, 24 Icon động, MG & SFX">✦ Mẫu Pro (TX / Motion / Icon)</button>
       <button id="capcutBtn" title="Nhãn dán, hiệu ứng, chuyển tiếp lấy danh mục từ CapCut">CapCut</button>
       <button id="mgBtn" title="Thư viện motion graphics mẫu Opus 5.5">Thư viện MG</button>
       <button id="tplBtn" title="Chọn và xem trước template trước khi dựng">Template</button>
@@ -53,7 +54,8 @@
 <main id="work">
   <aside id="left">
     <nav class="tabs" role="tablist">
-      <button data-tab="list" class="on">Nội dung</button>
+      <button data-tab="presets" class="on" title="Mẫu Chữ VFX, Motion/Animation, 24 Icon động & Tài nguyên chuẩn">✦ Mẫu Pro</button>
+      <button data-tab="list">Nội dung</button>
       <button data-tab="layers">Lớp</button>
       <button data-tab="assets">Tư liệu</button>
       <button data-tab="sfx">SFX</button>
@@ -62,7 +64,8 @@
       <button data-tab="code" hidden>Mã</button>
       <button data-tab="renders" hidden>Xuất</button>
     </nav>
-    <section id="tab-list" class="tab on">
+    <section id="tab-presets" class="tab on"></section>
+    <section id="tab-list" class="tab">
       <div id="chips" class="row"></div>
       <input id="search" type="search" placeholder="Tìm nội dung…" aria-label="Tìm nội dung">
       <div id="items"></div>
@@ -98,6 +101,7 @@
       <button id="saveCode">Lưu mã</button>
     </section>
     <section id="tab-renders" class="tab">
+      <div id="outDirBox"></div>
       <div class="row"><button id="openFolder">Mở thư mục</button></div>
       <div id="renders"></div>
     </section>
@@ -160,7 +164,13 @@
     <div class="menuWrap">
       <button class="menuBtn primary" aria-haspopup="true" aria-expanded="false">＋ Thêm ▾</button>
       <div class="topMenu" hidden>
-        <button id="newText" title="Tạo chữ mới tại playhead">T Chữ</button>
+        <button id="newProTx" title="Chèn mẫu chữ VFX cài sẵn (TX-01..TX-08) kèm icon động tại playhead">✦ Mẫu Chữ VFX (TX-01..08)</button>
+        <button id="newProMg" title="Chèn thẻ đồ họa MG (MG29 Spec Card, MG26 Số nhảy, Map Pin, Thước đo)">❖ Thẻ Đồ họa MG & Icon động</button>
+        <button id="newSub" title="Tạo phụ đề câu thoại mới tại playhead (T1)">💬 Phụ đề (T1)</button>
+        <button id="newText" title="Tạo chữ mới tại playhead">T Chữ cơ bản</button>
+        <button id="newProVfx" title="Thêm lớp kỹ xảo VFX (Light Sweep, Bloom Glow, Vignette Dimmer)">✨ Lớp Kỹ xảo VFX</button>
+        <button id="newProTrans" title="Thêm chuyển cảnh (Whip Pan, Match Cut, Hard Cut, Zoom Through)">⇄ Chuyển cảnh (Transition)</button>
+        <button id="newGrade" title="Tạo lớp Màu & 3D LUT trên timeline cho vùng chọn hoặc cảnh đang phát">◐ Lớp màu & 3D LUT</button>
         <label class="btn" title="Chọn tệp từ máy, thêm vào timeline tại playhead. Hoặc kéo thả tệp thẳng vào timeline">⤒ Video, ảnh, âm thanh<input id="tlUpload" type="file" multiple hidden></label>
         <hr>
         <button data-shape="vuong">▭ Hình chữ nhật</button>
@@ -170,11 +180,10 @@
         <button data-shape="sao">☆ Ngôi sao</button>
         <button data-shape="duong">― Đường kẻ</button>
         <hr>
-        <button data-cc="Nhãn dán">Nhãn dán</button>
-        <button data-cc="Hiệu ứng">Hiệu ứng</button>
-        <button data-cc="Chuyển tiếp">Chuyển cảnh</button>
-        <button data-mg>Motion graphics</button>
-        <button id="newGrade" title="Tạo lớp Màu trên timeline cho vùng chọn hoặc cảnh đang phát">◐ Lớp màu, bộ lọc</button>
+        <button data-cc="Nhãn dán">Nhãn dán (CapCut)</button>
+        <button data-cc="Hiệu ứng">Hiệu ứng (CapCut)</button>
+        <button data-cc="Chuyển tiếp">Chuyển cảnh (CapCut)</button>
+        <button data-mg>Kho mẫu MG Opus</button>
       </div>
     </div>
     <button id="split" title="Tách clip tại playhead (S hoặc Ctrl+B). Không chọn gì thì tách cảnh video đang phát">✂ Tách</button>
@@ -183,6 +192,8 @@
     <button id="dup" title="Nhân đôi clip (Ctrl+D)">Nhân đôi</button>
     <button id="del" title="Xóa clip (Delete)">Xóa</button>
     <span class="sep"></span>
+    <button id="allLanesBtn" class="toggle on" title="Hiện đầy đủ các tầng thành phần tạo nên video hoàn chỉnh trên timeline kể cả khi tầng đang trống">☰ Đủ tầng</button>
+    <button id="scaffold8Btn" title="Tự động dựng khung các khối mẫu chuẩn 8 thành phần cho những tầng đang trống trên timeline">✦ Khung 8 tầng</button>
     <span class="sep"></span>
     <button id="snap" class="toggle on" title="Hít vào mép clip và playhead">Snap</button>
     <button id="rangeBtn" class="toggle" title="Kéo trên thước thời gian để chọn vùng cần AI sửa (hoặc giữ Shift rồi kéo)">Chọn vùng</button>

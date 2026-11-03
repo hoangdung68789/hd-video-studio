@@ -1,4 +1,5 @@
 import { overridesCss } from "/lib/html.mjs";
+import * as Mau from "/mau_xem.js";
 
 // Giao diện lưu trên máy chủ Studio, mở lại ở cổng nào cũng giữ nguyên. Chuyển dữ liệu cũ từ trình duyệt nếu có.
 let uiCache = await fetch("/vn/giao-dien").then((r) => r.json()).catch(() => ({}));
@@ -13,8 +14,19 @@ const $ = (s) => document.querySelector(s);
 const el = (tag, props = {}, ...kids) => { const e = Object.assign(document.createElement(tag), props); e.append(...kids); return e; };
 
 const LANES = [
-  { kind: "sub", name: "Phụ đề" }, { kind: "text", name: "Chữ" }, { kind: "sticker", name: "Nhãn dán" }, { kind: "shape", name: "Hình" }, { kind: "graphic", name: "Đồ họa MG" }, { kind: "transition", name: "Chuyển cảnh" }, { kind: "fx", name: "Hiệu ứng" },
-  { kind: "grade", name: "Màu, bộ lọc" }, { kind: "video", name: "Video, cảnh" }, { kind: "image", name: "Ảnh" }, { kind: "voice", name: "Lời thoại" }, { kind: "sfx", name: "SFX" }, { kind: "music", name: "Nhạc nền" }, { kind: "audio", name: "Âm thanh" },
+  { kind: "sub", name: "1. Phụ đề (T1)", core: true, addHint: "Thêm Phụ đề (T1)" },
+  { kind: "text", name: "2. Chữ VFX (T2–T3)", core: true, addHint: "Thêm Mẫu Chữ VFX (TX-01..08)" },
+  { kind: "mg", name: "3. Đồ họa MG & Icon", core: true, addHint: "Thêm Thẻ MG / Icon động SVG" },
+  { kind: "sticker", name: "Nhãn dán", core: false, addHint: "Thêm nhãn dán" },
+  { kind: "shape", name: "Hình khối", core: false, addHint: "Thêm hình khối" },
+  { kind: "vfx", name: "4. Kỹ xảo VFX", core: true, addHint: "Thêm Lớp Kỹ xảo VFX" },
+  { kind: "transition", name: "5. Chuyển cảnh", core: true, addHint: "Thêm Chuyển cảnh" },
+  { kind: "grade", name: "6. Màu & 3D LUT", core: true, addHint: "Thêm Lớp Màu & 3D LUT" },
+  { kind: "broll", name: "7. B-Roll / Ảnh phủ", core: true, addHint: "Thêm B-Roll hoặc Ảnh phủ" },
+  { kind: "video", name: "8. Cảnh chính (A-Roll)", core: true, addHint: "Thêm Cảnh Video chính" },
+  { kind: "voice", name: "9. Lời thoại (Voice)", core: true, addHint: "Thêm Lời thoại" },
+  { kind: "sfx", name: "10. SFX (Đỉnh âm)", core: true, addHint: "Thêm SFX 48kHz chuẩn đỉnh âm" },
+  { kind: "music", name: "11. Nhạc nền (BGM)", core: true, addHint: "Thêm Nhạc nền BGM" },
 ];
 const EASES = ["none", "power1.out", "power2.out", "power3.out", "power2.in", "power2.inOut", "sine.inOut", "expo.out", "back.out(1.7)", "elastic.out(1,0.5)"];
 
@@ -22,6 +34,22 @@ const state = {
   project: new URLSearchParams(location.search).get("du-an"),
   model: null, sel: null, time: 0, playing: false, pxPerSec: 20, snap: true, loop: false, muted: false, rate: 1,
   hidden: new Set(), range: null, rangeMode: false, shoot: true, picks: new Set(), notes: [], filter: "sub", stopAt: null, frame: null, scale: 1, peaks: new Map(), lastMtime: 0, busy: false, lanes: [],
+  showAllLanes: true, pro: null,
+  proUi: {
+    subTab: "tx",
+    txId: "TX-01",
+    txOverrides: {},
+    motionCat: "entrance",
+    motionCustom: { dur: 0.45, ease: "back.out(1.7)", mode: "text", dist: 0.04, blur: 10 },
+    mgId: "MG-SPEC-CARD",
+    mgParams: {},
+    iconCat: "all",
+    iconColor: "#F5D061",
+    iconSize: 48,
+    iconLabel: "",
+    sfxFx: "pop_in_text",
+    sfxEmo: "sang_trong",
+  },
 };
 
 const api = async (url, opts) => {
@@ -49,13 +77,40 @@ const fmtTime = (t) => { const m = Math.floor(t / 60), s = t - m * 60; return `$
 const baseName = (p) => (p || "").split("/").pop();
 const clipOf = (id) => state.model?.clips.find((c) => c.id === id);
 
+// Tên gốc của SFX: lấy từ kế hoạch dựng của dự án, hoặc từ tên tệp Studio đã chép (bỏ mã băm đầu tên).
+function sfxOrigin(c) {
+  const stem = baseName(c.src).replace(/\.[^.]+$/, "");
+  const names = state.model?.sfxGoc?.[stem];
+  if (names?.length) return names.map(baseName).join(" + ");
+  return stem.replace(/^[0-9a-f]{8}_/, "").replace(/_/g, " ");
+}
+const isBlurMask = (c) => c.kind === "fx" && (/^che[-_]/i.test(c.id || "") || /^che\b/i.test(c.name || ""));
+// Tên editor thường gọi theo asset/phong_cach/tu_dien_hieu_ung.md, kèm tên tiếng Việt.
+const EFFECT_NAMES = [
+  [/mờ chuyển|hòa tan/i, "Cross Dissolve (Hòa tan)"],
+  [/lát cắt/i, "Slice Wipe (Lát cắt vàng)"],
+  [/lướt ngang|trượt đẩy/i, "Slide / Push Transition (Trượt đẩy)"],
+  [/mờ đen|tối dần/i, "Fade to Black (Mờ về đen)"],
+  [/lóe trắng/i, "White Flash (Lóe trắng)"],
+];
+function effectName(c) {
+  if (isBlurMask(c)) return `${c.tweens.length ? "Blur Mask Tracking" : "Blur Mask"} (${c.name || "Che mờ"})`;
+  const text = c.name || { flash: "Lóe trắng", fade: "Tối dần" }[c.id] || "";
+  return EFFECT_NAMES.find(([re]) => re.test(text))?.[1] || null;
+}
 function clipLabel(c) {
+  // Phụ đề luôn hiện đúng câu đang nói để tìm và sửa được.
+  if (c.kind === "sub" && c.segments.length) return c.segments.map((s) => s.text.replace(/\*\*/g, "")).join(" ");
+  if (c.kind === "sfx" && c.src) return sfxOrigin(c);
+  if (c.kind === "fx") { const n = effectName(c); if (n) return n; }
   if (c.name) return c.name;
   if (c.segments.length) return c.segments.map((s) => s.text.replace(/\*\*/g, "")).join(" · ");
   if (c.kind === "grade") return c.grade?.lut ? `Màu · ${baseName(c.grade.lut.src).replace(/\.cube$/i, "")}` : "Lớp màu";
   if (c.src) return baseName(c.src);
   return { map: "Bản đồ", flash: "Lóe trắng", fade: "Tối dần" }[c.id] || c.id || c.tag;
 }
+
+const isSound = (c) => c?.kind === "audio" || c?.kind === "sfx" || c?.tag === "audio";
 
 // ---- Khung xem ----
 function player() { return state.frame?.contentWindow?.__player; }
@@ -68,10 +123,12 @@ function loadFrame() {
   $("#frameBox").prepend(f);
   const old = state.frame;
   const started = Date.now();
+  state.frameLoading = true;
   const wait = setInterval(() => {
     const p = f.contentWindow?.__player;
     if (!p && Date.now() - started < 30000) return;
     clearInterval(wait);
+    state.frameLoading = false;
     if (!p) { toast("Khung xem chưa tải được. Hãy tải lại trang.", true); return; }
     state.frame = f;
     f.style.visibility = "visible";
@@ -85,6 +142,7 @@ function loadFrame() {
     studioStyle(f.contentDocument);
     syncFrameGlass();
     drawSel();
+    drawTimeline();
     setStatus("Đã lưu");
   }, 120);
 }
@@ -138,9 +196,14 @@ function fitStage() {
 function seek(t) {
   const m = state.model;
   t = Math.max(0, Math.min(t, m.duration));
+  // Người dùng tua khi đang xem thử: để playhead ở đúng chỗ đó, không lặp về đoạn cũ.
+  if (state.preview && !state.autoSeeking) { state.pvMoved = true; state.loopFrom = null; state.stopAt = null; }
   setTimeout(kfRefresh);
   state.time = t;
   player()?.seek(t);
+  // Máy phát làm tròn xuống khung hình gần nhất; thước phải đứng đúng khung đang hiện, nếu không layer thêm tại đây sẽ chưa tới lúc hiện.
+  const real = player()?.getTime?.();
+  if (Number.isFinite(real) && Math.abs(real - t) < 0.2) state.time = real;
   drawHead();
   drawSel();
 }
@@ -148,6 +211,7 @@ function seek(t) {
 function togglePlay() {
   const p = player();
   if (!p) return;
+  state.loopFrom = null;
   if (p.isPlaying()) { p.pause(); }
   else { if (state.time >= state.model.duration - 0.02) seek(0); p.play(); }
 }
@@ -160,7 +224,10 @@ function tick() {
     if (playing) {
       state.time = p.getTime();
       if (state.time >= state.model.duration - 0.02 && state.loop) { p.seek(0); p.play(); }
-      if (state.stopAt !== null && state.time >= state.stopAt) { p.pause(); state.stopAt = null; }
+      if (state.stopAt !== null && state.time >= state.stopAt) {
+        if (state.loopFrom != null) { p.seek(state.loopFrom); state.time = state.loopFrom; }
+        else { p.pause(); state.stopAt = null; }
+      }
       drawHead(true);
       drawSel();
       markNow();
@@ -179,30 +246,120 @@ function applyHidden() {
   for (const c of state.model.clips) {
     if ((c.kind !== "audio" && c.kind !== "sfx") || !c.id) continue;
     const a = doc.getElementById(c.id);
-    if (a) a.muted = state.hidden.has(laneKey(c));
+    if (a) a.muted = c.muted || state.hidden.has(laneKey(c));
   }
 }
 
 // ---- Chọn và kéo trực tiếp trên khung xem ----
+// Khung thật của phần đang hiện: lớp bọc phủ toàn khung (.key, .sub, .mg) không tính, chỉ gộp chữ, ảnh và khối có nền.
+function paintedRects(n) {
+  const win = n.ownerDocument.defaultView, out = [];
+  const shown = (e) => {
+    const s = win.getComputedStyle(e);
+    return s.display !== "none" && s.visibility !== "hidden" && +s.opacity > 0.02;
+  };
+  const walk = (e) => {
+    if (!shown(e)) return;
+    const s = win.getComputedStyle(e), r = e.getBoundingClientRect();
+    // SVG phủ cả khung: chỉ tính các phần đang hiện, khung chọn ôm đúng hình và chữ.
+    if (e.tagName.toLowerCase() === "svg") {
+      for (const k of e.children) { if (/^(defs|style|title|desc|clippath|mask|filter|lineargradient|radialgradient)$/i.test(k.tagName) || !shown(k)) continue; const b = k.getBoundingClientRect(); if (b.width && b.height) out.push(b); }
+      if (out.length) return;
+    }
+    const media = /^(VIDEO|IMG|CANVAS|SVG|svg)$/.test(e.tagName);
+    const painted = media || s.backgroundImage !== "none" || !/rgba\(.*, 0\)|transparent/.test(s.backgroundColor) || parseFloat(s.borderTopWidth) > 0;
+    if (painted && r.width && r.height) out.push(r);
+    if (media) return;
+    for (const c of e.childNodes) {
+      if (c.nodeType === 1) walk(c);
+      else if (c.nodeType === 3 && c.textContent.trim()) {
+        const rg = n.ownerDocument.createRange();
+        rg.selectNodeContents(c);
+        for (const t of rg.getClientRects()) if (t.width && t.height) out.push(t);
+      }
+    }
+  };
+  walk(n);
+  return out;
+}
+// Layer của mẫu đang xem thử: kéo, phóng to được ngay khi chưa áp dụng.
+function previewLayerId() {
+  const pv = state.preview;
+  if (!pv || pv.hotBack || !["addTextVfxPreset", "addMgPreset", "addWallText", "applyMotionPreset"].includes(pv.op)) return null;
+  if (pv.body?.category === "transition" || pv.body?.category === "camera") return null;
+  const id = pv.id || pv.body?.id || pv.opts.id;
+  return id && state.frame?.contentDocument?.getElementById(id) ? id : null;
+}
+function liveXf(n) {
+  const cs = n.ownerDocument.defaultView.getComputedStyle(n);
+  const [x = 0, y = 0] = cs.translate === "none" ? [] : cs.translate.split(" ").map(parseFloat);
+  const sv = cs.scale === "none" ? [1] : cs.scale.split(" ").map(Number);
+  return { x, y, sx: sv[0], sy: sv[1] ?? sv[0] };
+}
+function setPreviewXf(set) {
+  const pv = state.preview;
+  if (pv) pv.body = { ...pv.body, xf: { ...pv.body.xf, ...set } };
+}
+// Đã cầm mẫu xem thử để chỉnh thì khung đứng yên cho dễ canh, tới khi bấm Xem lại mới chạy.
+function holdPreviewForDrag() {
+  state.pvFrozen = true;
+  holdForEdit();
+  replayPreview();
+}
+function playPreviewAgain() {
+  state.pvMoved = false;
+  state.pvFrozen = false;
+  state.editing = false;
+  replayPreview();
+}
+function paintedBox(n) {
+  const rs = paintedRects(n);
+  if (!rs.length) return null;
+  const left = Math.min(...rs.map((r) => r.left)), top = Math.min(...rs.map((r) => r.top));
+  const right = Math.max(...rs.map((r) => r.right)), bottom = Math.max(...rs.map((r) => r.bottom));
+  return { left, top, right, bottom, width: right - left, height: bottom - top };
+}
+
 function targetAt(cx, cy) {
   const doc = state.frame?.contentDocument;
   if (!doc) return null;
   const r = $("#pick").getBoundingClientRect();
   const x = (cx - r.left) / state.scale, y = (cy - r.top) / state.scale;
-  const ids = new Set(state.model.clips.map((c) => c.id));
+  // Nới thêm vài điểm ảnh cho dễ trúng chữ nhỏ.
+  const pad = 4 / state.scale;
+  const pvId = previewLayerId();
+  if (pvId && paintedRects(doc.getElementById(pvId)).some((b) => x >= b.left - pad && x <= b.right + pad && y >= b.top - pad && y <= b.bottom + pad)) return pvId;
   const hit = [];
-  for (let n of doc.elementsFromPoint(x, y)) {
-    for (; n && n !== doc.documentElement; n = n.parentElement) {
-      if (n.id && ids.has(n.id) && getComputedStyle(n).opacity !== "0" && getComputedStyle(n).visibility !== "hidden") { if (!hit.includes(n.id)) hit.push(n.id); }
-    }
+  for (const c of state.model.clips) {
+    if (!c.id || c.kind === "audio" || c.kind === "sfx" || c.kind === "grade") continue;
+    if (state.time < c.start || state.time > c.end || state.hidden.has(laneKey(c))) continue;
+    const n = doc.getElementById(c.id);
+    if (!n) continue;
+    const rs = paintedRects(n);
+    if (!rs.some((b) => x >= b.left - pad && x <= b.right + pad && y >= b.top - pad && y <= b.bottom + pad)) continue;
+    const box = paintedBox(n);
+    hit.push({ id: c.id, kind: c.kind, area: box.width * box.height, z: +doc.defaultView.getComputedStyle(n).zIndex || 0 });
   }
-  const rank = (id) => ["sub", "text", "graphic", "fx", "image", "video", "audio", "sfx"].indexOf(clipOf(id).kind);
-  return hit.sort((a, b) => rank(a) - rank(b))[0] ?? null;
+  const rank = (k) => ["sub", "text", "graphic", "fx", "image", "video"].indexOf(k);
+  // Cùng loại thì lấy cái nhỏ hơn, để phần tử nằm chồng vẫn bấm chọn được.
+  hit.sort((a, b) => rank(a.kind) - rank(b.kind) || a.area - b.area || b.z - a.z);
+  return hit[0]?.id ?? null;
 }
 
 function drawSel() {
   const box = $("#selBox");
   const doc = state.frame?.contentDocument;
+  const pvId = previewLayerId();
+  if (pvId) {
+    const pv = state.preview, n = doc.getElementById(pvId);
+    const r = (pv.start == null || (state.time >= pv.start && state.time <= pv.end)) && (paintedBox(n) || n.getBoundingClientRect());
+    box.hidden = !r?.width;
+    if (!r?.width) return;
+    box.style.cssText = `left:${r.left * state.scale - 2}px;top:${r.top * state.scale - 2}px;width:${r.width * state.scale + 4}px;height:${r.height * state.scale + 4}px`;
+    const m = state.model;
+    box.classList.toggle("out", !!state.dragFrame && (r.top < m.height * 0.12 || r.bottom > m.height * 0.75 || r.right > m.width * 0.852 || r.left < 0));
+    return;
+  }
   const c = clipOf(state.sel);
   if (!c && state.layer && doc) {
     const r = doc.getElementById(state.layer)?.getBoundingClientRect();
@@ -213,38 +370,77 @@ function drawSel() {
   if (!doc || !c || c.kind === "audio" || c.kind === "sfx" || c.kind === "fx") { box.hidden = true; return; }
   const n = doc.getElementById(c.id);
   if (!n || state.time < c.start || state.time > c.end) { box.hidden = true; return; }
-  let r = n.getBoundingClientRect();
+  const r = paintedBox(n) || n.getBoundingClientRect();
   if (!r.width) { box.hidden = true; return; }
   box.hidden = false;
   box.style.cssText = `left:${r.left * state.scale - 2}px;top:${r.top * state.scale - 2}px;width:${r.width * state.scale + 4}px;height:${r.height * state.scale + 4}px`;
   const m = state.model;
-  if (c.segments.length) { const rg = doc.createRange(); rg.selectNodeContents(n); const t = rg.getBoundingClientRect(); if (t.width) r = t; }
-  const unsafe = c.kind !== "video" && c.kind !== "image" && (r.top < m.height * 0.12 || r.bottom > m.height * 0.75 || r.right > m.width * 0.852 || r.left < 0);
+  // Chỉ cảnh báo trong lúc đang kéo trên khung xem, không hiện sẵn khi mới chọn.
+  const unsafe = !!state.dragFrame && c.kind !== "video" && c.kind !== "image" && (r.top < m.height * 0.12 || r.bottom > m.height * 0.75 || r.right > m.width * 0.852 || r.left < 0);
   box.classList.toggle("out", unsafe);
 }
 
-// Kéo góc khung chọn để đổi kích thước.
-for (const corner of ["nw", "ne", "sw", "se"]) {
+function frameDragStart(keepPreview) {
+  if (!keepPreview) { cancelPreview(); hideActBar(); }
+  state.dragFrame = true;
+  $("#safe").classList.add("keo");
+  $("#platform").classList.add("keo");
+}
+function frameDragEnd() {
+  const out = $("#selBox").classList.contains("out");
+  state.dragFrame = false;
+  $("#safe").classList.remove("keo");
+  $("#platform").classList.remove("keo");
+  drawSel();
+  if (out) toast("Layer đang nằm ngoài vùng an toàn TikTok", true);
+}
+
+// Layer dự án có transform-origin ở góc, nên CSS scale làm layer trôi đi. Đo tâm rồi bù translate để layer đứng yên.
+function setScaleKeepCenter(n, sx, sy, pos) {
+  const center = () => { const r = paintedBox(n) || n.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; };
+  const parent = n.parentElement, ps = parent.getBoundingClientRect().width / parent.offsetWidth || 1;
+  const [ax, ay] = center();
+  n.style.setProperty("scale", `${sx} ${sy}`, "important");
+  const [bx, by] = center();
+  pos.x = Math.round(pos.x + (ax - bx) / ps);
+  pos.y = Math.round(pos.y + (ay - by) / ps);
+  n.style.setProperty("translate", `${pos.x}px ${pos.y}px`, "important");
+}
+// Góc: phóng to đều. Cạnh: kéo giãn theo một chiều (giữ Shift khi kéo góc để giãn tự do).
+for (const corner of ["nw", "ne", "sw", "se", "n", "s", "e", "w"]) {
   const h = el("i", { className: corner });
   $("#selBox").append(h);
   h.addEventListener("pointerdown", (e) => {
     e.stopPropagation();
-    const id = state.sel, n = state.frame.contentDocument.getElementById(id);
+    const pvId = previewLayerId();
+    if (pvId) holdPreviewForDrag();
+    const id = pvId ?? state.sel, n = state.frame.contentDocument.getElementById(id);
     const r = $("#selBox").getBoundingClientRect();
     const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
-    const d0 = Math.hypot(e.clientX - cx, e.clientY - cy) || 1;
-    const s0 = state.model.overrides[id]?.scale ?? 1;
-    let val = s0;
+    const o = state.model.overrides[id] || {}, live = pvId ? liveXf(n) : null;
+    const sx0 = live ? live.sx : o.scale ?? 1, sy0 = live ? live.sy : o.scaleY ?? sx0;
+    const pos = live ? { x: live.x, y: live.y } : { x: kfValue(id, "x", o.x || 0), y: kfValue(id, "y", o.y || 0) };
+    const dx0 = Math.max(4, Math.abs(e.clientX - cx)), dy0 = Math.max(4, Math.abs(e.clientY - cy)), d0 = Math.hypot(e.clientX - cx, e.clientY - cy) || 1;
+    let sx = sx0, sy = sy0, moved = false;
     h.setPointerCapture(e.pointerId);
     const move = (ev) => {
-      val = Math.max(0.05, +(s0 * Math.hypot(ev.clientX - cx, ev.clientY - cy) / d0).toFixed(3));
-      n.style.setProperty("scale", String(val), "important");
+      if (!state.dragFrame) frameDragStart(!!pvId);
+      moved = true;
+      const fx = Math.abs(ev.clientX - cx) / dx0, fy = Math.abs(ev.clientY - cy) / dy0;
+      if (corner === "e" || corner === "w") sx = +Math.max(0.05, sx0 * fx).toFixed(3);
+      else if (corner === "n" || corner === "s") sy = +Math.max(0.05, sy0 * fy).toFixed(3);
+      else if (ev.shiftKey) { sx = +Math.max(0.05, sx0 * fx).toFixed(3); sy = +Math.max(0.05, sy0 * fy).toFixed(3); }
+      else { const k = Math.hypot(ev.clientX - cx, ev.clientY - cy) / d0; sx = +Math.max(0.05, sx0 * k).toFixed(3); sy = +Math.max(0.05, sy0 * k).toFixed(3); }
+      setScaleKeepCenter(n, sx, sy, pos);
       drawSel();
     };
     const up = () => {
       h.removeEventListener("pointermove", move);
       h.removeEventListener("pointerup", up);
-      if (val !== s0) edit("style", { id, set: { scale: val } });
+      if (state.dragFrame) frameDragEnd();
+      if (!moved) return;
+      const set = { scale: sx, scaleY: sx === sy ? null : sy, x: pos.x, y: pos.y };
+      if (pvId) setPreviewXf(set); else edit("style", { id, set });
     };
     h.addEventListener("pointermove", move);
     h.addEventListener("pointerup", up);
@@ -255,22 +451,30 @@ $("#pick").addEventListener("dblclick", () => document.querySelector("#props tex
 
 $("#pick").addEventListener("pointerdown", (e) => {
   if (e.button !== 0) return;
-  const id = e.target.id === "selBox" ? state.sel : targetAt(e.clientX, e.clientY);
-  select(id);
+  if (state.trkDraw) return trackDrawStart(e);
+  const pvId = previewLayerId();
+  if (pvId) holdPreviewForDrag();
+  // Luôn dò theo điểm bấm: khung chọn của cảnh video phủ cả khung, không được giữ chặt lựa chọn cũ.
+  const id = targetAt(e.clientX, e.clientY) ?? (e.target.id === "selBox" ? pvId ?? state.sel : null);
+  const isPv = !!id && id === pvId;
+  // Đang xem thử mẫu: bấm trượt khỏi mẫu không được kéo theo video hay layer nằm dưới.
+  if (pvId && !isPv) return;
+  // Bấm trúng clip trong nhóm đang chọn thì giữ nguyên nhóm, để còn áp vị trí cho cả nhóm.
+  if (!isPv && (!id || !state.picks.has(id))) select(id);
   if (!id) return;
-  const c = clipOf(id);
+  const c = clipOf(id) || { id, kind: "text" };
   if (c.kind === "audio" || c.kind === "sfx" || c.kind === "fx") return;
   const doc = state.frame.contentDocument, n = doc.getElementById(id);
   const parent = n.parentElement;
   const ps = parent.getBoundingClientRect().width / parent.offsetWidth || 1;
   const o = state.model.overrides[id] || {};
-  const x0 = kfValue(id, "x", o.x || 0), y0 = kfValue(id, "y", o.y || 0), sx = e.clientX, sy = e.clientY;
+  const live = isPv ? liveXf(n) : null;
+  const x0 = live ? live.x : kfValue(id, "x", o.x || 0), y0 = live ? live.y : kfValue(id, "y", o.y || 0), sx = e.clientX, sy = e.clientY;
   let moved = false, nx = x0, ny = y0;
   $("#pick").setPointerCapture(e.pointerId);
   // Khung để canh: mép và tâm thật của phần tử; chữ lấy theo phần chữ, không theo khối bao.
-  let box0 = n.getBoundingClientRect();
-  if (c.segments.length) { const rg = doc.createRange(); rg.selectNodeContents(n); const t = rg.getBoundingClientRect(); if (t.width) box0 = t; }
-  const W = state.model.width, H = state.model.height;
+  const box0 = paintedBox(n) || n.getBoundingClientRect();
+  const W =state.model.width, H = state.model.height;
   const reach = 7 / state.scale;
   // Hít vào mép và đường giữa khung hình; trả về độ lệch đã chỉnh và đường canh.
   const snapAxis = (lo, hi, d, size) => {
@@ -294,6 +498,7 @@ $("#pick").addEventListener("pointerdown", (e) => {
   };
   const move = (ev) => {
     if (!moved && Math.hypot(ev.clientX - sx, ev.clientY - sy) < 3) return;
+    if (!moved) frameDragStart(isPv);
     moved = true;
     let cx = (ev.clientX - sx) / state.scale, cy = (ev.clientY - sy) / state.scale;
     // Giữ Alt để kéo tự do.
@@ -312,28 +517,704 @@ $("#pick").addEventListener("pointerdown", (e) => {
     $("#pick").removeEventListener("pointerup", up);
     for (const f of flash.values()) clearTimeout(f.timer);
     $("#guideV").hidden = $("#guideH").hidden = true;
-    if (moved) setOrKey(id, { x: nx, y: ny }, () => edit("style", { id, set: { x: nx, y: ny } }, true));
+    if (!moved) return;
+    frameDragEnd();
+    if (isPv) {
+      const trk = state.preview?.body?.trk;
+      if (!trk) return setPreviewXf({ x: nx, y: ny });
+      trk.params = { ...trk.params, offX: (trk.params.offX || 0) + (nx - x0) * ps, offY: (trk.params.offY || 0) + (ny - y0) * ps };
+      n.style.removeProperty("translate");
+      return previewOp(state.preview.label, state.preview.op, state.preview.body, state.preview.opts);
+    }
+    if (o.track) {
+      n.style.removeProperty("translate");
+      return edit("shiftTrack", { id, dx: nx - x0, dy: ny - y0 });
+    }
+    setOrKey(id, { x: nx, y: ny }, () => edit("style", { id, set: { x: nx, y: ny } }, true));
+    if (c.kind === "sub" && !kfOf(id).x && !kfOf(id).y) offerSubPos(id, nx, ny);
   };
   $("#pick").addEventListener("pointermove", move);
   $("#pick").addEventListener("pointerup", up);
 });
 
+// ---- Thanh hỏi nhanh trên khung xem ----
+function hideActBar() { clearTimeout(state.actBarTimer); $("#actBar")?.remove(); }
+function showActBar(text, buttons, ms) {
+  hideActBar();
+  const bar = el("div", { id: "actBar" }, el("span", { textContent: text }), ...buttons.map(([label, fn, primary]) => {
+    const b = el("button", { textContent: label, className: primary ? "primary" : "" });
+    b.onclick = fn;
+    return b;
+  }));
+  $("#stage").append(bar);
+  if (ms) state.actBarTimer = setTimeout(hideActBar, ms);
+}
+
+// Áp vị trí của một phụ đề cho các phụ đề khác; phụ đề có keyframe vị trí giữ nguyên.
+function subPosTargets(id) {
+  const free = (x) => x.kind === "sub" && x.id !== id && !kfOf(x.id).x && !kfOf(x.id).y;
+  const all = state.model.clips.filter(free).map((x) => x.id);
+  return { all, picked: all.filter((x) => state.picks.has(x)) };
+}
+async function applySubPos(id, x, y, ids) {
+  hideActBar();
+  if (!ids.length) return;
+  const r = await edit("batch", { items: ids.map((o) => ({ op: "style", body: { id: o, set: { x, y } } })) });
+  if (r) toast(`Đã áp vị trí cho ${ids.length} phụ đề. Bấm Hoàn tác nếu muốn trả lại.`);
+}
+function offerSubPos(id, x, y) {
+  const { all, picked } = subPosTargets(id);
+  if (!all.length) return;
+  showActBar("Phụ đề đã đổi vị trí. Áp dụng cho:", [
+    ["Chỉ phụ đề này", hideActBar],
+    ...(picked.length ? [[`Phụ đề đang chọn (${picked.length + 1})`, () => applySubPos(id, x, y, picked)]] : []),
+    [`Toàn bộ phụ đề (${all.length + 1})`, () => applySubPos(id, x, y, all), true],
+  ], 20000);
+}
+// Đồ họa SVG: nút tách layer, và chỉnh màu, độ dày, chữ của layer đã tách.
+// SFX đang đi cùng layer: các âm đặt quanh lúc layer xuất hiện, nghe và đổi ngay tại đây.
+function layerSfxRows(c) {
+  const list = state.model.clips.filter((x) => x.kind === "sfx" && x.start >= c.start - 0.8 && x.start <= c.start + 0.8).sort((a, b) => a.start - b.start);
+  const add = el("button", { textContent: "+ Thêm SFX cho layer này" });
+  add.onclick = () => { seek(c.start); select(null); openTab("sfx"); };
+  const rows = list.map((x) => {
+    const change = el("button", { className: "primary", textContent: "Đổi" });
+    change.onclick = () => { select(x.id); openTab("sfx"); };
+    const off = el("button", { textContent: "Xóa" });
+    off.onclick = () => edit("remove", { id: x.id });
+    return el("div", { className: "proLayerSfx" }, sfxListenBtn(x, "▶"), el("span", { className: "nm", title: x.src, textContent: sfxOrigin(x) }), change, off);
+  });
+  return [foldBox("layerSfx", `SFX đi kèm (${list.length})`, ...(rows.length ? rows : [el("p", { className: "hint", textContent: "Layer này chưa có SFX." })]), add)];
+}
+// Đo từng phần trong khối chữ hoặc thẻ MG để tách ra đúng chỗ đang thấy.
+function measureHtmlParts(c) {
+  const n = state.frame?.contentDocument?.getElementById(c.id);
+  if (!n) return null;
+  const doc = n.ownerDocument, win = doc.defaultView, root = doc.querySelector("[data-composition-id]");
+  const rr = root.getBoundingClientRect(), k = rr.width / root.offsetWidth || 1;
+  const box = (e) => { const r = e.getBoundingClientRect(); return { x: (r.left - rr.left) / k, y: (r.top - rr.top) / k, w: r.width / k, h: r.height / k }; };
+  const NAMES = { ic: "Icon", m: "Chữ chính", s: "Chữ phụ", vfx: "Hiệu ứng", lbl: "Nhãn" };
+  const nameOf = (e) => {
+    const sfx = new RegExp(`^${c.id}_(\\w+)$`).exec(e.id || "")?.[1];
+    if (sfx && NAMES[sfx]) return NAMES[sfx];
+    const t = e.textContent.trim();
+    return t ? `Chữ: ${t.slice(0, 22)}` : /svg|img/i.test(e.tagName) ? "Icon" : "Đồ họa";
+  };
+  const ownText = (e) => [...e.childNodes].some((x) => x.nodeType === 3 && x.nodeValue.trim());
+  const parts = [];
+  const walk = (e, path) => {
+    [...e.children].forEach((kid, i) => {
+      if (/^(style|script)$/i.test(kid.tagName)) return;
+      const p = [...path, i], cs = win.getComputedStyle(kid);
+      const hasBg = cs.backgroundColor !== "rgba(0, 0, 0, 0)" || cs.backgroundImage !== "none";
+      if (kid.tagName === "DIV" && kid.children.length > 1 && !ownText(kid) && !hasBg && !kid.hasAttribute("data-hd-split")) return walk(kid, p);
+      const abs = cs.position === "absolute";
+      parts.push({ path: p, name: nameOf(kid), ...box(abs ? e : kid) });
+    });
+  };
+  walk(n, []);
+  const cs = win.getComputedStyle(n);
+  const hasBg = cs.backgroundColor !== "rgba(0, 0, 0, 0)" || cs.backgroundImage !== "none" || (cs.backdropFilter && cs.backdropFilter !== "none") || parseFloat(cs.borderTopWidth) > 0;
+  const bg = hasBg ? { ...box(n), css: `background:${cs.background};border:${cs.border};border-radius:${cs.borderRadius};box-shadow:${cs.boxShadow};backdrop-filter:${cs.backdropFilter};`.replace(/"/g, "'") } : null;
+  return { parts, bg };
+}
+// Gộp, tách layer theo ý: chọn nhiều layer để gộp, bấm tách để chia khối thành từng phần.
+function layerGroupRows(c) {
+  const out = [];
+  const n = state.frame?.contentDocument?.getElementById(c.id);
+  const picks = [...state.picks].map(clipOf).filter((x) => x && !["video", "audio", "sfx", "music", "voice"].includes(x.kind));
+  if (picks.length > 1) {
+    const b = el("button", { className: "primary", textContent: `Gộp ${picks.length} layer thành một nhóm` });
+    b.onclick = async () => { const r = await edit("groupLayers", { ids: picks.map((x) => x.id) }); state.picks.clear(); if (r?.id) select(r.id); };
+    out.push(b);
+  }
+  if (n?.classList.contains("nhom")) {
+    const b = el("button", { className: "primary", textContent: "Tách nhóm về từng layer" });
+    // Tách xong từng layer vẫn đứng đúng chỗ và đúng cỡ như lúc còn trong nhóm.
+    b.onclick = async () => {
+      const o = state.model.overrides[c.id] || {}, sx = o.scale ?? 1, sy = o.scaleY ?? sx;
+      const centerOf = (e) => { const q = e.getBoundingClientRect(); return [q.left + q.width / 2, q.top + q.height / 2]; };
+      const home = [...n.children].filter((k) => k.id).map((k) => [k.id, centerOf(k)]);
+      const r = await edit("ungroupLayers", { id: c.id });
+      if (!r) return;
+      if (sx !== 1 || sy !== 1 || o.x || o.y) {
+        for (let i = 0; i < 150 && state.frameLoading; i++) await new Promise((ok) => setTimeout(ok, 100));
+        const doc = state.frame.contentDocument, items = [];
+        for (const [id, [hx, hy]] of home) {
+          const k = doc.getElementById(id), kid = state.model.overrides[id] || {};
+          if (!k) continue;
+          const parent = k.parentElement, ps = parent.getBoundingClientRect().width / parent.offsetWidth || 1;
+          const ksx = (kid.scale ?? 1) * sx, ksy = (kid.scaleY ?? kid.scale ?? 1) * sy;
+          const pos = { x: kid.x || 0, y: kid.y || 0 };
+          k.style.setProperty("scale", `${ksx} ${ksy}`, "important");
+          const [nx, ny] = centerOf(k);
+          pos.x = Math.round(pos.x + (hx - nx) / ps);
+          pos.y = Math.round(pos.y + (hy - ny) / ps);
+          items.push({ op: "style", body: { id, set: { scale: +ksx.toFixed(3), scaleY: ksx === ksy ? null : +ksy.toFixed(3), x: pos.x, y: pos.y } } });
+        }
+        if (items.length) await edit("batch", { items });
+      }
+      if (r.id) select(r.id);
+    };
+    out.push(el("p", { className: "hint", textContent: "Nhóm kéo, phóng to và dời thời gian chung. Tách ra để chỉnh riêng từng layer." }), b);
+  } else if (n && (n.classList.contains("tx-container") || (n.classList.contains("mg") && !n.querySelector(":scope > svg")))) {
+    const b = el("button", { className: "primary", textContent: "▶ Xem thử tách thành từng layer" });
+    b.title = "Tách icon, chữ chính, chữ phụ, hiệu ứng, nền thành layer riêng";
+    b.onclick = () => {
+      player()?.pause();
+      seek((c.start + c.end) / 2);
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        const m = measureHtmlParts(c);
+        if (!m || m.parts.length + (m.bg ? 1 : 0) < 2) return toast("Khối này chỉ có một phần, không cần tách", true);
+        previewOp(`Tách ${clipLabel(c).slice(0, 26)} thành ${m.parts.length + (m.bg ? 1 : 0)} layer`, "splitHtmlLayers", { id: c.id, parts: m.parts, bg: m.bg }, { id: c.id, keepSel: true, max: 5 });
+      }));
+    };
+    out.push(b);
+  }
+  return out.length ? [el("div", { className: "proGroup" }, el("div", { className: "proGroupHead", textContent: "Tách và gộp layer" }), ...out)] : [];
+}
+function mgLayerRows(c) {
+  const n = state.frame?.contentDocument?.getElementById(c.id), svg = n?.querySelector(":scope > svg");
+  if (!svg) return [];
+  const parts = [...svg.children].filter((k) => k.tagName.toLowerCase() !== "defs");
+  if (!n.hasAttribute("data-mg-tach")) {
+    if (parts.length < 2) return [];
+    const b = el("button", { className: "primary", textContent: "▶ Xem thử tách thành từng layer", title: "Tách nền, đường, ghim, chữ thành từng layer riêng" });
+    b.onclick = () => previewOp(`Tách ${clipLabel(c).slice(0, 26)} thành từng layer`, "splitMgLayers", { id: c.id }, { id: c.id, keepSel: true, max: 5 });
+    return [el("p", { className: "hint", textContent: `Đồ họa này có ${parts.length} phần. Tách ra để kéo và chỉnh riêng từng phần.` }), b];
+  }
+  const win = n.ownerDocument.defaultView;
+  const leaf = (k) => (k.tagName.toLowerCase() === "g" ? k.querySelector("path,circle,text,rect,line,polyline,polygon") || k : k);
+  const first = leaf(parts[0]), cs = win.getComputedStyle(first), tag = first.tagName.toLowerCase();
+  const toHex = (v) => { const m = /rgba?\((\d+),\s*(\d+),\s*(\d+)/.exec(v || ""); return m ? `#${[m[1], m[2], m[3]].map((x) => (+x).toString(16).padStart(2, "0")).join("")}` : ""; };
+  const put = (set) => edit("mgLayerStyle", { id: c.id, ...set });
+  if (tag === "image") return [el("p", { className: "hint", textContent: "Layer ảnh nền: kéo, phóng to, đổi độ rõ ở mục Biến đổi." })];
+  const rows = [];
+  if (tag === "text") {
+    const i = el("input", { type: "text", value: first.textContent });
+    i.onchange = () => put({ text: i.value });
+    rows.push(field("Chữ", i), colorField("Màu chữ", toHex(cs.fill), (v) => v && put({ fill: v }), { dots: false }), sliderRow("Cỡ chữ", parseFloat(cs.fontSize) || 40, 12, 200, 1, (v) => put({ fontSize: v })));
+  } else if (cs.stroke !== "none" && cs.fill === "none") {
+    rows.push(colorField("Màu đường", toHex(cs.stroke), (v) => v && put({ stroke: v }), { dots: false }), sliderRow("Độ dày", parseFloat(cs.strokeWidth) || 8, 1, 60, 1, (v) => put({ strokeWidth: v })));
+  } else {
+    rows.push(colorField("Màu", toHex(cs.fill) || toHex(cs.stroke), (v) => v && put({ fill: v, ...(cs.stroke !== "none" ? { stroke: v } : {}) }), { dots: false }));
+  }
+  return [el("div", { className: "proGroup" }, el("div", { className: "proGroupHead", textContent: "Layer đồ họa" }), ...rows)];
+}
+// Mặt nạ của layer đang chọn: đổi hình, kích thước, viền mềm là thấy ngay.
+// Mục gấp giữ nguyên trạng thái mở khi bảng thuộc tính vẽ lại.
+function foldBox(key, title, ...kids) {
+  state.folds ??= {};
+  const d = el("details", { className: "proGroup proFold", open: !!state.folds[key] }, el("summary", { className: "proGroupHead", textContent: title }), ...kids);
+  d.ontoggle = () => { state.folds[key] = d.open; };
+  return d;
+}
+function maskRows(c) {
+  const cur = { shape: "none", x: 50, y: 50, w: 60, h: 60, feather: 8, invert: false, ...(state.model.overrides[c.id]?.mask || {}) };
+  const css = (m) => { const f = m.feather, on = m.invert ? "transparent" : "#000", off = m.invert ? "#000" : "transparent"; if (m.shape === "ellipse") { const v = `radial-gradient(ellipse ${m.w / 2}% ${m.h / 2}% at ${m.x}% ${m.y}%,${on} ${100 - f * 2}%,${off} 100%)`; return `mask-image:${v};-webkit-mask-image:${v}`; } if (/^(top|bottom|left|right)$/.test(m.shape)) { const v = `linear-gradient(to ${m.shape},${off} ${Math.max(0, m.x - f)}%,${on} ${Math.min(100, m.x + f)}%)`; return `mask-image:${v};-webkit-mask-image:${v}`; } if (m.shape === "rect") { const e = (a, d) => `${off} ${a - d / 2 - f}%,${on} ${a - d / 2}%,${on} ${a + d / 2}%,${off} ${a + d / 2 + f}%`; const v = `linear-gradient(to right,${e(m.x, m.w)}),linear-gradient(to bottom,${e(m.y, m.h)})`; return `mask-image:${v};-webkit-mask-image:${v};mask-composite:intersect;-webkit-mask-composite:source-in`; } return ""; };
+  const thumb = c.kind === "video" && c.src ? `/vn/thumb?du-an=${encodeURIComponent(state.project)}&path=${encodeURIComponent(c.src)}&t=${(c.mediaStart + 0.4).toFixed(2)}` : proThumbs()[0];
+  const live = el("div", { className: "proLive" });
+  const redraw = () => live.replaceChildren(Mau.maskTile(css(cur), thumb));
+  redraw();
+  const save = () => edit("style", { id: c.id, set: { mask: cur.shape === "none" ? null : { ...cur } } });
+  // Kéo là áp tạm lên video trong khung xem, thả ra mới lưu.
+  const liveFrame = () => { redraw(); const n = state.frame?.contentDocument?.getElementById(c.id); if (n) { n.style.maskImage = ""; n.style.webkitMaskImage = ""; const t = css(cur); if (t) n.style.cssText += `;${t}`; } };
+  const slide = (label, key, min, max, step) => sliderRow(label, cur[key], min, max, step, (v) => { cur[key] = v; redraw(); save(); }, (v) => { cur[key] = v; liveFrame(); });
+  const body = [live, tilePicker("Hình mặt nạ", [["none", "Không"], ["rect", "Chữ nhật"], ["ellipse", "Elip / Tròn"], ["top", "Mờ lên trên"], ["bottom", "Mờ xuống dưới"], ["left", "Mờ sang trái"], ["right", "Mờ sang phải"]], cur.shape, (v) => Mau.maskTile(css({ ...cur, shape: v }), thumb), (v) => { cur.shape = v ?? "none"; redraw(); save(); }), slide("Tâm ngang (%)", "x", 0, 100, 1), slide("Tâm dọc (%)", "y", 0, 100, 1), slide("Rộng (%)", "w", 5, 150, 1), slide("Cao (%)", "h", 5, 150, 1), slide("Viền mềm", "feather", 0, 40, 1), checkRow("Đảo vùng che", cur.invert, (v) => { cur.invert = v; redraw(); save(); })];
+  return foldBox("mask", `Mặt nạ (Mask)${cur.shape !== "none" ? " · đang bật" : ""}`, ...body);
+}
+// Tách nền người dẫn của clip video bằng AI tại máy.
+// Khung so sánh: kéo vạch để xem Trước (trái) và Sau (phải); nền xem được đổi để soi viền.
+function compareBox(beforeEl, afterEl, w, h) {
+  const shot = el("div", { className: "cmpAfter cmpCaro" }, afterEl);
+  const line = el("i", { className: "cmpLine" });
+  const range = el("input", { type: "range", min: 0, max: 100, value: 50, className: "cmpRange" });
+  range.setAttribute("aria-label", "Vị trí vạch so sánh");
+  const place = () => { shot.style.clipPath = `inset(0 0 0 ${range.value}%)`; line.style.left = `${range.value}%`; };
+  range.oninput = place;
+  place();
+  const box = el("div", { className: "cmpBox" }, beforeEl, shot, line, el("b", { className: "cmpTag l", textContent: "TRƯỚC" }), el("b", { className: "cmpTag r", textContent: "SAU" }), range);
+  box.style.aspectRatio = `${w} / ${h}`;
+  const bgs = el("div", { className: "pill" }, ...[["cmpCaro", "Ô caro"], ["cmpXanh", "Xanh lá"], ["cmpDen", "Đen"], ["cmpTrang", "Trắng"]].map(([k, t], i) => {
+    const b = el("button", { textContent: t, className: i ? "" : "on" });
+    b.onclick = () => { shot.className = `cmpAfter ${k}`; for (const x of bgs.children) x.classList.toggle("on", x === b); };
+    return b;
+  }));
+  return el("div", { className: "cmpWrap" }, box, field("Nền xem", bgs));
+}
+function openCompareModal(...nodes) {
+  const dlg = $("#modal");
+  dlg.classList.add("wideCmp");
+  openModal(...nodes);
+  dlg.addEventListener("close", () => { dlg.classList.remove("wideCmp"); for (const v of dlg.querySelectorAll("video")) v.pause(); }, { once: true });
+}
+// Xem thử trên một khung tại playhead, chưa tạo gì trong dự án.
+async function matteTryFrame(c, runAll) {
+  const time = state.time >= c.start && state.time <= c.end ? state.time : c.start + (c.end - c.start) / 2;
+  openCompareModal(el("h3", { textContent: "Đang tách thử một khung…" }), el("p", { className: "hint", textContent: "AI chạy tại máy, thường vài giây." }));
+  try {
+    const r = await post("tach-nen/thu", { id: c.id, time });
+    const m = state.model;
+    const a = el("img", { className: "cmpMedia", alt: "Khung gốc", src: r.before }), b = el("img", { className: "cmpMedia", alt: "Khung đã tách nền", src: r.after });
+    const go = el("button", { className: "primary", textContent: `✂ Tách nền cả clip (${(c.end - c.start).toFixed(1)} giây)` }), no = el("button", { textContent: "Đóng" });
+    go.onclick = () => { closeModal(); runAll(); };
+    no.onclick = closeModal;
+    openModal(el("h3", { textContent: `Xem trước tách nền tại ${fmtTime(r.time)}` }), el("p", { className: "hint", textContent: "Kéo vạch để so sánh. Chưa có gì được thêm vào dự án." }), compareBox(a, b, m.width, m.height), el("div", { className: "row" }, go, no));
+  } catch (e) {
+    closeModal();
+    toast(`Chưa tách thử được: ${e.message}`, true);
+  }
+}
+// So sánh trên video đang chạy, sau khi đã tách nền cả clip.
+function matteCompareVideo(c, matte) {
+  const base = `/api/projects/${state.model.projectId}/preview/`, url = (src) => base + src.split("/").map(encodeURIComponent).join("/");
+  const rate = +c.rate || 1, m = state.model, len = c.end - c.start;
+  const a = el("video", { className: "cmpMedia", src: url(c.src), muted: true, playsInline: true, preload: "auto" });
+  const b = el("video", { className: "cmpMedia", src: url(matte.src), muted: true, playsInline: true, preload: "auto" });
+  a.playbackRate = rate;
+  const seekTo = (t) => { a.currentTime = (+c.mediaStart || 0) + t * rate; b.currentTime = t; };
+  const play = el("button", { className: "primary", textContent: "⏸ Dừng" });
+  const pos = el("input", { type: "range", min: 0, max: len, step: 0.01, value: 0 });
+  pos.setAttribute("aria-label", "Thời điểm trong clip");
+  const clock = el("small", { className: "cmpClock" });
+  let on = true, raf = 0;
+  const frame = () => {
+    if (!a.isConnected || !$("#modal").open) return;
+    const t = a.currentTime - (+c.mediaStart || 0);
+    const local = t / rate;
+    if (on) {
+      if (local >= len - 0.03) { seekTo(0); }
+      else if (Math.abs(b.currentTime - local) > 0.08) b.currentTime = local;
+      pos.value = Math.max(0, local);
+    }
+    clock.textContent = `${Math.max(0, local).toFixed(2)} / ${len.toFixed(2)} giây`;
+    raf = requestAnimationFrame(frame);
+  };
+  play.onclick = () => { on = !on; play.textContent = on ? "⏸ Dừng" : "▶ Chạy"; if (on) { a.play(); b.play(); } else { a.pause(); b.pause(); } };
+  pos.oninput = () => { on = false; play.textContent = "▶ Chạy"; a.pause(); b.pause(); seekTo(+pos.value); };
+  const hideOriginal = !!state.model.overrides[c.id]?.hidden;
+  const toggle = el("button", { textContent: hideOriginal ? "Hiện lại nền gốc trên video" : "Dùng bản đã tách (ẩn nền gốc)" });
+  toggle.onclick = () => { closeModal(); edit("style", { id: c.id, set: { hidden: hideOriginal ? null : true } }); };
+  const no = el("button", { textContent: "Đóng" });
+  no.onclick = closeModal;
+  openCompareModal(el("h3", { textContent: "So sánh trước và sau khi tách nền" }), compareBox(a, b, m.width, m.height), el("div", { className: "row cmpBar" }, play, pos, clock), el("div", { className: "row" }, toggle, no));
+  seekTo(0);
+  a.play().catch(() => {});
+  b.play().catch(() => {});
+  raf = requestAnimationFrame(frame);
+}
+function matteRows(c) {
+  const done = state.model.clips.find((x) => x.id.startsWith(`tachnen_${c.id}`));
+  const q = el("select", {}, ...[["balanced", "Cân bằng"], ["best", "Nét nhất (lâu hơn)"], ["fast", "Nhanh"]].map(([v, t]) => el("option", { value: v, textContent: t })));
+  const line = el("p", { className: "hint", textContent: done ? "Clip này đã có layer người tách nền. Tắt mắt video gốc để bỏ nền, hoặc đặt chữ phía sau người." : `Đoạn dài ${(c.end - c.start).toFixed(1)} giây. AI chạy tại máy, không tốn phí, dùng nhiều CPU/GPU trong lúc tách.` });
+  const bar = el("div", { className: "bar", hidden: true }, el("i"));
+  const go = el("button", { className: "primary", textContent: done ? "Tách lại" : "✂ Tách nền người dẫn" });
+  const stop = el("button", { textContent: "Dừng", hidden: true });
+  stop.onclick = () => post("tach-nen/dung", {});
+  const watch = async () => {
+    bar.hidden = false; go.disabled = true; stop.hidden = false;
+    for (;;) {
+      const { job } = await api("tach-nen");
+      if (!job) break;
+      bar.firstChild.style.width = `${job.percent}%`;
+      line.textContent = `${job.stage} ${job.percent}%`;
+      if (job.status === "dang_chay") setStatus(`Tách nền ${job.percent}%`);
+      if (job.status !== "dang_chay") {
+        setStatus("Đã lưu");
+        if (job.status === "xong") {
+          toast("Đã tách nền, layer mới nằm trên video gốc");
+          await refresh();
+          const m = state.model.clips.filter((x) => x.id.startsWith(`tachnen_${c.id}`)).pop();
+          if (m && clipOf(c.id)) matteCompareVideo(clipOf(c.id), m);
+        }
+        else if (job.status === "loi") { toast(`Tách nền lỗi: ${job.log.slice(-160)}`, true); }
+        break;
+      }
+      await new Promise((r) => setTimeout(r, 800));
+    }
+    bar.hidden = true; go.disabled = false; stop.hidden = true;
+  };
+  const runAll = async () => { try { await post("tach-nen", { id: c.id, quality: q.value }); watch(); } catch (e) { toast(e.message, true); } };
+  go.onclick = runAll;
+  const compare = el("button", { textContent: done ? "👁 So sánh trước / sau" : "👁 Xem trước 1 khung" });
+  compare.onclick = () => { const m = state.model.clips.find((x) => x.id.startsWith(`tachnen_${c.id}`)); return m ? matteCompareVideo(c, m) : matteTryFrame(c, runAll); };
+  return foldBox("matte", `Tách nền người dẫn${done ? " · đã có" : ""}`, line, field("Chất lượng", q), bar, el("div", { className: "row" }, compare, go, stop));
+}
+// Một nút cho mọi loại chữ: đoạn nào chưa tách nền thì tự tách, rồi đặt chữ phía sau người dẫn.
+const TEXT_KINDS = ["text", "sub", "graphic"];
+const isBehind = (c) => state.frame?.contentDocument?.getElementById(c.id)?.style.zIndex === "59";
+const matteOf = (v) => state.model.clips.find((x) => x.id.startsWith(`tachnen_${v.id}`));
+const baseVideos = () => state.model.clips.filter((x) => x.kind === "video" && !/^tachnen_/.test(x.id) && !state.model.overrides[x.id]?.hidden);
+function behindScope(c) {
+  // Đang chọn nhiều layer thì áp cho cả nhóm.
+  if (state.picks.size > 1 && state.picks.has(c.id)) return [...state.picks].map(clipOf).filter((x) => x && TEXT_KINDS.includes(x.kind));
+  return [c];
+}
+function videosUnder(list) { return baseVideos().filter((v) => list.some((t) => v.start < t.end && v.end > t.start)); }
+async function waitMatte(onTick) {
+  for (;;) {
+    const { job } = await api("tach-nen");
+    if (!job) return false;
+    onTick?.(job);
+    if (job.status !== "dang_chay") { if (job.status === "loi") toast(`Tách nền lỗi: ${job.log.slice(-160)}`, true); return job.status === "xong"; }
+    await new Promise((r) => setTimeout(r, 800));
+  }
+}
+async function behindPreview(list, front) {
+  const items = list.map((x) => ({ op: "setBehindPerson", body: { id: x.id, behind: !front } }));
+  const first = [...list].sort((a, b) => a.start - b.start)[0];
+  await previewOp(front ? "Đưa chữ ra trước người dẫn" : `Chữ phía sau người dẫn${list.length > 1 ? ` · ${list.length} layer` : ""}`, "batch", { items }, { id: list.length === 1 ? first.id : null, keepSel: true, range: [first.start, first.end], free: list.length > 1, max: 4.5 });
+}
+async function behindOneClick(c) {
+  const list = behindScope(c);
+  const missing = videosUnder(list).filter((v) => !matteOf(v));
+  if (!missing.length) return behindPreview(list);
+  const total = missing.reduce((n, v) => n + (v.end - v.start), 0);
+  const start = async () => {
+    state.behindStop = false;
+    for (let i = 0; i < missing.length; i++) {
+      const v = missing[i];
+      try { await post("tach-nen", { id: v.id, quality: state.behindQ || "balanced" }); }
+      catch (e) { toast(e.message, true); hideActBar(); return; }
+      const ok = await waitMatte((job) => showActBar(`Đang tách nền ${i + 1}/${missing.length}: ${job.percent}%. Xong sẽ tự đặt chữ phía sau người dẫn.`, [["Dừng", () => { state.behindStop = true; post("tach-nen/dung", {}); }]]));
+      if (!ok || state.behindStop) { hideActBar(); if (state.behindStop) toast("Đã dừng tách nền"); await refresh(); return; }
+      await refresh();
+    }
+    hideActBar();
+    const fresh = list.map((x) => clipOf(x.id)).filter(Boolean);
+    behindPreview(fresh);
+  };
+  // Đo thực tế khoảng 45 giây xử lý cho 1 giây video 60 khung/giây: đoạn dài thì hỏi trước.
+  if (total <= 20) return start();
+  const go = el("button", { className: "primary", textContent: "Tách nền và đặt chữ" }), no = el("button", { textContent: "Để sau" });
+  go.onclick = () => { closeModal(); start(); };
+  no.onclick = closeModal;
+  openModal(el("h3", { textContent: "Cần tách nền trước" }), el("p", { className: "hint", textContent: `Có ${missing.length} cảnh, tổng ${total.toFixed(0)} giây video chưa tách nền. Ước tính khoảng ${Math.ceil((total * 45) / 60)} phút và máy sẽ bận trong lúc này.` }), el("div", { className: "row" }, go, no));
+}
+function behindRow(c) {
+  const list = behindScope(c), on = isBehind(c), mattes = videosUnder(list).map(matteOf).filter(Boolean);
+  const main = el("button", { className: on ? "" : "primary", textContent: on ? "Đưa ra trước người dẫn" : `▶ Đặt sau người dẫn${list.length > 1 ? ` (${list.length} layer)` : ""}` });
+  main.onclick = () => (on ? behindPreview(list, true) : behindOneClick(c));
+  const q = selectRow("Tách nền", [["balanced", "Cân bằng"], ["best", "Nét nhất (lâu hơn)"], ["fast", "Nhanh"]], state.behindQ || "balanced", (v) => { state.behindQ = v; });
+  const cur = state.model.overrides[c.id] || {};
+  const kids = [main];
+  if (!mattes.length) kids.push(q, el("p", { className: "hint", textContent: "Đoạn này chưa tách nền. Bấm nút để AI tách tại máy rồi tự đặt chữ phía sau." }));
+  else {
+    const first = mattes[0], personOp = state.model.overrides[first.id]?.opacity ?? 1;
+    kids.push(
+      sliderRow("Độ che của người", personOp, 0.1, 1, 0.05, (v) => edit("batch", { items: mattes.map((m) => ({ op: "style", body: { id: m.id, set: { opacity: v === 1 ? null : v } } })) }), (v) => { for (const m of mattes) { const n = state.frame?.contentDocument?.getElementById(m.id); if (n) n.style.setProperty("opacity", String(v), "important"); } }),
+      sliderRow("Độ rõ chữ", cur.opacity ?? 1, 0.1, 1, 0.05, (v) => edit("batch", { items: list.map((x) => ({ op: "style", body: { id: x.id, set: { opacity: v === 1 ? null : v } } })) }), (v) => { for (const x of list) { const n = state.frame?.contentDocument?.getElementById(x.id); if (n) n.style.setProperty("opacity", String(v), "important"); } }),
+      el("p", { className: "hint", textContent: "Vị trí, cỡ chữ, màu chỉnh ở các mục bên dưới và kéo trực tiếp trên video." })
+    );
+  }
+  return foldBox("behind", `Phía sau người dẫn${on ? " · đang bật" : ""}`, ...kids);
+}
+function subPosRow(c) {
+  const o = state.model.overrides[c.id] || {}, x = o.x || 0, y = o.y || 0, { all, picked } = subPosTargets(c.id);
+  const mk = (label, ids) => { const b = el("button", { textContent: label, disabled: !ids.length }); b.onclick = () => applySubPos(c.id, x, y, ids); return b; };
+  return field("Áp vị trí này cho", el("div", { className: "row" }, ...(picked.length ? [mk(`Đang chọn (${picked.length + 1})`, picked)] : []), mk(`Toàn bộ phụ đề (${all.length + 1})`, all)));
+}
+
+// ---- Xem thử trước khi xác nhận: áp thật lên video, phát đoạn đó, rồi Giữ lại hoặc Bỏ (hoàn tác) ----
+async function playClipOnce(id, pre = 0, tail = false) {
+  for (let i = 0; i < 150 && state.frameLoading; i++) await new Promise((r) => setTimeout(r, 100));
+  const c = clipOf(id);
+  if (!c) return;
+  if (state.sel !== id) select(id);
+  player()?.pause();
+  seek(tail ? Math.max(c.start, c.end - 1.5) : Math.max(0, c.start - pre));
+  state.stopAt = tail ? c.end : Math.min(c.end + pre, c.start + Math.max(3, pre * 2));
+  player()?.play();
+}
+// Xem mẫu ngay trên video chính: máy chủ dựng thử trong bộ nhớ, thay tạm vào khung xem và phát lặp. Tệp dự án chưa đổi.
+function cancelPreview() {
+  const pv = state.preview;
+  if (!pv) return;
+  clearTimeout(state.editEndT);
+  // Bản xem thử đang dựng dở không được quay lại sau khi đã bỏ hoặc đã áp dụng.
+  state.prevTok = (state.prevTok || 0) + 1;
+  state.reWant = false;
+  state.pvFrozen = false;
+  state.editing = false;
+  state.preview = null;
+  state.loopFrom = null;
+  state.stopAt = null;
+  player()?.pause();
+  if (pv.hotBack) applyHot(pv.hotBack);
+  else if (!hotSwap(pv.html, pv.base, true)) { state.frameSrc = pv.base; loadFrame(); }
+  hideActBar();
+  pv.opts.onDrop?.();
+  drawSel();
+  for (const n of document.querySelectorAll(".mxPlaying")) n.classList.remove("mxPlaying");
+}
+function autoSeek(t) {
+  state.autoSeeking = true;
+  try { seek(t); } finally { state.autoSeeking = false; }
+}
+function replayPreview() {
+  const pv = state.preview;
+  if (!pv) return;
+  const { start, end, opts } = pv;
+  const a = opts.range?.[0] ?? start ?? state.time;
+  const b = opts.range?.[1] ?? end ?? a + 3;
+  const from = opts.tail ? Math.max(a, b - 1.6) : Math.max(0, a - (opts.pre || 0));
+  const to = Math.min(state.model.duration, opts.tail ? b : Math.min(b + (opts.pre || 0), from + (opts.max || 3.6)));
+  player()?.pause();
+  if (state.editing) {
+    // Khung dừng: sau pha vào, chữ đã hiện rõ.
+    // Đang đứng ở chỗ đã thấy rõ layer thì giữ nguyên, không tua lại mỗi lần chỉnh.
+    const settle = from + Math.min(opts.settle ?? 1.1, Math.max(0.1, (to - from) * 0.5));
+    if (state.time < settle || state.time > to - 0.04) autoSeek(Math.min(to - 0.04, settle));
+    return;
+  }
+  autoSeek(from);
+  // Áp cho nhiều phụ đề thì chạy tiếp tới khi bấm dừng, không lặp một đoạn ngắn.
+  state.loopFrom = opts.free ? null : from;
+  state.stopAt = opts.free ? null : to;
+  player()?.play();
+}
+async function applyPreview() {
+  const pv = state.preview;
+  if (!pv) return;
+  cancelPreview();
+  const r = await edit(pv.op, pv.body);
+  if (!r) return;
+  if (state.proUi.tplBx) delete state.proUi.tplBx[pv.op];
+  pv.opts.after?.(r);
+  toast(`Đã áp dụng: ${pv.label}. Bấm Hoàn tác nếu muốn trả lại.`);
+  for (let i = 0; i < 150 && state.frameLoading; i++) await new Promise((ok) => setTimeout(ok, 100));
+  drawProps();
+  state.proSync?.();
+  const id = r.id || pv.body.id || pv.opts.id, one = clipOf(id);
+  const range = pv.opts.range;
+  state.loopFrom = null;
+  player()?.pause();
+  // Áp dụng xong tự chạy: một layer thì tới hết layer đó; nhiều phụ đề thì chạy tiếp tới khi bấm dừng.
+  if (pv.opts.free) { seek(range?.[0] ?? state.time); state.stopAt = null; player()?.play(); return; }
+  if (one) {
+    if (state.sel !== id) select(id);
+    seek(Math.max(0, one.start - (pv.opts.pre || 0)));
+    state.stopAt = one.end + (pv.opts.pre || 0);
+    player()?.play();
+  } else if (range) { seek(range[0]); state.stopAt = range[1]; player()?.play(); }
+}
+function previewOp(label, op, body, opts = {}) {
+  return (state.previewWork = runPreview(label, op, body, opts));
+}
+async function runPreview(label, op, body, opts) {
+  const tok = (state.prevTok = (state.prevTok || 0) + 1);
+  if (pvAway()) { state.pvHome = state.time; state.pvMoved = false; }
+  // Bản thử tạm của mẫu trước (chưa áp dụng) phải mất đi khi đổi sang mẫu khác.
+  if (state.tryOn) { if (state.tryOn.fromPreview) await discardTry(); else keepTry(); }
+  setStatus("Đang dựng xem thử…");
+  // Khung xem đang nạp lại (vừa thêm video) thì chờ xong, nếu không bản xem thử rơi vào khung cũ.
+  for (let i = 0; i < 300 && state.frameLoading; i++) await new Promise((ok) => setTimeout(ok, 100));
+  if (tok !== state.prevTok) return;
+  const bx = state.proUi.tplBx?.[op];
+  if (bx && !body.bx) body = { ...body, bx };
+  // Vị trí, cỡ đã kéo được giữ khi đổi thông số hoặc đổi mẫu cùng loại.
+  const was = state.preview;
+  if (was?.body && was.op === op && was.body.replaceId === body.replaceId && was.body.id === body.id) {
+    if (was.body.xf && !body.xf) body = { ...body, xf: was.body.xf };
+    if (was.body.trk && !body.trk) body = { ...body, trk: was.body.trk };
+  }
+  let r;
+  try { r = await post("thu-mau", { op, body }); }
+  catch (e) { setStatus("Đã lưu"); toast(e.message, true); return; }
+  if (tok !== state.prevTok) return;
+  setStatus("Đã lưu");
+  const base = state.preview?.base ?? state.frameSrc, live = state.preview?.html ?? state.frameSrc;
+  // Chỉ đổi biến màu (bảng màu, tab Màu): đổi trực tiếp trên khung xem, không dựng lại.
+  const onlyVars = r.hot && !state.preview;
+  if (onlyVars) applyHot(r.hot);
+  else if (!hotSwap(live, r.html, true)) {
+    // Mẫu có thêm video, âm thanh mới cần ghi tạm kèm nút Giữ, Bỏ. Lỗi khác: nạp lại khung xem rồi thử lại, không ghi gì.
+    if (state.swapWhy === "media") {
+      if (state.preview) cancelPreview();
+      return tryRun(label, () => edit(op, body), { id: opts.id, fromPreview: true });
+    }
+    state.preview = null;
+    state.frameSrc = base;
+    loadFrame();
+    for (let i = 0; i < 300 && state.frameLoading; i++) await new Promise((ok) => setTimeout(ok, 100));
+    if (tok !== state.prevTok) return;
+    if (!hotSwap(base, r.html, true)) { toast("Chưa xem thử được mẫu này trên video", true); return; }
+  }
+  state.preview = { label, op, body, opts, base, html: r.html, id: r.id, start: r.start, end: r.end, hotBack: onlyVars ? r.hotBack : null };
+  showActBar(`Đang xem thử: ${label}${r.count ? ` (${r.count} chỗ)` : ""}. Chưa ghi vào dự án.`, [["✓ Áp dụng vào video", applyPreview, true], ["▶ Xem lại", playPreviewAgain], ["✕ Bỏ", () => { const home = pvAway() ? null : state.pvHome; cancelPreview(); if (home != null) seek(home); }]]);
+  if (opts.id && clipOf(opts.id) && state.sel !== opts.id && !opts.keepSel) select(opts.id);
+  if (!onlyVars) replayPreview();
+  drawSel();
+}
+// Mẫu giữ nguyên thời điểm bắt đầu trong suốt lúc chỉnh, dù khung dừng khác playhead ban đầu. Người dùng dời playhead thì mẫu theo chỗ mới.
+const pinTime = () => (state.preview && !pvAway() && state.pvHome != null ? state.pvHome : state.time);
+// Playhead đã rời đoạn xem thử: do người dùng tua, hoặc tự phát rồi dừng ở chỗ khác.
+function pvAway() {
+  const pv = state.preview;
+  if (!pv || state.pvMoved) return true;
+  const pre = pv.opts.pre || 0;
+  return pv.start != null && (state.time < pv.start - pre - 0.05 || state.time > pv.end + pre + 0.05);
+}
+// Đổi thông số khi đang xem thử: dựng lại liên tục ngay trong lúc kéo, xong lượt này mới tới lượt mới nhất.
+function rePreview(first) {
+  holdForEdit();
+  state.reWant = true;
+  state.reFirst = first || null;
+  if (state.reBusy) return;
+  state.reBusy = true;
+  (async () => {
+    while (state.reWant) {
+      state.reWant = false;
+      const from = performance.now();
+      try {
+        // Chưa xem thử thì lần chỉnh đầu tiên cũng đưa mẫu lên video.
+        await (state.preview ? state.preview.opts.redo?.() : (state.reFirst || state.proPreview)?.());
+        await state.previewWork;
+      } catch { /* lỗi đã báo khi dựng */ }
+      const rest = 70 - (performance.now() - from);
+      if (rest > 0) await new Promise((ok) => setTimeout(ok, rest));
+    }
+    state.reBusy = false;
+  })();
+}
+// Đang chỉnh thông số: video đứng yên ở khung thấy rõ layer. Ngừng chỉnh một nhịp mới chạy lại.
+function holdForEdit() {
+  state.editing = true;
+  state.loopFrom = null;
+  state.stopAt = null;
+  player()?.pause();
+  clearTimeout(state.editEndT);
+  state.editEndT = setTimeout(endEditHold, 1500);
+}
+function endEditHold() {
+  // Còn giữ chuột trên thanh kéo nghĩa là vẫn đang chỉnh.
+  if (state.editHeld) { state.editEndT = setTimeout(endEditHold, 400); return; }
+  if (state.pvFrozen) return;
+  state.editing = false;
+  // Vừa dời playhead thì để yên ở chỗ đó, không kéo về đoạn xem thử.
+  if (state.preview && !pvAway()) replayPreview();
+}
+for (const side of ["#left", "#right"]) $(side).addEventListener("pointerdown", (e) => { if (e.target.closest("input, select")) state.editHeld = true; });
+addEventListener("pointerup", () => { state.editHeld = false; });
+function keepTry() { state.tryOn = null; hideActBar(); }
+async function discardTry() {
+  state.tryOn = null;
+  hideActBar();
+  player()?.pause();
+  await stepUndo("undo");
+  toast("Đã bỏ, video trở lại như trước");
+}
+async function tryRun(label, fn, opts = {}) {
+  cancelPreview();
+  if (state.tryOn) await discardTry();
+  state.inTry = true;
+  let r;
+  try { r = await fn(); } finally { state.inTry = false; }
+  if (!r) return r;
+  const id = r.id || opts.id;
+  const replay = () => { if (id) playClipOnce(id, opts.pre || 0, opts.tail); };
+  state.tryOn = { label, fromPreview: !!opts.fromPreview };
+  showActBar(`Đang xem thử: ${label}`, [...(id ? [["▶ Xem lại", replay]] : []), ["✓ Giữ lại", keepTry, true], ["✕ Bỏ", discardTry]]);
+  replay();
+  return r;
+}
+
 // ---- Timeline ----
-const laneKey = (c) => c.lane || c.kind;
+const laneKey = (c) => {
+  const k = c.lane || c.kind;
+  if (k === "graphic") return "mg";
+  if (k === "fx") return "vfx";
+  if (k === "image") return "broll";
+  if (k === "audio") return "music";
+  return k;
+};
 function packLanes() {
   const out = [];
   for (const lane of LANES) {
     const clips = state.model.clips.filter((c) => laneKey(c) === lane.kind).sort((a, b) => a.start - b.start);
-    if (!clips.length) continue;
-    const rows = [];
-    for (const c of clips) {
-      let r = rows.find((row) => row[row.length - 1].end <= c.start + 0.001);
-      if (!r) rows.push((r = []));
-      r.push(c);
+    if (!clips.length) {
+      if (state.showAllLanes && lane.core) {
+        out.push({ ...lane, row: [], track: 0, first: true, empty: true, label: lane.name });
+      }
+      continue;
     }
-    rows.forEach((row, i) => out.push({ ...lane, row, first: i === 0, label: rows.length > 1 ? `${lane.name} ${i + 1}` : lane.name }));
+    // Mỗi hàng giữ đúng số hàng (data-track-index) của clip, nên thả xong clip không tự nhảy hàng;
+    // chỉ khi chồng lên nhau trong cùng hàng mới tách thêm hàng phụ.
+    const rows = [];
+    for (const t of [...new Set(clips.map((c) => c.track))].sort((a, b) => a - b)) {
+      const own = [];
+      for (const c of clips.filter((x) => x.track === t)) {
+        let r = own.find((row) => row[row.length - 1].end <= c.start + 0.001);
+        if (!r) own.push((r = []));
+        r.push(c);
+      }
+      for (const r of own) rows.push(Object.assign(r, { track: t }));
+    }
+    rows.forEach((row, i) => out.push({ ...lane, row, track: row.track, first: i === 0, empty: false, label: rows.length > 1 ? `${lane.name} · ${i + 1}` : lane.name }));
   }
   return out;
+}
+
+async function quickAddForLane(kind) {
+  if (kind === "sub") {
+    const r = await edit("add", { kind: "sub", lane: "sub", text: "Phụ đề câu thoại mới", time: state.time, duration: 2.5, newId: "sub" });
+    if (r?.id) { state.txtTab = "text"; select(r.id); toast("Đã thêm khối Phụ đề (T1)"); }
+    return;
+  }
+  if (kind === "text") {
+    state.proUi.subTab = "tx";
+    openTab("presets");
+    const r = await edit("addTextVfxPreset", { presetId: state.proUi.txId || "TX-01", overrides: state.proUi.txOverrides || {}, time: state.time, duration: 3 });
+    if (r?.id) { state.txtTab = "text"; select(r.id); toast(`Đã thêm mẫu chữ VFX ${state.proUi.txId || "TX-01"}`); }
+    return;
+  }
+  if (kind === "mg") {
+    state.proUi.subTab = "mg";
+    openTab("presets");
+    const r = await edit("addMgPreset", { mgId: state.proUi.mgId || "MG-SPEC-CARD", params: state.proUi.mgParams || {}, time: state.time, duration: 3.2 });
+    if (r?.id) { state.txtTab = "text"; select(r.id); toast(`Đã thêm thẻ Đồ họa MG (${state.proUi.mgId || "MG-SPEC-CARD"})`); }
+    return;
+  }
+  if (kind === "vfx") {
+    const r = await edit("addFx", { ten: "Ánh sáng ấm", loai: "Hiệu ứng", kieu: "am", time: state.time, duration: 2 });
+    if (r?.id) { select(r.id); toast(`Đã thêm lớp Kỹ xảo tại ${fmtTime(state.time)}`); }
+    return;
+  }
+  if (kind === "shape") {
+    const r = await edit("addShape", { shape: "bo", time: state.time });
+    if (r?.id) { select(r.id); toast(`Đã thêm Hình khối tại ${fmtTime(state.time)}`); }
+    return;
+  }
+  if (kind === "sticker") return document.querySelector('[data-cc="Nhãn dán"]')?.click();
+  if (kind === "transition") {
+    state.proUi.subTab = "motion";
+    state.proUi.motionCat = "transition";
+    openTab("presets");
+    const r = await edit("applyMotionPreset", { category: "transition", presetId: "whip_pan_trans", custom: { time: state.time, duration: 0.5 } });
+    if (r?.id) { select(r.id); toast("Đã thêm Chuyển cảnh Whip Pan / Swish Pan"); }
+    return;
+  }
+  if (kind === "grade") {
+    let a = state.time, b = Math.min(state.model?.duration || 15, state.time + 3);
+    if (state.range) [a, b] = state.range;
+    else {
+      const v = state.model.clips.filter((x) => x.kind === "video" && x.start <= state.time && x.end > state.time).sort((p, q) => q.start - p.start)[0];
+      if (v) b = v.end;
+    }
+    const r = await edit("add", { kind: "grade", time: a, duration: Math.max(0.5, b - a), newId: "mau" });
+    if (r?.id) { state.txtTab = "color"; select(r.id); toast("Đã thêm Lớp Màu & 3D LUT"); }
+    return;
+  }
+  if (kind === "sfx") {
+    openTab("sfx");
+    toast("Chọn âm SFX bên trái hoặc vào Mẫu Pro → SFX & 8 Tầng để đặt chuẩn Đỉnh Âm");
+    return;
+  }
+  if (kind === "broll" || kind === "video" || kind === "voice" || kind === "music") {
+    openTab("assets");
+    toast("Bấm tệp trong Tư liệu hoặc kéo thả tệp từ máy vào timeline");
+    return;
+  }
 }
 
 function drawTimeline() {
@@ -357,19 +1238,97 @@ function drawTimeline() {
     ruler.append(u);
   }
   state.lanes = packLanes();
-  $("#laneRows").replaceChildren(...state.lanes.map((l) => {
+  const motion = el("div", { className: "row-t", id: "motionRow" }), coded = codedRow();
+  fillMotion(motion);
+  $("#laneRows").replaceChildren(el("div", { className: "lane", title: "Các nhịp hiệu ứng của clip đang chọn" }, el("span", { textContent: "✦ Nhịp Tween" })), ...(coded ? [el("div", { className: "lane" }, el("span", { textContent: "Hiệu ứng bằng mã" }))] : []), ...state.lanes.map((l) => {
     const eye = el("button", { textContent: ["audio", "sfx", "voice", "music"].includes(l.kind) ? "🔊" : "👁", title: `Ẩn / hiện ${l.name} khi xem`, className: state.hidden.has(l.kind) ? "off" : "" });
     eye.setAttribute("aria-label", `Ẩn hoặc hiện ${l.name}`);
     eye.onclick = () => { state.hidden.has(l.kind) ? state.hidden.delete(l.kind) : state.hidden.add(l.kind); applyHidden(); drawTimeline(); };
-    return el("div", { className: "lane" }, el("span", { textContent: l.label }), l.first ? eye : "");
+    const addBtn = el("button", { className: "laneAdd", textContent: "+", title: `${l.addHint || `Thêm vào ${l.name}`} tại playhead` });
+    addBtn.setAttribute("aria-label", l.addHint || `Thêm vào ${l.name}`);
+    addBtn.onclick = () => quickAddForLane(l.kind);
+    return el("div", { className: `lane l-head-${l.kind}${l.empty ? " empty" : ""}`, title: `${l.name}${l.empty ? " (Đang trống — bấm + để thêm khối)" : ""}` }, el("span", { className: "laneName", textContent: l.label }), l.first ? el("span", { className: "laneBtns" }, addBtn, eye) : "");
   }));
-  $("#rows").replaceChildren(...state.lanes.map((l) => {
-    const row = el("div", { className: "row-t" });
-    for (const c of l.row) row.append(clipEl(c));
+  $("#rows").replaceChildren(motion, ...(coded ? [coded] : []), ...state.lanes.map((l, i) => {
+    const row = el("div", { className: `row-t${l.empty ? " empty" : ""}` });
+    row.dataset.li = i;
+    if (l.empty) {
+      const hintBtn = el("button", { className: "rowEmptyHint", textContent: `+ ${l.addHint || `Thêm ${l.name}`}` });
+      hintBtn.onclick = (e) => { e.stopPropagation(); quickAddForLane(l.kind); };
+      row.append(hintBtn);
+      row.addEventListener("dblclick", (e) => {
+        const r = $("#ruler").getBoundingClientRect();
+        seek((e.clientX - r.left) / state.pxPerSec);
+        quickAddForLane(l.kind);
+      });
+    } else {
+      for (const c of l.row) row.append(clipEl(c));
+    }
     return row;
   }));
   drawHead();
   drawRange();
+}
+
+// Từng nhịp hiệu ứng của clip đang chọn: kéo để dời, kéo mép phải để đổi độ dài.
+// Hàng này luôn có sẵn để các lớp dưới không nhảy vị trí khi đổi lựa chọn giữa lúc đang kéo.
+function fillMotion(row) {
+  row.replaceChildren();
+  const c = clipOf(state.sel);
+  if (!c?.tweens.length) return;
+  const pps = state.pxPerSec;
+  for (const t of c.tweens) {
+    const len = t.dur || 0.02;
+    const name = `${t.selector ? t.selector.replace(/^#/, "") : t.id} · ${t.method}`;
+    const box = el("div", { className: "tw", title: `${name} · lúc ${t.pos.toFixed(2)}s · dài ${t.dur.toFixed(2)}s` });
+    const h = el("i");
+    box.append(h);
+    box.style.left = `${t.pos * pps}px`;
+    box.style.width = `${Math.max(4, len * pps)}px`;
+    box.addEventListener("pointerdown", (e) => {
+      if (e.button !== 0) return;
+      e.stopPropagation();
+      const resize = e.target === h, sx = e.clientX;
+      let pos = t.pos, dur = t.dur;
+      box.setPointerCapture(e.pointerId);
+      const move = (ev) => {
+        const d = (ev.clientX - sx) / pps;
+        if (resize) { dur = +Math.max(0, t.dur + d).toFixed(3); box.style.width = `${Math.max(4, dur * pps)}px`; }
+        else { pos = +Math.max(0, t.pos + d).toFixed(3); box.style.left = `${pos * pps}px`; }
+      };
+      const up = () => {
+        box.removeEventListener("pointermove", move);
+        box.removeEventListener("pointerup", up);
+        if (resize ? dur !== t.dur : pos !== t.pos) edit("tween", { i: t.i, expectedPos: t.pos, ...(resize ? { dur } : { pos }) });
+      };
+      box.addEventListener("pointermove", move);
+      box.addEventListener("pointerup", up);
+    });
+    row.append(box);
+  }
+}
+
+// Nhịp do vòng lặp trong mã sinh ra (dự án cũ) không đọc được từ tệp: lấy từ timeline đang chạy để hiện đủ, chỉ xem.
+function codedTweens() {
+  const tl = state.frame?.contentWindow?.__timelines?.main;
+  if (!tl?.getChildren) return [];
+  const known = state.model.clips.flatMap((c) => c.tweens);
+  return tl.getChildren(false, true, true).filter((x) => {
+    const at = x.startTime();
+    return !known.some((t) => Math.abs(t.pos - at) < 0.006);
+  }).map((x) => ({ at: x.startTime(), len: x.totalDuration(), who: x.targets?.()[0]?.id || "" }));
+}
+function codedRow() {
+  const list = codedTweens();
+  if (!list.length) return null;
+  const row = el("div", { className: "row-t" });
+  for (const x of list) {
+    const box = el("div", { className: "tw code", title: `${x.who || "Hiệu ứng"} · lúc ${x.at.toFixed(2)}s. Hiệu ứng này do vòng lặp trong mã tạo ra, nhờ AI tách thành clip để kéo được` });
+    box.style.left = `${x.at * state.pxPerSec}px`;
+    box.style.width = `${Math.max(4, x.len * state.pxPerSec)}px`;
+    row.append(box);
+  }
+  return row;
 }
 
 // Tay nắm rõ dần, mờ dần ở hai góc trên của clip, kéo vào trong như CapCut.
@@ -449,7 +1408,9 @@ function animBands(c, box) {
 
 function clipEl(c) {
   const narrow = (c.end - c.start) * state.pxPerSec < 26;
-  const box = el("div", { className: `clip k-${c.kind}${narrow ? " narrow" : ""}${c.id === state.sel ? " sel" : ""}${state.picks.has(c.id) ? " pick" : ""}`, title: `${clipLabel(c)}\n${fmtTime(c.start)} → ${fmtTime(c.end)}` });
+  const lk = laneKey(c);
+  const badge = c.presetId ? `[${c.presetId}] ` : c.mgId ? `[${c.mgId.replace(/^MG-/, "MG:")}] ` : "";
+  const box = el("div", { className: `clip k-${c.kind} l-${lk}${narrow ? " narrow" : ""}${c.id === state.sel ? " sel" : ""}${state.picks.has(c.id) ? " pick" : ""}${isSound(c) && c.muted ? " off" : ""}`, title: `${isSound(c) && c.muted ? "Đang tắt · " : ""}${badge}${clipLabel(c)}\n${fmtTime(c.start)} → ${fmtTime(c.end)}` });
   box.dataset.id = c.id;
   box.style.left = `${c.start * state.pxPerSec}px`;
   box.style.width = `${Math.max(2, (c.end - c.start) * state.pxPerSec)}px`;
@@ -457,7 +1418,7 @@ function clipEl(c) {
     box.style.backgroundImage = `url("/vn/thumb?du-an=${encodeURIComponent(state.project)}&path=${encodeURIComponent(c.src)}&t=${c.mediaStart.toFixed(2)}")`;
   }
   if (c.kind === "audio" || c.kind === "sfx") { drawWave(c, box); addFadeHandles(c, box); }
-  box.append(el("span", { className: "lb", textContent: clipLabel(c) }), el("div", { className: "h l" }), el("div", { className: "h r" }));
+  box.append(el("span", { className: "lb", textContent: `${badge}${clipLabel(c)}` }), el("div", { className: "h l" }), el("div", { className: "h r" }));
   if (c.id === state.sel) for (const t of kfTimes(c.id)) box.append(kfMark(c, t));
   animBands(c, box);
   box.addEventListener("pointerdown", (e) => { if (e.button !== 2) clipDrag(e, c, box); });
@@ -537,13 +1498,35 @@ function clipDrag(e, c, box) {
   const edge = e.target.classList.contains("l") ? "start" : e.target.classList.contains("r") ? "end" : null;
   const sx = e.clientX, pts = snapPoints(c.id);
   const line = $("#snapLine");
-  let delta = 0, moved = false;
+  let delta = 0, moved = false, track = c.track;
   box.setPointerCapture(e.pointerId);
-  const sc0 = $("#tracksScroll").scrollLeft;
+  box.classList.add("dragging");
+  const sc0 = $("#tracksScroll").scrollLeft, sy = e.clientY;
+  const home = box.parentElement, homeTop = home.getBoundingClientRect().top;
+  const kind = laneKey(c);
+  const mine = state.lanes.filter((l) => l.kind === kind);
+  const tracks = mine.map((l) => l.track);
+  // Kéo dọc: thả lên hàng cùng loại thì vào hàng đó; kéo ra ngoài nhóm hàng thì tạo hàng mới phía trên/dưới.
+  const pickTrack = (ev) => {
+    if (edge || group) return { track: c.track, top: homeTop };
+    const rowEl = [...document.querySelectorAll("#rows .row-t[data-li]")].find((r) => { const b = r.getBoundingClientRect(); return ev.clientY >= b.top && ev.clientY < b.bottom; });
+    if (!rowEl) return { track, top: null };
+    const lane = state.lanes[+rowEl.dataset.li], top = rowEl.getBoundingClientRect().top;
+    if (lane.kind === kind) return { track: lane.track, top };
+    const firstLi = state.lanes.indexOf(mine[0]);
+    if (+rowEl.dataset.li < firstLi) return Math.min(...tracks) > 0 ? { track: Math.min(...tracks) - 1, top, fresh: true } : { track, top: null };
+    return { track: Math.max(...tracks) + 1, top, fresh: true };
+  };
   const onMove = (ev) => {
     const raw = (ev.clientX - sx + $("#tracksScroll").scrollLeft - sc0) / state.pxPerSec;
-    if (!moved && Math.abs(ev.clientX - sx) < 3) return;
+    if (!moved && Math.abs(ev.clientX - sx) < 3 && Math.abs(ev.clientY - sy) < 6) return;
     moved = true;
+    const pt = pickTrack(ev);
+    if (pt.top !== null) {
+      track = pt.track;
+      box.style.transform = `translateY(${pt.top - homeTop}px)`;
+      box.classList.toggle("newRow", !!pt.fresh);
+    }
     let snap;
     if (edge === "start") { snap = snapTo(c.start + raw, pts); delta = snap.value - c.start; }
     else if (edge === "end") { snap = snapTo(c.end + raw, pts); delta = snap.value - c.end; }
@@ -573,10 +1556,20 @@ function clipDrag(e, c, box) {
     box.removeEventListener("pointerup", onUp);
     line.hidden = true;
     tip.hidden = true;
-    if (!moved || Math.abs(delta) < 0.001) return;
+    box.classList.remove("dragging", "newRow");
+    const moveX = Math.abs(delta) >= 0.001, moveY = track !== c.track;
+    if (!moved) {
+      // Bấm một clip trong nhóm mà không kéo thì chỉ còn chọn clip đó, như CapCut.
+      if (group) select(c.id);
+      player()?.pause();
+      seek((sx - $("#ruler").getBoundingClientRect().left) / state.pxPerSec);
+      if (c.kind === "sfx") openTab("sfx");
+    }
+    if (!moved || (!moveX && !moveY)) { box.style.transform = ""; return; }
     if (group && !edge) return edit("batch", { items: group.map((id) => ({ op: "move", body: { id, delta } })) });
-    if (edge) edit("trim", { id: c.id, edge, delta });
-    else edit("move", { id: c.id, delta });
+    if (edge) return edit("trim", { id: c.id, edge, delta });
+    const items = [...(moveX ? [{ op: "move", body: { id: c.id, delta } }] : []), ...(moveY ? [{ op: "track", body: { id: c.id, track } }] : [])];
+    edit(items.length > 1 ? "batch" : items[0].op, items.length > 1 ? { items, id: c.id } : items[0].body);
   };
   const auto = edgeScroll(onMove);
   const onPointer = (ev) => { auto.track(ev); onMove(ev); };
@@ -599,12 +1592,51 @@ $("#ruler").addEventListener("pointerdown", (e) => {
   ruler.addEventListener("pointermove", move);
   ruler.addEventListener("pointerup", () => { auto.stop(); ruler.removeEventListener("pointermove", move); }, { once: true });
 });
+// Bấm chỗ trống: playhead tới đó. Giữ chuột kéo: quét chọn nhiều layer như CapCut; giữ Shift/Ctrl để chọn thêm.
 $("#rows").addEventListener("pointerdown", (e) => {
-  if (e.target.closest(".clip")) return;
-  const r = $("#ruler").getBoundingClientRect();
-  select(null);
-  player()?.pause();
-  seek((e.clientX - r.left) / state.pxPerSec);
+  if (e.button !== 0 || e.target.closest(".clip")) return;
+  const rows = $("#rows"), sc = $("#tracksScroll");
+  const x0 = e.clientX, y0 = e.clientY, sl0 = sc.scrollLeft, st0 = sc.scrollTop;
+  const base = e.shiftKey || e.ctrlKey ? new Set(state.picks.size ? state.picks : state.sel ? [state.sel] : []) : new Set();
+  let moved = false, hit = new Set(base);
+  let box = $("#marquee");
+  if (!box) { box = el("div", { id: "marquee" }); document.body.append(box); }
+  rows.setPointerCapture(e.pointerId);
+  const update = (ev) => {
+    if (!moved && Math.hypot(ev.clientX - x0, ev.clientY - y0) < 4) return;
+    moved = true;
+    const ax = x0 - (sc.scrollLeft - sl0), ay = y0 - (sc.scrollTop - st0);
+    const l = Math.min(ax, ev.clientX), r = Math.max(ax, ev.clientX), t = Math.min(ay, ev.clientY), b = Math.max(ay, ev.clientY);
+    box.hidden = false;
+    box.style.cssText = `left:${l}px;top:${t}px;width:${r - l}px;height:${b - t}px`;
+    hit = new Set(base);
+    for (const n of rows.querySelectorAll(".clip")) {
+      const q = n.getBoundingClientRect();
+      if (q.left < r && q.right > l && q.top < b && q.bottom > t) hit.add(n.dataset.id);
+      n.classList.toggle("pick", hit.has(n.dataset.id));
+    }
+  };
+  const auto = edgeScroll(update);
+  const move = (ev) => { auto.track(ev); update(ev); };
+  rows.addEventListener("pointermove", move);
+  rows.addEventListener("pointerup", () => {
+    auto.stop();
+    rows.removeEventListener("pointermove", move);
+    box.hidden = true;
+    if (!moved) {
+      select(null);
+      player()?.pause();
+      seek((x0 - $("#ruler").getBoundingClientRect().left) / state.pxPerSec);
+      return;
+    }
+    const ids = [...hit].filter((id) => clipOf(id));
+    select(ids[0] ?? null);
+    if (ids.length > 1) {
+      for (const id of ids) state.picks.add(id);
+      for (const n of rows.querySelectorAll(".clip")) n.classList.toggle("pick", state.picks.has(n.dataset.id));
+      drawProps(); syncTools(); drawList();
+    }
+  }, { once: true });
 });
 
 // ---- Chọn vùng cho AI ----
@@ -661,6 +1693,9 @@ function drawHead(follow) {
   $("#playhead").style.left = `${state.time * state.pxPerSec}px`;
   if (!state.range && !state.playing) drawAiCtx();
   $("#clock").textContent = `${fmtTime(state.time)} / ${fmtTime(state.model.duration)}`;
+  const at = `Thêm tại ${fmtTime(state.time)}`;
+  for (const n of document.querySelectorAll(".addAt")) n.textContent = at;
+  drawTrackOv();
   if (follow) {
     const sc = $("#tracksScroll"), x = state.time * state.pxPerSec;
     if (x > sc.scrollLeft + sc.clientWidth - 40 || x < sc.scrollLeft) sc.scrollLeft = x - 40;
@@ -686,17 +1721,22 @@ function fitZoom() {
 function select(id) {
   state.sel = id;
   state.picks.clear();
+  if ($("#motionRow")) fillMotion($("#motionRow"));
   for (const b of document.querySelectorAll(".clip")) { b.classList.remove("pick"); b.classList.toggle("sel", b.dataset.id === id); }
   // Kim cương keyframe chỉ hiện trên clip đang chọn.
   for (const m of document.querySelectorAll(".clip i.kf")) m.remove();
-  const picked = clipOf(id), box = id && document.querySelector(`#rows .clip[data-id="${id}"]`);
+  const picked = clipOf(id), box = id && document.querySelector(`#rows .clip[data-id="${CSS.escape(id)}"]`);
   if (picked && box) for (const t of kfTimes(id)) box.append(kfMark(picked, t));
+  if (picked?.presetId && state.pro?.textVfxPresets?.some((p) => p.id === picked.presetId)) {
+    state.proUi.txId = picked.presetId;
+  }
   drawList();
   drawProps();
   drawSel();
   syncTools();
   drawAiCtx();
   if ($("#tab-sfx").classList.contains("on")) drawSfx();
+  state.proSync?.();
 }
 
 function syncTools() {
@@ -778,15 +1818,54 @@ function drawProps() {
     );
     return;
   }
-  const nodes = [el("div", { className: "inspHead" }, el("b", { textContent: KIND_NAME[c.kind] }), el("small", { textContent: c.id }))];
+  const nodes = [el("div", { className: "inspHead" }, el("b", { textContent: KIND_NAME[c.kind] }), el("small", { textContent: c.id.replace(/^hf-/, "") }))];
   if (state.picks.size > 1) nodes.push(el("p", { className: "hint", textContent: `Đang chọn ${state.picks.size} clip: kéo một cái để dời cả nhóm, Delete để xóa cả nhóm.` }));
+  if (c.kind === "sfx" && c.src) {
+    const change = el("button", { className: "primary", textContent: "Đổi SFX này" });
+    change.onclick = () => openTab("sfx");
+    nodes.push(el("p", { className: "hint", title: (state.model.sfxGoc?.[baseName(c.src).replace(/\.[^.]+$/, "")] || [c.src]).join("\n"), textContent: `Tệp gốc: ${sfxOrigin(c)}` }), el("div", { className: "row" }, sfxListenBtn(c), change));
+  }
+  if (c.kind === "fx" && effectName(c) && c.name) nodes.push(el("p", { className: "hint", textContent: `Tên thường gọi: ${effectName(c)}` }));
+  if (c.kind === "sub") nodes.push(subPosRow(c));
+  if (c.kind === "graphic") nodes.push(...mgLayerRows(c));
+  if (["text", "graphic", "fx", "image", "shape"].includes(c.kind)) nodes.push(...layerGroupRows(c), ...layerSfxRows(c));
+  if (isVisualClip(c)) {
+    const front = el("button", { textContent: "⬆ Đưa layer lên trên cùng", title: "Layer bị video hoặc layer khác che thì bấm để đưa lên trên" });
+    front.onclick = () => edit("bringFront", { id: c.id });
+    nodes.push(front, trackRow(c), blendRows(c));
+  }
+  if (c.kind === "video") nodes.push(matteRows(c));
+  if (TEXT_KINDS.includes(c.kind)) { state.folds ??= {}; state.folds.behind ??= true; nodes.push(behindRow(c)); }
+  if (["video", "image", "text", "graphic"].includes(c.kind)) nodes.push(maskRows(c));
   const fromHere = el("button", { textContent: "▶ Từ đây", title: "Phát từ trước clip 1 giây" });
   fromHere.onclick = () => { state.stopAt = null; seek(Math.max(0, c.start - 1)); player()?.play(); };
   const onlyThis = el("button", { textContent: "Xem clip", title: "Phát đúng đoạn của clip rồi dừng" });
   onlyThis.onclick = () => { seek(c.start); state.stopAt = c.end; player()?.play(); };
   nodes.push(el("div", { className: "view-row" }, fromHere, onlyThis, ...(c.kind !== "audio" && c.kind !== "sfx" ? [compareButton(c)] : [])));
   nodes.push(...inspector(c));
-  $("#props").replaceChildren(...nodes);
+  keepTyping(host, () => host.replaceChildren(...nodes));
+}
+
+// Lưu ngay khi đang gõ thì bảng được vẽ lại: giữ con trỏ, phần chữ gõ thêm, rồi lưu tiếp phần đó.
+function keepTyping(host, redraw) {
+  const a = document.activeElement;
+  const was = host.contains(a) && a.matches("input,textarea") && a.getAttribute("aria-label")
+    ? { label: a.getAttribute("aria-label"), value: a.value, s: a.selectionStart, e: a.selectionEnd } : null;
+  redraw();
+  if (!was) return;
+  const b = [...host.querySelectorAll("input,textarea")].find((x) => x.getAttribute("aria-label") === was.label);
+  if (!b) return;
+  b.focus();
+  if (b.value !== was.value) { b.value = was.value; b.dispatchEvent(new Event("input")); }
+  try { b.setSelectionRange(was.s, was.e); } catch { /* ô số không có con trỏ */ }
+}
+// Gõ tới đâu lưu tới đó (chờ ngừng gõ một chút), không cần Enter.
+function liveCommit(input, save, wait = 450) {
+  let timer = 0, last = input.value;
+  const go = () => { clearTimeout(timer); if (input.value === last) return; last = input.value; save(input.value); };
+  input.addEventListener("input", () => { clearTimeout(timer); timer = setTimeout(go, wait); });
+  input.addEventListener("change", go);
+  input.addEventListener("blur", go);
 }
 
 // ---- Yêu thích ----
@@ -840,8 +1919,33 @@ const ICONS = {
 const ICON_BG = { school: "#1a73e8", hospital: "#d93025", pharmacy: "#d93025", cart: "#188038", mall: "#e8710a", park: "#188038", cafe: "#8d6e63", food: "#e8710a", bus: "#1a73e8", bank: "#5f6368", gym: "#9334e6", home: "#ea4335", plane: "#1a73e8", star: "#f2a600" };
 
 function iconPanel(c) {
-  const out = [el("h4", { textContent: `Icon minh họa (${c.icons.length})` })];
-  for (const ic of c.icons) {
+  const out = [el("h4", { textContent: `Icon minh họa (${c.icons?.length || 1})` })];
+  const proIcons = state.pro?.animatedIcons || [];
+  const hasPro = c.iconId || c.presetId || c.mgId || c.icons?.some((ic) => ic.kind === "pro_icon");
+  if (hasPro && proIcons.length) {
+    const curId = c.iconId || c.icons?.find((ic) => ic.kind === "pro_icon")?.iconId || "IC-DIAMOND-LUX";
+    const card = el("div", { className: "iconCard" });
+    card.append(
+      el("span", { className: "cf-lbl", textContent: `Kho 24 Icon Động SVG (Đang dùng: ${curId})` }),
+      colorField("Màu nét Icon SVG", state.proUi.iconColor || "#F5D061", (v) => {
+        if (!v) return;
+        state.proUi.iconColor = v;
+        edit("setProIcon", { id: c.id, iconId: curId, iconColor: v });
+      }),
+      el("div", { className: "proIconGrid" }, ...proIcons.map((ic) => {
+        const b = el("button", {
+          title: `${ic.id} · ${ic.name_vi}\n${ic.usage || ""}`,
+          className: `proIconBtn${ic.id === curId ? " on" : ""}`,
+        });
+        b.innerHTML = `<svg viewBox="${ic.viewBox || "0 0 64 64"}" fill="none" stroke="${state.proUi.iconColor || "#F5D061"}" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">${(ic.paths || []).map((d) => `<path d="${d}"/>`).join("")}</svg><span>${ic.name_vi}</span>`;
+        b.onclick = () => edit("setProIcon", { id: c.id, iconId: ic.id, iconColor: state.proUi.iconColor || "#F5D061" });
+        return b;
+      }))
+    );
+    out.push(card);
+  }
+  for (const ic of c.icons || []) {
+    if (ic.kind === "pro_icon") continue;
     const ov = state.model.overrides[ic.id] || {};
     const card = el("div", { className: "iconCard" });
     if (ic.kind === "pin") {
@@ -1001,16 +2105,19 @@ function layerCard(c, sg, index) {
   const back = el("button", { textContent: "↺ Khôi phục", title: "Trả lớp chữ về như bản AI dựng gốc" });
   back.onclick = () => edit("restoreSeg", { id: c.id, index });
   card.append(el("h5", {}, el("span", { textContent: c.segments.length > 1 ? `Lớp ${index + 1}${lo.hidden ? " · đã xóa" : ""}` : (lo.hidden ? "Chữ · đã xóa" : "Chữ") }), el("span", { className: "acts" }, del, back)));
-  const multi = plainText.includes("\n");
-  const input = el(multi ? "textarea" : "input", { type: "text", value: plainText, disabled: !!sg.auto });
+  // Luôn là ô nhiều dòng: Enter để xuống dòng, gõ tới đâu khung xem cập nhật tới đó.
+  const input = el("textarea", { value: plainText, disabled: !!sg.auto, rows: Math.max(2, plainText.split("\n").length) });
   if (sg.auto) card.append(el("small", { className: "hint", textContent: "Số chạy tự động bằng hiệu ứng: muốn đổi số, nhờ AI sửa." }));
   input.setAttribute("aria-label", `Nội dung lớp ${index + 1}`);
-  input.onchange = () => {
+  input.title = "Gõ là tự lưu. Enter để xuống dòng";
+  input.addEventListener("input", () => { input.rows = Math.max(2, input.value.split("\n").length); });
+  liveCommit(input, (value) => {
     // Giữ nhấn và màu riêng cho những từ vẫn còn trong câu mới.
     const old = new Map(sg.tokens.filter((x) => /\S/.test(x.w)).map((x) => [wordKey(x.w), x]));
-    const tokens = input.value.split(/(\s+)/).filter((w) => w !== "").map((w) => { const o = old.get(wordKey(w)); return { w, hi: !!o?.hi && /\S/.test(w), c: /\S/.test(w) ? o?.c || null : null }; });
+    const tokens = value.split(/(\s+)/).filter((w) => w !== "").map((w) => { const o = old.get(wordKey(w)); return { w, hi: !!o?.hi && /\S/.test(w), c: /\S/.test(w) ? o?.c || null : null }; });
+    showClip(c);
     edit("setWords", { id: c.id, index, tokens });
-  };
+  });
   card.append(input);
   if (!sg.auto) card.append(...wordPicker(c, sg, index));
   return card;
@@ -1068,8 +2175,13 @@ function sliderRow(label, value, min, max, step, onSet, live) {
   const r = el("input", { type: "range", min, max, step, value });
   const n = el("input", { type: "number", min, max, step, value });
   r.setAttribute("aria-label", label); n.setAttribute("aria-label", `${label}, số`);
-  r.oninput = () => { n.value = r.value; live?.(+r.value); };
-  r.onchange = n.onchange = (e) => onSet(+e.target.value);
+  const fill = () => r.style.setProperty("--pct", `${((+r.value - +min) / (+max - +min || 1)) * 100}%`);
+  fill();
+  n.addEventListener("input", fill);
+  r.oninput = () => { n.value = r.value; fill(); live?.(+r.value); };
+  r.onchange = (e) => onSet(+e.target.value);
+  n.addEventListener("input", () => { if (n.value !== "") { r.value = n.value; live?.(+n.value); } });
+  liveCommit(n, (v) => { if (v !== "") onSet(+v); }, 500);
   return el("div", { className: "pr" }, el("label", { textContent: label }), r, n);
 }
 function pillRow(label, opts, cur, onSet) {
@@ -1105,11 +2217,12 @@ function accordion(key, label, on, body, openByDefault = false) {
 function inspector(c) {
   const hasText = c.segments.length > 0;
   const isAudio = c.kind === "audio" || c.kind === "sfx";
+  const hasIcon = !!(c.icons?.length || c.iconId || c.presetId || c.mgId);
   const list = hasText
-    ? [["text", "Chữ"], ["anim", "Chuyển động"], ["fx", "Hiệu ứng"], ...(c.icons?.length ? [["icon", "Icon"]] : []), ["info", "Thông tin"], ["save", "Lưu"]]
+    ? [["text", "Chữ"], ["anim", "Chuyển động"], ["fx", "Hiệu ứng"], ...(hasIcon ? [["icon", "Icon"]] : []), ["info", "Thông tin"], ["save", "Lưu"]]
     : c.kind === "grade" ? [["color", "Màu"], ["info", "Thông tin"]]
     : isAudio ? [["audio", "Âm thanh"], ["info", "Thông tin"]]
-    : [["video", c.tag === "video" ? "Video" : "Hình"], ...(c.tag === "video" ? [["color", "Màu"], ["audio", "Âm thanh"]] : []), ...(c.icons?.length ? [["icon", "Icon"]] : []), ["info", "Thông tin"]];
+    : [["video", c.tag === "video" ? "Video" : "Hình"], ...(c.tag === "video" ? [["color", "Màu"], ["audio", "Âm thanh"]] : []), ...(hasIcon ? [["icon", "Icon"]] : []), ["info", "Thông tin"]];
   if (!isAudio && c.kind !== "grade") list.splice(1, 0, ["design", "Thiết kế"]);
   const tab = list.some(([k]) => k === state.txtTab) ? state.txtTab : list[0][0];
   const out = [el("div", { className: "ptabs" }, ...list.map(([k, t]) => { const b = el("button", { textContent: t, className: k === tab ? "on" : "" }); b.onclick = () => { state.txtTab = k; drawProps(); }; return b; }))];
@@ -1136,7 +2249,7 @@ function inspector(c) {
   if (tab === "design") out.push(...tabDesign(c.id, c));
   if (tab === "text") out.push(...tabControls(c, o, set), ...accordion("t-frame", "Khung viền chữ", !!state.model.overrides[c.id]?.frame?.on, () => frameRows(c)));
   if (tab === "anim") out.push(...tabAnim(c, o, set));
-  if (tab === "fx") out.push(...tabFx(o, set));
+  if (tab === "fx") out.push(...tabFx(c, o, set));
   if (tab === "icon") out.push(...iconPanel(c));
   if (tab === "video") out.push(...tabVideo(c));
   if (tab === "color") out.push(...tabColor(c));
@@ -1191,7 +2304,7 @@ function setOrKey(id, values, plain) {
   if (state.time < c.start || state.time > c.end) { toast("Đưa playhead vào trong clip để sửa keyframe", true); return refresh(false); }
   return edit("keyframe", { id, t: kfLocal(c), values: Object.fromEntries(keyed.map((p) => [p, values[p]])) });
 }
-function kfTimes(id) { return [...new Set(Object.values(kfOf(id)).flat().map((k) => k.t))].sort((a, b) => a - b); }
+function kfTimes(id) { if (state.model?.overrides?.[id]?.track) return []; return [...new Set(Object.values(kfOf(id)).flat().map((k) => k.t))].sort((a, b) => a - b); }
 function kfButtons(c, props, current) {
   const a = props.flatMap((p) => kfOf(c.id)[p] || []).map((k) => k.t).sort((x, y) => x - y);
   const t = kfLocal(c), on = a.some((v) => kfNear(v, t));
@@ -1352,37 +2465,93 @@ function tabDesign(id, c) {
 
 // ---- Bảng Lớp: cây phần tử trong video ----
 state.openLayers = new Set();
+// Nhóm của tab Lớp: mã, tên nhóm, nhãn ngắn trên từng dòng khi tìm kiếm.
+const LAYER_GROUPS = [
+  ["video", "Cảnh chính (A-Roll)", "A-Roll"],
+  ["broll", "B-Roll / Ảnh phủ", "B-Roll"],
+  ["sub", "Phụ đề (T0–T1)", "Phụ đề"],
+  ["text", "Chữ hook / Chữ VFX (T2–T3)", "Chữ hook"],
+  ["mg", "Đồ họa MG & Icon", "MG"],
+  ["sticker", "Nhãn dán", "Nhãn dán"],
+  ["shape", "Hình khối", "Hình khối"],
+  ["transition", "Chuyển cảnh (Transition)", "Chuyển cảnh"],
+  ["vfx", "Kỹ xảo VFX / Effects", "VFX"],
+  ["che", "Che địa chỉ (Blur Mask)", "Che mờ"],
+  ["grade", "Màu & 3D LUT", "Màu"],
+  ["voice", "Lời thoại (Voice)", "Thoại"],
+  ["sfx", "SFX", "SFX"],
+  ["music", "Nhạc nền (BGM)", "BGM"],
+  ["khac", "Thành phần khác", "Khác"],
+];
+function layerGroupOf(c) {
+  const find = (k) => LAYER_GROUPS.find((g) => g[0] === k);
+  if (!c) return find("khac");
+  if (isBlurMask(c)) return find("che");
+  if (c.kind === "fx" && /lát cắt|mờ chuyển|lướt ngang/i.test(c.name || "")) return find("transition");
+  return find(laneKey(c)) || find("khac");
+}
 function drawLayers() {
+  state.shutLayerGroups ??= new Set();
   const list = state.model?.layers;
   if (!list) return;
   const q = plain($("#layerSearch").value.trim());
   const kids = new Map();
   list.forEach((l, i) => { if (!kids.has(l.parent)) kids.set(l.parent, []); kids.get(l.parent).push(i); });
-  const pick = async (l) => {
+  const topOf = (i) => { let k = i; while (list[k].parent !== -1) k = list[k].parent; return list[k]; };
+  const pick = async (l, i) => {
     let id = l.id;
     try { if (!id) id = (await edit("layerId", { n: l.n, tag: l.tag }))?.id; } catch (e) { return toast(e.message, true); }
     if (!id) return;
-    if (clipOf(id)) { state.layer = null; select(id); }
-    else { state.sel = null; state.layer = id; drawTimeline(); drawProps(); drawSel(); }
+    if (clipOf(id)) {
+      state.layer = null;
+      const c = clipOf(id);
+      // Đưa playhead vào đúng lớp để nhìn thấy nó trên video.
+      if (state.time < c.start || state.time > c.end) focusClip(c); else select(id);
+    } else {
+      state.sel = null; state.layer = id;
+      const owner = clipOf(topOf(i).id);
+      if (owner && (state.time < owner.start || state.time > owner.end)) { player()?.pause(); seek(owner.start + Math.min(0.4, (owner.end - owner.start) / 2)); }
+      drawTimeline(); drawProps(); drawSel();
+    }
     drawLayers();
   };
-  const row = (i, depth) => {
+  const row = (i, depth, chip) => {
     const l = list[i], o = state.model.overrides[l.id] || {}, has = kids.has(i), open = state.openLayers.has(i);
+    const c = clipOf(l.id);
     const chev = el("button", { textContent: has ? (open ? "▾" : "▸") : "", title: open ? "Thu gọn" : "Mở rộng" });
     chev.onclick = (e) => { e.stopPropagation(); open ? state.openLayers.delete(i) : state.openLayers.add(i); drawLayers(); };
     const ensure = async () => l.id || (await edit("layerId", { n: l.n, tag: l.tag }))?.id;
     const tool = (txt, title, fn) => { const b = el("button", { textContent: txt, title }); b.setAttribute("aria-label", title); b.onclick = async (e) => { e.stopPropagation(); const id = await ensure(); if (id) fn(id); }; return b; };
     const z = (id, by) => { const d = state.model.overrides[id]?.d || {}; edit("style", { id, set: { d: { ...d, z: (d.z ?? 0) + by } } }); };
-    const name = el("span", { className: "lyrName", textContent: l.name, title: `${l.tag}${l.id ? ` #${l.id}` : ""}` });
+    const label = c ? clipLabel(c) : l.name;
+    const name = el("span", { className: "lyrName", textContent: label, title: `${label}\n${l.tag}${l.id ? ` #${l.id}` : ""}${c ? `\n${fmtTime(c.start)} → ${fmtTime(c.end)}` : ""}` });
     const tools = el("span", { className: "lyrTools" }, tool("✎", "Đổi tên", (id) => { const v = window.prompt("Tên lớp", l.name); if (v !== null) edit("rename", { id, ten: v.trim() }); }), tool("▲", "Đưa lên trên", (id) => z(id, 1)), tool("▼", "Đưa xuống dưới", (id) => z(id, -1)));
-    const r = el("div", { className: `lyr${l.id && (l.id === state.sel || l.id === state.layer) ? " sel" : ""}${o.hidden ? " off" : ""}` }, chev, el("span", { className: "lyrTag", textContent: l.tag }), name, tools, tool(o.hidden ? "🙈" : "👁", o.hidden ? "Hiện lớp" : "Ẩn lớp", (id) => edit("style", { id, set: { hidden: state.model.overrides[id]?.hidden ? null : true } })));
+    const r = el("div", { className: `lyr${l.id && (l.id === state.sel || l.id === state.layer) ? " sel" : ""}${o.hidden ? " off" : ""}` }, chev, ...(chip ? [el("span", { className: "lyrChip", textContent: chip })] : []), name, ...(c ? [el("small", { className: "lyrTime", textContent: fmtTime(c.start).slice(0, 5) })] : [el("span", { className: "lyrTag", textContent: l.tag })]), tools, tool(o.hidden ? "🙈" : "👁", o.hidden ? "Hiện lớp" : "Ẩn lớp", (id) => edit("style", { id, set: { hidden: state.model.overrides[id]?.hidden ? null : true } })));
     r.style.paddingLeft = `${depth * 12}px`;
-    r.onclick = () => pick(l);
+    r.onclick = () => pick(l, i);
     return r;
   };
   const out = [];
-  if (q) list.forEach((l, i) => { if (plain(`${l.name} ${l.id}`).includes(q)) out.push(row(i, 0)); });
-  else { const walk = (p, depth) => { for (const i of kids.get(p) || []) { out.push(row(i, depth)); if (state.openLayers.has(i)) walk(i, depth + 1); } }; walk(-1, 0); }
+  if (q) list.forEach((l, i) => { const c = clipOf(l.id); if (plain(`${l.name} ${l.id} ${c ? clipLabel(c) : ""} ${layerGroupOf(c)[1]}`).includes(q)) out.push(row(i, 0, layerGroupOf(c)[2])); });
+  else {
+    const walk = (p, depth) => { for (const i of kids.get(p) || []) { out.push(row(i, depth)); if (state.openLayers.has(i)) walk(i, depth + 1); } };
+    const groups = new Map(LAYER_GROUPS.map((g) => [g[0], []]));
+    for (const i of kids.get(-1) || []) groups.get(layerGroupOf(clipOf(list[i].id))[0]).push(i);
+    const order = (i) => clipOf(list[i].id)?.start ?? 1e9;
+    for (const [key, name] of LAYER_GROUPS) {
+      const items = groups.get(key).sort((a, b) => order(a) - order(b));
+      if (!items.length) continue;
+      const shut = state.shutLayerGroups.has(key);
+      const ids = items.map((i) => list[i].id).filter(Boolean);
+      const allOff = ids.length && ids.every((id) => state.model.overrides[id]?.hidden);
+      const eye = el("button", { textContent: allOff ? "🙈" : "👁", title: allOff ? "Hiện cả nhóm" : "Ẩn cả nhóm", disabled: !ids.length });
+      eye.onclick = (e) => { e.stopPropagation(); edit("batch", { items: ids.map((id) => ({ op: "style", body: { id, set: { hidden: allOff ? null : true } } })) }); };
+      const head = el("div", { className: "lyrGroup" }, el("span", { className: "lyrArrow", textContent: shut ? "▸" : "▾" }), el("b", { textContent: name }), el("small", { textContent: String(items.length) }), eye);
+      head.onclick = () => { shut ? state.shutLayerGroups.delete(key) : state.shutLayerGroups.add(key); drawLayers(); };
+      out.push(head);
+      if (!shut) for (const i of items) { out.push(row(i, 0)); if (state.openLayers.has(i)) walk(i, 1); }
+    }
+  }
   $("#layerTree").replaceChildren(...out);
 }
 $("#layerSearch").oninput = drawLayers;
@@ -1418,7 +2587,19 @@ function transformRows(o, set, c) {
   if (c) {
     const cur = (ps) => () => Object.fromEntries(ps.map((p) => [p, kfValue(c.id, p, o[p] ?? KF_DEFAULT[p])]));
     const num = (id, label, ps) => { const n = el("input", { type: "number", step: 1, value: kfValue(c.id, id, o[id] ?? 0) }); n.setAttribute("aria-label", label); n.onchange = () => setOrKey(c.id, { [id]: +n.value }, () => set({ [id]: +n.value })); return n; };
-    const line = (label, prop, min, max, step, none) => [kfLabel(label, c, [prop], cur([prop])), sliderRow(label, kfValue(c.id, prop, o[prop] ?? KF_DEFAULT[prop]), min, max, step, (v) => setOrKey(c.id, { [prop]: v }, () => set({ [prop]: v === none ? null : v })), (v) => set.live?.({ [prop]: v }))];
+    const line = (label, prop, min, max, step, none) => {
+      // Phóng to bằng thanh kéo cũng giữ layer đứng yên.
+      const keep = { x: o.x || 0, y: o.y || 0 };
+      const frameEl = () => state.frame?.contentDocument?.getElementById(c.id);
+      const scaleLive = prop === "scale" && !kfOf(c.id).scale && !kfOf(c.id).x && !kfOf(c.id).y;
+      const row = sliderRow(label, kfValue(c.id, prop, o[prop] ?? KF_DEFAULT[prop]), min, max, step, (v) => {
+        if (scaleLive) { const n = frameEl(); if (n) setScaleKeepCenter(n, v, o.scaleY ?? v, keep); return set({ scale: v === none ? null : v, x: keep.x || null, y: keep.y || null }); }
+        return setOrKey(c.id, { [prop]: v }, () => set({ [prop]: v === none ? null : v }));
+      }, (v) => { if (scaleLive) { const n = frameEl(); if (n) { setScaleKeepCenter(n, v, o.scaleY ?? v, keep); drawSel(); } } else set.live?.({ [prop]: v }); });
+      // Dòng keyframe phía trên đã ghi tên, không lặp lại.
+      row.classList.add("noLbl");
+      return [kfLabel(label, c, [prop], cur([prop])), row];
+    };
     return [
       kfLabel("Vị trí X / Y", c, ["x", "y"], cur(["x", "y"])),
       el("div", { className: "pair" }, num("x", "Vị trí X"), num("y", "Vị trí Y")),
@@ -1510,7 +2691,16 @@ function lutPicker(c, g, save, live) {
 
 function tabVideo(c) {
   const o = state.model.overrides[c.id] || {};
-  return accordion("v-tf", "Biến đổi", false, () => transformRows(o, (p) => edit("style", { id: c.id, set: p }), c), true);
+  const camPresets = state.pro?.motionPresets?.camera || [];
+  const camRows = camPresets.length ? accordion("v-cam-pro", "✦ Chuyển động máy (Camera Motion) cài sẵn", false, () => [
+    el("p", { className: "hint", textContent: "Bấm chọn kiểu đẩy/kéo/lia máy chuẩn Editor, sau đó tùy chỉnh keyframe bên dưới:" }),
+    el("div", { className: "proQuickGrid" }, ...camPresets.map((p) => {
+      const b = el("button", { className: "proQuickChip", title: p.desc }, Mau.camera(p, proThumbs()), el("b", { textContent: p.name }), el("small", { textContent: p.tag }));
+      b.onclick = () => previewOp(p.name, "applyMotionPreset", { id: c.id, category: "camera", presetId: p.id }, { id: c.id });
+      return b;
+    })),
+  ], true) : [];
+  return [...camRows, ...accordion("v-tf", "Biến đổi & Keyframe", false, () => transformRows(o, (p) => edit("style", { id: c.id, set: p }), c), true)];
 }
 
 function tabAudio(c) {
@@ -1536,10 +2726,16 @@ function tabAudio(c) {
 
 function tabControls(c, o, set) {
   const idx = activeLayer(c);
+  const splitBtn = () => {
+    if (!splittable(c)) return [];
+    const b = el("button", { textContent: "✂ Tách lớp thành khối riêng", title: "Mỗi lớp thành một khối riêng trên timeline, kéo thả từng khối. Lớp vẫn giữ nguyên kiểu chữ và hiệu ứng" });
+    b.onclick = () => splitText(c);
+    return [el("div", { className: "row" }, b)];
+  };
   const content = () => {
     if (c.segments.length === 1) return [layerCard(c, c.segments[0], 0)];
-    if (idx !== null) return [layerCard(c, c.segments[idx], idx)];
-    return [el("p", { className: "hint", textContent: "Chọn lớp để sửa nội dung:" }), el("div", { className: "layerPick" }, ...c.segments.map((sg, i) => {
+    if (idx !== null) return [layerCard(c, c.segments[idx], idx), ...splitBtn()];
+    return [el("p", { className: "hint", textContent: "Chọn lớp để sửa nội dung:" }), ...splitBtn(), el("div", { className: "layerPick" }, ...c.segments.map((sg, i) => {
       const b = el("button", {}, el("span", { textContent: sg.text.replace(/\*\*/g, "") }), el("small", { textContent: `Lớp ${i + 1}` }));
       b.onclick = () => { (state.layerIdx ??= {})[c.id] = i; drawProps(); };
       return b;
@@ -1603,6 +2799,23 @@ function tabAnim(c, o, set) {
   };
   const out = [];
   if (activeLayer(c) !== null && c.segments[activeLayer(c)].auto) out.push(el("p", { className: "hint", textContent: "Lớp số chạy tự động không gắn chuyển động được." }));
+  const mp = state.pro?.motionPresets;
+  if (mp) {
+    out.push(...accordion("a-pro-presets", "✦ Kiểu Motion cài sẵn (Tên phổ biến)", false, () => [
+      el("span", { className: "cf-lbl", textContent: "Hiệu ứng Mở đầu (Entrance / In)" }),
+      el("div", { className: "proQuickGrid" }, ...(mp.entrance || []).map((p) => {
+        const b = el("button", { className: "proQuickChip", title: p.desc }, Mau.entrance(p), el("b", { textContent: p.name }), el("small", { textContent: `${p.dur}s` }));
+        b.onclick = () => previewOp(p.name, "applyMotionPreset", { id: c.id, category: "entrance", presetId: p.id }, { id: c.id });
+        return b;
+      })),
+      el("span", { className: "cf-lbl", style: "margin-top:6px", textContent: "Hiệu ứng Kết thúc (Exit / Out)" }),
+      el("div", { className: "proQuickGrid" }, ...(mp.exit || []).map((p) => {
+        const b = el("button", { className: "proQuickChip", title: p.desc }, Mau.exit(p), el("b", { textContent: p.name }), el("small", { textContent: `${p.dur}s` }));
+        b.onclick = () => previewOp(p.name, "applyMotionPreset", { id: c.id, category: "exit", presetId: p.id }, { id: c.id, tail: true });
+        return b;
+      })),
+    ], true));
+  }
   const basic = [];
   basic.push(pillRow("Chế độ", [["text", "Cả câu"], ["letter", "Từng chữ cái"], ["word", "Từng từ"]], a.mode || "text", (v) => put({ mode: v || "text" })));
   basic.push(checkRow("Chuyển động VÀO", a.in?.on, (v) => put({ in: { ...a.in, on: v }, dissolve: a.dissolve ?? { on: true } })));
@@ -1624,7 +2837,7 @@ function tabAnim(c, o, set) {
   return out;
 }
 
-function tabFx(o, set) {
+function tabFx(c, o, set) {
   const acc = (key, label, body) => accordion(`fx-${key}`, label, o[key]?.on, () => {
     const x = o[key] || {};
     const put = (p) => set({ [key]: { ...x, on: true, ...p } });
@@ -1635,7 +2848,16 @@ function tabFx(o, set) {
   });
   const shadow = (sl, col) => [sl("Độ đậm", "o", 0.6, 0, 1, 0.05), sl("Khoảng cách", "d", 6, 0, 80, 1), sl("Góc", "a", 135, -180, 360, 5), sl("Nhòe", "b", 8, 0, 80, 1), col("Màu", "c", "#000000")];
   const glow = (dR) => (sl, col) => [sl("Bán kính", "r", dR, 0, 200, 1), sl("Cường độ", "g", 1, 1, 6, 1), sl("Hòa trộn", "b", 1, 0, 1, 0.05), col("Màu", "c", "#FFFFFF")];
+  const vfxPresets = state.pro?.motionPresets?.vfx || [];
+  const proRows = vfxPresets.length ? accordion("fx-pro-presets", "✦ Kỹ xảo VFX cài sẵn (Tên phổ biến)", false, () => [
+    el("div", { className: "proQuickGrid" }, ...vfxPresets.map((p) => {
+      const b = el("button", { className: "proQuickChip", title: p.desc }, Mau.vfx(p.vfx_type), el("b", { textContent: p.name }), el("small", { textContent: p.tag }));
+      b.onclick = () => previewOp(p.name, "applyMotionPreset", { id: c.id, category: "vfx", presetId: p.id }, { id: c.id });
+      return b;
+    })),
+  ], true) : [];
   return [
+    ...proRows,
     ...acc("border", "Viền (Border)", (sl, col) => [sl("Độ dày", "w", 2, 0, 30, 0.5), col("Màu viền", "c", "#000000")]),
     ...acc("shadow", "Đổ bóng (Drop Shadow)", shadow),
     ...acc("shadow2", "Đổ bóng 2 (Second Drop Shadow)", shadow),
@@ -1858,6 +3080,9 @@ function applyHot(hot) {
 }
 
 async function edit(op, body) {
+  // Sửa tiếp khi đang xem thử nghĩa là đã nhận bản xem thử; hoàn tác lúc đó sẽ bỏ nhầm thao tác mới.
+  if (state.tryOn && !state.inTry) keepTry();
+  cancelPreview();
   setStatus("Đang lưu…");
   try {
     const r = await post(`op/${op}`, body);
@@ -1867,13 +3092,80 @@ async function edit(op, body) {
   } catch (e) {
     setStatus("Chưa lưu");
     toast(e.message, true);
+    state.frameSrc = null;
     await refresh(true, true);
   }
 }
 
+// Áp bản mới vào khung xem đang mở: chỉ thay phần tử đã đổi rồi dựng lại nhịp hiệu ứng, không tải lại trang.
+// Trả false khi đổi cấu trúc (thêm video/âm thanh, đổi khung gốc) để gọi loadFrame như cũ.
+function hotSwap(oldHtml, newHtml, isPreview = false) {
+  const f = state.frame, win = f?.contentWindow, doc = f?.contentDocument;
+  state.swapWhy = "";
+  if (!doc || !win?.__timelines || !oldHtml) return false;
+  const P = new DOMParser();
+  const a = P.parseFromString(oldHtml, "text/html"), b = P.parseFromString(newHtml, "text/html");
+  const ra = a.querySelector("[data-composition-id]") || a.getElementById("stage"), rb = b.querySelector("[data-composition-id]") || b.getElementById("stage");
+  if (!ra || !rb) return false;
+  // Mẫu xem thử chạy quá cuối video vẫn xem được; chỉ khi áp dụng thật mới kéo dài video.
+  for (const k of ["data-width", "data-height", ...(isPreview ? [] : ["data-duration"]), "data-fps"]) if (ra.getAttribute(k) !== rb.getAttribute(k)) return false;
+  const live = doc.querySelector("[data-composition-id]") || doc.getElementById("stage");
+  if (!live) return false;
+  const kids = (r) => new Map([...r.children].filter((n) => n.id && n.tagName !== "SCRIPT").map((n) => [n.id, n]));
+  const ka = kids(ra), kb = kids(rb);
+  const isMedia = (n) => n.tagName === "VIDEO" || n.tagName === "AUDIO";
+  for (const [id, n] of kb) if (!ka.has(id) && isMedia(n)) { state.swapWhy = "media"; return false; }
+  if ([...ra.children].filter((n) => !n.id && n.tagName !== "SCRIPT").map((n) => n.outerHTML).join() !== [...rb.children].filter((n) => !n.id && n.tagName !== "SCRIPT").map((n) => n.outerHTML).join()) return false;
+  const styles = (d) => [...d.querySelectorAll("style:not(#hd-studio)")].map((s) => s.textContent);
+  const code = (d) => [...d.querySelectorAll("script:not([src])")].map((s) => s.textContent).join("\n");
+  const stylesA = styles(a), stylesB = styles(b);
+  const script = code(b);
+  if (!/__timelines|__hdTimeline/.test(script)) return false;
+  const t = state.time;
+  try {
+    // CSS đổi thì thay ngay trong khung xem.
+    for (const n of doc.querySelectorAll("style:not(#hd-studio)")) if (stylesA.includes(n.textContent) && !stylesB.includes(n.textContent)) n.remove();
+    for (const t of stylesB) if (!stylesA.includes(t)) { const st = doc.createElement("style"); st.textContent = t; doc.head.append(st); }
+    // Trả mọi phần tử về trạng thái trước hiệu ứng, rồi mới thay.
+    for (const k of Object.keys(win.__timelines)) { win.__timelines[k]?.revert?.(); win.__timelines[k]?.kill?.(); }
+    // Bỏ các lớp bọc chữ của lần dựng trước để không bọc chồng nhiều tầng.
+    for (const n of doc.querySelectorAll("[data-hd-split]")) { if (n.__hdHtml != null) n.innerHTML = n.__hdHtml; n.removeAttribute("data-hd-split"); }
+    for (const [id, old] of ka) {
+      const next = kb.get(id), n = doc.getElementById(id);
+      if (!n) continue;
+      if (!next) { n.remove(); continue; }
+      if (old.outerHTML === next.outerHTML) continue;
+      if (isMedia(next)) {
+        for (const at of [...old.attributes]) if (!next.hasAttribute(at.name)) n.removeAttribute(at.name);
+        for (const at of [...next.attributes]) if (at.name !== "data-hf-id" && n.getAttribute(at.name) !== at.value) n.setAttribute(at.name, at.value);
+      } else n.replaceWith(doc.importNode(next, true));
+    }
+    let prev = null;
+    for (const [id, next] of kb) {
+      let n = doc.getElementById(id);
+      if (!n) { n = doc.importNode(next, true); if (prev) prev.after(n); else live.prepend(n); }
+      prev = n;
+    }
+    const css = b.querySelector("style#hd-studio")?.textContent;
+    if (css !== undefined) { const st = studioStyle(doc); if (st) st.textContent = css; }
+    win.eval(script);
+    win.__hfForceTimelineRebind?.();
+    // Máy phát bỏ qua lệnh tua tới đúng thời điểm đang đứng, nên layer vừa thay vẫn ẩn. Tua lệch một nhịp rồi về lại để hiện ngay.
+    win.__player.seek(t > 0.05 ? t - 0.05 : t + 0.05);
+    win.__player.seek(t);
+    applyHidden();
+    return true;
+  } catch (e) {
+    console.warn("Không cập nhật tại chỗ được, tải lại khung xem", e);
+    return false;
+  }
+}
+
 async function refresh(reloadFrame = true, keepStatus) {
+  cancelPreview();
   const m = await api("model");
   state.model = m;
+  if (!state.proDrawnTab && $("#tab-presets")?.classList.contains("on")) setTimeout(drawProPresets);
   state.lastMtime = m.mtime;
   setTimeout(() => { if ($("#tab-layers").classList.contains("on")) drawLayers(); });
   $("#undo").disabled = !m.canUndo;
@@ -1884,7 +3176,12 @@ async function refresh(reloadFrame = true, keepStatus) {
   syncTools();
   drawVars();
   drawList();
-  if (reloadFrame) loadFrame();
+  if ($("#tab-presets")?.classList.contains("on") && state.proUi.subTab === "resource") drawProPresets();
+  const src = (await api("code")).content;
+  const oldSrc = state.frameSrc;
+  state.frameSrc = src;
+  if (reloadFrame && src !== oldSrc && hotSwap(oldSrc, src)) { drawSel(); if (!keepStatus) setStatus("Đã lưu"); }
+  else if (reloadFrame && (src !== oldSrc || !state.frame)) loadFrame();
   else if (!keepStatus) setStatus("Đã lưu");
 }
 
@@ -1892,10 +3189,10 @@ async function watchFile() {
   if (state.model && !document.hidden && Date.now() - (state.saveTick || 0) > 3000) {
     try {
       const { mtime } = await api("mtime");
-      if (mtime !== state.lastMtime && Date.now() - (state.saveTick || 0) > 3000) { setStatus("AI vừa cập nhật, đang tải lại…"); await new Promise((r) => setTimeout(r, 800)); await refresh(); await loadCode(); }
+      if (mtime !== state.lastMtime && Date.now() - (state.saveTick || 0) > 3000) { setStatus("AI vừa cập nhật…"); await new Promise((r) => setTimeout(r, 150)); await refresh(); await loadCode(); }
     } catch { /* máy chủ đang bận */ }
   }
-  setTimeout(watchFile, 1500);
+  setTimeout(watchFile, 500);
 }
 
 // ---- SFX: nghe thử và thêm một nhấn ----
@@ -1928,9 +3225,40 @@ async function loadSfx() {
   drawSfx();
 }
 
+// Nghe đúng tệp SFX đang nằm trên timeline.
+function sfxListenBtn(c, label = "▶ Nghe âm đang dùng") {
+  const b = el("button", { textContent: label });
+  b.onclick = () => {
+    const again = sfxPlaying === b;
+    stopSfx();
+    if (again) return;
+    sfxAudio.src = `/api/projects/${state.model.projectId}/preview/${c.src.split("/").map(encodeURIComponent).join("/")}`;
+    sfxAudio.play().catch(() => toast("Không phát được âm này", true));
+    b.classList.add("on"); sfxPlaying = b;
+  };
+  return b;
+}
+function drawSfxCurrent(c) {
+  let box = $("#sfxCur");
+  if (!box) { box = el("div", { id: "sfxCur" }); $("#tab-sfx").prepend(box); }
+  box.hidden = !c;
+  if (!c) { box.replaceChildren(); return; }
+  box.replaceChildren(
+    el("small", { textContent: `Đang đổi SFX tại ${fmtTime(c.start)}` }),
+    el("b", { textContent: sfxOrigin(c) }),
+    el("span", { className: "hint", textContent: "Bấm ▶ Thử thay ở âm mới để nghe cùng video, rồi Giữ lại hoặc Bỏ." }),
+    sfxListenBtn(c)
+  );
+  // Mở sẵn đúng thư mục của âm gốc để có âm cùng loại.
+  const stem = baseName(c.src).replace(/\.[^.]+$/, ""), origin = state.model.sfxGoc?.[stem]?.[0];
+  const cat = origin?.split("/")[0], sel = $("#sfxGroup");
+  if (state.sfxCurId !== c.id && cat && [...sel.options].some((o) => o.value === `c:${cat}`)) sel.value = `c:${cat}`;
+  state.sfxCurId = c.id;
+}
 function drawSfx() {
   const s = state.sfx;
   if (!s) return;
+  { const cur = clipOf(state.sel); drawSfxCurrent(cur?.kind === "sfx" ? cur : null); }
   const byPath = (s.byPath ??= new Map(s.files.map((f) => [f.path, f])));
   const g = $("#sfxGroup").value, q = plain($("#sfxSearch").value.trim());
   let list;
@@ -1941,7 +3269,7 @@ function drawSfx() {
   if (q) list = list.filter((f) => plain(f.path).includes(q));
   const c = clipOf(state.sel);
   const swap = c?.kind === "sfx";
-  $("#sfxHint").textContent = swap ? `Đang chọn SFX trên timeline: bấm Thay để đổi âm, giữ đúng nhịp.` : `${list.length} âm. Bấm ▶ để nghe, Thêm để đặt đỉnh âm đúng playhead.`;
+  $("#sfxHint").textContent = swap ? `Đang chọn SFX trên timeline: bấm Thử thay để nghe cùng video, giữ đúng nhịp.` : `${list.length} âm. Bấm ▶ bên trái để nghe riêng, Thử để nghe cùng video rồi Giữ lại hoặc Bỏ.`;
   const host = $("#sfxItems");
   host.replaceChildren();
   const row = (f) => {
@@ -1955,19 +3283,25 @@ function drawSfx() {
       sfxAudio.play().catch(() => toast("Không phát được âm này", true));
       play.classList.add("on"); play.textContent = "■"; sfxPlaying = play;
     };
-    const act = el("button", { className: "act", textContent: swap ? "Thay" : "Thêm", title: swap ? "Thay âm của SFX đang chọn" : "Thêm vào timeline tại playhead" });
-    act.onclick = async () => {
+    const act = el("button", { className: "act", textContent: swap ? "▶ Thử thay" : "▶ Thử", title: swap ? "Thay thử âm của SFX đang chọn và nghe cùng video" : "Đặt thử tại playhead và nghe cùng video" });
+    act.onclick = () => tryRun(clipOf(state.sel)?.kind === "sfx" ? `Đổi "${sfxOrigin(clipOf(state.sel))}" thành "${baseName(f.path)}"` : baseName(f.path), async () => {
       setStatus("Đang lưu…");
       try {
         const body = { path: f.path, time: state.time };
-        if (clipOf(state.sel)?.kind === "sfx") body.replaceId = state.sel;
+        const swapId = clipOf(state.sel)?.kind === "sfx" ? state.sel : null;
+        if (swapId) body.replaceId = swapId;
         const r = await post("sfx-add", body);
         await refresh();
-        if (r.id) select(r.id);
+        return r.id ? r : { ...r, id: swapId };
       } catch (e) { setStatus("Chưa lưu"); toast(e.message, true); }
-    };
+    }, { pre: 1 });
     const info = el("span", { className: "nm", title: f.path }, baseName(f.path).replace(/\.[^.]+$/, ""), el("small", { textContent: `${f.dur.toFixed(2)} giây` }));
-    return el("div", { className: "sfx" }, play, info, act, starBtn("sfx", f.path, baseName(f.path), () => { const y = $("#tab-sfx").scrollTop; drawSfx(); $("#tab-sfx").scrollTop = y; }));
+    const plus = el("button", { className: "act", textContent: "+ Thêm", title: "Thêm SFX này vào timeline, đỉnh âm trùng thước timeline" });
+    plus.onclick = async () => {
+      try { const r = await post("sfx-add", { path: f.path, time: state.time }); await refresh(); toast(`Đã thêm SFX tại ${fmtTime(state.time)}`); if (r?.id) select(r.id); }
+      catch (e) { toast(e.message, true); }
+    };
+    return el("div", { className: "sfx" }, play, info, act, plus, starBtn("sfx", f.path, baseName(f.path), () => { const y = $("#tab-sfx").scrollTop; drawSfx(); $("#tab-sfx").scrollTop = y; }));
   };
   let at = 0;
   const more = () => { host.append(...list.slice(at, at + 80).map(row)); at += 80; };
@@ -1976,11 +3310,1334 @@ function drawSfx() {
   pane.onscroll = () => { if (at < list.length && pane.scrollTop + pane.clientHeight > pane.scrollHeight - 300) more(); };
 }
 
+// ---- Bảng Mẫu Pro: Chữ VFX (TX-01..08), Motion/Animation, 24 Icon Động, MG & Tài nguyên 8 Tầng ----
+// Kho trên máy chủ ghi trường tiếng Việt và icon dạng đối tượng; giao diện dùng một kiểu tên thống nhất.
+function normalizeCatalog(c) {
+  const icons = Array.isArray(c.animatedIcons) ? c.animatedIcons : Object.values(c.animatedIcons || {});
+  const motion = {};
+  for (const [k, list] of Object.entries(c.motionPresets || {})) {
+    motion[k] = list.map((p) => ({ ...p, name: p.name || p.ten_pho_bien || p.id, tag: p.tag || p.nhom || "", desc: p.desc || p.mo_ta || "", dur: p.dur || p.duration || p.gsapTo?.duration || 0.45 }));
+  }
+  const matrix = c.sfxVisualEmotionMatrix || c.sfxMatrix || {};
+  return {
+    ...c,
+    textVfxPresets: (c.textVfxPresets || []).map((p) => ({ ...p, name: p.name || p.ten_pho_bien || p.ten || p.id, role: p.role || p.vai_tro_goi_y || [], description: p.description || [p.cach_mo_dau, p.cach_ket_thuc].filter(Boolean).join(" ") })),
+    animatedIcons: icons.map((ic) => ({ ...ic, name_vi: ic.name_vi || ic.ten_pho_bien || ic.id, name_en: ic.name_en || ic.ten_pho_bien || "", usage: ic.usage || ic.khi_dung || "", in_anim: ic.in_anim || ic.cach_mo_dau || "", category: ic.category || ic.nhom || "" })),
+    motionPresets: motion,
+    mgTemplates: (c.mgTemplates || []).map((m) => ({ ...m, name: m.name || m.ten_pho_bien || m.ten || m.id, desc: m.desc || m.ten || "" })),
+    colorPalettes: (c.colorPalettes || []).map((p) => ({ ...p, name: p.name || p.ten || p.id, desc: p.desc || p.mo_ta || "" })),
+    sfxVisualEmotionMatrix: {
+      visual_fx: (matrix.visual_fx || []).map((x) => ({ ...x, label: x.label || x.ten || x.id, desc: x.desc || x.purpose || "" })),
+      emotions: (matrix.emotions || []).map((x) => ({ ...x, label: x.label || x.ten || x.id, prefer: x.prefer || (x.pref_sac_thai || []).join(", "), gain_mod: x.gain_mod || (x.min_gap_s ? `cách nhau tối thiểu ${x.min_gap_s}s` : "") })),
+    },
+  };
+}
+
+async function loadProCatalog() {
+  if (!state.pro) {
+    try {
+      state.pro = normalizeCatalog(await fetch("/vn/pro-catalog").then((r) => r.json()));
+    } catch {
+      $("#tab-presets")?.replaceChildren(el("p", { className: "hint", textContent: "Không tải được kho Mẫu Pro." }));
+      return;
+    }
+  }
+  drawProPresets();
+}
+
+function renderIconSvg(ic, color = "#F5D061") {
+  if (!ic) return "";
+  return `<svg viewBox="${ic.viewBox || "0 0 24 24"}" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ic.svg_paths || (ic.paths || []).map((d) => `<path d="${d}"/>`).join("")}</svg>`;
+}
+
+// Ô xem trước dùng đúng tệp phông của mẫu, nạp một lần cho mỗi tên.
+const tileFonts = new Map();
+Mau.setFontLoader((name) => {
+  if (tileFonts.has(name)) return tileFonts.get(name);
+  const family = `mau-${tileFonts.size}`;
+  tileFonts.set(name, family);
+  const projectFont = (state.model?.fonts || []).includes(name);
+  if (!projectFont && state.project) {
+    new FontFace(family, `url("/vn/font-goc?du-an=${encodeURIComponent(state.project)}&ten=${encodeURIComponent(name)}")`).load().then((f) => document.fonts.add(f)).catch(() => {});
+  }
+  return family;
+});
+// Chọn phông: giữ phông gốc của mẫu ở đầu, phông trong dự án, rồi thư viện đủ dấu tiếng Việt.
+function fontChoice(label, cur, base, onPick) {
+  if (!state.fontLib && !state.fontLibLoading) {
+    state.fontLibLoading = true;
+    fetch("/vn/font-list").then((r) => r.json()).then((d) => { state.fontLib = d.fonts || []; if ($("#tab-presets")?.classList.contains("on")) drawProPresets(); }).catch(() => {});
+  }
+  const lib = (state.fontLib || []).filter((f) => f.vn && f.id.startsWith("c:")).map((f) => [f.id.slice(2).replace(/\.[^.]+$/, ""), `${f.family} ${f.style}`]);
+  const sel = el("select");
+  sel.setAttribute("aria-label", label);
+  sel.append(el("option", { value: base, textContent: `${base} (phông gốc của mẫu)` }));
+  const project = (state.model.fonts || []).filter((f) => f !== base);
+  if (project.length) sel.append(el("optgroup", { label: "Trong dự án" }, ...project.map((f) => el("option", { value: f, textContent: f }))));
+  if (lib.length) sel.append(el("optgroup", { label: "Thư viện đủ dấu tiếng Việt" }, ...lib.filter(([v]) => v !== base).map(([v, t]) => el("option", { value: v, textContent: t }))));
+  sel.value = cur || base;
+  if (sel.value !== (cur || base)) { sel.append(el("option", { value: cur, textContent: cur })); sel.value = cur; }
+  sel.onchange = () => onPick(sel.value);
+  return el("div", { className: "pr2" }, el("label", { textContent: label }), sel);
+}
+function proThumbs() {
+  const seen = new Set(), out = [];
+  for (const c of state.model?.clips || []) {
+    if (c.kind !== "video" || seen.has(c.src)) continue;
+    seen.add(c.src);
+    out.push(`/vn/thumb?du-an=${encodeURIComponent(state.project)}&path=${encodeURIComponent(c.src)}&t=${(c.mediaStart + 0.5).toFixed(2)}`);
+    if (out.length === 2) break;
+  }
+  return out;
+}
+// Danh sách layer cụ thể để áp mẫu.
+function layerPicker(cur, kinds, emptyLabel, onSet, extra = []) {
+  const sel = el("select", { className: "proLayerSel" });
+  sel.setAttribute("aria-label", "Layer áp mẫu");
+  sel.append(el("option", { value: "", textContent: emptyLabel }));
+  for (const [v, t] of extra) sel.append(el("option", { value: v, textContent: t }));
+  const list = state.model.clips.filter((c) => kinds.includes(c.kind)).sort((a, b) => a.start - b.start);
+  for (const k of kinds) {
+    const items = list.filter((c) => c.kind === k);
+    if (!items.length) continue;
+    const g = el("optgroup", { label: KIND_NAME[k] || k });
+    for (const c of items) g.append(el("option", { value: c.id, textContent: `${fmtTime(c.start).slice(0, 5)} · ${clipLabel(c).slice(0, 44)}` }));
+    sel.append(g);
+  }
+  sel.value = cur || "";
+  sel.onchange = () => onSet(sel.value || null);
+  return sel;
+}
+// Bộ chọn bằng ô có hoạt ảnh, thay cho danh sách chỉ có chữ.
+// Nội dung chữ của một layer, dùng để mẫu tự nhận đúng thông tin đang hiển thị.
+function layerTexts(c) {
+  const seg = (c?.segments || []).map((x) => x.text.replace(/\*\*/g, "").trim()).filter(Boolean);
+  if (c?.kind === "sub") return [seg.join(" ")];
+  if (seg.length) return seg;
+  return c?.name ? [c.name.replace(/^(MG|Chữ hook|Icon|TX-\d+)\s*:\s*/i, "").trim()] : [];
+}
+// Vị trí đang hiển thị của layer (theo % khung), để mẫu mới nằm đúng chỗ cũ.
+async function layerAnchor(c) {
+  state.anchors ??= {};
+  if (state.anchors[c.id]) return state.anchors[c.id];
+  player()?.pause();
+  autoSeek(c.start + Math.min(0.5, (c.end - c.start) / 2));
+  await new Promise((r) => setTimeout(r, 90));
+  const n = state.frame?.contentDocument?.getElementById(c.id), b = n && (paintedBox(n) || n.getBoundingClientRect());
+  if (!b?.width) return {};
+  const m = state.model;
+  return (state.anchors[c.id] = { pos_x_pct: +(((b.left + b.width / 2) / m.width) * 100).toFixed(1), pos_y_pct: +(((b.top + b.height / 2) / m.height) * 100).toFixed(1) });
+}
+function formGroup(title, ...kids) {
+  return el("div", { className: "proGroup" }, el("div", { className: "proGroupHead", textContent: title }), ...kids);
+}
+// Easing: chọn hướng (Ease In, Ease Out, Ease In-Out) rồi độ mạnh, có đồ thị và giải thích.
+const EASE_DIRS = [["in", "Ease In (Tăng tốc)", "Bắt đầu chậm, tăng tốc tới khi kết thúc. Dùng khi vật thể rời khung hình hoặc bắt đầu lao đi."], ["out", "Ease Out (Giảm tốc)", "Bắt đầu nhanh, hãm dần rồi dừng. Phổ biến nhất khi vật thể bay vào khung và dừng đúng vị trí."], ["inOut", "Ease In-Out (Easy Ease)", "Chậm đầu, nhanh giữa, chậm cuối. Dùng cho chuyển động qua lại, popup icon, chuyển cảnh."]];
+const EASE_POWERS = [["sine", "Sine (Nhẹ)"], ["power1", "Quad"], ["power2", "Cubic"], ["power3", "Quart (Mạnh)"], ["expo", "Expo (Rất mạnh)"], ["circ", "Circ"], ["back", "Back (Vượt rồi về)"], ["elastic", "Elastic (Lò xo)"], ["bounce", "Bounce (Nảy)"], ["none", "Linear (Đều tốc)"]];
+function easingPicker(mc, onChange) {
+  const m = /^(\w+)(?:\.(in|out|inOut))?/.exec(mc.ease || "back.out") || [];
+  let power = m[1] || "back", dir = m[2] || "out";
+  const name = (p, d) => (p === "none" ? "none" : `${p}.${d}`);
+  const hint = el("p", { className: "hint proHint" });
+  const showHint = () => { hint.textContent = EASE_DIRS.find((x) => x[0] === dir)?.[2] || ""; };
+  showHint();
+  const update = () => { mc.ease = name(power, dir); showHint(); onChange(); redrawPowers(); };
+  const dirs = tilePicker("Hướng tăng giảm tốc", EASE_DIRS.map(([v, t]) => [v, t]), dir, (v) => Mau.easing(name(power === "none" ? "power2" : power, v)), (v) => { dir = v ?? "out"; update(); });
+  const powersBox = el("div");
+  const redrawPowers = () => powersBox.replaceChildren(tilePicker("Độ mạnh", EASE_POWERS, power, (v) => Mau.easing(name(v, dir)), (v) => { power = v ?? "none"; update(); }));
+  redrawPowers();
+  return el("div", { className: "proGroup" }, el("div", { className: "proGroupHead", textContent: `Easing: ${mc.ease || name(power, dir)}` }), dirs, hint, powersBox);
+}
+// Dòng nhập chữ có nút ẩn, hiện. Chữ ẩn vẫn được giữ để bật lại.
+const EYE_ON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>';
+const EYE_OFF = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18"/><path d="M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4M6.5 6.6A16.6 16.6 0 0 0 2 12s3.6 7 10 7a10 10 0 0 0 4.4-1"/></svg>';
+function textRow(input, hidden, onToggle) {
+  const b = el("button", { className: "proEye", type: "button" });
+  const row = el("div", { className: "proTextRow" }, input, b);
+  const paint = () => {
+    row.classList.toggle("off", hidden);
+    b.innerHTML = hidden ? EYE_OFF : EYE_ON;
+    b.title = hidden ? "Đang ẩn, bấm để hiện lại" : "Đang hiện, bấm để ẩn dòng này";
+    b.setAttribute("aria-pressed", String(hidden));
+  };
+  paint();
+  b.onclick = () => { hidden = !hidden; paint(); onToggle(hidden); };
+  return row;
+}
+function tilePicker(label, opts, cur, tileOf, onSet) {
+  const tiles = opts.map(([v, name]) => {
+    const b = el("button", { className: `mxPick${v === cur ? " on" : ""}${v === "none" || v === "normal" ? " tat" : ""}`, title: v === "none" || v === "normal" ? name : `${name}. Bấm một lần để bật, bấm lại để tắt` }, tileOf(v), el("span", { textContent: name }));
+    b.dataset.v = v;
+    // Bấm một lần là bật, bấm lại là tắt. Có ô "Không dùng" thì ô đó sáng khi đã tắt.
+    b.onclick = () => {
+      const off = b.classList.contains("on");
+      for (const x of tiles) x.classList.toggle("on", off ? ["none", "normal"].includes(x.dataset.v) : x === b);
+      onSet(off ? null : v);
+    };
+    return b;
+  });
+  return el("div", { className: "mxPicker" }, el("label", { className: "cf-lbl" }, label, el("small", { textContent: " · bấm lại để tắt" })), el("div", { className: "mxPickGrid" }, ...tiles));
+}
+
+// ---- Hòa trộn ----
+const BLEND_OPTS = [["normal", "Normal (Bình thường)"], ["multiply", "Multiply (Nhân)"], ["screen", "Screen (Sáng lọc)"], ["overlay", "Overlay (Phủ)"], ["soft-light", "Soft Light (Sáng dịu)"], ["hard-light", "Hard Light (Sáng gắt)"], ["darken", "Darken (Tối hơn)"], ["lighten", "Lighten (Sáng hơn)"], ["color-dodge", "Color Dodge (Né màu)"], ["color-burn", "Color Burn (Cháy màu)"], ["difference", "Difference (Hiệu)"], ["exclusion", "Exclusion (Loại trừ)"], ["hue", "Hue (Sắc)"], ["saturation", "Saturation (Bão hòa)"], ["color", "Color (Màu)"], ["luminosity", "Luminosity (Độ sáng)"], ["plus-lighter", "Add (Cộng sáng)"]];
+function blendPicker(cur, onSet) {
+  return tilePicker("Chế độ hòa trộn (Blend Mode)", BLEND_OPTS, cur || "normal", (v) => Mau.blend(v), (v) => onSet(v || "normal"));
+}
+// Bảng thông số hòa trộn, dùng chung cho layer trên timeline và mẫu. changed() được gọi sau mỗi lần chỉnh.
+function blendPanel(v, def, changed, reset) {
+  v.bl ??= {};
+  const bl = v.bl;
+  const name = () => BLEND_OPTS.find((x) => x[0] === (v.mode ?? def.mode))?.[1] || "";
+  const sel = el("select");
+  sel.setAttribute("aria-label", "Chế độ hòa trộn");
+  for (const [k, t] of BLEND_OPTS) sel.append(el("option", { value: k, textContent: t, selected: k === (v.mode ?? def.mode) }));
+  const gridBox = el("div");
+  const paintGrid = () => gridBox.replaceChildren(blendPicker(v.mode ?? def.mode, (m) => { v.mode = m; sel.value = m; changed(); }));
+  paintGrid();
+  sel.onchange = () => { v.mode = sel.value; paintGrid(); changed(); };
+  state.folds ??= {};
+  state.folds.blGrid ??= true;
+  const grid = foldBox("blGrid", "Xem trước các chế độ", gridBox);
+  const num = (obj, key, dflt, label, min, max, step, title) => {
+    const r = sliderRow(label, obj[key] ?? dflt, min, max, step, (x) => { obj[key] = x; changed(); }, (x) => { obj[key] = x; changed(); });
+    if (title) r.title = title;
+    return r;
+  };
+  const opacity = sliderRow("Độ rõ (Opacity %)", Math.round((v.opacity ?? def.opacity ?? 1) * 100), 0, 100, 1, (x) => { v.opacity = x / 100; changed(); }, (x) => { v.opacity = x / 100; changed(); });
+  const adjust = foldBox("blAdjust", "Điều chỉnh trước khi trộn",
+    num(bl, "bright", 100, "Độ sáng (Exposure %)", 0, 300, 1),
+    num(bl, "contrast", 100, "Tương phản (Contrast %)", 0, 300, 1),
+    num(bl, "sat", 100, "Bão hòa (Saturation %)", 0, 300, 1),
+    num(bl, "hue", 0, "Xoay màu (Hue °)", -180, 180, 1),
+    num(bl, "gray", 0, "Trắng đen (Tint %)", 0, 100, 1),
+    num(bl, "invert", 0, "Đảo màu (Invert %)", 0, 100, 1),
+    num(bl, "blur", 0, "Làm mờ (Blur px)", 0, 80, 0.5));
+  bl.key ??= {};
+  const keyBox = el("div");
+  const paintKey = () => keyBox.replaceChildren(...(bl.key.mode ? [
+    num(bl.key, "at", bl.key.mode === "bright" ? 70 : 15, "Ngưỡng (Threshold %)", 0, 100, 1, "Vùng sáng tối qua mức này sẽ trong suốt"),
+    num(bl.key, "soft", 15, "Làm mềm (Softness %)", 1, 60, 1, "Mép chuyển từ từ, không bị cứng"),
+  ] : []));
+  paintKey();
+  const key = foldBox("blKey", "Luma Key (tách theo độ sáng)",
+    selectRow("Kiểu tách", [["", "Tắt"], ["dark", "Bỏ vùng tối (Key Out Darker)"], ["bright", "Bỏ vùng sáng (Key Out Brighter)"]], bl.key.mode || "", (x) => {
+      bl.key = x ? { mode: x, at: x === "bright" ? 70 : 15, soft: 15 } : {};
+      paintKey();
+      changed();
+    }),
+    keyBox,
+    el("p", { className: "hint", textContent: "Layer có nền đen như khói, lửa, ánh sáng thì dùng Bỏ vùng tối." }));
+  bl.ramp ??= {};
+  const rampBox = el("div");
+  const paintRamp = () => rampBox.replaceChildren(...(bl.ramp.type ? [
+    ...(bl.ramp.type === "radial" ? [num(bl.ramp, "cx", 50, "Tâm ngang (%)", 0, 100, 1), num(bl.ramp, "cy", 50, "Tâm dọc (%)", 0, 100, 1)] : [num(bl.ramp, "angle", 90, "Góc (°)", 0, 360, 1)]),
+    num(bl.ramp, "from", bl.ramp.type === "radial" ? 40 : 0, bl.ramp.type === "radial" ? "Vùng rõ hẳn (%)" : "Bắt đầu hiện (%)", 0, 100, 1),
+    num(bl.ramp, "to", bl.ramp.type === "radial" ? 80 : 40, bl.ramp.type === "radial" ? "Mờ hết tại (%)" : "Rõ hẳn tại (%)", 0, 100, 1),
+  ] : []));
+  paintRamp();
+  const ramp = foldBox("blRamp", "Gradient Matte (độ rõ theo vùng)",
+    selectRow("Kiểu", [["", "Tắt"], ["linear", "Tuyến tính (Linear)"], ["radial", "Tỏa tròn (Radial)"]], bl.ramp.type || "", (x) => {
+      bl.ramp = x ? (x === "radial" ? { type: x, cx: 50, cy: 50, from: 40, to: 80 } : { type: x, angle: 90, from: 0, to: 40 }) : {};
+      paintRamp();
+      changed();
+    }),
+    rampBox);
+  const time = foldBox("blTime", "Theo thời gian (Fade)",
+    num(v, "fadeIn", def.fadeIn ?? 0, "Hiện dần (giây)", 0, 5, 0.05),
+    num(v, "fadeOut", def.fadeOut ?? 0, "Mờ dần (giây)", 0, 5, 0.05));
+  const again = el("button", { className: "reset", textContent: "↺ Trả về thông số gốc" });
+  again.onclick = reset;
+  return el("div", { className: "blPanel" }, el("div", { className: "pr2" }, el("label", { textContent: "Chế độ (Mode)" }), sel), opacity, grid, adjust, key, ramp, time, again);
+}
+// Hòa trộn cho layer đã có trên timeline: chọn nhiều layer thì đổi cả nhóm.
+function blendRows(c) {
+  const o = state.model.overrides[c.id] || {};
+  const ids = state.picks.size > 1 && state.picks.has(c.id) ? [...state.picks].filter((id) => isVisualClip(clipOf(id))) : [c.id];
+  // Mẫu có thể gắn sẵn chế độ trộn trong thẻ, nên đọc giá trị thật trên khung xem.
+  const node = state.frame?.contentDocument?.getElementById(c.id);
+  const seen = node ? node.ownerDocument.defaultView.getComputedStyle(node).mixBlendMode : "normal";
+  const v = { mode: o.d?.blend || seen || "normal", opacity: o.opacity ?? 1, bl: JSON.parse(JSON.stringify(o.d?.bl || {})), fadeIn: o.d?.fade?.in || 0, fadeOut: o.d?.fade?.out || 0 };
+  const name = BLEND_OPTS.find((x) => x[0] === v.mode)?.[1] || v.mode;
+  const run = () => {
+    if (state.time < c.start || state.time > c.end) autoSeek(c.start + Math.min(0.7, (c.end - c.start) / 2));
+    const body = (id) => ({ id, ...v });
+    const opts = { id: c.id, keepSel: true, range: [c.start, c.end], max: Math.max(3, c.end - c.start), redo: run, blendFor: c.id, onDrop: () => drawProps() };
+    return ids.length > 1 ? previewOp(`Hòa trộn ${ids.length} layer`, "batch", { items: ids.map((id) => ({ op: "blendSet", body: body(id) })) }, opts) : previewOp(`Hòa trộn: ${clipLabel(c).slice(0, 24)}`, "blendSet", body(c.id), opts);
+  };
+  const changed = () => {
+    if (state.preview && state.preview.opts.blendFor !== c.id) cancelPreview();
+    rePreview(run);
+  };
+  const reset = () => { v.mode = "normal"; v.opacity = 1; v.bl = {}; v.fadeIn = 0; v.fadeOut = 0; run(); const box = reset.box; box?.replaceWith(reset.box = blendPanel(v, v, changed, reset)); };
+  return foldBox("blend", `Hòa trộn: ${name}`, (reset.box = blendPanel(v, v, changed, reset)));
+}
+// Hòa trộn cho mẫu chưa áp dụng: thông số đi kèm mỗi lần dựng xem thử.
+function tplBlend(op, def) {
+  const u = state.proUi;
+  const v = ((u.tplBx ??= {})[op] ??= {});
+  const reset = () => { delete u.tplBx[op]; drawProPresets(); rePreview(); };
+  return formGroup("Hòa trộn", blendPanel(v, { mode: "normal", opacity: 1, ...def }, () => rePreview(), reset));
+}
+const isVisualClip = (c) => !!c && !["audio", "sfx", "grade", "voice", "music"].includes(c.kind);
+// Thêm mẫu thành layer ngay tại thước timeline, không qua bước xem thử.
+function addHereBtn(label, op, bodyOf) {
+  const b = el("button", { className: "proAddHere", textContent: `+ ${label} tại thước timeline`, title: "Thêm layer mới đúng vị trí thước timeline đang đứng" });
+  b.onclick = async () => {
+    const t = pinTime(), xf = state.preview?.body?.xf, trk = state.preview?.body?.trk, bx = state.proUi.tplBx?.[op];
+    const r = await edit(op, { ...bodyOf(), time: t, ...(xf ? { xf } : {}), ...(trk ? { trk } : {}), ...(bx ? { bx } : {}) });
+    if (state.proUi.tplBx) delete state.proUi.tplBx[op];
+    if (r?.id) { seek(t); select(r.id); toast(`Đã thêm layer tại ${fmtTime(t)}`); }
+  };
+  return b;
+}
+
+// ---- Tracking ----
+const trkUi = () => (state.proUi.trk ??= {
+  mode: "object", search: 1.6, pos: true, scale: false, rot: false, channel: "luma", fps: 30, conf: 60, low: "adapt", avoid: true,
+  smooth: 0.15, rate: 15, mult: 100, offX: 0, offY: 0, snap: false, zoom: 1, box: null, boxC: null, boxT: 0, boxVideo: null, res: null, map: null, meas: null, measKey: "",
+  cam: { zoom: 1.15, tx: 50, ty: 32, dead: 2, smooth: 0.5, rate: 10, scope: "one", results: null, items: null },
+});
+function trackTargets() {
+  const pvId = previewLayerId();
+  if (pvId) return [pvId];
+  if (state.picks.size > 1) return [...state.picks].filter((id) => isVisualClip(clipOf(id)));
+  return isVisualClip(clipOf(state.sel)) ? [state.sel] : [];
+}
+function trackRange(ids) {
+  const pv = state.preview;
+  if (ids.length === 1 && ids[0] === previewLayerId() && pv.start != null) return [pv.start, pv.end];
+  const list = ids.map(clipOf).filter(Boolean);
+  return list.length ? [Math.min(...list.map((c) => c.start)), Math.max(...list.map((c) => c.end))] : null;
+}
+function videoAt(t) {
+  const list = state.model.clips.filter((c) => c.kind === "video" && c.src && !/\.webm$/i.test(c.src) && c.start <= t && c.end > t);
+  return list.sort((a, b) => (laneKey(b) === "broll") - (laneKey(a) === "broll") || b.track - a.track)[0] || null;
+}
+// Vùng hiển thị thật của khung video trong khung hình (đã tính object-fit).
+function videoMap(rect, aspect, n) {
+  const fit = n.ownerDocument.defaultView.getComputedStyle(n).objectFit;
+  if (fit === "fill") return { x: rect.x, y: rect.y, w: rect.w, h: rect.h };
+  const w = fit === "contain" ? Math.min(rect.w, rect.h / aspect) : Math.max(rect.w, rect.h / aspect), h = w * aspect;
+  return { x: rect.x + (rect.w - w) / 2, y: rect.y + (rect.h - h) / 2, w, h };
+}
+// Đo layer ở trạng thái gốc: tâm, điểm xoay, hệ số khung cha.
+function measureLayer(id) {
+  const n = state.frame?.contentDocument?.getElementById(id);
+  if (!n) return null;
+  const o = state.model.overrides[id] || {}, b = o.track?.base;
+  const live = id === previewLayerId() ? liveXf(n) : null;
+  const x0 = live ? live.x : (b ? b.x : o.x) || 0, y0 = live ? live.y : (b ? b.y : o.y) || 0;
+  const s0 = live ? live.sx : (b ? b.scale : o.scale) ?? 1, r0 = (b ? b.rotate : o.rotate) || 0;
+  const parent = n.parentElement, ps = parent.getBoundingClientRect().width / parent.offsetWidth || 1;
+  const saved = ["translate", "scale", "rotate"].map((k) => [k, n.style.getPropertyValue(k), n.style.getPropertyPriority(k)]);
+  const place = (s) => {
+    n.style.setProperty("translate", `${x0}px ${y0}px`, "important");
+    n.style.setProperty("scale", String(s), "important");
+    n.style.setProperty("rotate", `${r0}deg`, "important");
+  };
+  const center = () => { const r = paintedBox(n) || n.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; };
+  place(s0);
+  const [cx, cy] = center(), q = n.getBoundingClientRect();
+  place(s0 * 2);
+  const [c2x, c2y] = center();
+  for (const [k, v, pr] of saved) { if (v) n.style.setProperty(k, v, pr); else n.style.removeProperty(k); }
+  return { id, x0, y0, s0, r0, ps, cx, cy, vx: c2x - cx, vy: c2y - cy, rect: { x: q.left, y: q.top, w: q.width, h: q.height } };
+}
+async function runTrackJob(cfg, onProgress) {
+  await post("track", cfg);
+  for (;;) {
+    await new Promise((ok) => setTimeout(ok, 200));
+    const { job } = await api("track");
+    onProgress?.(job);
+    if (job.status === "xong") return api(`track/kq?id=${job.tid}`);
+    if (job.status === "da_dung") return null;
+    if (job.status === "loi") throw new Error(job.error || "Bộ tracking không chạy xong");
+  }
+}
+function trackBody(q, ids) {
+  const key = `${ids.join()}|${q.res.tid}`;
+  if (q.measKey !== key || !q.meas?.length) {
+    // Đo khi layer đã hiện rõ, đo xong trả playhead về chỗ cũ.
+    const back = state.time, range = trackRange(ids) || [back, back];
+    autoSeek(Math.min(range[1] - 0.05, Math.max(back, range[0] + Math.min(0.7, (range[1] - range[0]) / 2))));
+    q.meas = ids.map(measureLayer).filter(Boolean);
+    q.measKey = key;
+    autoSeek(back);
+  }
+  return {
+    targets: q.meas,
+    track: { samples: q.res.samples, fps: q.res.fps, tid: q.res.tid, mode: q.res.mode, ref: q.res.ref, map: q.map },
+    params: { pos: q.pos, scale: q.scale, rot: q.rot, smooth: q.smooth, rate: q.rate, mult: q.mult, offX: q.offX, offY: q.offY, snap: q.snap, zoom: q.zoom },
+  };
+}
+function previewTrack() {
+  const q = trkUi(), ids = trackTargets();
+  if (!q.res) return;
+  if (!ids.length) return toast("Hãy chọn layer trên timeline, hoặc đưa một mẫu lên video, rồi bấm Xem lại", true);
+  const pv = state.preview, body = trackBody(q, ids);
+  if (pv && ids[0] === previewLayerId() && pv.op !== "applyTrack") {
+    pv.body = { ...pv.body, trk: body };
+    return previewOp(pv.label, pv.op, pv.body, pv.opts);
+  }
+  const [a, b] = trackRange(ids) || [state.time, state.time + 3];
+  const name = { object: "vật thể", scene: "cảnh quay", person: "người dẫn" }[q.res.mode];
+  return previewOp(`Bám theo ${name}: ${ids.length} layer`, "applyTrack", body, { id: ids[0], keepSel: true, range: [a, b], max: Math.max(3, b - a), redo: previewTrack });
+}
+function previewCamera() {
+  const cam = trkUi().cam;
+  if (!cam.results?.length) return;
+  if (!cam.items) {
+    const back = state.time;
+    cam.items = cam.results.map(({ res, clip }) => {
+      autoSeek((clip.start + clip.end) / 2);
+      const m = measureLayer(clip.id), n = state.frame.contentDocument.getElementById(clip.id);
+      return m && { id: clip.id, samples: res.samples, fps: res.fps, tid: res.tid, map: videoMap(m.rect, res.aspect, n), O: [m.cx - m.vx, m.cy - m.vy], x0: m.x0, y0: m.y0, s0: m.s0, ps: m.ps };
+    }).filter(Boolean);
+    autoSeek(back);
+  }
+  const first = cam.results[0].clip;
+  return previewOp(`Camera bám người dẫn: ${cam.items.length} cảnh`, "cameraFollow", { items: cam.items, params: { zoom: cam.zoom, tx: cam.tx, ty: cam.ty, dead: cam.dead, smooth: cam.smooth, rate: cam.rate } }, { id: first.id, keepSel: true, range: [first.start, first.end], max: Math.max(3, first.end - first.start), redo: previewCamera });
+}
+// Vẽ vùng theo dõi và đường bám lên khung xem.
+function drawTrackOv() {
+  const pick = $("#pick");
+  if (!pick || !state.model) return;
+  let svg = $("#trkOv");
+  const show = state.proUi?.subTab === "track" && $("#tab-presets")?.classList.contains("on");
+  if (!show) { if (svg) svg.style.display = "none"; return; }
+  if (!svg) {
+    svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.id = "trkOv";
+    pick.append(svg);
+  }
+  svg.style.display = "";
+  const m = state.model, q = trkUi();
+  svg.setAttribute("viewBox", `0 0 ${m.width} ${m.height}`);
+  let out = "";
+  const sw = 3 / (state.scale || 1) / 1.5;
+  const res = q.res, map = q.map;
+  let box = q.boxC;
+  if (res && map) {
+    const pts = res.samples.filter((_, i) => i % 2 === 0).map((s) => `${(map.x + s.cx * map.w).toFixed(1)},${(map.y + s.cy * map.w).toFixed(1)}`).join(" ");
+    out += `<polyline points="${pts}" fill="none" stroke="#FFD147" stroke-width="${sw}" opacity=".9"/>`;
+    const near = res.samples.reduce((a, s) => (Math.abs(s.t - state.time) < Math.abs(a.t - state.time) ? s : a), res.samples[0]);
+    const cx = map.x + near.cx * map.w, cy = map.y + near.cy * map.w;
+    out += `<circle cx="${cx}" cy="${cy}" r="${sw * 4}" fill="${near.c < q.conf / 100 ? "#ff5252" : "#4ade80"}"/>`;
+    if (box && res.mode === "object") { const k = Math.hypot(near.a, near.b) || 1; box = { w: box.w * k, h: box.h * k, x: cx - (box.w * k) / 2, y: cy - (box.h * k) / 2 }; }
+    else if (res.mode === "person") { const w = res.ref.w * map.w; box = { x: cx - w / 2, y: cy - w / 2, w, h: w }; }
+    else box = null;
+  }
+  if (box && q.mode !== "scene") {
+    const f = q.search;
+    out += `<rect x="${box.x}" y="${box.y}" width="${box.w}" height="${box.h}" fill="none" stroke="#FFD147" stroke-width="${sw}"/>`;
+    if (q.mode === "object") out += `<rect x="${box.x - (box.w * (f - 1)) / 2}" y="${box.y - (box.h * (f - 1)) / 2}" width="${box.w * f}" height="${box.h * f}" fill="none" stroke="#ff9d4d" stroke-width="${sw}" stroke-dasharray="${sw * 4} ${sw * 3}"/>`;
+  }
+  svg.innerHTML = out;
+}
+// Kéo chuột trên khung xem để vẽ vùng theo dõi.
+function trackDrawStart(e) {
+  const q = trkUi(), pick = $("#pick"), r = pick.getBoundingClientRect();
+  const toC = (ev) => [(ev.clientX - r.left) / state.scale, (ev.clientY - r.top) / state.scale];
+  const [ax, ay] = toC(e);
+  pick.setPointerCapture(e.pointerId);
+  const move = (ev) => {
+    const [bx, by] = toC(ev);
+    q.boxC = { x: Math.min(ax, bx), y: Math.min(ay, by), w: Math.abs(bx - ax), h: Math.abs(by - ay) };
+    q.res = null;
+    drawTrackOv();
+  };
+  const up = () => {
+    pick.removeEventListener("pointermove", move);
+    pick.removeEventListener("pointerup", up);
+    pick.classList.remove("trkVe");
+    state.trkDraw = false;
+    const v = videoAt(state.time), b = q.boxC;
+    if (v && b && b.w > 6 && b.h > 6) {
+      const n = state.frame.contentDocument.getElementById(v.id), o = n.getBoundingClientRect();
+      const aspect = n.videoHeight && n.videoWidth ? n.videoHeight / n.videoWidth : o.height / o.width;
+      const map = videoMap({ x: o.left, y: o.top, w: o.width, h: o.height }, aspect, n);
+      q.box = [(b.x - map.x) / map.w, (b.y - map.y) / map.w, b.w / map.w, b.h / map.w];
+      q.boxT = state.time;
+      q.boxVideo = v.id;
+    } else { q.box = null; q.boxC = null; if (!v) toast("Không có cảnh video tại vị trí này", true); }
+    drawProPresets();
+  };
+  pick.addEventListener("pointermove", move);
+  pick.addEventListener("pointerup", up);
+}
+function trackPanel() {
+  const q = trkUi(), cam = q.cam, ids = trackTargets();
+  const names = ids.map((id) => (clipOf(id) ? clipLabel(clipOf(id)).slice(0, 26) : state.preview?.label?.slice(0, 26) || id));
+  const banner = el("div", { className: "proTargetBanner", textContent: ids.length ? `Áp vào: ${names.join(", ")}` : "Chưa chọn layer. Bấm một layer trên timeline, hoặc đưa một mẫu lên video." });
+  const changed = () => { if (q.res) rePreview(); };
+  const slide = (label, key, min, max, step, title) => { const r = sliderRow(label, q[key], min, max, step, (v) => { q[key] = v; changed(); }, (v) => { q[key] = v; changed(); }); if (title) r.title = title; return r; };
+  const check = (label, key, title) => { const r = checkRow(label, q[key], (v) => { q[key] = v; q.measKey = ""; changed(); }); if (title) r.title = title; return r; };
+  const prog = el("div", { className: "trkProg", hidden: !state.trkBusy }, el("i"), el("span", { textContent: "Đang phân tích…" }));
+  const showProg = (job, prefix = "") => { prog.hidden = false; prog.firstChild.style.width = `${job.percent}%`; prog.lastChild.textContent = `${prefix}${job.stage} ${Math.round(job.percent)}%`; };
+  const stopBtn = el("button", { textContent: "■ Dừng phân tích", hidden: !state.trkBusy });
+  stopBtn.onclick = () => post("track/dung");
+  const analyze = async (dir) => {
+    if (state.trkBusy) return;
+    const t = q.mode === "object" && q.box ? q.boxT : pinTime();
+    const v = q.mode === "object" && q.boxVideo ? clipOf(q.boxVideo) : videoAt(t);
+    if (!v) return toast("Không có cảnh video tại vị trí này", true);
+    if (q.mode === "object" && !q.box) return toast("Hãy bấm Vẽ vùng theo dõi rồi kéo khung quanh vật thể trên video", true);
+    const range = trackRange(ids) || [v.start, v.end];
+    state.trkBusy = true;
+    drawProPresets();
+    try {
+      const res = await runTrackJob({ videoId: v.id, time: t, from: Math.max(range[0], v.start), to: Math.min(range[1], v.end), mode: q.mode, box: q.box, search: q.search, conf: q.conf / 100, low: q.low, scale: q.scale, rot: q.rot, channel: q.channel, fps: q.fps, dir, avoid: q.avoid }, (job) => showProgLive(job));
+      if (res) {
+        q.res = res;
+        const n = state.frame.contentDocument.getElementById(v.id), o = n.getBoundingClientRect();
+        q.map = videoMap({ x: o.left, y: o.top, w: o.width, h: o.height }, res.aspect, n);
+        q.measKey = "";
+      }
+    } catch (e) { toast(e.message, true); }
+    state.trkBusy = false;
+    state.trkProg = null;
+    drawProPresets();
+    if (q.res && ids.length) previewTrack();
+  };
+  const showProgLive = (job, prefix) => { state.trkProg = { job, prefix }; const live = document.querySelector("#tab-presets .trkProg"); if (live) { live.hidden = false; live.firstChild.style.width = `${job.percent}%`; live.lastChild.textContent = `${prefix || ""}${job.stage} ${Math.round(job.percent)}%`; } };
+  if (state.trkProg) showProg(state.trkProg.job, state.trkProg.prefix);
+
+  const modes = pillRow("Theo dõi", [["object", "Vật thể"], ["scene", "Cảnh quay"], ["person", "Người dẫn"]], q.mode, (v) => { q.mode = v || q.mode; q.res = null; drawProPresets(); });
+  const modeHint = { object: "Vẽ khung quanh vật thể có nhiều chi tiết (bảng hiệu, góc tường, đồ vật). Layer đi theo vật thể đó.", scene: "Bám chuyển động của cả cảnh khi máy quay lia, tiến lùi. Chữ như được dán cố định vào không gian.", person: "Tự tìm mặt người dẫn trong cảnh. Layer đi theo đầu người dẫn." }[q.mode];
+  const drawBtn = el("button", { className: "primary", textContent: q.box ? "✎ Vẽ lại vùng theo dõi" : "✎ Vẽ vùng theo dõi trên video" });
+  drawBtn.onclick = () => { player()?.pause(); state.trkDraw = true; $("#pick").classList.add("trkVe"); toast("Kéo chuột trên video để khoanh vật thể"); };
+  const source = formGroup("1. Nguồn theo dõi", modes, el("p", { className: "hint", textContent: modeHint }),
+    ...(q.mode === "object" ? [drawBtn, slide("Vùng tìm kiếm (Search Region)", "search", 1.1, 4, 0.1, "Khung nét đứt. Vật thể di chuyển nhanh thì tăng lên")] : []),
+    ...(q.mode === "scene" ? [check("Bỏ qua vùng có người dẫn", "avoid", "Lấy điểm trên tường, sàn; người đi lại không kéo lệch cảnh")] : []));
+  const type = formGroup("2. Kiểu bám (Track Type)", check("Vị trí (Position)", "pos"), check("Tỉ lệ (Scale)", "scale", "Vật thể tiến lại gần thì layer to lên"), check("Xoay (Rotation)", "rot", "Máy quay nghiêng thì layer nghiêng theo"));
+  const opts = formGroup("3. Tùy chọn phân tích (Motion Tracker Options)",
+    selectRow("Kênh (Channel)", [["luma", "Độ sáng (Luminance)"], ["sat", "Độ bão hòa (Saturation)"], ["red", "Kênh đỏ"], ["green", "Kênh xanh lá"], ["blue", "Kênh xanh dương"]], q.channel, (v) => { q.channel = v; }),
+    selectRow("Nhịp phân tích", [["15", "15 khung/giây (nhanh)"], ["30", "30 khung/giây"], ["60", "60 khung/giây (chính xác nhất)"]], String(q.fps), (v) => { q.fps = +v; }),
+    sliderRow("Độ tin cậy tối thiểu (%)", q.conf, 10, 95, 1, (v) => { q.conf = v; }),
+    selectRow("Khi độ tin cậy thấp", [["adapt", "Cập nhật mẫu (Adapt Feature)"], ["continue", "Bám tiếp (Continue Tracking)"], ["extrapolate", "Ngoại suy (Extrapolate Motion)"], ["stop", "Dừng bám (Stop Tracking)"]], q.low, (v) => { q.low = v; }));
+  const go = (label, dir, cls) => { const b = el("button", { className: cls || "", textContent: label, disabled: !!state.trkBusy }); b.onclick = () => analyze(dir); return b; };
+  const run = formGroup("4. Phân tích", el("div", { className: "row trkRun" }, go("◀ Lùi", "back"), go("◀ Cả hai chiều ▶", "both", "primary"), go("Tới ▶", "forward")), prog, stopBtn);
+
+  const res = q.res;
+  const graph = () => {
+    const w = 260, h = 34, S = res.samples, a = S[0].t, b = S[S.length - 1].t;
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+    svg.setAttribute("class", "trkGraph");
+    const y = (c) => (h - 2 - c * (h - 4)).toFixed(1);
+    svg.innerHTML = `<line x1="0" x2="${w}" y1="${y(q.conf / 100)}" y2="${y(q.conf / 100)}" stroke="#ff9d4d" stroke-dasharray="3 3"/><polyline fill="none" stroke="#4ade80" stroke-width="1.4" points="${S.map((s) => `${(((s.t - a) / (b - a || 1)) * w).toFixed(1)},${y(s.c)}`).join(" ")}"/>`;
+    return svg;
+  };
+  const stab = el("button", { textContent: "Ổn định cảnh (Stabilize)", title: "Áp cho layer video: đảo ngược chuyển động để cảnh đứng yên, phóng nhẹ để không lộ mép" });
+  stab.onclick = () => { q.mult = -100; q.zoom = 1.08; q.measKey = ""; drawProPresets(); previewTrack(); };
+  const result = res ? formGroup("5. Kết quả và tinh chỉnh",
+    el("p", { className: "hint", textContent: `${res.samples.length} khung · tin cậy trung bình ${Math.round(res.conf * 100)}% · ${res.low} khung dưới ngưỡng. Kéo thông số là thấy ngay, không cần phân tích lại.` }),
+    graph(),
+    slide("Làm mượt (Smoother)", "smooth", 0, 1, 0.01),
+    slide("Keyframe mỗi giây", "rate", 2, 30, 1),
+    slide("Hệ số chuyển động (%)", "mult", -100, 200, 1, "100 là bám đúng. Giá trị âm đảo ngược, dùng để ổn định cảnh"),
+    slide("Lệch ngang (Attach X)", "offX", -800, 800, 1),
+    slide("Lệch dọc (Attach Y)", "offY", -800, 800, 1),
+    slide("Phóng thêm", "zoom", 1, 1.5, 0.01),
+    check("Đặt layer đúng vào điểm bám", "snap", "Tâm layer nhảy tới đúng điểm đang theo dõi"),
+    (() => { const b = el("button", { className: "primary", textContent: "▶ Xem bám trên video" }); b.onclick = () => { state.pvFrozen = false; state.editing = false; previewTrack(); }; return b; })(),
+    stab) : null;
+
+  const camSlide = (label, key, min, max, step, title) => { const r = sliderRow(label, cam[key], min, max, step, (v) => { cam[key] = v; if (cam.results) rePreviewCam(); }, (v) => { cam[key] = v; if (cam.results) rePreviewCam(); }); if (title) r.title = title; return r; };
+  const rePreviewCam = () => { state.proPreview = previewCamera; rePreview(); };
+  const camProg = el("div", { className: "trkProg", hidden: true }, el("i"), el("span"));
+  const camRun = el("button", { className: "primary", textContent: cam.results ? "↻ Phân tích lại người dẫn" : "▶ Phân tích và xem thử", disabled: !!state.trkBusy });
+  camRun.onclick = async () => {
+    const list = cam.scope === "all" ? state.model.clips.filter((c) => c.kind === "video" && c.src && laneKey(c) === "video" && c.end - c.start >= 0.5).sort((a, b) => a.start - b.start) : [videoAt(pinTime())].filter(Boolean);
+    if (!list.length) return toast("Không có cảnh video tại vị trí này", true);
+    state.trkBusy = true;
+    const results = [], skipped = [];
+    camProg.hidden = false;
+    for (let i = 0; i < list.length; i++) {
+      const clip = list[i];
+      try {
+        const res = await runTrackJob({ videoId: clip.id, time: (clip.start + clip.end) / 2, from: clip.start, to: clip.end, mode: "person", fps: 15, scale: false, channel: "luma", dir: "both" }, (job) => { camProg.firstChild.style.width = `${((i + job.percent / 100) / list.length) * 100}%`; camProg.lastChild.textContent = `Cảnh ${i + 1}/${list.length}: ${job.stage}`; });
+        if (res) results.push({ res, clip }); else break;
+      } catch (e) { skipped.push(clip.id); }
+    }
+    state.trkBusy = false;
+    cam.results = results;
+    cam.items = null;
+    drawProPresets();
+    if (skipped.length) toast(`${skipped.length} cảnh không thấy người dẫn nên giữ nguyên`, true);
+    if (results.length) { state.proPreview = previewCamera; previewCamera(); }
+  };
+  const camGroup = formGroup("Camera bám người dẫn",
+    el("p", { className: "hint", textContent: "Phóng cảnh lên rồi dời khung để người dẫn luôn ở đúng vị trí, không lộ mép cảnh. Áp lên cảnh video, không cần chọn layer." }),
+    selectRow("Áp dụng cho", [["one", "Cảnh tại thước timeline"], ["all", "Mọi cảnh chính trong video"]], cam.scope, (v) => { cam.scope = v; cam.results = null; cam.items = null; }),
+    camRun, camProg,
+    camSlide("Độ phóng", "zoom", 1, 2, 0.01, "Phóng càng nhiều, khung càng có chỗ để dời theo người dẫn"),
+    camSlide("Giữ người dẫn: ngang (%)", "tx", 0, 100, 1),
+    camSlide("Giữ người dẫn: dọc (%)", "ty", 0, 100, 1),
+    camSlide("Vùng chết (%)", "dead", 0, 15, 0.5, "Người dẫn nhúc nhích trong vùng này thì khung đứng yên, tránh rung"),
+    camSlide("Làm mượt", "smooth", 0, 1, 0.01),
+    camSlide("Keyframe mỗi giây", "rate", 2, 30, 1));
+
+  const tracked = ids.map((id) => [id, state.model.overrides[id]?.track]).filter(([, t]) => t);
+  const remove = tracked.length ? (() => {
+    const b = el("button", { className: "reset", textContent: `✕ Gỡ tracking khỏi ${tracked.length} layer` });
+    b.onclick = () => edit("batch", { items: tracked.map(([id]) => ({ op: "clearTrack", body: { id } })) });
+    const again = el("button", { textContent: "Chỉnh lại đường bám đã có" });
+    again.onclick = async () => {
+      const [id, t] = tracked[0];
+      try {
+        const r = await api(`track/kq?id=${t.tid}`);
+        if (t.kind === "camera") { Object.assign(cam, t.params); toast("Bấm Phân tích và xem thử để chỉnh camera"); return drawProPresets(); }
+        Object.assign(q, t.params, { res: r, mode: r.mode, measKey: "" });
+        const v = clipOf(r.videoId), n = state.frame.contentDocument.getElementById(v.id), o = n.getBoundingClientRect();
+        q.map = videoMap({ x: o.left, y: o.top, w: o.width, h: o.height }, r.aspect, n);
+        drawProPresets();
+        previewTrack();
+      } catch (e) { toast(e.message, true); }
+    };
+    return formGroup("Đang tracking", again, b);
+  })() : null;
+
+  state.proPreview = previewTrack;
+  // Đổi layer, áp dụng hoặc gỡ tracking thì vẽ lại bảng.
+  const syncKey = () => trackTargets().map((id) => `${id}:${state.model.overrides[id]?.track?.tid || ""}`).join();
+  state.proSync = () => { const now = syncKey(); if (now !== q.lastIds) { q.lastIds = now; drawProPresets(); } };
+  q.lastIds = syncKey();
+  setTimeout(drawTrackOv);
+  return el("div", { className: "proCustomBox" }, el("div", { className: "proSecHead" }, el("b", { textContent: "🎯 Tracking" })), banner, ...(remove ? [remove] : []), source, type, opts, run, ...(result ? [result] : []), camGroup);
+}
+// Hàng tracking trong bảng thuộc tính của layer.
+function trackRow(c) {
+  const t = state.model.overrides[c.id]?.track;
+  const open = el("button", { textContent: t ? "🎯 Mở bảng Tracking" : "🎯 Cho layer này bám theo…", title: "Bám vật thể, cảnh quay hoặc người dẫn" });
+  open.onclick = () => { state.proUi.subTab = "track"; openTab("presets"); drawProPresets(); };
+  const off = t ? el("button", { className: "reset", textContent: "✕ Gỡ tracking" }) : null;
+  if (off) off.onclick = () => edit("clearTrack", { id: c.id });
+  const name = t ? (t.kind === "camera" ? "Camera bám người dẫn" : { object: "Đang bám vật thể", scene: "Đang bám cảnh quay", person: "Đang bám người dẫn" }[t.mode]) : "Tracking";
+  return foldBox("track", name, open, ...(off ? [off] : []));
+}
+
+function drawProPresets() {
+  // Kho tải xong trước dự án: chờ refresh đầu tiên vẽ lại.
+  if (!state.model) return;
+  const host = $("#tab-presets");
+  if (!host) return;
+  if (!state.pro) {
+    host.replaceChildren(el("p", { className: "hint", textContent: "Đang tải kho Mẫu Pro…" }));
+    loadProCatalog();
+    return;
+  }
+  const u = state.proUi;
+  const subTabs = [
+    ["tx", "✦ Chữ VFX"],
+    ["motion", "⚡ Motion chữ"],
+    ["mg", "❖ MG"],
+    ["icon", "✪ Icon"],
+    ["wall", "🧱 Chữ 3D"],
+    ["track", "🎯 Tracking"],
+    ["resource", "🎧 SFX & Bảng màu"],
+  ];
+  const nav = el("div", { className: "proSubTabs" }, ...subTabs.map(([k, label]) => {
+    const b = el("button", { className: u.subTab === k ? "on" : "", textContent: label });
+    b.onclick = () => { u.subTab = k; drawProPresets(); };
+    return b;
+  }));
+
+  const body_ = el("div", { className: "proBody" });
+
+  const iconById = new Map((state.pro.animatedIcons || []).map((ic) => [ic.id, ic]));
+  state.proSync = null;
+  state.proPreview = null;
+
+  // 1) TAB: CHỮ VFX: bấm mẫu là thấy trên video; chọn layer chữ để đổi đúng layer đó
+  if (u.subTab === "tx") {
+    const presets = state.pro.textVfxPresets || [];
+    const curPreset = presets.find((p) => p.id === u.txId) || presets[0];
+    if (curPreset && u.txId !== curPreset.id) u.txId = curPreset.id;
+    const baseP = curPreset?.customizable_params || {};
+    const ov = (u.txOverrides[u.txId] ??= {});
+    const val = (k) => (ov[k] !== undefined ? ov[k] : baseP[k]);
+    const target = () => (u.txTarget ? clipOf(u.txTarget) : null);
+    if (u.txTarget && !target()) u.txTarget = null;
+    const texts = (c) => { const t = layerTexts(c); return [t[0] ?? "", t.slice(1).join(" ")]; };
+    const curText = () => {
+      const c = target();
+      if (!c) return [val("text_main") || "", val("text_sub") || ""];
+      const [m0, s0] = texts(c);
+      return [ov.text_main ?? m0, ov.text_sub ?? s0];
+    };
+    const preview = async () => {
+      const c = target(), [text_main, text_sub] = curText();
+      const anchor = c ? await layerAnchor(c) : {};
+      const body = c
+        ? { presetId: u.txId, overrides: { ...anchor, ...ov, text_main, text_sub }, time: c.start, duration: c.end - c.start, replaceId: c.id }
+        : { presetId: u.txId, overrides: ov, time: pinTime(), duration: ov.duration || 3 };
+      return previewOp(`${u.txId} ${c ? `đổi layer "${clipLabel(c).slice(0, 24)}"` : "thêm mới"}`, "addTextVfxPreset", body, {
+        redo: () => state.proPreview?.(),
+        after: (r) => { if (u.txTarget && r.id) { state.anchors[r.id] = anchor; u.txTarget = r.id; } drawProPresets(); },
+      });
+    };
+    state.proPreview = preview;
+
+    const liveCp = () => { const [text_main, text_sub] = curText(); return { ...baseP, ...ov, text_main: ov.hide_main ? " " : text_main, text_sub: ov.hide_sub ? "" : text_sub }; };
+    const liveBox = el("div", { className: "proLive" });
+    const redrawLive = () => { const cp = liveCp(); liveBox.replaceChildren(Mau.tx(cp, iconById.get(cp.icon_id))); };
+    redrawLive();
+    const changed = () => { redrawLive(); rePreview(); };
+
+    const grid = el("div", { className: "proTxGrid" }, ...presets.map((p) => {
+      const cp = p.customizable_params || {};
+      const card = el("button", { className: `proTxCard${p.id === u.txId ? " on" : ""}`, title: `${p.id} · ${p.name}\n${p.description || ""}` });
+      card.append(
+        el("div", { className: "proTxTop" }, el("span", { className: "proBadge", textContent: p.id }), el("span", { className: "proRole", textContent: (p.role || [])[0] || "" })),
+        Mau.tx(cp, iconById.get(cp.icon_id)),
+        el("div", { className: "proTxName", textContent: p.name })
+      );
+      // Bấm lại mẫu đang xem thử thì gỡ khỏi video.
+      card.onclick = () => {
+        if (u.txId === p.id && state.preview?.op === "addTextVfxPreset") return cancelPreview();
+        u.txId = p.id; drawProPresets(); state.proPreview?.();
+      };
+      return card;
+    }));
+
+    const picker = layerPicker(u.txTarget, ["text", "sub", "graphic"], "➕ Thêm mới tại playhead", (v) => {
+      u.txTarget = v;
+      delete ov.text_main; delete ov.text_sub;
+      drawProPresets();
+      state.proPreview?.();
+    });
+    state.proSync = () => {
+      const c = clipOf(state.sel);
+      if (c && ["text", "sub", "graphic"].includes(c.kind) && u.txTarget !== c.id) { u.txTarget = c.id; delete ov.text_main; delete ov.text_sub; drawProPresets(); }
+    };
+
+    const [m0, s0] = curText();
+    const tMain = el("input", { type: "text", value: m0, placeholder: "Chữ chính" });
+    tMain.oninput = () => { ov.text_main = tMain.value; changed(); };
+    const tSub = el("input", { type: "text", value: s0, placeholder: "Chữ phụ, để trống nếu chỉ 1 dòng" });
+    tSub.oninput = () => { ov.text_sub = tSub.value; changed(); };
+
+    const curIconId = val("icon_id") || "none";
+    const iconList = state.pro.animatedIcons || [];
+    const icPos = pillRow("Vị trí icon", [["top", "Trên"], ["left", "Trái"], ["right", "Phải"], ["none", "Ẩn"]], val("icon_pos") || "top", (v) => { ov.icon_pos = v || "top"; drawProPresets(); rePreview(); });
+    const icPicker = el("div", { className: "proMiniIconGrid" },
+      (() => { const b = el("button", { className: `proMiniIc${curIconId === "none" ? " on" : ""}`, textContent: "∅", title: "Không dùng icon" }); b.onclick = () => { ov.icon_id = "none"; ov.icon_pos = "none"; drawProPresets(); rePreview(); }; return b; })(),
+      ...iconList.map((ic) => {
+        const b = el("button", { className: `proMiniIc${ic.id === curIconId ? " on" : ""}`, title: `${ic.id} · ${ic.name_vi}` });
+        b.innerHTML = renderIconSvg(ic, val("icon_color") || val("color_primary") || "#F5D061");
+        b.onclick = () => { ov.icon_id = ic.id; if (val("icon_pos") === "none") ov.icon_pos = "top"; drawProPresets(); rePreview(); };
+        return b;
+      })
+    );
+    const colMain = colorField("Màu chữ chính", val("color_primary") || "#F5D061", (v) => { ov.color_primary = v || baseP.color_primary; changed(); }, { dots: false });
+    const colSub = colorField("Màu chữ phụ", val("color_secondary") || "#FFFFFF", (v) => { ov.color_secondary = v || baseP.color_secondary; changed(); }, { dots: false });
+    const colIcon = colorField("Màu icon", val("icon_color") || val("color_primary") || "#F5D061", (v) => { ov.icon_color = v || baseP.icon_color; changed(); }, { dots: false });
+
+    const accent = () => val("color_primary") || "#FFD147";
+    const withCur = (opts, cur, tag) => (cur && !opts.some(([v]) => v === cur) ? [[cur, `${cur} (${tag})`], ...opts] : opts);
+    const inPick = tilePicker("Motion vào", withCur([
+      ["Pop-in Bounce", "Pop-in / Bounce Pop"],
+      ["Mask Reveal Up", "Mask Reveal Up"],
+      ["Focus Blur-Resolve", "Focus Blur-Resolve"],
+      ["Press-Release Spring Stamp", "Spring Stamp"],
+    ], val("in_effect"), "của mẫu"), val("in_effect"), (v) => Mau.textIn(v, accent()), (v) => { ov.in_effect = v ?? "none"; changed(); });
+    const vfxPick = tilePicker("Lớp VFX", withCur([
+      ["light_sweep", "Light Sweep 45°"],
+      ["underline_stroke_draw", "Stroke Draw"],
+      ["glass_badge", "Glass Callout"],
+      ["stamp_shockwave_ring", "Shockwave Ring"],
+      ["none", "Không dùng"],
+    ], val("vfx_type"), "của mẫu"), val("vfx_type"), (v) => Mau.vfx(v, accent()), (v) => { ov.vfx_type = v ?? "none"; changed(); });
+    const outPick = tilePicker("Motion ra", withCur([
+      ["Fade Out Clean", "Fade Out"],
+      ["Smooth Evaporate Fade Out", "Evaporate"],
+      ["Scale-Down Fade", "Scale Down"],
+    ], val("out_effect"), "của mẫu"), val("out_effect"), (v) => Mau.textOut(v, accent()), (v) => { ov.out_effect = v ?? "none"; changed(); });
+
+    const slide = (label, key, def, min, max, step) => sliderRow(label, val(key) ?? def, min, max, step, (v) => { ov[key] = v; changed(); }, (v) => { ov[key] = v; changed(); });
+    const durRow = target() ? [] : [sliderRow("Thời lượng (s)", ov.duration ?? 3, 0.8, 10, 0.2, (v) => { ov.duration = v; changed(); }, (v) => { ov.duration = v; rePreview(); })];
+    const fonts = (key, label) => fontChoice(label, val(key), baseP[key], (v) => { ov[key] = v; changed(); });
+    const EASES_TX = [["back.out(1.7)", "Back Out (Nảy nhẹ)"], ["back.out(2.0)", "Back Out mạnh"], ["expo.out", "Expo Out (Dứt khoát)"], ["power3.out", "Power3 Out (Êm cuối)"], ["elastic.out(1,0.5)", "Elastic Out (Lò xo)"], ["none", "Linear (Đều tốc)"]];
+    const EASES_OUT = [["power2.in", "Power2 In (Nhanh dần)"], ["expo.in", "Expo In (Dứt khoát)"], ["sine.inOut", "Sine InOut (Êm)"], ["none", "Linear (Đều tốc)"]];
+    const withEase = (opts, cur) => (cur && !opts.some(([v]) => v === cur) ? [[cur, cur], ...opts] : opts);
+    const colGlow = colorField("Màu phát sáng", val("glow_color") || val("color_primary") || "#FFD147", (v) => { ov.glow_color = v || baseP.glow_color; changed(); }, { dots: false });
+    const colStroke = colorField("Màu viền chữ", val("stroke_color") || "#000000", (v) => { ov.stroke_color = v || baseP.stroke_color; changed(); }, { dots: false });
+
+    const seeBtn = el("button", { className: "primary", textContent: "▶ Xem trên video chính" });
+    seeBtn.onclick = () => { state.pvFrozen = false; state.editing = false; state.proPreview?.(); };
+    const resetOv = el("button", { className: "reset", textContent: "↺ Trả về thông số gốc của mẫu" });
+    resetOv.onclick = () => { delete u.txOverrides[u.txId]; if (state.preview?.body?.xf) delete state.preview.body.xf; drawProPresets(); rePreview(); };
+
+    const form = el("div", { className: "proCustomBox" },
+      el("div", { className: "proSecHead" }, el("b", { textContent: `Tùy chỉnh ${curPreset?.id}` })),
+      liveBox,
+      seeBtn,
+      addHereBtn("Thêm mẫu này", "addTextVfxPreset", () => { const [text_main, text_sub] = curText(); return { presetId: u.txId, overrides: { ...ov, text_main, text_sub }, duration: ov.duration || 3 }; }),
+      tplBlend("addTextVfxPreset", { mode: val("vfx_type") === "difference_blend" ? "difference" : "normal" }),
+      formGroup("Nội dung chữ",
+        textRow(tMain, !!ov.hide_main, (h) => { ov.hide_main = h || undefined; changed(); }),
+        textRow(tSub, !!ov.hide_sub, (h) => { ov.hide_sub = h || undefined; changed(); })),
+      formGroup("Phông & cỡ chữ", fonts("font_main", "Phông chính"), fonts("font_sub", "Phông phụ"), slide("Cỡ chữ chính", "size_main_pct", 8, 3, 16, 0.1), slide("Cỡ chữ phụ", "size_sub_pct", 4.2, 2, 10, 0.1)),
+      formGroup("Màu sắc", colMain, colSub, colIcon),
+      formGroup("Viền & phát sáng", colStroke, slide("Độ dày viền", "stroke_width_px", 3, 0, 14, 1), colGlow, slide("Độ phát sáng", "glow_opacity", 0.35, 0, 1, 0.05)),
+      formGroup("Chuyển động vào", inPick, slide("Thời lượng vào", "in_duration_s", 0.28, 0.08, 1.5, 0.01), selectRow("Easing vào", withEase(EASES_TX, val("in_easing")), val("in_easing"), (v) => { ov.in_easing = v; changed(); }), slide("So le (ms)", "stagger_ms", 50, 0, 300, 5)),
+      formGroup("Lớp VFX", vfxPick),
+      formGroup("Chuyển động ra", outPick, slide("Thời lượng ra", "out_duration_s", 0.16, 0.08, 1.5, 0.01), selectRow("Easing ra", withEase(EASES_OUT, val("out_easing") || "power2.in"), val("out_easing") || "power2.in", (v) => { ov.out_easing = v; changed(); })),
+      formGroup("Icon đi kèm", icPicker, icPos, slide("Cỡ icon", "icon_size_px", 72, 24, 180, 2)),
+      formGroup("Vị trí & thời lượng", slide("Vị trí ngang", "pos_x_pct", 50, 5, 95, 1), slide("Vị trí dọc", "pos_y_pct", 72, 5, 95, 1), ...durRow, ...(target() ? [] : [slide("Giữ tối thiểu", "hold_min_s", 1.6, 0.4, 6, 0.1)])),
+      resetOv
+    );
+    body_.append(
+      el("div", { className: "proTargetBox" }, el("b", { textContent: "Áp vào" }), picker),
+      el("p", { className: "hint proHint", textContent: target() ? "Mẫu lấy đúng chữ và vị trí của layer đã chọn. Bấm một mẫu để xem trên video." : "Bấm một mẫu là thấy ngay trên video chính. Chưa ghi gì vào dự án cho tới khi bạn bấm Áp dụng." }),
+      grid,
+      form
+    );
+  }
+
+  // 2) TAB: MOTION CHỮ: áp cho một layer, toàn bộ hoặc một phần phụ đề; kết hợp vào/ra; tô màu từ quan trọng
+  else if (u.subTab === "motion") {
+    const mp = state.pro.motionPresets || {};
+    const byId = (list, id) => (mp[list] || []).find((x) => x.id === id);
+    const COMBOS = [["pop_in_bounce", "scale_down_snap"], ["slide_up_fade", "smooth_evaporate_fade"], ["mask_reveal_up", "reverse_mask_wipe"], ["focus_blur_resolve", "smooth_evaporate_fade"], ["spring_stamp", "cut_out_hard_cut"], ["word_kinetic_stagger", "directional_continue_exit"], ["swipe_right_reveal", "directional_continue_exit"], ["elastic_drop_in", "scale_down_snap"]]
+      .map(([a, b]) => ({ in: byId("entrance", a), out: byId("exit", b) })).filter((x) => x.in && x.out);
+    const cats = [["entrance", `Vào (${(mp.entrance || []).length})`], ["exit", `Ra (${(mp.exit || []).length})`], ["combo", `Vào + Ra (${COMBOS.length})`], ["highlight", "Tô màu từ"], ["vfx", `VFX (${(mp.vfx || []).length})`], ["camera", `Camera (${(mp.camera || []).length})`], ["transition", `Chuyển cảnh (${(mp.transition || []).length})`]];
+    const catBar = el("div", { className: "pill proCatBar" }, ...cats.map(([k, t]) => {
+      const b = el("button", { className: u.motionCat === k ? "on" : "", textContent: t });
+      b.onclick = () => { u.motionCat = k; drawProPresets(); };
+      return b;
+    }));
+    const cat = u.motionCat, kinds = cat === "camera" ? ["video", "image"] : cat === "highlight" ? ["sub", "text"] : ["text", "sub", "graphic"];
+    const subs = () => state.model.clips.filter((c) => c.kind === "sub").sort((a, b) => a.start - b.start);
+    u.subPick ??= new Set();
+    if (u.motionScope && !["allsub", "custom"].includes(u.motionScope) && !clipOf(u.motionScope)) u.motionScope = "";
+    const autoTarget = () => {
+      const c = clipOf(state.sel);
+      if (c && kinds.includes(c.kind)) return c.id;
+      const list = state.model.clips.filter((x) => kinds.includes(x.kind));
+      const now = list.filter((x) => state.time >= x.start && state.time <= x.end).sort((a, b) => kinds.indexOf(a.kind) - kinds.indexOf(b.kind))[0];
+      return (now || [...list].sort((a, b) => a.start - b.start).find((x) => x.start >= state.time) || list[0])?.id ?? null;
+    };
+    const scopeIds = () => {
+      if (cat === "transition") return [];
+      if (cat === "camera") { const t = u.motionScope && clipOf(u.motionScope) ? u.motionScope : autoTarget(); return t ? [t] : []; }
+      if (u.motionScope === "allsub") return subs().map((c) => c.id);
+      if (u.motionScope === "custom") return [...u.subPick].filter((id) => clipOf(id));
+      if (u.motionScope) return [u.motionScope];
+      const t = autoTarget();
+      return t ? [t] : [];
+    };
+    // Phát ở phụ đề gần playhead nhất trong phạm vi đã chọn.
+    const rangeOf = (ids) => {
+      const list = ids.map(clipOf).filter(Boolean).sort((a, b) => a.start - b.start);
+      const c = list.find((x) => x.end >= state.time) || list[0];
+      return c ? [c.start, c.end] : null;
+    };
+    const mc = u.motionCustom;
+    const customOf = () => ({ duration: mc.dur, sp: +(0.6 / Math.max(0.15, mc.dur)).toFixed(2), easeIn: mc.ease || "back.out(1.7)", easeOut: mc.easeOut || (mc.ease && !/\.out/.test(mc.ease) ? mc.ease : "power2.in"), mode: mc.mode, dist: mc.dist, blurAmt: mc.blur, delay: mc.delay, order: mc.order, time: state.preview?.body?.custom?.time ?? state.time });
+    const tryOn = (label, parts, opts = {}) => {
+      const ids = scopeIds();
+      if (cat !== "transition" && !ids.length) return toast("Hãy chọn phụ đề hoặc layer để thử", true);
+      const items = (cat === "transition" ? [null] : ids).flatMap((id) => parts.map((x) => ({ op: "applyMotionPreset", body: { id, category: x.cat, presetId: x.p.id, custom: customOf() } })));
+      const many = ids.length > 1 || parts.length > 1;
+      const range = many ? rangeOf(ids) : null;
+      const suffix = ids.length > 1 ? ` · ${ids.length} layer` : "";
+      if (many) return previewOp(`${label}${suffix}`, "batch", { items }, { ...opts, id: ids.length === 1 ? ids[0] : null, keepSel: true, range, max: 4.5, free: ids.length > 1 });
+      return previewOp(label, "applyMotionPreset", items[0].body, { ...opts, id: ids[0] || null, keepSel: u.motionScope === "custom" });
+    };
+    const usedId = (id) => { const o = state.model.overrides[id] || {}; return cat === "entrance" ? o.anim?.inId : cat === "exit" ? o.anim?.outId : cat === "vfx" ? o.vfxId : null; };
+    const run = (p, again) => {
+      // Bấm lại thẻ đang xem thử: bỏ xem thử. Bấm lại kiểu đang dùng trên layer: xem thử việc tắt nó.
+      if (!again && u.motionId === p.id && state.preview) { u.motionId = null; cancelPreview(); for (const n of document.querySelectorAll(".proMotionCard")) n.classList.remove("on"); return; }
+      const only = scopeIds();
+      if (!again && only.length === 1 && usedId(only[0]) === p.id) { u.motionId = null; return previewOp(`Tắt ${p.name}`, "clearMotion", { id: only[0], category: cat }, { id: only[0], max: 3.6 }); }
+      u.motionId = p.id;
+      setTimeout(() => redrawMotion());
+      tryOn(p.name, [{ cat, p }], { tail: cat === "exit", pre: cat === "transition" ? 1 : 0, max: cat === "camera" ? 5 : 3.6, redo: () => run(p, true) });
+      for (const n of document.querySelectorAll(".proMotionCard")) n.classList.toggle("on", n.dataset.id === p.id);
+    };
+    const runCombo = (x) => {
+      u.motionId = `${x.in.id}+${x.out.id}`;
+      tryOn(`${x.in.name.split("(")[0].trim()} + ${x.out.name.split("(")[0].trim()}`, [{ cat: "entrance", p: x.in }, { cat: "exit", p: x.out }], { redo: () => runCombo(x) });
+      for (const n of document.querySelectorAll(".proMotionCard")) n.classList.toggle("on", n.dataset.id === u.motionId);
+    };
+    const banner = el("div", { className: "proTargetBanner" });
+    const syncBanner = () => {
+      const ids = scopeIds();
+      banner.textContent = cat === "transition" ? `Đặt tại điểm cắt gần playhead nhất (${fmtTime(state.time)})`
+        : u.motionScope === "allsub" ? `Áp cho toàn bộ ${ids.length} phụ đề`
+        : u.motionScope === "custom" ? `Áp cho ${ids.length} phụ đề đã chọn`
+        : ids.length ? `Sẽ thử trên: ${clipLabel(clipOf(ids[0])).slice(0, 40)}` : "Chưa có layer phù hợp";
+    };
+    syncBanner();
+    // Dấu "đang dùng" đi theo layer đang chọn và cập nhật ngay sau khi áp dụng.
+    const markUsed = () => {
+      for (const n of document.querySelectorAll(".proMotionCard")) {
+        const p = (mp[cat] || []).find((x) => x.id === n.dataset.id);
+        if (!p) continue;
+        const inUse = scopeIds().some((id) => usedId(id) === p.id);
+        n.classList.toggle("used", inUse);
+        n.title = inUse ? `Đang dùng. Bấm lại để tắt.
+${p.desc}` : p.desc;
+        n.querySelector(".proMotionInfo b").textContent = `${inUse ? "✓ " : ""}${p.name}`;
+        n.querySelector(".proMotionInfo small").textContent = inUse ? "Đang dùng trên layer này. Bấm lại để tắt." : p.desc;
+      }
+    };
+    state.proSync = () => { syncBanner(); markUsed(); };
+    const allowSubs = !["camera", "transition"].includes(cat);
+    const picker = cat === "transition" ? null : layerPicker(u.motionScope, kinds, "Tự chọn theo playhead", (v) => {
+      u.motionScope = v || "";
+      if (v === "custom") for (const id of state.picks) if (clipOf(id)?.kind === "sub") u.subPick.add(id);
+      drawProPresets();
+      rePreview();
+    }, allowSubs ? [["allsub", `📝 Toàn bộ phụ đề (${subs().length})`], ["custom", "📝 Một phần phụ đề (chọn bên dưới)"]] : []);
+    const subList = u.motionScope === "custom" && allowSubs ? (() => {
+      const count = el("b", { textContent: `Đã chọn ${u.subPick.size}/${subs().length}` });
+      const sync = () => { count.textContent = `Đã chọn ${[...u.subPick].filter((id) => clipOf(id)).length}/${subs().length}`; syncBanner(); rePreview(); };
+      const boxes = subs().map((c) => {
+        const i = el("input", { type: "checkbox", checked: u.subPick.has(c.id) });
+        i.onchange = () => { i.checked ? u.subPick.add(c.id) : u.subPick.delete(c.id); sync(); };
+        return [c, i, el("label", { className: "proSubItem" }, i, el("small", { textContent: fmtTime(c.start).slice(0, 5) }), el("span", { textContent: clipLabel(c) }))];
+      });
+      const all = el("button", { textContent: "Chọn hết" }), none = el("button", { textContent: "Bỏ hết" });
+      all.onclick = () => { for (const [c, i] of boxes) { i.checked = true; u.subPick.add(c.id); } sync(); };
+      none.onclick = () => { for (const [, i] of boxes) i.checked = false; u.subPick.clear(); sync(); };
+      return el("div", { className: "proSubBox" }, el("div", { className: "row" }, count, all, none), el("div", { className: "proSubList" }, ...boxes.map((x) => x[2])));
+    })() : null;
+    const head = [catBar, ...(picker ? [el("div", { className: "proTargetBox" }, el("b", { textContent: "Áp vào" }), picker)] : []), ...(subList ? [subList] : []), banner];
+    const curCard = () => (mp[cat === "combo" ? "entrance" : cat] || []).find((p) => p.id === u.motionId) || (mp[cat === "combo" ? "entrance" : cat] || [])[0];
+    const liveMotion = el("div", { className: "proLive" });
+    const redrawMotion = () => { const p = curCard(); if (p && ["entrance", "exit", "combo"].includes(cat)) liveMotion.replaceChildren(Mau.motionLive(p, cat === "exit" ? "exit" : "entrance", mc)); };
+    redrawMotion();
+    const mcChange = () => { redrawMotion(); rePreview(); };
+    const customBox = el("div", { className: "proCustomBox" },
+      el("div", { className: "proSecHead" }, el("b", { textContent: "Thông số chuyển động" })),
+      ...(["entrance", "exit", "combo"].includes(cat) ? [liveMotion] : []),
+      sliderRow("Thời lượng (s)", mc.dur ?? 0.45, 0.15, 2.5, 0.05, (v) => { mc.dur = v; mcChange(); }, (v) => { mc.dur = v; mcChange(); }),
+      easingPicker(mc, mcChange),
+      ...(["entrance", "exit", "combo"].includes(cat) ? [
+        tilePicker("Chế độ chữ", [["text", "Cả khối"], ["word", "Từng từ"], ["letter", "Từng ký tự"]], mc.mode || "text", (v) => Mau.textMode(v), (v) => { mc.mode = v ?? "text"; mcChange(); }),
+        sliderRow("Biên độ trượt", mc.dist ?? 0.04, 0.01, 0.25, 0.005, (v) => { mc.dist = v; mcChange(); }, (v) => { mc.dist = v; mcChange(); }),
+        sliderRow("Độ nhòe", mc.blur ?? 10, 0, 30, 1, (v) => { mc.blur = v; mcChange(); }, (v) => { mc.blur = v; mcChange(); }),
+        sliderRow("So le (Stagger)", mc.delay ?? 1, 0, 4, 0.1, (v) => { mc.delay = v; mcChange(); }, (v) => { mc.delay = v; mcChange(); }),
+        selectRow("Thứ tự so le", [["start", "Từ đầu tới cuối"], ["center", "Từ giữa ra"], ["end", "Từ cuối về đầu"], ["edges", "Từ hai đầu vào"], ["random", "Ngẫu nhiên"]], mc.order || "start", (v) => { mc.order = v; rePreview(); }),
+      ] : [])
+    );
+    if (cat === "highlight") {
+      u.hl ??= { words: "", color: "#FFD147", fade: 0.3 };
+      const ids = () => scopeIds();
+      const runHl = () => {
+        const list = ids();
+        if (!list.length) return toast("Hãy chọn phụ đề để tô màu", true);
+        if (!u.hl.words.trim()) return toast("Hãy nhập từ cần tô màu", true);
+        const words = u.hl.words.split(/[,;]/).map((x) => plain(x.trim())).filter(Boolean);
+        // Phát đúng phụ đề đầu tiên có chứa từ khóa, sau playhead nếu có.
+        const has = list.map(clipOf).filter((c) => words.some((w) => plain(clipLabel(c)).includes(w))).sort((a, b) => a.start - b.start);
+        const c = has.find((x) => x.end >= state.time) || has[0];
+        previewOp(`Tô màu "${u.hl.words.slice(0, 24)}"`, "highlightSubs", { ids: list, words: u.hl.words, color: u.hl.color, fade: u.hl.fade }, { keepSel: true, range: c ? [c.start, c.end] : null, free: list.length > 1, redo: runHl });
+      };
+      const inp = el("input", { type: "text", value: u.hl.words, placeholder: "Ví dụ: 7,6 tỷ; sổ hồng; thang máy" });
+      inp.oninput = () => { u.hl.words = inp.value; rePreview(); };
+      const tile = el("div", { className: "proLive" }, Mau.highlight(u.hl.color));
+      const see = el("button", { className: "primary", textContent: "▶ Xem trên video chính" });
+      see.onclick = runHl;
+      const suggest = el("button", { textContent: "✦ Gợi ý từ quan trọng", title: "Lấy số, giá, diện tích và từ khóa bất động sản có trong phụ đề đã chọn" });
+      suggest.onclick = () => {
+        const found = new Set();
+        for (const c of ids().map(clipOf).filter(Boolean)) for (const m of clipLabel(c).matchAll(/\d[\d.,]*\s*(?:tỷ|triệu|m²|m2|mét|phòng ngủ|phòng vệ sinh|tầng|lầu)?|thang máy|sổ hồng|hoàn công|mặt tiền|chính chủ/gi)) found.add(m[0].trim().replace(/[.,]+$/, ""));
+        u.hl.words = [...found].slice(0, 12).join("; ");
+        inp.value = u.hl.words;
+        if (!found.size) toast("Không thấy số hay từ khóa nào trong phụ đề đã chọn", true);
+      };
+      const clear = el("button", { className: "reset", textContent: "↺ Bỏ màu riêng của phụ đề đã chọn" });
+      clear.onclick = () => { const list = ids(); if (list.length) previewOp("Bỏ màu riêng", "highlightSubs", { ids: list, clear: true }, { keepSel: true, range: rangeOf(list) }); };
+      body_.append(...head,
+        el("div", { className: "proCustomBox" },
+          el("div", { className: "proSecHead" }, el("b", { textContent: "Tô màu từ quan trọng trong lời thoại" })),
+          tile,
+          el("label", { className: "cf-lbl", textContent: "Từ cần tô (cách nhau bằng dấu ;)" }), inp, suggest,
+          colorField("Màu tô", u.hl.color, (v) => { u.hl.color = v || "#FFD147"; tile.replaceChildren(Mau.highlight(u.hl.color)); rePreview(); }, { dots: true }),
+          sliderRow("Độ mượt (s)", u.hl.fade, 0.05, 1, 0.05, (v) => { u.hl.fade = v; rePreview(); }, (v) => { u.hl.fade = v; rePreview(); }),
+          see, clear));
+    } else {
+      const thumbs = proThumbs();
+      const tileOf = (p) => (cat === "entrance" ? Mau.entrance(p) : cat === "exit" ? Mau.exit(p) : cat === "vfx" ? Mau.vfx(p.vfx_type) : cat === "camera" ? Mau.camera(p, thumbs) : Mau.transition(p, thumbs));
+      const cards = cat === "combo"
+        ? COMBOS.map((x) => {
+          const key = `${x.in.id}+${x.out.id}`;
+          const card = el("button", { className: `proMotionCard${u.motionId === key ? " on" : ""}` }, Mau.combo(x.in, x.out), el("div", { className: "proMotionInfo" }, el("b", { textContent: `${x.in.name.split("(")[0].trim()} + ${x.out.name.split("(")[0].trim()}` }), el("small", { textContent: `Vào ${x.in.dur}s, ra ${x.out.dur}s` })));
+          card.dataset.id = key;
+          card.onclick = () => runCombo(x);
+          return card;
+        })
+        : (mp[cat] || []).map((p) => {
+          const inUse = scopeIds().some((id) => usedId(id) === p.id);
+          const card = el("button", { className: `proMotionCard${u.motionId === p.id ? " on" : ""}${inUse ? " used" : ""}`, title: inUse ? `Đang dùng. Bấm lại để tắt.\n${p.desc}` : p.desc }, tileOf(p), el("div", { className: "proMotionInfo" }, el("b", { textContent: `${inUse ? "✓ " : ""}${p.name}` }), el("small", { textContent: inUse ? "Đang dùng trên layer này. Bấm lại để tắt." : p.desc })));
+          card.dataset.id = p.id;
+          card.onclick = () => run(p);
+          return card;
+        });
+      if (cat === "combo") {
+        const inS = selectRow("Tự ghép: Vào", (mp.entrance || []).map((p) => [p.id, p.name]), u.comboIn || mp.entrance?.[0]?.id, (v) => { u.comboIn = v; });
+        const outS = selectRow("Tự ghép: Ra", (mp.exit || []).map((p) => [p.id, p.name]), u.comboOut || mp.exit?.[0]?.id, (v) => { u.comboOut = v; });
+        const go = el("button", { className: "primary", textContent: "▶ Xem cặp tự ghép trên video" });
+        go.onclick = () => runCombo({ in: byId("entrance", u.comboIn || mp.entrance[0].id), out: byId("exit", u.comboOut || mp.exit[0].id) });
+        body_.append(...head, el("div", { className: "proMotionList" }, ...cards), el("div", { className: "proCustomBox" }, inS, outS, go), customBox);
+      } else body_.append(...head, el("div", { className: "proMotionList" }, ...cards), customBox);
+    }
+  }
+
+  // 3) TAB: ĐỒ HỌA MG & ICON
+  else if (u.subTab === "mg") {
+    const mgList = state.pro.mgTemplates || [];
+    const icons = state.pro.animatedIcons || [];
+    const curMg = mgList.find((m) => m.id === u.mgId) || mgList[0];
+    if (curMg && u.mgId !== curMg.id) u.mgId = curMg.id;
+    const mp = (u.mgParams[u.mgId] ??= { ...(curMg?.default_params || {}) });
+    const iconOf = (m, params) => iconById.get(params?.icon_id || m.icon_id);
+    if (u.mgTarget && !clipOf(u.mgTarget)) u.mgTarget = null;
+    // Chọn layer thì thẻ lấy đúng nội dung layer đó; dòng nào layer không có thì để trống, không dùng chữ mẫu.
+    const fromLayer = () => {
+      const c = clipOf(u.mgTarget);
+      if (!c) return {};
+      const t = layerTexts(c);
+      return { title: t[0] || "", line1: t[1] || "", line2: t[2] || "", line3: t[3] || "" };
+    };
+    const rawParams = () => ({ ...mp, ...fromLayer(), ...(u.mgEdits?.[u.mgTarget] || {}) });
+    const hiddenRows = () => ((u.mgHide ??= {})[u.mgTarget || u.mgId] ??= {});
+    const curParams = () => {
+      const q = rawParams(), h = hiddenRows();
+      for (const k of ["line1", "line2", "line3"]) if (h[k]) q[k] = "";
+      if (h.title) q.hide_title = true;
+      return q;
+    };
+    const setParam = (k, v) => { if (u.mgTarget && ["title", "line1", "line2", "line3"].includes(k)) { u.mgEdits ??= {}; (u.mgEdits[u.mgTarget] ??= {})[k] = v; } else mp[k] = v; };
+    const preview = async () => {
+      const c = clipOf(u.mgTarget), anchor = c ? await layerAnchor(c) : {};
+      const params = { ...anchor, ...curParams() };
+      if (mp.pos_y_pct !== undefined && mp._userY) params.pos_y_pct = mp.pos_y_pct; else if (!c) delete params.pos_y_pct;
+      if (mp._userX) params.pos_x_pct = mp.pos_x_pct; else if (!c) delete params.pos_x_pct;
+      return previewOp(`${curMg?.name || u.mgId}${c ? ` đổi layer "${clipLabel(c).slice(0, 22)}"` : ""}`, "addMgPreset", { mgId: u.mgId, iconId: mp.icon_id || curMg?.icon_id || "IC-HOUSE-VILLA", params, time: c ? c.start : pinTime(), duration: c ? c.end - c.start : (+mp.duration_s || 3.2), ...(c ? { replaceId: c.id } : {}) }, {
+        redo: () => state.proPreview?.(),
+        after: (r) => { if (u.mgTarget && r.id) { state.anchors[r.id] = anchor; u.mgEdits && (u.mgEdits[r.id] = u.mgEdits[u.mgTarget]); u.mgTarget = r.id; } drawProPresets(); },
+      });
+    };
+    state.proPreview = preview;
+    const liveBox = el("div", { className: "proLive" });
+    const redrawLive = () => liveBox.replaceChildren(Mau.mg(curMg, iconOf(curMg, mp), curParams()));
+    redrawLive();
+    const changed = () => { redrawLive(); rePreview(); };
+
+    const mgCards = el("div", { className: "proTxGrid" }, ...mgList.map((m) => {
+      const b = el("button", { className: `proTxCard${m.id === u.mgId ? " on" : ""}`, title: m.desc });
+      b.append(Mau.mg(m, iconOf(m)), el("div", { className: "proTxName", textContent: m.name }));
+      b.onclick = () => { u.mgId = m.id; drawProPresets(); state.proPreview?.(); };
+      return b;
+    }));
+    const params0 = curParams();
+    const mkInput = (label, key) => {
+      const inp = el("input", { type: "text", value: rawParams()[key] ?? "", placeholder: curMg?.default_params?.[key] || label });
+      inp.oninput = () => { setParam(key, inp.value); changed(); };
+      return field(label, textRow(inp, !!hiddenRows()[key], (h) => { hiddenRows()[key] = h; changed(); }));
+    };
+    const mgColor = colorField("Màu nhấn", mp.accent_color || "#F5D061", (v) => { mp.accent_color = v || "#F5D061"; changed(); }, { dots: false });
+    const seeBtn = el("button", { className: "primary", textContent: "▶ Xem trên video chính" });
+    seeBtn.onclick = () => { state.editing = false; state.proPreview?.(); };
+    const picker = layerPicker(u.mgTarget, ["graphic", "text", "sub"], "➕ Thêm mới tại playhead", (v) => { u.mgTarget = v; drawProPresets(); state.proPreview?.(); });
+    const slideMg = (label, key, def, min, max, step, mark) => sliderRow(label, mp[key] ?? def, min, max, step, (v) => { mp[key] = v; if (mark) mp[mark] = true; changed(); }, (v) => { mp[key] = v; if (mark) mp[mark] = true; changed(); });
+    const iconRow = el("div", { className: "proMiniIconGrid" }, ...icons.map((ic) => {
+      const b = el("button", { className: `proMiniIc${(mp.icon_id || curMg?.icon_id) === ic.id ? " on" : ""}`, title: `${ic.id} · ${ic.name_vi}` });
+      b.innerHTML = renderIconSvg(ic, mp.accent_color || "#F5D061");
+      b.onclick = () => { mp.icon_id = ic.id; drawProPresets(); rePreview(); };
+      return b;
+    }));
+    const mgForm = el("div", { className: "proCustomBox" },
+      el("div", { className: "proSecHead" }, el("b", { textContent: `Tùy chỉnh ${curMg?.name}` })),
+      liveBox,
+      seeBtn,
+      addHereBtn("Thêm thẻ này", "addMgPreset", () => ({ mgId: u.mgId, iconId: mp.icon_id || curMg?.icon_id || "IC-HOUSE-VILLA", params: curParams(), duration: +mp.duration_s || 3.2 })),
+      tplBlend("addMgPreset"),
+      formGroup("Nội dung", mkInput("Tiêu đề", "title"), mkInput("Dòng 1", "line1"), mkInput("Dòng 2", "line2"), mkInput("Dòng 3", "line3")),
+      formGroup("Phông chữ", fontChoice("Phông tiêu đề", mp.font_title || "Montserrat-ExtraBold", "Montserrat-ExtraBold", (v) => { mp.font_title = v; changed(); }), fontChoice("Phông dòng", mp.font_line || "BeVietnamPro-Bold", "BeVietnamPro-Bold", (v) => { mp.font_line = v; changed(); })),
+      formGroup("Màu & icon", mgColor, iconRow, slideMg("Cỡ icon", "icon_size_px", 64, 24, 140, 2)),
+      formGroup("Kích thước & vị trí", slideMg("Tỉ lệ thẻ", "size_scale", 1, 0.5, 1.6, 0.05), slideMg("Vị trí ngang", "pos_x_pct", 50, 5, 95, 1, "_userX"), slideMg("Vị trí dọc", "pos_y_pct", 74, 5, 95, 1, "_userY"), ...(u.mgTarget ? [] : [slideMg("Thời lượng (s)", "duration_s", 3.2, 0.8, 10, 0.1)]))
+    );
+
+    body_.append(
+      el("div", { className: "proTargetBox" }, el("b", { textContent: "Áp vào" }), picker),
+      el("p", { className: "hint proHint", textContent: u.mgTarget ? "Thẻ lấy đúng chữ và vị trí của layer đã chọn, chỉ thay kiểu thẻ. Bấm một mẫu để xem trên video." : "Bấm một mẫu là thấy ngay trên video chính tại playhead." }),
+      mgCards,
+      mgForm
+    );
+  }
+
+  // 3b) TAB: ICON TÙY CHỈNH: chọn icon, chỉnh mọi thông số, thêm vào timeline hoặc thay icon đang có
+  else if (u.subTab === "icon") {
+    const icons = state.pro.animatedIcons || [];
+    u.ic ??= { id: icons[0]?.id, label: "", showLabel: true, color: "", size: 88, stroke: 2.4, badge: true, badgeColor: "#0a0e16", badgeAlpha: 0.72, radius: 24, labelSize: 36, labelColor: "#ffffff", x: 50, y: 45, dur: 2.8, anim: "pop" };
+    const ic = u.ic, cur = () => iconById.get(ic.id) || icons[0];
+    if (u.icTarget && !clipOf(u.icTarget)) u.icTarget = null;
+    const shortName = (x) => x.name_vi.split("(")[0].trim();
+    const paramsOf = () => ({ label: ic.showLabel ? (ic.label || shortName(cur())) : "", color: ic.color || cur().default_color || "#FFD147", size_px: ic.size, stroke_w: ic.stroke, badge: ic.badge, badge_color: ic.badgeColor, badge_alpha: ic.badgeAlpha, badge_radius: ic.radius, label_size: ic.labelSize, label_color: ic.labelColor, font_label: ic.font_label || "BeVietnamPro-Bold", pos_x_pct: ic.x, pos_y_pct: ic.y, anim: ic.anim });
+    const target = () => clipOf(u.icTarget);
+    const preview = () => {
+      const c = target();
+      return previewOp(`Icon ${shortName(cur())}${c ? " thay layer đã chọn" : ""}`, "addMgPreset", { iconId: cur().id, params: { ...paramsOf(), blend_mode: u.icBlend }, time: c ? c.start : pinTime(), duration: c ? c.end - c.start : ic.dur, ...(c ? { replaceId: c.id } : {}) }, {
+        redo: () => state.proPreview?.(),
+        after: (r) => { if (u.icTarget && r.id) u.icTarget = r.id; drawProPresets(); },
+      });
+    };
+    state.proPreview = preview;
+    const liveBox = el("div", { className: "proLive" });
+    const redrawLive = () => liveBox.replaceChildren(Mau.iconFull(cur(), ic));
+    redrawLive();
+    const changed = () => { redrawLive(); rePreview(); };
+    const list = icons.filter((x) => (u.iconCat || "all") === "all" || x.category === u.iconCat).filter((x) => !u.iconQ || plain(`${x.name_vi} ${x.id} ${x.usage}`).includes(plain(u.iconQ)));
+    const cards = el("div", { className: "proIconCatalog" }, ...list.map((x) => {
+      const card = el("button", { className: `proIcCard${x.id === ic.id ? " on" : ""}`, title: `${x.id}\n${x.usage}\nVào: ${x.in_anim}` }, Mau.icon(x, ic.color || x.default_color), el("b", { textContent: shortName(x) }));
+      card.onclick = () => { ic.id = x.id; ic.label = ""; drawProPresets(); state.proPreview?.(); };
+      return card;
+    }));
+    const iconClips = state.model.clips.filter((c) => /^ic_/.test(c.id) || /^Icon:/.test(c.name || ""));
+    const picker = el("select", { className: "proLayerSel" }, el("option", { value: "", textContent: "➕ Thêm mới vào timeline tại playhead" }), ...iconClips.map((c) => el("option", { value: c.id, textContent: `${fmtTime(c.start).slice(0, 5)} · ${clipLabel(c).slice(0, 40)}` })));
+    picker.value = u.icTarget || "";
+    picker.onchange = () => { u.icTarget = picker.value || null; drawProPresets(); state.proPreview?.(); };
+    const q = el("input", { type: "search", value: u.iconQ || "", placeholder: "Tìm icon…" });
+    q.oninput = () => { u.iconQ = q.value; const y = q.selectionStart; drawProPresets(); const n = document.querySelector("#tab-presets input[type=search]"); n?.focus(); n?.setSelectionRange(y, y); };
+    const catSel = selectRow("Nhóm", [["all", `Tất cả ${icons.length} icon`], ...[...new Set(icons.map((x) => x.category))].map((x) => [x, x])], u.iconCat || "all", (v) => { u.iconCat = v; drawProPresets(); });
+    const slide = (label, key, min, max, step) => sliderRow(label, ic[key], min, max, step, (v) => { ic[key] = v; changed(); }, (v) => { ic[key] = v; changed(); });
+    const lbl = el("input", { type: "text", value: ic.label, placeholder: shortName(cur()) });
+    lbl.oninput = () => { ic.label = lbl.value; changed(); };
+    const toggle = (label, key) => { const i = checkRow(label, ic[key], (v) => { ic[key] = v; changed(); }); return i; };
+    const seeBtn = el("button", { className: "primary", textContent: u.icTarget ? "▶ Xem thay trên video chính" : "▶ Xem trên video chính" });
+    seeBtn.onclick = () => { state.editing = false; state.proPreview?.(); };
+    const form = el("div", { className: "proCustomBox" },
+      el("div", { className: "proSecHead" }, el("b", { textContent: `Tùy chỉnh: ${shortName(cur())}` })),
+      liveBox, seeBtn,
+      addHereBtn("Thêm icon này", "addMgPreset", () => ({ iconId: cur().id, params: { ...paramsOf(), blend_mode: u.icBlend }, duration: cur().dur || 3 })),
+      tplBlend("addMgPreset"),
+      formGroup("Nét icon", colorField("Màu nét", ic.color || cur().default_color || "#FFD147", (v) => { ic.color = v; changed(); }, { dots: false }), slide("Cỡ icon", "size", 30, 300, 2), slide("Độ dày nét", "stroke", 0.5, 5, 0.1)),
+      formGroup("Nền icon", toggle("Hiện nền", "badge"), colorField("Màu nền", ic.badgeColor, (v) => { ic.badgeColor = v || "#0a0e16"; changed(); }, { dots: false }), slide("Độ đậm nền", "badgeAlpha", 0, 1, 0.05), slide("Bo góc", "radius", 0, 90, 1)),
+      formGroup("Nhãn", toggle("Hiện nhãn", "showLabel"), field("Chữ nhãn", lbl), fontChoice("Phông nhãn", ic.font_label || "BeVietnamPro-Bold", "BeVietnamPro-Bold", (v) => { ic.font_label = v; changed(); }), colorField("Màu nhãn", ic.labelColor, (v) => { ic.labelColor = v || "#ffffff"; changed(); }, { dots: false }), slide("Cỡ nhãn", "labelSize", 16, 90, 1)),
+      formGroup("Hiệu ứng vào", tilePicker("Kiểu", [["pop", "Pop-in"], ["fade", "Fade In"], ["slide", "Slide Up"], ["spin", "Spin In"]], ic.anim, (v) => Mau.iconFull(cur(), { ...ic, anim: v, showLabel: false }), (v) => { ic.anim = v ?? "fade"; changed(); })),
+      formGroup("Vị trí & thời lượng", slide("Vị trí ngang", "x", 5, 95, 1), slide("Vị trí dọc", "y", 5, 95, 1), ...(u.icTarget ? [] : [slide("Thời lượng (s)", "dur", 0.5, 10, 0.1)]))
+    );
+    body_.append(
+      el("div", { className: "proTargetBox" }, el("b", { textContent: "Áp vào" }), picker),
+      el("p", { className: "hint proHint", textContent: "Bấm icon là thấy ngay trên video chính, chỉnh thông số rồi bấm Áp dụng để thêm vào timeline." }),
+      q, catSel, cards, form
+    );
+  }
+
+  // 3c) TAB: CHỮ NGHIÊNG 3D BÁM TƯỜNG
+  else if (u.subTab === "wall") {
+    u.wall ??= { text: "CHỮ TRÊN TƯỜNG", font: (state.model.fonts || [])[0] || "sans-serif", size: 120, weight: 800, color: "#FFFFFF", spacing: 0, stroke_w: 0, stroke_c: "#000000", depth: 8, depth_c: "#333333", shadow: 0.5, opacity: 1, blend: "normal", rot_x: 0, rot_y: -28, rot_z: 0, persp: 1400, skew: 0, x_pct: 50, y_pct: 40, anim: "fade", behind: false, dur: 3 };
+    const q = u.wall;
+    if (u.wallTarget && !clipOf(u.wallTarget)) u.wallTarget = null;
+    const walls = state.model.clips.filter((c) => /^tuong/.test(c.id));
+    const preview = () => {
+      const c = clipOf(u.wallTarget);
+      return previewOp(`Chữ 3D "${q.text.slice(0, 22)}"`, "addWallText", { params: q, time: c ? c.start : pinTime(), duration: c ? c.end - c.start : q.dur, ...(c ? { replaceId: c.id } : {}) }, { settle: 0.5, redo: () => state.proPreview?.(), after: (r) => { if (u.wallTarget && r.id) u.wallTarget = r.id; drawProPresets(); } });
+    };
+    state.proPreview = preview;
+    const liveBox = el("div", { className: "proLive" });
+    const redrawLive = () => liveBox.replaceChildren(Mau.wall(q));
+    redrawLive();
+    const changed = () => { redrawLive(); rePreview(); };
+    const slide = (label, key, min, max, step) => sliderRow(label, q[key], min, max, step, (v) => { q[key] = v; changed(); }, (v) => { q[key] = v; changed(); });
+    const PRESETS = [["Tường bên trái", { rot_x: 0, rot_y: 32, rot_z: 0 }], ["Tường bên phải", { rot_x: 0, rot_y: -32, rot_z: 0 }], ["Sàn nhà", { rot_x: 62, rot_y: 0, rot_z: 0 }], ["Trần nhà", { rot_x: -55, rot_y: 0, rot_z: 0 }], ["Nghiêng chéo", { rot_x: 12, rot_y: -24, rot_z: -6 }], ["Mặt phẳng", { rot_x: 0, rot_y: 0, rot_z: 0 }]];
+    const cards = el("div", { className: "mxPickGrid" }, ...PRESETS.map(([name, v]) => {
+      const b = el("button", { className: "mxPick", title: name }, Mau.wall({ ...q, ...v, text: "CHỮ 3D" }), el("span", { textContent: name }));
+      b.onclick = () => { Object.assign(q, v); drawProPresets(); state.proPreview?.(); };
+      return b;
+    }));
+    const txt = el("input", { type: "text", value: q.text, placeholder: "Nội dung chữ" });
+    txt.oninput = () => { q.text = txt.value; changed(); };
+    const picker = el("select", { className: "proLayerSel" }, el("option", { value: "", textContent: "➕ Thêm mới tại playhead" }), ...walls.map((c) => el("option", { value: c.id, textContent: `${fmtTime(c.start).slice(0, 5)} · ${clipLabel(c).slice(0, 40)}` })));
+    picker.value = u.wallTarget || "";
+    picker.onchange = () => { u.wallTarget = picker.value || null; drawProPresets(); state.proPreview?.(); };
+    const hasMatte = state.model.clips.some((c) => /^tachnen_/.test(c.id) && c.start < state.time + q.dur && c.end > state.time);
+    const see = el("button", { className: "primary", textContent: "▶ Xem trên video chính" });
+    see.onclick = () => { state.editing = false; state.proPreview?.(); };
+    const form = el("div", { className: "proCustomBox" },
+      el("div", { className: "proSecHead" }, el("b", { textContent: "Tùy chỉnh chữ 3D" })),
+      liveBox, see,
+      addHereBtn("Thêm chữ 3D này", "addWallText", () => ({ params: q, duration: q.dur })),
+      tplBlend("addWallText"),
+      formGroup("Nội dung", txt),
+      formGroup("Phông & cỡ", fontChoice("Phông", q.font, (state.model.fonts || [])[0] || "BeVietnamPro-Bold", (v) => { q.font = v; changed(); }), slide("Cỡ chữ", "size", 30, 320, 2), slide("Độ đậm", "weight", 300, 900, 100), slide("Giãn chữ", "spacing", -0.05, 0.5, 0.01)),
+      formGroup("Màu", colorField("Màu chữ", q.color, (v) => { q.color = v || "#FFFFFF"; changed(); }, { dots: false }), slide("Độ rõ", "opacity", 0.1, 1, 0.05), selectRow("Hòa trộn", [["normal", "Bình thường"], ["multiply", "Multiply (Sơn lên tường sáng)"], ["screen", "Screen (Chữ phát sáng)"], ["overlay", "Overlay (Hòa vào bề mặt)"], ["soft-light", "Soft Light (Nhẹ trên tường)"]], q.blend, (v) => { q.blend = v; changed(); })),
+      formGroup("Viền & độ dày 3D", slide("Viền chữ", "stroke_w", 0, 12, 1), colorField("Màu viền", q.stroke_c, (v) => { q.stroke_c = v || "#000000"; changed(); }, { dots: false }), slide("Độ dày 3D", "depth", 0, 40, 1), colorField("Màu cạnh 3D", q.depth_c, (v) => { q.depth_c = v || "#333333"; changed(); }, { dots: false }), slide("Bóng đổ", "shadow", 0, 1, 0.05)),
+      formGroup("Phối cảnh bám tường", cards, slide("Xoay ngang", "rot_y", -80, 80, 1), slide("Xoay dọc", "rot_x", -80, 80, 1), slide("Xoay phẳng", "rot_z", -45, 45, 1), slide("Xiên", "skew", -30, 30, 1), slide("Độ sâu", "persp", 300, 3000, 20)),
+      formGroup("Vị trí & hiệu ứng", slide("Vị trí ngang", "x_pct", 0, 100, 1), slide("Vị trí dọc", "y_pct", 0, 100, 1), ...(u.wallTarget ? [] : [slide("Thời lượng (s)", "dur", 0.5, 15, 0.1)]), tilePicker("Kiểu vào", [["fade", "Fade In"], ["rise", "Rise Up"], ["wipe", "Wipe"], ["none", "Không"]], q.anim, (v) => Mau.textIn(v === "fade" ? "blur" : v === "rise" ? "mask" : "pop"), (v) => { q.anim = v ?? "none"; changed(); }),
+        checkRow(`Đặt phía sau người dẫn${hasMatte ? "" : " (cần tách nền video trước)"}`, q.behind, (v) => { q.behind = v; changed(); }))
+    );
+    body_.append(el("div", { className: "proTargetBox" }, el("b", { textContent: "Áp vào" }), picker), el("p", { className: "hint proHint", textContent: "Kéo chữ trên khung xem để đặt vào đúng bức tường, chỉnh phối cảnh cho khớp. Cảnh quay có lia máy thì cần thêm keyframe vị trí." }), form);
+  }
+
+  else if (u.subTab === "track") body_.append(trackPanel());
+  // 4) TAB: SFX THEO HIỆU ỨNG, BẢNG MÀU, KIỂM TRA ĐỦ TẦNG
+  else if (u.subTab === "resource") {
+    const matrix = state.pro.sfxVisualEmotionMatrix || { visual_fx: [], emotions: [] };
+    u.sfxFx ||= matrix.visual_fx?.[0]?.id;
+    u.sfxEmo ||= matrix.emotions?.[0]?.id;
+    let curFx = matrix.visual_fx.find((x) => x.id === u.sfxFx) || matrix.visual_fx[0];
+    let curEmo = matrix.emotions.find((x) => x.id === u.sfxEmo) || matrix.emotions[0];
+    const emoName = (x) => x.label || x.ten;
+    // Xem mẫu hiệu ứng trên video chính, bấm lại để dừng.
+    const demoFx = (x) => {
+      const mp = state.pro.motionPresets;
+      if (x.nhom === "Chuyển cảnh") {
+        const key = { whip_pan: "whip_pan", zoom_through: "zoom_through", match_cut: "match_cut", fast_cut_montage: "hard_cut_beat", cross_dissolve: "cross_dissolve", flash_negative_hit: "flash_hit" }[x.id];
+        const p = (mp.transition || []).find((t) => t.cssEffect === key || t.id === key) || mp.transition?.[0];
+        const cuts = state.model.clips.filter((c) => c.kind === "video" && c.start > 0.01).sort((a, b) => Math.abs(a.start - state.time) - Math.abs(b.start - state.time));
+        if (!p || !cuts[0]) return;
+        return previewOp(`Mẫu chuyển cảnh ${x.label}`, "applyMotionPreset", { id: null, category: "transition", presetId: p.id, custom: { time: cuts[0].start } }, { pre: 1, max: 3.6 });
+      }
+      const near = state.model.clips.filter((c) => TEXT_KINDS.includes(c.kind) && c.end >= state.time).sort((a, b) => a.start - b.start)[0];
+      if (x.id === "typewriter_text" && near) return previewOp(`Mẫu ${x.label}`, "applyMotionPreset", { id: near.id, category: "entrance", presetId: "typewriter_digital", custom: {} }, { id: near.id, max: 3.6 });
+      if (x.id === "title_3d_slam" || x.id === "gold_shimmer_reveal" || x.id === "typewriter_text") {
+        const ov = x.id === "title_3d_slam" ? { in_effect: "Press-Release Spring Stamp" } : x.id === "gold_shimmer_reveal" ? { vfx_type: "light_sweep" } : {};
+        return previewOp(`Mẫu ${x.label}`, "addTextVfxPreset", { presetId: "TX-01", overrides: ov, time: state.time, duration: 3 }, { max: 3.6 });
+      }
+      const mg = { map_pin_and_route: "MG-MAP-PIN", number_counter_rise: "MG-COUNTER" }[x.id] || "MG-SPEC-CARD";
+      return previewOp(`Mẫu ${x.label}`, "addMgPreset", { mgId: mg, params: {}, time: state.time, duration: 3.2 }, { max: 3.6 });
+    };
+    const thumbs = proThumbs();
+    const mgOf = (id) => state.pro.mgTemplates.find((m) => m.id === id);
+    const fxTile = (x) => {
+      if (x.nhom === "Chuyển cảnh") return Mau.transition({ cssEffect: { whip_pan: "whip_pan", zoom_through: "zoom_through", match_cut: "match_cut", fast_cut_montage: "hard_cut_beat", cross_dissolve: "cross_dissolve", flash_negative_hit: "flash_hit" }[x.id], duration: 0.35 }, thumbs);
+      if (x.id === "title_3d_slam") return Mau.textIn("stamp", "#FFD147");
+      if (x.id === "gold_shimmer_reveal") return Mau.vfx("light_sweep", "#FFD147");
+      if (x.id === "typewriter_text") return Mau.entrance(state.pro.motionPresets.entrance.find((p) => p.id === "typewriter_digital"));
+      const m = mgOf({ map_pin_and_route: "MG-MAP-PIN", number_counter_rise: "MG-COUNTER" }[x.id] || "MG-SPEC-CARD");
+      return Mau.mg(m, iconById.get(m.icon_id));
+    };
+    const fxBtns = new Map(), emoBtns = new Map();
+    const pickStatus = el("div", { className: "proSfxStatus" });
+    const pickRule = el("div", { className: "proSfxRule" });
+    const paintPick = () => {
+      for (const [id, b] of fxBtns) b.classList.toggle("on", id === curFx.id);
+      for (const [id, b] of emoBtns) b.classList.toggle("on", id === curEmo.id);
+      pickRule.replaceChildren(
+        el("div", {}, el("b", { textContent: "Canh đỉnh âm: " }), el("span", { textContent: curFx.align_rule })),
+        el("div", {}, el("b", { textContent: "Mức âm: " }), el("span", { textContent: `${curFx.tier}${curEmo.gain_mod ? `, ${curEmo.gain_mod}` : ""}` })));
+    };
+    const fxCards = el("div", { className: "proTxGrid" }, ...matrix.visual_fx.map((x) => {
+      const b = el("button", { className: "proTxCard", title: x.desc }, fxTile(x), el("div", { className: "proTxName", textContent: x.label }));
+      fxBtns.set(x.id, b);
+      b.onclick = () => {
+        if (u.sfxDemo === x.id && state.preview) { u.sfxDemo = null; cancelPreview(); stopSfx(); return; }
+        u.sfxFx = x.id; u.sfxDemo = x.id; curFx = x; u.sfxShow = 16;
+        paintPick(); fillList(true); demoFx(x);
+      };
+      return b;
+    }));
+    const emoChips = el("div", { className: "pill proCatBar" }, ...matrix.emotions.map((x) => {
+      const b = el("button", { textContent: emoName(x), title: x.mo_ta });
+      emoBtns.set(x.id, b);
+      b.onclick = () => { u.sfxEmo = x.id; curEmo = x; u.sfxShow = 16; paintPick(); fillList(true); };
+      return b;
+    }));
+    // Vai trò trong quy tắc phối → nhóm âm trong thư viện; thêm âm theo tên tệp để có nhiều lựa chọn.
+    const ROLE_MAP = { chuyen_canh: ["whoosh_section", "transition_pack", "swoosh_fx", "whoosh_soft_broll"], cham_manh: ["cinematic_impact", "title_slam", "trailer_hit", "bass_drop"], du_bao: ["riser_tonal", "riser_build", "reverse_cymbal"], nhan_chu: ["text_pop", "flat_ui", "ui_click", "blob_bounce"], lap_lanh: ["gold_shimmer", "magic_reveal", "highlight_ding"], danh_sach: ["list_tick", "balafon_note", "infographic", "keyboard_type"], foley: ["document", "camera_shutter", "ui_sounds", "money_price"], xac_nhan: ["approve_legal", "correct_answer", "bell_ding"] };
+    const EMO_ROLES = { sang_trong: ["riser_tonal", "gold_shimmer"], kich_tinh: ["cinematic_impact", "riser_epic", "trailer_hit"], tin_cay: ["approve_legal", "correct_answer"], am_ap: ["balafon_note", "highlight_ding"], vui_tuoi: ["blob_bounce", "game_achievement"], cong_nghe: ["hud_digital", "synth_fx"] };
+    const NAME_RE = { whip_pan: /whoosh|swish|swoosh|whip/i, zoom_through: /zoom|whoosh|impact|riser/i, match_cut: /swoosh|click|pop/i, fast_cut_montage: /click|tick|pop/i, cross_dissolve: /shimmer|soft|air|swoosh/i, flash_negative_hit: /impact|hit|boom/i, title_3d_slam: /impact|slam|hit|boom/i, gold_shimmer_reveal: /gleam|shimmer|sparkle|twinkle/i, typewriter_text: /type|key|click/i, map_pin_and_route: /pin|drop|pop|radar/i, number_counter_rise: /count|tick|cash|money/i, freeze_cutout_pop: /freeze|shutter|pop|camera/i };
+    const EMO_RE = { sang_trong: /shimmer|sparkle|chime|bell|gold|luxury|glitter/i, kich_tinh: /impact|boom|trailer|epic|hit|slam/i, tin_cay: /approve|correct|ding|confirm|stamp|success/i, am_ap: /soft|warm|ding|marimba|balafon|piano|wood/i, vui_tuoi: /pop|bounce|game|cartoon|boing|blob/i, cong_nghe: /hud|digital|synth|glitch|tech|data|beep/i };
+    const box = el("div", { className: "proCustomBox" },
+      el("div", { className: "proSecHead" }, el("b", { textContent: "Chọn SFX theo hiệu ứng trên hình" })),
+      el("p", { className: "hint proHint", textContent: "Quy tắc: phụ đề và nhãn không có SFX, chỉ chữ hook có. SFX thấp hơn giọng 1–6 dB." }),
+      pickStatus,
+      fxCards,
+      el("label", { className: "cf-lbl", textContent: "Cảm xúc của đoạn" }), emoChips,
+      pickRule
+    );
+    const listBox = el("div", { className: "proSfxMatches" }, el("p", { className: "hint", textContent: "Đang tải thư viện SFX…" }));
+    box.append(listBox);
+    const fillList = (auto) => {
+      const s = state.sfx;
+      if (!s?.files?.length) { listBox.replaceChildren(el("p", { className: "hint", textContent: "Chưa có thư viện SFX. Chọn thư mục ở Công cụ → Thư mục tài nguyên." })); return; }
+      const byPath = (s.byPath ??= new Map(s.files.map((f) => [f.path, f])));
+      const keys = [...[].concat(curFx.lead_vai || []).flatMap((k) => ROLE_MAP[k] || []), ...[].concat(curFx.sub_vai || []).flatMap((k) => ROLE_MAP[k] || []), ...(EMO_ROLES[curEmo.id] || [])];
+      const paths = new Set(keys.flatMap((k) => s.roles.find((r) => r.key === k)?.paths || []));
+      const re = NAME_RE[curFx.id];
+      const extra = re ? s.files.filter((f) => re.test(f.path) && f.dur < 3).map((f) => f.path) : [];
+      // Âm hợp cả hiệu ứng lẫn cảm xúc đứng đầu, nên đổi cảm xúc là danh sách đổi theo.
+      const emoPaths = new Set((EMO_ROLES[curEmo.id] || []).flatMap((k) => s.roles.find((r) => r.key === k)?.paths || []));
+      const emoRe = EMO_RE[curEmo.id];
+      if (emoRe) for (const f of s.files) if (emoRe.test(f.path) && f.dur < 3) emoPaths.add(f.path);
+      const fxSet = new Set([...paths, ...extra]);
+      const rank = (x) => (emoPaths.has(x) && fxSet.has(x) ? 0 : emoPaths.has(x) ? 1 : 2);
+      const all = [...new Set([...fxSet, ...emoPaths])].sort((a, b) => rank(a) - rank(b)).map((x) => byPath.get(x)).filter(Boolean);
+      const both = all.filter((f) => rank(f.path) === 0).length;
+      pickStatus.replaceChildren(el("span", {}, "Đang chọn ", el("b", { textContent: curFx.label }), " · cảm xúc ", el("b", { textContent: emoName(curEmo) })), el("small", { textContent: `${all.length} âm, ${both} âm hợp cả hai. Bấm lại thẻ hiệu ứng để dừng.` }));
+      u.sfxShow ||= 16;
+      const row = (f) => {
+        const play = el("button", { className: "play", textContent: "▶", title: "Nghe thử" });
+        play.onclick = () => {
+          const again = sfxPlaying === play;
+          stopSfx();
+          if (again) return;
+          sfxAudio.src = `/vn/sfx-file?path=${encodeURIComponent(f.path)}`;
+          sfxAudio.play().catch(() => toast("Không phát được âm này", true));
+          play.classList.add("on"); play.textContent = "■"; sfxPlaying = play;
+        };
+        const add = el("button", { className: "act", textContent: "▶ Thử trên video", title: "Đặt thử đỉnh âm trùng playhead và nghe cùng video" });
+        add.onclick = () => tryRun(baseName(f.path), async () => {
+          try { const r = await post("sfx-add", { path: f.path, time: state.time }); await refresh(); return r; }
+          catch (e) { toast(e.message, true); }
+        }, { pre: 1 });
+        const hot = rank(f.path) === 0;
+        return el("div", { className: `sfx${hot ? " hot" : ""}` }, play, el("span", { className: "nm", title: f.path }, baseName(f.path).replace(/\.[^.]+$/, ""), el("small", { textContent: `${hot ? "Hợp cả hai · " : ""}${f.cat} · ${f.dur.toFixed(2)}s` })), add);
+      };
+      const more = el("button", { textContent: `Xem thêm (${Math.max(0, all.length - u.sfxShow)} âm)` });
+      more.onclick = () => { u.sfxShow += 16; fillList(); };
+      listBox.replaceChildren(el("div", { className: "proHint hint", textContent: `${all.length} âm phù hợp trong thư viện ${s.files.length} tệp` }), ...all.slice(0, u.sfxShow).map(row), ...(all.length > u.sfxShow ? [more] : []));
+      if (auto) { listBox.classList.remove("proFlash"); void listBox.offsetWidth; listBox.classList.add("proFlash"); listBox.querySelector(".sfx .play")?.click(); }
+    };
+    paintPick();
+    if (state.sfx) fillList();
+    else loadSfx().then(fillList).catch(() => listBox.replaceChildren(el("p", { className: "hint", textContent: "Không tải được thư viện SFX." })));
+
+    const palGrid = el("div", { className: "proPalList" }, ...(state.pro.colorPalettes || []).map((p) => {
+      const card = el("button", { className: "proPalCard", title: p.desc }, Mau.palette(p.vars), el("b", { textContent: p.name }), el("small", { className: "hint", textContent: p.desc }));
+      card.onclick = () => previewOp(`Bảng màu ${p.name}`, "setPalette", { paletteId: p.id });
+      return card;
+    }));
+    const coreLanes = LANES.filter((l) => l.core);
+    const checklist = el("div", { className: "proLaneCheck" }, ...coreLanes.map((l) => {
+      const count = (state.model?.clips || []).filter((c) => laneKey(c) === l.kind).length;
+      const addB = el("button", { textContent: "+ Thêm", title: l.addHint });
+      addB.onclick = () => quickAddForLane(l.kind);
+      return el("div", { className: `proLaneRow${count ? " has" : ""}` }, el("span", { className: "proLaneDot" }, count ? "✓" : "○"), el("span", { className: "proLaneLbl", textContent: l.name }), el("small", { textContent: count ? `${count} khối` : "Trống" }), addB);
+    }));
+    const scaffoldBtn = el("button", { textContent: "Thêm khối mẫu cho các tầng đang trống" });
+    scaffoldBtn.onclick = async () => {
+      const r = await edit("scaffold8Components", { time: state.time });
+      toast(r?.added?.length ? `Đã dựng thêm ${r.added.length} khối lên timeline` : "Các tầng chính đều đã có khối");
+    };
+    body_.append(box,
+      el("div", { className: "proSecHead" }, el("b", { textContent: "Bảng màu chung" })),
+      el("p", { className: "hint proHint", textContent: `Bấm một bảng là đổi ngay trên video: ${(state.model.vars || []).filter((v) => !/^--mau-/.test(v.name)).map((v) => v.name.replace(/^--/, "")).join(", ") || "biến màu của dự án"} đổi theo bảng, chữ hook dùng các màu này sẽ đổi. Video chưa bị ghi cho tới khi bấm Áp dụng.` }),
+      palGrid,
+      el("div", { className: "proSecHead" }, el("b", { textContent: "Kiểm tra đủ thành phần của video" })), checklist, scaffoldBtn);
+  }
+
+  // Giữ nguyên chỗ đang cuộn khi vẽ lại bảng.
+  const sameTab = state.proDrawnTab === u.subTab, y = host.querySelector(".proBody")?.scrollTop || 0;
+  host.replaceChildren(nav, body_);
+  if (sameTab) body_.scrollTop = y;
+  state.proDrawnTab = u.subTab;
+}
+
 // ---- Bảng trái ----
 for (const b of document.querySelectorAll(".tabs button")) {
   b.onclick = () => {
     document.querySelectorAll(".tabs button").forEach((x) => x.classList.toggle("on", x === b));
     document.querySelectorAll(".tab").forEach((x) => x.classList.toggle("on", x.id === `tab-${b.dataset.tab}`));
+    if (b.dataset.tab === "presets") loadProCatalog();
     if (b.dataset.tab === "layers") drawLayers();
     if (b.dataset.tab === "history") drawHistory();
     if (b.dataset.tab === "code") loadCode();
@@ -1989,18 +4646,45 @@ for (const b of document.querySelectorAll(".tabs button")) {
   };
 }
 
+// Bấm tư liệu: xem trước trong cửa sổ, chỉ thêm vào timeline khi bấm nút Thêm.
+function previewAsset(f) {
+  const url = `/api/projects/${state.model.projectId}/preview/${f.path.split("/").map(encodeURIComponent).join("/")}`;
+  const title = el("h3", { textContent: baseName(f.path) });
+  const add = el("button", { className: "primary", textContent: `＋ Thêm tại ${fmtTime(state.time)}` }), no = el("button", { textContent: "Đóng" });
+  const stop = () => { body.querySelector("video,audio")?.pause(); };
+  no.onclick = () => { stop(); closeModal(); };
+  add.onclick = async () => {
+    stop();
+    closeModal();
+    if (state.tryOn) keepTry();
+    setStatus("Đang lưu…");
+    try { const r = await post("add-asset", { path: f.path, time: state.time }); await refresh(); select(r.id); }
+    catch (e) { toast(e.message, true); setStatus("Chưa lưu"); }
+  };
+  let media;
+  if (f.kind === "audio") media = el("audio", { controls: true, autoplay: true, src: url });
+  else if (f.kind === "font") {
+    media = el("p", { className: "fontSample", textContent: "Nhà đẹp giá tốt 123 Ă Â Đ Ê Ô Ơ Ư" });
+    const face = new FontFace(`hd-xem-${Date.now()}`, `url("${url}")`);
+    face.load().then((x) => { document.fonts.add(x); media.style.fontFamily = `"${x.family}"`; }).catch(() => { media.textContent = "Không xem trước được phông chữ này."; });
+    add.hidden = true;
+  } else if (f.kind === "image") media = el("img", { className: "assetView", alt: "", src: url });
+  else media = el("video", { className: "assetView", controls: true, autoplay: true, muted: true, playsInline: true, src: url });
+  const body = el("div", { className: "assetPrev" }, media);
+  openModal(title, body, el("p", { className: "hint path", textContent: f.path }), el("div", { className: "row" }, add, no));
+  $("#modal").addEventListener("close", stop, { once: true });
+}
+
 async function loadAssets() {
   const { files } = await api("assets");
   const q = encodeURIComponent(state.project);
   $("#assets").replaceChildren(...files.map((f) => {
     const thumb = f.kind === "audio" ? el("span", { className: "ph", textContent: "♪" }) : el("img", { loading: "lazy", alt: "", src: `/vn/thumb?du-an=${q}&path=${encodeURIComponent(f.path)}&t=0` });
-    const b = el("button", { className: "asset", title: f.path, draggable: f.kind !== "font" }, thumb, el("span", { className: "nm", textContent: baseName(f.path) }));
+    // SFX trong dự án mang tên mã (k1_0, băm_tên): hiện tên gốc của tệp.
+    const shown = /\/sfx\//.test(f.path) ? sfxOrigin({ src: f.path }) : baseName(f.path);
+    const b = el("button", { className: "asset", title: `${shown}\n${f.path}`, draggable: f.kind !== "font" }, thumb, el("span", { className: "nm", textContent: shown }));
     b.addEventListener("dragstart", (ev) => { ev.dataTransfer.setData("text/hd-asset", f.path); ev.dataTransfer.effectAllowed = "copy"; });
-    b.onclick = async () => {
-      setStatus("Đang lưu…");
-      try { const r = await post("add-asset", { path: f.path, time: state.time }); await refresh(); select(r.id); }
-      catch (e) { toast(e.message, true); setStatus("Chưa lưu"); }
-    };
+    b.onclick = () => previewAsset(f);
     const del = el("button", { className: "assetDel", textContent: "×", title: "Xóa tệp (khôi phục được ở Lịch sử)" });
     del.setAttribute("aria-label", `Xóa ${baseName(f.path)}`);
     del.onclick = async (e) => { e.stopPropagation(); try { await post("xoa-tep", { path: f.path }); loadAssets(); drawHistory(); toast("Đã xóa, khôi phục được ở Lịch sử"); } catch (err) { toast(err.message, true); } };
@@ -2029,7 +4713,13 @@ function drawVars() {
     const isHex = /^#[0-9a-f]{6}$/i.test(v.value);
     const input = el("input", isHex ? { type: "color", value: v.value } : { type: "text", value: v.value });
     input.setAttribute("aria-label", v.name);
-    input.onchange = () => edit("cssVar", { name: v.name, value: input.value });
+    // Kéo trong bảng chọn màu là thấy ngay trên video; thả ra thì hỏi Giữ lại hay Bỏ.
+    const rootStyle = () => state.frame?.contentDocument?.documentElement?.style;
+    input.oninput = () => rootStyle()?.setProperty(v.name, input.value);
+    input.onchange = () => {
+      rootStyle()?.removeProperty(v.name);
+      if (input.value !== v.value) tryRun(`Màu ${v.name.replace(/^--/, "")}`, () => edit("cssVar", { name: v.name, value: input.value }));
+    };
     return el("div", { className: "var" }, input, el("span", { textContent: v.name.replace(/^--/, "") }));
   }));
   if (!state.model.vars.length) $("#vars").append(el("p", { className: "hint", textContent: "Dự án này chưa khai báo bảng màu chung." }));
@@ -2046,9 +4736,26 @@ $("#saveCode").onclick = async () => {
   catch (e) { setStatus("Chưa lưu"); toast(e.message, true); }
 };
 
+// Dòng xem và đổi nơi lưu video, dùng ở cửa sổ Xuất và tab Bản xuất.
+function outDirRow(onChange) {
+  const input = el("input", { type: "text", placeholder: "Đường dẫn thư mục" });
+  input.setAttribute("aria-label", "Nơi lưu video xuất");
+  const hint = el("p", { className: "hint" });
+  const show = (d) => { input.value = d.dir; hint.textContent = d.custom ? "Thư mục bạn chọn, dùng cho mọi dự án." : "Mặc định: thư mục final của dự án."; reset.hidden = !d.custom; onChange?.(d); };
+  const run = async (fn) => { try { show(await fn()); } catch (e) { toast(e.message, true); api("thu-muc-xuat").then(show); } };
+  const browse = el("button", { type: "button", textContent: "Chọn thư mục" });
+  const reset = el("button", { type: "button", textContent: "Về mặc định" });
+  browse.onclick = () => run(() => post("chon-thu-muc", {}));
+  reset.onclick = () => run(() => post("thu-muc-xuat", { dir: "" }));
+  input.onchange = () => run(() => post("thu-muc-xuat", { dir: input.value }));
+  api("thu-muc-xuat").then(show).catch(() => {});
+  return el("div", { className: "outDir" }, el("label", { textContent: "Lưu vào" }), input, el("div", { className: "row" }, browse, reset), hint);
+}
+
 async function loadRenders() {
   const { files } = await api("renders");
   const q = encodeURIComponent(state.project);
+  if (!$("#outDirBox").hasChildNodes()) $("#outDirBox").append(outDirRow(() => loadRenders()));
   $("#renders").replaceChildren(...(files.length ? files.map((f) => el("div", { className: "render" },
     el("video", { controls: true, preload: "metadata", src: `/vn/final?du-an=${q}&thu-muc=${f.folder}&ten=${encodeURIComponent(f.name)}` }),
     el("div", { textContent: f.name }),
@@ -2069,7 +4776,7 @@ function openModal(...nodes) {
   $("#modalBody").scrollTop = 0;
   if (!$("#modal").open) $("#modal").showModal();
 }
-const closeModal = () => $("#modal").close();
+const closeModal = () => { for (const m of $("#modal").querySelectorAll("video, audio")) m.pause(); $("#modal").close(); };
 $("#modalX").onclick = closeModal;
 
 $("#export").onclick = async () => {
@@ -2080,8 +4787,23 @@ $("#export").onclick = async () => {
   const gpu = el("input", { type: "checkbox", checked: true });
   const m = state.model;
   const pick = (opts) => { const x = el("select"); for (const [v, t] of opts) x.append(el("option", { value: v, textContent: t })); return x; };
+  const engine = pick([
+    ["capcut", "⚡ Siêu tốc (Đủ hiệu ứng, GPU NVENC — Khuyên dùng)"],
+    ["nhanh", "🚀 Nhanh (Đủ nội dung, chuyển động chữ 15 khung/giây)"],
+    ["chuan", "🎬 Chuẩn HD Studio (Đầy đủ hiệu ứng trình duyệt)"],
+  ]);
+  const codec = pick([
+    ["h264", "H.264 (MP4 phổ thông, tương thích mọi nơi)"],
+    ["hevc", "H.265 / HEVC (Nhẹ dung lượng, nét cao)"],
+  ]);
+  const quality = pick([
+    ["delivery", "Cao — Bàn giao (Khuyên dùng)"],
+    ["master", "Siêu nét (Master)"],
+    ["standard", "Tiêu chuẩn (Standard)"],
+  ]);
   const aspect = pick([["goc", `Giữ nguyên (${m.width}×${m.height})`], ["9:16", "9:16 TikTok, Reels, Shorts"], ["16:9", "16:9 YouTube"], ["1:1", "1:1 Vuông"], ["4:5", "4:5 Facebook, Instagram"], ["3:4", "3:4"], ["4:3", "4:3"], ["21:9", "21:9 Điện ảnh"]]);
-  const res = pick([["goc", "Giữ nguyên"], ["720", "720p"], ["1080", "1080p Full HD"], ["1440", "1440p 2K"], ["2160", "2160p 4K"], ["tuy", "Tùy chỉnh rộng × cao"]]);
+  const res = pick([["1080", "1080p Full HD (Khuyên dùng)"], ["goc", `Giữ nguyên (${m.width}×${m.height})`], ["720", "720p HD"], ["1440", "1440p 2K"], ["2160", "2160p 4K"], ["tuy", "Tùy chỉnh rộng × cao"]]);
+  if (Math.min(m.width, m.height) <= 1080) res.value = "goc";
   const fit = pick([["mo", "Thêm nền mờ, giữ đủ hình"], ["cat", "Cắt cho đầy khung"], ["den", "Thêm viền đen"]]);
   const cw = el("input", { type: "number", min: 16, max: 7680, step: 2, value: m.width, placeholder: "Rộng" });
   const ch = el("input", { type: "number", min: 16, max: 7680, step: 2, value: m.height, placeholder: "Cao" });
@@ -2090,7 +4812,7 @@ $("#export").onclick = async () => {
   const fitRow = field("Khi lệch khung", fit);
   const outLine = el("p", { className: "hint" });
   const size = () => {
-    if (res.value === "tuy") return [+cw.value, +ch.value];
+    if (res.value === "tuy") return [Math.max(2, Math.round(+cw.value / 2) * 2), Math.max(2, Math.round(+ch.value / 2) * 2)];
     const r = aspect.value === "goc" ? m.width / m.height : aspect.value.split(":").reduce((a, b) => a / b);
     const side = res.value === "goc" ? Math.min(m.width, m.height) : +res.value;
     const even = (n) => Math.round(n / 2) * 2;
@@ -2104,62 +4826,89 @@ $("#export").onclick = async () => {
     const [w, h] = size();
     const same = Math.abs(w / h - m.width / m.height) < 0.005;
     fitRow.style.display = same ? "none" : "";
-    outLine.textContent = `Video xuất ra: ${w} × ${h}${Math.min(w, h) > Math.min(m.width, m.height) ? " (lớn hơn bản dựng nên sẽ phóng hình, không nét thêm)" : ""}`;
+    const engineLabel = engine.value === "capcut" ? "Siêu tốc" : engine.value === "nhanh" ? "Nhanh" : "Chuẩn HD Studio";
+    outLine.textContent = `Video xuất ra: ${w} × ${h} · ${fps.value}fps · ${codec.value.toUpperCase()} (${engineLabel})${Math.min(w, h) > Math.min(m.width, m.height) ? " — lớn hơn bản dựng nên sẽ phóng hình" : ""}`;
   };
   aspect.value = frameChoice().aspect;
   fit.value = frameChoice().fit;
-  aspect.onchange = res.onchange = cw.oninput = ch.oninput = sync;
-  const options = () => (res.value === "tuy" ? { width: +cw.value, height: +ch.value, fit: fit.value } : { aspect: aspect.value, short: res.value, fit: fit.value });
+  aspect.onchange = res.onchange = cw.oninput = ch.oninput = fps.onchange = engine.onchange = codec.onchange = sync;
+  const options = () => ({
+    engine: engine.value,
+    codec: codec.value,
+    ...(res.value === "tuy" ? { width: +cw.value, height: +ch.value, fit: fit.value } : { aspect: aspect.value, short: res.value, fit: fit.value }),
+  });
   const lint = await fetch(`/api/projects/${state.model.projectId}/lint`).then((r) => r.json()).catch(() => ({}));
   const errs = (lint.findings || []).filter((f) => f.severity === "error").length;
   const checks = [
     [errs === 0, errs ? `Còn ${errs} lỗi kỹ thuật (bấm Kiểm lỗi để xem)` : "Không có lỗi kỹ thuật"],
     [state.notes.length === 0, state.notes.length ? `Còn ${state.notes.length} ghi chú chưa xử lý` : "Không còn ghi chú nào"],
   ].map(([ok, t]) => el("div", { className: `check${ok ? "" : " bad"}`, textContent: `${ok ? "✓" : "!"} ${t}` }));
-  const draft = el("button", { textContent: "Dựng nháp", title: "Nhanh, chất lượng thấp, lưu vào thư mục preview" });
+  const draft = el("button", { textContent: "⚡ Dựng nháp nhanh", title: "Xuất nháp siêu tốc bằng GPU, lưu vào thư mục preview" });
   draft.onclick = async () => {
-    try { await post("render", { fps: 30, gpu: false, quality: "draft", ...options() }); watchRender(); }
+    try { await post("render", { fps: 30, gpu: true, quality: "draft", ...options(), short: "720" }); watchRender(); }
     catch (e) { toast(e.message, true); }
   };
-  const go = el("button", { className: "primary", textContent: "Bắt đầu xuất" });
+  const go = el("button", { className: "primary", textContent: "⚡ Bắt đầu xuất" });
   const cancel = el("button", { textContent: "Đóng" });
   cancel.onclick = closeModal;
   go.onclick = async () => {
-    try { await post("render", { fps: +fps.value, gpu: gpu.checked, quality: "delivery", ...options() }); watchRender(); }
+    try { await post("render", { fps: +fps.value, gpu: gpu.checked, quality: quality.value, ...options() }); watchRender(); }
     catch (e) { toast(e.message, true); }
   };
   openModal(el("h3", { textContent: "Xuất video cuối" }),
-    el("p", { className: "hint", textContent: "H.264 chất lượng bàn giao, lưu vào thư mục final của dự án." }),
+    el("p", { className: "hint", textContent: "Tăng tốc phần cứng NVIDIA NVENC + kết xuất thông minh như CapCut." }),
     ...checks, el("p"),
-    field("Khung hình", aspect), field("Độ phân giải", res), customRow, fitRow, outLine,
-    field("Tốc độ", fps), field("Dùng GPU", gpu),
+    field("Chế độ", engine),
+    field("Khung hình", aspect), field("Độ phân giải", res), customRow, fitRow,
+    field("Tốc độ", fps), field("Chuẩn nén", codec), field("Chất lượng", quality), field("Dùng GPU", gpu),
+    outLine, outDirRow(),
     el("div", { className: "row" }, go, draft, cancel));
   sync();
 };
 
 async function watchRender() {
-  const pct = el("i"), line = el("p", { className: "hint" }), bar = el("div", { className: "bar" }, pct);
+  const pct = el("i"), stageLine = el("p", { className: "renderStage", textContent: "Đang khởi tạo tiến trình xuất…" });
+  const line = el("p", { className: "hint" }), bar = el("div", { className: "bar" }, pct);
+  const badges = el("div", { className: "renderBadges" });
   const stop = el("button", { textContent: "Dừng xuất" }), close = el("button", { textContent: "Ẩn" });
   close.onclick = closeModal;
   stop.onclick = () => fetch("/vn/render/cancel", { method: "POST" });
-  const title = el("h3", { textContent: "Đang xuất video" });
+  const title = el("h3", { textContent: "⚡ Đang xuất video" });
   const extra = el("div");
-  openModal(title, bar, line, extra, el("div", { className: "row" }, stop, close));
+  openModal(title, stageLine, bar, badges, line, extra, el("div", { className: "row" }, stop, close));
   for (;;) {
     const { job } = await fetch("/vn/render").then((r) => r.json());
     if (!job) return;
     pct.style.width = `${job.percent}%`;
-    line.textContent = `${job.percent}% · ${job.gpu ? "GPU" : "CPU"} · ${Math.round(((job.finishedAt || Date.now()) - job.startedAt) / 1000)} giây`;
-    $("#export").textContent = job.status === "dang_chay" ? `Đang xuất ${job.percent}%` : "Xuất video";
+    stageLine.textContent = job.stage || (job.status === "dang_chay" ? "Đang kết xuất…" : "");
+    const elapsed = ((job.finishedAt || Date.now()) - job.startedAt) / 1000;
+    const pills = [
+      `${job.percent}%`,
+      job.gpu ? `GPU NVENC (${(job.codec || "h264").toUpperCase()})` : "CPU",
+      job.resolution || "",
+      job.speed ? `Tốc độ ${job.speed}` : "",
+      job.fpsCurrent ? `${job.fpsCurrent} fps` : "",
+      job.etaSec != null && job.status === "dang_chay" ? `Còn ~${job.etaSec}s` : `${elapsed.toFixed(1)}s`,
+    ].filter(Boolean);
+    badges.replaceChildren(...pills.map((t) => el("span", { className: "rBadge", textContent: t })));
+    line.textContent = `Thời gian đã chạy: ${elapsed.toFixed(1)} giây${job.note ? `. ${job.note}` : ""}`;
+    $("#export").textContent = job.status === "dang_chay" ? `⚡ Đang xuất ${job.percent}%` : "Xuất video";
     if (job.status !== "dang_chay") {
       stop.remove();
-      title.textContent = { xong: "Đã xuất xong", loi: "Xuất video bị lỗi", da_dung: "Đã dừng xuất" }[job.status];
-      if (job.status === "xong") extra.replaceChildren(el("p", { className: "path", textContent: job.output }));
+      title.textContent = { xong: "✓ Đã xuất video thành công", loi: "Xuất video bị lỗi", da_dung: "Đã dừng xuất" }[job.status];
+      if (job.status === "xong") {
+        const openBtn = el("button", { textContent: "Mở thư mục chứa video" });
+        openBtn.onclick = () => post("open-folder");
+        extra.replaceChildren(
+          el("p", { className: "path", textContent: job.output }),
+          el("div", { className: "row" }, openBtn)
+        );
+      }
       if (job.status === "loi") extra.replaceChildren(el("p", { className: "err", textContent: job.log || "Không rõ lỗi" }));
       loadRenders();
       return;
     }
-    await new Promise((r) => setTimeout(r, 1000));
+    await new Promise((r) => setTimeout(r, 500));
   }
 }
 
@@ -2738,7 +5487,7 @@ function applyUi(ui = readUi()) {
   if (ui.tlH) document.body.style.setProperty("--tl-h", `${ui.tlH}px`);
   // Bố cục: giữ nguyên cho đến khi người dùng đổi.
   const lay = ui.layout || {};
-  const lw = ui.hideLeft ? 0 : lay.leftW || 270, rw = ui.hideRight ? 0 : lay.rightW || 300;
+  const lw = ui.hideLeft ? 0 : lay.leftW || 310, rw = ui.hideRight ? 0 : lay.rightW || 310;
   const lp = lay.leftPos || "left", rp = lay.rightPos || "right";
   const cols = [];
   const put = (w, order, el2) => { el2.style.order = order; if (w) cols.push([order, `${w}px`]); };
@@ -2761,7 +5510,7 @@ function dragSizer(bar, key, sign) {
   bar.addEventListener("pointerdown", (e) => {
     e.preventDefault();
     bar.setPointerCapture(e.pointerId);
-    const ui0 = readUi(), lay = ui0.layout || {}, w0 = lay[key] || (key === "leftW" ? 270 : 300), x0 = e.clientX;
+    const ui0 = readUi(), lay = ui0.layout || {}, w0 = lay[key] || (key === "leftW" ? 310 : 310), x0 = e.clientX;
     let w = w0;
     bar.classList.add("dragging");
     document.body.classList.add("sizing");
@@ -2870,17 +5619,49 @@ $("#newText").onclick = async () => {
   const r = await edit("add", { kind: "text", text: "Chữ mới", time: state.time, duration: 3, newId: "chu" });
   if (r?.id) { state.txtTab = "text"; select(r.id); }
 };
+if ($("#newSub")) $("#newSub").onclick = () => quickAddForLane("sub");
+if ($("#newProTx")) $("#newProTx").onclick = () => quickAddForLane("text");
+if ($("#newProMg")) $("#newProMg").onclick = () => quickAddForLane("mg");
+if ($("#newProVfx")) $("#newProVfx").onclick = () => quickAddForLane("vfx");
+if ($("#newProTrans")) $("#newProTrans").onclick = () => quickAddForLane("transition");
+if ($("#proBtn")) $("#proBtn").onclick = () => { openTab("presets"); };
+if ($("#allLanesBtn")) {
+  $("#allLanesBtn").onclick = (e) => {
+    state.showAllLanes = !state.showAllLanes;
+    e.currentTarget.classList.toggle("on", state.showAllLanes);
+    drawTimeline();
+    toast(state.showAllLanes ? "Đã hiện đầy đủ các tầng thành phần trên timeline" : "Chỉ hiện những tầng đang có clip");
+  };
+}
+if ($("#scaffold8Btn")) {
+  $("#scaffold8Btn").onclick = async () => {
+    const r = await edit("scaffold8Components", { time: state.time });
+    toast(r?.added?.length ? `Đã dựng thêm ${r.added.length} khối mẫu lên những tầng đang trống` : "Tất cả các tầng chính đã có khối trên timeline");
+  };
+}
+// Thanh thêm layer đầu mỗi danh mục: layer mới nằm đúng tại thước timeline.
+function addBars() {
+  const q = (k) => () => quickAddForLane(k);
+  const bar = (host, items) => $(host)?.prepend(el("div", { className: "addBar" }, el("span", { className: "addAt" }), ...items.map(([label, run]) => {
+    const b = el("button", { textContent: `+ ${label}`, title: `Thêm layer ${label} đúng tại thước timeline` });
+    b.onclick = run;
+    return b;
+  })));
+  bar("#tab-list", [["Phụ đề", q("sub")], ["Chữ", () => $("#newText").click()], ["Mẫu chữ VFX", q("text")], ["Thẻ MG", q("mg")]]);
+  bar("#tab-layers", [["Chữ", () => $("#newText").click()], ...LANES.map((l) => [l.name.replace(/^\d+\.\s*/, ""), q(l.kind)])]);
+  bar("#tab-assets", [["Hình khối", q("shape")], ["Nhãn dán", q("sticker")]]);
+  bar("#tab-sfx", []);
+  bar("#tab-colors", [["Lớp màu & 3D LUT", q("grade")]]);
+}
+addBars();
 $("#newGrade").onclick = async () => {
-  let a, b;
-  const c = clipOf(state.sel);
+  let a = state.time, b = Math.min(state.model?.duration || 15, state.time + 3);
   if (state.range) [a, b] = state.range;
-  else if (c?.kind === "video") { a = c.start; b = c.end; }
   else {
     const v = state.model.clips.filter((x) => x.kind === "video" && x.start <= state.time && x.end > state.time).sort((p, q) => q.start - p.start)[0];
-    if (!v) return toast("Playhead không nằm trên cảnh video nào");
-    a = v.start; b = v.end;
+    if (v) b = v.end;
   }
-  const r = await edit("add", { kind: "grade", time: a, duration: b - a, newId: "mau" });
+  const r = await edit("add", { kind: "grade", time: a, duration: Math.max(0.5, b - a), newId: "mau" });
   if (r?.id) { state.txtTab = "color"; select(r.id); }
 };
 
@@ -3147,6 +5928,8 @@ const addNote = () => {
   t.focus();
 };
 const stepUndo = async (url) => {
+  cancelPreview();
+  if (state.tryOn) keepTry();
   setStatus("Đang lưu…");
   const r = await post(url);
   if (r.hot && applyHot(r.hot)) await refresh(false); else await refresh();
@@ -3328,6 +6111,7 @@ document.addEventListener("keydown", (e) => {
   else if (!ctrl && k === "w") doTrim("end");
   else if (!ctrl && k === "z") zoomSel();
   else if (!ctrl && k === "n") { e.preventDefault(); addNote(); }
+  else if (!ctrl && k === "v" && clipOf(state.sel)) { closeCtx(); toggleMute(clipOf(state.sel)); }
   else if (e.key === ",") nudge(e.shiftKey ? -10 * fr : -fr);
   else if (e.key === ".") nudge(e.shiftKey ? 10 * fr : fr);
   else if (e.key === "Delete" || e.key === "Backspace") doDel();
@@ -3383,6 +6167,7 @@ $("#project").onchange = (e) => { location.search = `?du-an=${encodeURIComponent
 
 async function start() {
   state.fav = await fetch("/vn/yeu-thich").then((r) => r.json()).catch(() => ({ font: [], sfx: [], template: [] }));
+  loadProCatalog().catch(() => {});
   fetch("/vn/templates").then((r) => r.json()).then((d) => { tplState.data = d; syncTplBtn(); }).catch(() => {});
   const { projects } = await fetch("/vn/projects").then((r) => r.json());
   if (!state.project) state.project = projects[0]?.name;
@@ -3397,6 +6182,7 @@ async function start() {
   } catch (e) { setStatus("Không mở được"); toast(e.message, true); return; }
   fitStage();
   setZoom(30);
+  state.frameSrc = (await api("code")).content;
   loadFrame();
   loadAssets();
   fetch("/vn/font-list").then((r) => r.json()).then((d) => { state.fontLib = d.fonts; if (clipOf(state.sel)?.segments.length) drawProps(); });
@@ -3518,14 +6304,19 @@ async function drawHistory() {
   }) : [el("p", { className: "hint", textContent: "Chưa có thay đổi nào." })]));
 }
 function confirmRestore(e, label) {
-  const yes = el("button", { className: "primary", textContent: label }), no = el("button", { textContent: "Không" });
+  const preview = e.loai === "sua";
+  const yes = el("button", { className: "primary", textContent: preview ? "▶ Xem trước" : label }), no = el("button", { textContent: "Không" });
   no.onclick = closeModal;
-  yes.onclick = async () => {
-    closeModal();
-    try { await post("khoi-phuc", { id: e.id }); await refresh(); loadAssets(); drawHistory(); toast("Đã khôi phục"); }
+  const restore = async () => {
+    try { const r = await post("khoi-phuc", { id: e.id }); await refresh(); loadAssets(); drawHistory(); return r || {}; }
     catch (err) { toast(err.message, true); }
   };
-  const msg = e.loai === "sua" ? "Timeline sẽ quay về đúng lúc trước thao tác này, các sửa đổi sau đó sẽ không còn trên timeline. Bạn vẫn có thể Hoàn tác hoặc khôi phục lại từ Lịch sử." : e.loai === "them_file" ? "Tệp sẽ được chuyển vào thùng rác của dự án." : "Tệp sẽ được đưa lại vào dự án.";
+  yes.onclick = async () => {
+    closeModal();
+    if (preview) return tryRun(`Khôi phục: ${e.mo_ta}`, restore);
+    if (await restore()) toast("Đã khôi phục");
+  };
+  const msg = preview ? "Timeline sẽ quay về đúng lúc trước thao tác này để bạn xem trên video, sau đó chọn Giữ lại hoặc Bỏ." : e.loai === "them_file" ? "Tệp sẽ được chuyển vào thùng rác của dự án." : "Tệp sẽ được đưa lại vào dự án.";
   openModal(el("h3", { textContent: `${label}: ${e.mo_ta}?` }), el("p", { className: "hint", textContent: msg }), el("div", { className: "row" }, yes, no));
 }
 setInterval(drawHistory, 1500);
@@ -3643,6 +6434,26 @@ attachMic($("#aiChatMic"), $("#aiChatInput"));
 
 // ---- Chuột phải trên clip: nhờ AI sửa đúng mục đó, hoàn tác và làm lại riêng mục đó ----
 let ctxMic = null;
+// Vô hiệu hóa âm thanh giống CapCut: clip vẫn nằm trên timeline nhưng không phát và không xuất ra video.
+async function toggleMute(c) {
+  if (!isSound(c)) return toast("Chỉ tắt được clip âm thanh, SFX", true);
+  await edit("attrs", { id: c.id, muted: !c.muted });
+  toast(c.muted ? "Đã bật lại âm thanh" : "Đã vô hiệu hóa, bấm V để bật lại");
+}
+const textLayers = (c) => [...new Set(c.segments.map((s) => s.layer).filter((l) => l && l !== c.id))];
+const splittable = (c) => (c?.kind === "text" || c?.kind === "graphic") && textLayers(c).length > 1;
+async function splitText(c) {
+  const doc = state.frame?.contentDocument, ids = textLayers(c);
+  // Đo vị trí thật trên khung hình (khung chữ có thể đang phóng to) ở cuối clip, lúc chữ đã hiện đủ.
+  player()?.pause();
+  seek(Math.max(c.start, c.end - Math.min(0.4, (c.end - c.start) / 3)));
+  await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+  const first = doc?.getElementById(ids[0])?.getBoundingClientRect();
+  const offsets = {};
+  for (const l of ids.slice(1)) { const n = doc?.getElementById(l); if (n && first) offsets[l] = n.getBoundingClientRect().top - first.top; }
+  const r = await edit("splitLayers", { id: c.id, offsets });
+  if (r) toast(`Đã tách thành ${ids.length} khối, kéo từng khối riêng được`);
+}
 function closeCtx() { ctxMic?.stop(); ctxMic?.remove(); ctxMic = null; document.getElementById("ctxMenu")?.remove(); }
 async function openCtx(c, x, y) {
   closeCtx();
@@ -3665,14 +6476,19 @@ async function openCtx(c, x, y) {
     return b;
   };
   const undo = step("↶ Hoàn tác mục này", "undo"), redo = step("↷ Làm lại mục này", "redo");
-  const menu = el("div", { id: "ctxMenu" }, el("b", { textContent: clipLabel(c), title: c.id }), input, el("div", { className: "row" }, mic, send), el("hr"), undo, redo);
+  const act = (text, fn) => { const b = el("button", { className: "ctxBtn", type: "button", textContent: text }); b.onclick = () => { closeCtx(); fn(); }; return b; };
+  const quick = [
+    ...(isSound(c) ? [act(c.muted ? "🔊 Bật lại âm thanh   V" : "🔇 Vô hiệu hóa (tắt tiếng)   V", () => toggleMute(c))] : []),
+    ...(splittable(c) ? [act("✂ Tách lớp thành khối riêng", () => splitText(c))] : []),
+    act("🗑 Xóa   Delete", () => doDel()),
+  ];
+  const menu = el("div", { id: "ctxMenu" }, el("b", { textContent: clipLabel(c), title: c.id }), ...quick, el("hr"), input, el("div", { className: "row" }, mic, send), el("hr"), undo, redo);
   document.body.append(menu);
   menu.addEventListener("pointerdown", (e) => e.stopPropagation());
   const r = menu.getBoundingClientRect();
   menu.style.left = `${Math.min(x, innerWidth - r.width - 8)}px`;
   menu.style.top = `${Math.max(8, Math.min(y, innerHeight - r.height - 8))}px`;
   ctxMic = attachMic(mic, input);
-  input.focus();
   try { const n = await api(`clip-buoc?id=${encodeURIComponent(c.id)}`); undo.disabled = !n.undo; redo.disabled = !n.redo; } catch { /* để nút tắt */ }
 }
 $("#rows").addEventListener("contextmenu", (e) => {

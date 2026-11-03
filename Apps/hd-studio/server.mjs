@@ -8,7 +8,9 @@ import crypto from "node:crypto";
 import { spawn, spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
-import { parse, ops, syncAnim, readOverrides } from "./lib/html.mjs";
+import { parse, ops, scan, syncAnim, readOverrides } from "./lib/html.mjs";
+import { runFastRender, hasHevcNvenc, pickEncoder, fastUnsupported } from "./lib/fast_render.mjs";
+import { ANIMATED_ICONS, TEXT_VFX_PRESETS, MOTION_PRESETS, MG_TEMPLATES, SFX_VISUAL_EMOTION_MATRIX, BDS_COLOR_PALETTES, TIMELINE_COMPONENT_LANES } from "./lib/pro_presets.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const WORKSPACE = path.resolve(HERE, "..", "..");
@@ -16,7 +18,7 @@ const VIDEOS = path.join(WORKSPACE, "Videos");
 const DATA = path.join(HERE, ".du-lieu");
 const PORT = +(process.argv.find((a) => a.startsWith("--port="))?.slice(7) || 4700);
 const BACKEND_PORT = PORT + 1;
-const HF_VERSION = "0.8.171";
+const HF_VERSION = "0.9.4";
 const HF_BIN = path.join(process.env.APPDATA || "", "npm", "node_modules", "hyperframes", "bin", "hyperframes.mjs");
 const MIME = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".mjs": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8", ".svg": "image/svg+xml", ".ttf": "font/ttf", ".otf": "font/otf", ".mp4": "video/mp4", ".jpg": "image/jpeg", ".wav": "audio/wav", ".mp3": "audio/mpeg", ".jpeg": "image/jpeg", ".png": "image/png", ".webp": "image/webp", ".webm": "video/webm", ".m4v": "video/mp4", ".mov": "video/mp4" };
 
@@ -52,6 +54,7 @@ function killTree(child) {
 
 // ---- Dự án ----
 function listProjects() {
+  if (!fs.existsSync(VIDEOS)) return [];
   const out = [];
   for (const d of fs.readdirSync(VIDEOS, { withFileTypes: true })) {
     if (!d.isDirectory()) continue;
@@ -106,12 +109,197 @@ async function openProject(name) {
       } catch { /* máy xem trước đang khởi động */ }
       await new Promise((r) => setTimeout(r, 500));
     }
-    throw httpError(500, "Máy xem trước HyperFrames không khởi động được");
+    throw httpError(500, "Máy xem trước HD Studio không khởi động được");
   })();
   const opening = current;
   opening.ready.catch(() => { if (current === opening) { killTree(backend); current = null; } });
   await current.ready;
   return current;
+}
+
+// ---- Phông của mẫu: tìm đúng tệp theo tên mẫu ghi, chép vào dự án và khai báo để chữ hiện đúng phông ----
+const normFont = (s) => String(s || "").toLowerCase().replace(/\.(ttf|otf)$/, "").replace(/[^a-z0-9]/g, "");
+const FONT_WEIGHTS = ["thin", "extralight", "light", "regular", "medium", "semibold", "bold", "extrabold", "black"];
+function fontFilesFor(p) {
+  const dirs = [path.join(p.hf, "assets", "fonts"), FONTS, path.join(WORKSPACE, "Fonts", "tai_them"), path.join(WORKSPACE, "asset", "font", "capcut")];
+  // Dự án khác có thể đang giữ đúng tệp còn thiếu trong thư viện.
+  for (const v of fs.existsSync(VIDEOS) ? fs.readdirSync(VIDEOS) : []) dirs.push(path.join(VIDEOS, v, "hf", "assets", "fonts"));
+  const out = [];
+  for (const d of dirs) if (fs.existsSync(d)) for (const f of fs.readdirSync(d)) if (/\.(ttf|otf)$/i.test(f)) out.push({ file: f, full: path.join(d, f), key: normFont(f) });
+  return out;
+}
+// Trả tệp đúng tên; không có thì lấy tệp gần nhất cùng họ phông, ưu tiên đúng nghiêng rồi gần độ đậm.
+function findFontFile(p, name) {
+  const key = normFont(name), files = fontFilesFor(p);
+  const hit = files.find((f) => f.key === key);
+  if (hit) return { ...hit, exact: true };
+  const parts = (k) => { const italic = /italic/.test(k); const w = [...FONT_WEIGHTS].sort((a, b) => b.length - a.length).find((x) => k.replace("italic", "").endsWith(x)) || "regular"; return { italic, w, base: k.replace("italic", "").replace(new RegExp(`${w}$`), "") }; };
+  const want = parts(key);
+  const same = files.map((f) => ({ ...f, ...parts(f.key) })).filter((f) => f.base === want.base);
+  if (!same.length) return null;
+  same.sort((a, b) => (a.italic === want.italic ? 0 : 1) - (b.italic === want.italic ? 0 : 1) || Math.abs(FONT_WEIGHTS.indexOf(a.w) - FONT_WEIGHTS.indexOf(want.w)) - Math.abs(FONT_WEIGHTS.indexOf(b.w) - FONT_WEIGHTS.indexOf(want.w)));
+  return { ...same[0], exact: false };
+}
+function installFont(p, name, used) {
+  const f = findFontFile(p, name);
+  if (!f) return name;
+  const dir = path.join(p.hf, "assets", "fonts"), to = path.join(dir, f.file);
+  fs.mkdirSync(dir, { recursive: true });
+  if (!fs.existsSync(to)) fs.copyFileSync(f.full, to);
+  const family = f.file.replace(/\.[^.]+$/, "").replace(/["\\']/g, "");
+  used[family] = `assets/fonts/${f.file}`;
+  return family;
+}
+// Gắn phông vào yêu cầu trước khi dựng; phông đã khai báo sẵn trong dự án (BEB, MSI...) giữ nguyên.
+function withFonts(p, op, body) {
+  const own = parse(fs.readFileSync(p.file, "utf8")).fonts || [];
+  const fonts = {};
+  const use = (name) => (own.includes(name) ? name : installFont(p, name, fonts));
+  if (op === "addTextVfxPreset") {
+    const preset = TEXT_VFX_PRESETS.find((x) => x.id.toUpperCase() === String(body.presetId).toUpperCase()) || TEXT_VFX_PRESETS[0];
+    const cp = preset.customizable_params || {}, ov = body.overrides || {};
+    return { ...body, overrides: { ...ov, font_main: use(ov.font_main || cp.font_main), font_sub: use(ov.font_sub || cp.font_sub) }, fonts };
+  }
+  if (op === "addMgPreset") {
+    const q = body.params || {};
+    const params = body.mgId
+      ? { ...q, font_title: use(q.font_title || "Montserrat-ExtraBold"), font_line: use(q.font_line || "BeVietnamPro-Bold") }
+      : { ...q, font_label: use(q.font_label || "BeVietnamPro-Bold") };
+    return { ...body, params, fonts };
+  }
+  if (op === "addWallText" && body.params?.font) return { ...body, params: { ...body.params, font: use(body.params.font) }, fonts };
+  return body;
+}
+
+// ---- Tracking: chạy lib/track.py, kết quả lưu trong work/track của dự án ----
+let trackJob = null;
+const TRACK_PY = () => path.join(HERE, "lib", "track.py");
+const trackDir = (p) => { const d = path.join(p.root, "work", "track"); fs.mkdirSync(d, { recursive: true }); return d; };
+function startTrack(p, body) {
+  if (trackJob?.status === "dang_chay") throw httpError(409, "Đang phân tích một đoạn khác, chờ xong rồi làm tiếp");
+  const clip = parse(fs.readFileSync(p.file, "utf8")).clips.find((c) => c.id === body.videoId);
+  if (!clip || clip.kind !== "video" || !clip.src) throw httpError(400, "Không có cảnh video tại vị trí này");
+  const rate = Math.max(0.25, Math.min(4, +clip.rate || 1));
+  const fileOf = (t) => (+clip.mediaStart || 0) + (t - clip.start) * rate;
+  const from = Math.max(clip.start, +body.from || clip.start), to = Math.min(clip.end, body.to === undefined ? clip.end : +body.to);
+  if (to - from < 0.05) throw httpError(400, "Đoạn cần phân tích quá ngắn");
+  const ref = Math.max(from, Math.min(to, +body.time || from));
+  const tid = `t${Date.now()}`, dir = trackDir(p), out = path.join(dir, `${tid}.json`), cfgFile = path.join(dir, `${tid}.cfg.json`);
+  const { videoId, from: _f, to: _t, time: _r, ...opts } = body;
+  fs.writeFileSync(cfgFile, JSON.stringify({ ...opts, video: path.resolve(p.hf, clip.src), t0: fileOf(from), t1: fileOf(to), tref: fileOf(ref), out }));
+  const job = (trackJob = { status: "dang_chay", percent: 0, stage: "Đang đọc khung hình…", tid, child: null, error: "" });
+  const c = spawn(HERE_PY(), [TRACK_PY(), cfgFile], { windowsHide: true });
+  job.child = c;
+  let buf = "", errBuf = "";
+  c.stdout.on("data", (b) => {
+    buf += b.toString();
+    const lines = buf.split("\n");
+    buf = lines.pop();
+    for (const l of lines) {
+      if (l.startsWith("P ")) { job.percent = Math.min(99, +l.slice(2) || 0); job.stage = job.percent < 25 ? "Đang đọc khung hình…" : "Đang phân tích chuyển động…"; }
+      else if (l.startsWith("E ")) job.error = l.slice(2).trim();
+    }
+  });
+  c.stderr.on("data", (b) => { errBuf = (errBuf + b).slice(-400); });
+  c.on("error", (e) => { job.status = "loi"; job.error = e.message; });
+  c.on("exit", (code) => {
+    fs.rmSync(cfgFile, { force: true });
+    if (job.status !== "dang_chay") return fs.rmSync(out, { force: true });
+    if (code !== 0 || !fs.existsSync(out)) {
+      job.status = "loi";
+      job.error ||= /No module named 'cv2'/.test(errBuf) ? "Máy chưa có OpenCV. Chạy: venv\\Scripts\\python -m pip install \"opencv-python-headless<5\"" : "Bộ tracking không chạy xong";
+      return;
+    }
+    const res = JSON.parse(fs.readFileSync(out, "utf8"));
+    // Đổi thời gian trong tệp video sang thời gian trên timeline.
+    for (const s of res.samples) s.t = +(clip.start + (s.t - (+clip.mediaStart || 0)) / rate).toFixed(4);
+    res.tid = tid;
+    res.videoId = clip.id;
+    res.refT = ref;
+    fs.writeFileSync(out, JSON.stringify(res));
+    job.status = "xong";
+    job.percent = 100;
+    job.stage = "Xong";
+  });
+  return { tid };
+}
+
+const MATTE_TRY = path.join(DATA, "tach-nen-thu");
+function runTool(cmd, args, cwd) {
+  return new Promise((resolve, reject) => {
+    const c = spawn(cmd, args, { cwd, windowsHide: true, shell: cmd === "npx" });
+    let log = "";
+    c.stdout?.on("data", (b) => { log = (log + b).slice(-800); });
+    c.stderr?.on("data", (b) => { log = (log + b).slice(-800); });
+    c.on("error", reject);
+    c.on("exit", (code) => (code === 0 ? resolve() : reject(new Error(log.trim().slice(-200) || "Công cụ không chạy xong"))));
+  });
+}
+async function matteOneFrame(p, { id, time }, name) {
+  const clip = parse(fs.readFileSync(p.file, "utf8")).clips.find((c) => c.id === id);
+  if (!clip || clip.kind !== "video" || !clip.src) throw httpError(400, "Hãy chọn một clip video");
+  fs.rmSync(MATTE_TRY, { recursive: true, force: true });
+  fs.mkdirSync(MATTE_TRY, { recursive: true });
+  const stamp = Date.now(), before = `${stamp}_truoc.jpg`, after = `${stamp}_sau.png`;
+  const local = Math.max(0, Math.min(clip.end - clip.start - 0.02, (+time || clip.start) - clip.start));
+  const at = (+clip.mediaStart || 0) + local * (+clip.rate || 1);
+  await runTool("ffmpeg", ["-y", "-v", "error", "-ss", String(at), "-i", path.resolve(p.hf, clip.src), "-frames:v", "1", "-q:v", "2", path.join(MATTE_TRY, before)]);
+  const [cmd, args] = hfCommand(["remove-background", path.join(MATTE_TRY, before), "-o", path.join(MATTE_TRY, after)]);
+  await runTool(cmd, args, p.hf);
+  const url = (f) => `/vn/tach-nen/anh?du-an=${encodeURIComponent(name)}&ten=${encodeURIComponent(f)}`;
+  return { before: url(before), after: url(after), time: clip.start + local };
+}
+
+let matteJob = null;
+function startMatte(p, { id, quality = "balanced" }) {
+  if (matteJob?.status === "dang_chay") throw httpError(409, "Đang tách nền một clip khác, chờ xong rồi làm tiếp");
+  const clip = parse(fs.readFileSync(p.file, "utf8")).clips.find((c) => c.id === id);
+  if (!clip || clip.kind !== "video" || !clip.src) throw httpError(400, "Hãy chọn một clip video");
+  const dir = path.join(p.hf, "assets", "tach_nen");
+  fs.mkdirSync(dir, { recursive: true });
+  const stamp = Date.now(), tmp = path.join(dir, `.nguon_${id}_${stamp}.mp4`), rel = `assets/tach_nen/${id}_${stamp}.webm`, out = path.join(p.hf, rel);
+  const rate = Math.max(0.25, Math.min(4, +clip.rate || 1)), dur = clip.end - clip.start;
+  const job = (matteJob = { status: "dang_chay", percent: 0, stage: "Đang cắt đoạn video…", log: "", id, child: null });
+  const fail = (msg) => { if (job.status === "dang_chay") { job.status = "loi"; job.stage = "Tách nền lỗi"; job.log += `\n${msg}`; } fs.rmSync(tmp, { force: true }); };
+  // Cắt đúng đoạn và tốc độ của clip để layer tách nền khớp từng khung với video gốc.
+  const cut = spawn("ffmpeg", ["-y", "-v", "error", "-ss", String(+clip.mediaStart || 0), "-t", String(dur * rate), "-i", path.resolve(p.hf, clip.src), "-an", "-vf", `setpts=PTS/${rate.toFixed(4)}`, "-c:v", "libx264", "-preset", "veryfast", "-crf", "14", "-pix_fmt", "yuv420p", tmp], { windowsHide: true });
+  job.child = cut;
+  cut.stderr.on("data", (b) => { job.log = (job.log + b).slice(-2000); });
+  cut.on("exit", (code) => {
+    if (job.status !== "dang_chay") return fs.rmSync(tmp, { force: true });
+    if (code !== 0) return fail("Không cắt được đoạn video");
+    job.percent = 3;
+    job.stage = "AI đang tách nền…";
+    const [cmd, args] = hfCommand(["remove-background", tmp, "-o", out, "--quality", String(quality)]);
+    const run = spawn(cmd, args, { cwd: p.hf, windowsHide: true, shell: cmd === "npx" });
+    job.child = run;
+    const on = (b) => { const t = b.toString(); job.log = (job.log + t).slice(-2000); const pc = [...t.matchAll(/(\d{1,3})%/g)].pop(); if (pc) job.percent = Math.max(job.percent, Math.min(99, +pc[1])); };
+    run.stdout.on("data", on);
+    run.stderr.on("data", on);
+    run.on("error", (e) => fail(e.message));
+    run.on("exit", async (c2) => {
+      fs.rmSync(tmp, { force: true });
+      if (job.status !== "dang_chay") return fs.rmSync(out, { force: true });
+      if (c2 !== 0 || !fs.existsSync(out)) return fail("AI tách nền không chạy xong");
+      try {
+        await mutate(p, "addMatteLayer", { src: rel, time: clip.start, duration: dur, fromId: id });
+        job.status = "xong"; job.percent = 100; job.stage = "Xong";
+      } catch (e) { fail(e.message); }
+    });
+  });
+  cut.on("error", (e) => fail(e.message));
+  return { job: { status: job.status, percent: 0, stage: job.stage, id } };
+}
+
+// Tên gốc của SFX do AI dựng: tệp trong dự án đổi tên (x01, k1_0) và có thể trộn nhiều âm, kế hoạch dựng còn ghi nguồn.
+function sfxOriginals(p) {
+  try {
+    const plan = JSON.parse(fs.readFileSync(path.join(p.root, "work", "plan.json"), "utf8"));
+    const out = {};
+    for (const [k, v] of Object.entries(plan.sfx_ngoai_chu || {})) if (typeof v?.[2] === "string") out[k] = [v[2]];
+    for (const [k, list] of Object.entries(plan.sfx_hook || {})) if (Array.isArray(list)) out[k] = list.map((x) => x?.[1]).filter((x) => typeof x === "string");
+    return out;
+  } catch { return {}; }
 }
 
 // ---- Lịch sử hoàn tác: chụp file trước mỗi lần sửa, nằm ngoài thư mục dự án ----
@@ -135,7 +323,7 @@ function snapshot(h, content) {
 const histDir = (p) => { const d = path.join(DATA, "nhat-ky", p.name); fs.mkdirSync(d, { recursive: true }); return d; };
 const histFile = (p) => path.join(histDir(p), "muc.jsonl");
 const readHist = (p) => (fs.existsSync(histFile(p)) ? fs.readFileSync(histFile(p), "utf8").split("\n").filter(Boolean).map((l) => JSON.parse(l)) : []);
-const OP_NAME = { move: "Dời clip", trim: "Đổi độ dài clip", split: "Tách clip", remove: "Xóa clip", duplicate: "Nhân đôi clip", attrs: "Đổi âm thanh hoặc tốc độ", text: "Sửa chữ", tween: "Đổi chuyển động", cssVar: "Đổi màu chung", style: "Đổi kiểu", setWords: "Sửa màu từng từ", add: "Thêm clip", addFx: "Thêm hiệu ứng", addShape: "Thêm hình", keyframe: "Sửa keyframe", restoreClip: "Hoàn tác hoặc làm lại riêng mục", grade: "Đổi màu video", layerId: "Chọn lớp", rename: "Đổi tên lớp", restoreSeg: "Khôi phục lớp chữ", segStyle: "Đổi kiểu lớp chữ" };
+const OP_NAME = { move: "Dời clip", track: "Đổi hàng clip", splitLayers: "Tách lớp chữ thành khối riêng", trim: "Đổi độ dài clip", split: "Tách clip", remove: "Xóa clip", duplicate: "Nhân đôi clip", attrs: "Đổi âm thanh hoặc tốc độ", text: "Sửa chữ", tween: "Đổi chuyển động", cssVar: "Đổi màu chung", setPalette: "Áp bảng màu chuẩn BĐS", style: "Đổi kiểu", setWords: "Sửa màu từng từ", add: "Thêm clip", addFx: "Thêm hiệu ứng", addShape: "Thêm hình", addTextVfxPreset: "Chèn mẫu VFX Text Pro", addMgPreset: "Chèn đồ họa MG / Icon động", applyMotionPreset: "Áp kiểu Motion / Animation", setProIcon: "Đổi Icon động SVG", scaffold8Components: "Dựng khung 8 thành phần", keyframe: "Sửa keyframe", restoreClip: "Hoàn tác hoặc làm lại riêng mục", grade: "Đổi màu video", layerId: "Chọn lớp", rename: "Đổi tên lớp", restoreSeg: "Khôi phục lớp chữ", segStyle: "Đổi kiểu lớp chữ" };
 function addHist(p, { loai, mo_ta, before, ...rest }) {
   const list = readHist(p), last = list[list.length - 1], now = Date.now();
   // Kéo liên tục cùng một thứ chỉ tính một mục, giữ bản trước lần kéo đầu.
@@ -242,6 +430,15 @@ function hotChange(before, after) {
   return { css: block.replace(/^<style id="hd-studio">/, "").replace(/<\/style>\s*$/, ""), vars: parse(after).vars };
 }
 
+// Phần chỉnh trên khung xem khi mẫu chưa áp dụng: vị trí, cỡ đã kéo và tracking đã gắn.
+function afterOp(out, id, body) {
+  if (!id) return out;
+  if (body.xf) out = ops.style(out, { id, set: body.xf });
+  if (body.bx) out = ops.blendSet(out, { id, ...body.bx }).html;
+  if (body.trk) out = ops.applyTrack(out, { ...body.trk, targets: body.trk.targets.map((t) => ({ ...t, id })) }).html;
+  return out;
+}
+
 async function mutate(p, op, body) {
   if (op === "restoreSeg") {
     const b = baselinePath(p);
@@ -252,13 +449,17 @@ async function mutate(p, op, body) {
   if (!fn) throw httpError(404, "Thao tác không tồn tại");
   const before = fs.readFileSync(p.file, "utf8");
   const result = fn(before, body);
-  const after = syncAnim(typeof result === "string" ? result : result.html);
+  const after = syncAnim(afterOp(typeof result === "string" ? result : result.html, result.id || body.id, body));
   if (after === before) return { changed: false, id: result.id };
   parse(after); // tệp hỏng thì dừng trước khi ghi
   snapshot(p.history, before);
   p.history.redo.length = 0;
   await writeProject(p, after);
   const { from, ...logged } = body;
+  // Dữ liệu tracking rất dài, nhật ký chỉ ghi mã đường bám.
+  if (logged.track) logged.track = { tid: logged.track.tid, mode: logged.track.mode };
+  if (logged.trk) logged.trk = { tid: logged.trk.track?.tid };
+  if (logged.items && op === "cameraFollow") logged.items = logged.items.map((x) => ({ id: x.id, tid: x.tid }));
   logEdit(p, { thao_tac: op, ...logged });
   const clipId = op === "restoreClip" ? null : body.id || result.id || null;
   if (clipId) clipUndo.delete(`${p.name}/${clipId}`);
@@ -1126,55 +1327,162 @@ function reframeFilter({ w, h }, fit) {
   const under = `scale=${w}:${h}:force_original_aspect_ratio=decrease`;
   if (fit === "cat") return over;
   if (fit === "den") return `${under},pad=${w}:${h}:(ow-iw)/2:(oh-ih)/2`;
-  return `split[a][b];[a]${over},boxblur=30:2[nen];[b]${under}[hinh];[nen][hinh]overlay=(W-w)/2:(H-h)/2`;
+  // Bán kính 30 quá lớn với khung nhỏ: FFmpeg báo lỗi nếu 2r vượt cạnh ngắn của mặt màu.
+  const r = Math.max(0, Math.min(30, Math.floor((Math.ceil(Math.min(w, h) / 2) - 1) / 2)));
+  return `split[a][b];[a]${over},boxblur=${r}:2[nen];[b]${under}[hinh];[nen][hinh]overlay=(W-w)/2:(H-h)/2`;
 }
 
-function startRender(p, { fps = 60, quality = "delivery", gpu = true, aspect, short, width, height, fit = "mo" }) {
+// Thư mục lưu video do người dùng chọn, dùng chung mọi dự án; để trống là thư mục final của dự án.
+const OUT_FILE = path.join(DATA, "thu_muc_xuat.json");
+const readOutDir = () => { try { return JSON.parse(fs.readFileSync(OUT_FILE, "utf8")).dir || ""; } catch { return ""; } };
+function saveOutDir(dir) {
+  dir = String(dir || "").trim();
+  if (dir) {
+    if (!path.isAbsolute(dir)) throw httpError(400, "Hãy nhập đường dẫn đầy đủ, ví dụ D:\\Video xuất");
+    try { fs.mkdirSync(dir, { recursive: true }); const t = path.join(dir, `.hd-thu-${process.pid}`); fs.writeFileSync(t, ""); fs.rmSync(t); }
+    catch { throw httpError(400, `Không ghi được vào thư mục: ${dir}`); }
+  }
+  fs.mkdirSync(DATA, { recursive: true });
+  fs.writeFileSync(OUT_FILE, JSON.stringify({ dir }));
+  return dir;
+}
+const finalDirOf = (p) => readOutDir() || path.join(p.root, "final");
+
+// Hộp chọn thư mục của Windows; trả "" khi người dùng bấm Hủy.
+function pickFolder(start) {
+  const script = `Add-Type -AssemblyName System.Windows.Forms; $f = New-Object System.Windows.Forms.FolderBrowserDialog; $f.Description = 'Chọn nơi lưu video xuất'; $f.SelectedPath = $env:HD_START; $o = New-Object System.Windows.Forms.Form; $o.TopMost = $true; if ($f.ShowDialog($o) -eq 'OK') { [Console]::OutputEncoding = [Text.Encoding]::UTF8; $f.SelectedPath }`;
+  return new Promise((resolve) => {
+    let out = "";
+    const c = spawn("powershell", ["-NoProfile", "-STA", "-Command", script], { windowsHide: true, env: { ...process.env, HD_START: start || "" } });
+    c.stdout.on("data", (b) => { out += b; });
+    c.on("exit", () => resolve(out.trim()));
+    c.on("error", () => resolve(""));
+  });
+}
+
+// Studio giữ mã xuất đã nạp lúc khởi động. Tệp đổi sau đó mà vẫn xuất thì chạy bản cũ: ngày 03/11 đã làm video mất font và bản đồ.
+const FAST_RENDER_FILE = path.join(HERE, "lib", "fast_render.mjs");
+const fastRenderLoaded = fs.statSync(FAST_RENDER_FILE).mtimeMs;
+
+function startRender(p, { fps = 60, quality = "delivery", gpu = true, engine = "capcut", codec = "h264", aspect, short, width, height, fit = "mo" }) {
   if (renderJob?.status === "dang_chay") throw httpError(409, "Đang có một video được xuất. Chờ xong hoặc dừng nó trước.");
+  if (fs.statSync(FAST_RENDER_FILE).mtimeMs !== fastRenderLoaded) throw httpError(409, "Mã xuất video vừa được cập nhật. Hãy đóng Studio và mở lại rồi xuất, để không chạy bản cũ.");
   const draft = quality === "draft";
-  const finalDir = path.join(p.root, draft ? "preview" : "final");
+  const finalDir = draft ? path.join(p.root, "preview") : finalDirOf(p);
   fs.mkdirSync(finalDir, { recursive: true });
   const comp = parse(fs.readFileSync(p.file, "utf8"));
   const size = outputSize(comp, { aspect, short, width, height });
   const suffix = size ? `_${size.w}x${size.h}` : "";
   const output = path.join(finalDir, draft ? `${p.name}_nhap${suffix}.mp4` : `${p.name}${suffix}.mp4`);
   if (gpu && !hasNvenc()) gpu = false;
-  const rendered = size ? output.replace(/\.mp4$/, ".__goc.mp4") : output;
-  const args = ["render", "--quality", String(quality), "--fps", String(+fps), "-o", rendered];
+
+  // Có thứ động cơ nhanh chưa dựng đúng thì tự dùng HyperFrames, để video luôn đủ nội dung như trên timeline.
+  let note = "";
+  if (engine === "capcut" || engine === "nhanh") {
+    const html = fs.readFileSync(p.file, "utf8");
+    const why = fastUnsupported(html, comp, scan(html), readOverrides(html).clips || {});
+    if (Object.values(readOverrides(html).clips || {}).some((x) => x.d?.bl)) why.push("tinh chỉnh hòa trộn");
+    if (why.length) { engine = "chuan"; note = `Tự chuyển sang Chuẩn HD Studio vì dự án có ${why.join(", ")}.`; }
+  }
+
+  if (engine === "capcut" || engine === "nhanh") {
+    let jobRef = null;
+    const finishFast = (ok) => {
+      if (!jobRef) return;
+      jobRef.status = ok && fs.existsSync(output) ? "xong" : "loi";
+      if (jobRef.status === "xong") jobRef.percent = 100;
+      jobRef.finishedAt = Date.now();
+    };
+    jobRef = runFastRender(p, { fps, quality, engine }, { output, size, fit, gpu, codec, reframeFilter, onFinish: finishFast });
+    renderJob = jobRef;
+    return publicJob(jobRef);
+  }
+
+  // HyperFrames luôn xuất H.264 theo kích thước gốc: đổi khung hoặc H.265 thì mã hóa lại ở bước sau. Tệp tạm giữ an toàn bản cuối đang có.
+  const useHevc = codec === "hevc";
+  const postStep = !!size || useHevc;
+  const rendered = output.replace(/\.mp4$/, postStep ? ".__goc.mp4" : ".__dang-xuat.mp4");
+  // Studio có "Siêu nét"; HyperFrames gọi mức cao nhất là looks (CRF 16).
+  const hfQuality = { master: "looks", delivery: "delivery", standard: "standard", draft: "draft" }[quality] || "delivery";
+  const args = ["render", "--quality", hfQuality, "--fps", String(+fps), "-o", rendered];
   if (gpu) args.push("--gpu");
+  // HyperFrames tự chọn 1 Chrome với dự án nặng (1728×3072, chữ có blur) nên GPU gần như rảnh.
+  // Đo 02/11 trên RTX 4060: 3 Chrome nhanh gấp 3,8 lần, RAM còn trống 13 GB; 8 Chrome làm treo máy.
+  args.push("--workers", "3");
   const [cmd, full] = hfCommand(args);
   const child = spawn(cmd, full, { cwd: p.hf, windowsHide: true, shell: cmd === "npx" });
-  const job = { status: "dang_chay", percent: 0, stage: "Đang chuẩn bị", output, project: p.name, gpu, startedAt: Date.now(), log: "", child };
+  const outW = size ? size.w : comp.width, outH = size ? size.h : comp.height;
+  const encoder = pickEncoder({ codec, gpu, quality, w: outW, h: outH, hevcOk: gpu && useHevc && hasHevcNvenc() });
+  const job = { status: "dang_chay", percent: 0, stage: "Đang dựng bằng HD Studio…", note, engine: "chuan", codec, resolution: `${outW}×${outH}`, output, project: p.name, gpu: postStep ? encoder.gpu : gpu, startedAt: Date.now(), log: "", child };
   const onData = (buf) => {
     const s = buf.toString();
     job.log = (job.log + s).slice(-4000);
     const m = [...s.matchAll(/(\d{1,3})%/g)].pop();
-    if (m) job.percent = Math.min(100, +m[1]);
+    if (m) job.percent = Math.min(postStep ? 90 : 100, +m[1]);
   };
   child.stdout.on("data", onData);
   child.stderr.on("data", onData);
+  // Dừng giữa chừng để lại thư mục giao dịch của HyperFrames và tệp tạm: dọn luôn.
+  const cleanTemp = () => {
+    fs.rmSync(rendered, { force: true });
+    const prefix = `.${path.basename(rendered, ".mp4")}.hf-transaction-`;
+    for (const d of fs.readdirSync(finalDir)) if (d.startsWith(prefix)) fs.rmSync(path.join(finalDir, d), { recursive: true, force: true });
+  };
   const finish = (ok) => {
-    job.status = ok && fs.existsSync(output) ? "xong" : "loi";
-    if (job.status === "xong") job.percent = 100;
+    let done = ok;
+    if (ok && !postStep) {
+      try { fs.renameSync(rendered, output); }
+      catch { done = false; job.log += `\nKhông ghi đè được ${path.basename(output)}. Tệp có thể đang mở trong trình phát, hãy đóng rồi xuất lại.`; }
+    }
+    job.status = done && fs.existsSync(output) ? "xong" : "loi";
+    if (job.status === "xong") { job.percent = 100; job.stage = "Hoàn tất"; }
     job.finishedAt = Date.now();
-    if (size) fs.rmSync(rendered, { force: true });
+    cleanTemp();
   };
   child.on("exit", (code) => {
-    if (job.status !== "dang_chay") { if (size) fs.rmSync(rendered, { force: true }); return; }
-    if (code !== 0 || !size) return finish(code === 0);
-    // Đổi khung hình/độ phân giải sau khi render xong bản gốc.
-    job.percent = 99;
-    const enc = gpu ? ["-c:v", "h264_nvenc", "-preset", "p6", "-cq", "17"] : ["-c:v", "libx264", "-crf", "16"];
-    const ff = spawn("ffmpeg", ["-y", "-v", "error", "-i", rendered, "-filter_complex", reframeFilter(size, fit), ...enc, "-pix_fmt", "yuv420p", "-c:a", "copy", "-movflags", "+faststart", output], { windowsHide: true });
+    if (job.status !== "dang_chay") return cleanTemp();
+    if (code !== 0 || !postStep) return finish(code === 0);
+    job.percent = 90;
+    job.stage = size ? "Đang chuẩn hóa khung hình…" : "Đang mã hóa H.265…";
+    const finalOut = output.replace(/\.mp4$/, ".__dang-xuat.mp4");
+    const same = !size || Math.abs(size.w / size.h - comp.width / comp.height) < 0.005;
+    const filter = size ? ["-filter_complex", reframeFilter(size, same ? "cat" : fit)] : [];
+    const ff = spawn("ffmpeg", ["-y", "-v", "error", "-i", rendered, ...filter, ...encoder.args, "-pix_fmt", "yuv420p", "-c:a", "copy", "-movflags", "+faststart", finalOut], { windowsHide: true });
     job.child = ff;
     ff.stderr.on("data", (b) => { job.log = (job.log + b).slice(-4000); });
-    ff.on("exit", (c) => { if (job.status === "dang_chay") finish(c === 0); else fs.rmSync(rendered, { force: true }); });
+    ff.on("exit", (c) => {
+      if (job.status !== "dang_chay") { fs.rmSync(finalOut, { force: true }); return cleanTemp(); }
+      let ok = c === 0;
+      if (ok) {
+        try { fs.renameSync(finalOut, output); }
+        catch { ok = false; job.log += `\nKhông ghi đè được ${path.basename(output)}. Tệp có thể đang mở trong trình phát, hãy đóng rồi xuất lại.`; }
+      }
+      fs.rmSync(finalOut, { force: true });
+      finish(ok);
+    });
   });
   renderJob = job;
   return publicJob(job);
 }
 
-const publicJob = (j) => j && { status: j.status, percent: j.percent, output: j.output, project: j.project, gpu: j.gpu, startedAt: j.startedAt, finishedAt: j.finishedAt, log: j.status === "loi" ? j.log.slice(-800) : undefined };
+const publicJob = (j) => j && {
+  note: j.note,
+  status: j.status,
+  percent: j.percent,
+  stage: j.stage,
+  engine: j.engine,
+  codec: j.codec,
+  resolution: j.resolution,
+  fpsCurrent: j.fpsCurrent,
+  speed: j.speed,
+  etaSec: j.etaSec,
+  output: j.output,
+  project: j.project,
+  gpu: j.gpu,
+  startedAt: j.startedAt,
+  finishedAt: j.finishedAt,
+  log: j.status === "loi" ? j.log.slice(-800) : undefined,
+};
 
 // ---- HTTP ----
 function send(res, status, data) {
@@ -1261,7 +1569,7 @@ async function route(req, res, url) {
 
   if (seg === "projects" && m === "GET") return send(res, 200, { projects: listProjects(), current: current?.name ?? null });
 
-  if (seg === "render" && m === "GET") return send(res, 200, { job: publicJob(renderJob) });
+  if (seg === "render" && m === "GET") return send(res, 200, { job: publicJob(renderJob), gpuAvailable: hasNvenc(), hevcAvailable: hasHevcNvenc() });
   if (seg === "ai" && m === "GET") { checkBridge(); return send(res, 200, { job: publicAi(aiJob) }); }
   if (seg === "cau-noi" && m === "GET") {
     checkBridge();
@@ -1280,7 +1588,7 @@ async function route(req, res, url) {
     return send(res, 200, { job: publicAi(aiJob) });
   }
   if (seg === "render/cancel" && m === "POST") {
-    if (renderJob?.status === "dang_chay") { renderJob.status = "da_dung"; killTree(renderJob.child); }
+    if (renderJob?.status === "dang_chay") { renderJob.status = "da_dung"; renderJob.finishedAt = Date.now(); killTree(renderJob.child); }
     return send(res, 200, { job: publicJob(renderJob) });
   }
 
@@ -1364,6 +1672,31 @@ async function route(req, res, url) {
   if (seg === "font-file" && m === "GET") { res.setHeader("Cache-Control", "max-age=86400"); return sendFile(req, res, await fontPath(q.get("id"))); }
   if (seg === "sfx-list" && m === "GET") return send(res, 200, loadSfx());
   if (seg === "sfx-file" && m === "GET") return sendFile(req, res, sfxPlayable(q.get("path")));
+  if (seg === "pro-catalog" && m === "GET") {
+    const extraPresets = [];
+    for (const rootDir of [path.join(HERE, "blueprints", "text_vfx_presets"), path.join(WORKSPACE, "asset", "phong_cach", "bo_chu")]) {
+      if (!fs.existsSync(rootDir)) continue;
+      for (const d of fs.readdirSync(rootDir, { withFileTypes: true })) {
+        if (!d.isDirectory()) continue;
+        const pj = path.join(rootDir, d.name, "preset.json");
+        if (fs.existsSync(pj)) {
+          try {
+            const obj = JSON.parse(fs.readFileSync(pj, "utf8"));
+            if (obj?.id && !TEXT_VFX_PRESETS.some((x) => x.id === obj.id) && !extraPresets.some((x) => x.id === obj.id)) extraPresets.push(obj);
+          } catch { /* bỏ qua json lỗi */ }
+        }
+      }
+    }
+    return send(res, 200, {
+      textVfxPresets: [...TEXT_VFX_PRESETS, ...extraPresets],
+      animatedIcons: ANIMATED_ICONS,
+      motionPresets: MOTION_PRESETS,
+      mgTemplates: MG_TEMPLATES,
+      sfxMatrix: SFX_VISUAL_EMOTION_MATRIX,
+      colorPalettes: BDS_COLOR_PALETTES,
+      componentLanes: TIMELINE_COMPONENT_LANES,
+    });
+  }
 
   const name = q.get("du-an");
   if (!name) throw httpError(400, "Thiếu tên dự án");
@@ -1374,7 +1707,7 @@ async function route(req, res, url) {
 
   if (seg === "model" && m === "GET") {
     const html = fs.readFileSync(p.file, "utf8");
-    return send(res, 200, { project: p.name, projectId: p.projectId, mtime: fs.statSync(p.file).mtimeMs, canUndo: p.history.undo.length > 0, canRedo: p.history.redo.length > 0, ...parse(html) });
+    return send(res, 200, { project: p.name, projectId: p.projectId, mtime: fs.statSync(p.file).mtimeMs, canUndo: p.history.undo.length > 0, canRedo: p.history.redo.length > 0, sfxGoc: sfxOriginals(p), ...parse(html) });
   }
   if (seg === "mtime" && m === "GET") return send(res, 200, { mtime: fs.statSync(p.file).mtimeMs });
   if (seg === "capcut-nhan-dan" && m === "POST") return send(res, 200, await capcutSticker(p, (await readJson(req)).id));
@@ -1394,8 +1727,42 @@ async function route(req, res, url) {
     addHist(p, { loai: "xoa_file", mo_ta: `Xóa tệp ${path.basename(b.path)}`, path: b.path, trash });
     return send(res, 200, { ok: true });
   }
+  // Tách nền người dẫn của một clip video: cắt đúng đoạn dùng, chạy AI tại máy, thêm thành layer trong suốt.
+  if (seg === "track" && m === "GET") return send(res, 200, { job: trackJob && { status: trackJob.status, percent: trackJob.percent, stage: trackJob.stage, tid: trackJob.tid, error: trackJob.error } });
+  if (seg === "track" && m === "POST") return send(res, 200, startTrack(p, await readJson(req)));
+  if (seg === "track/dung" && m === "POST") { if (trackJob?.status === "dang_chay") { trackJob.status = "da_dung"; killTree(trackJob.child); } return send(res, 200, { ok: true }); }
+  if (seg === "track/kq" && m === "GET") {
+    const f = path.join(trackDir(p), `${path.basename(q.get("id") || "")}.json`);
+    if (!fs.existsSync(f)) throw httpError(404, "Không còn dữ liệu tracking này");
+    return send(res, 200, JSON.parse(fs.readFileSync(f, "utf8")));
+  }
+  if (seg === "tach-nen" && m === "GET") return send(res, 200, { job: matteJob && { status: matteJob.status, percent: matteJob.percent, stage: matteJob.stage, log: matteJob.status === "loi" ? matteJob.log.slice(-500) : "", id: matteJob.id } });
+  if (seg === "tach-nen/dung" && m === "POST") { if (matteJob?.status === "dang_chay") { matteJob.status = "da_dung"; killTree(matteJob.child); } return send(res, 200, { ok: true }); }
+  if (seg === "tach-nen" && m === "POST") return send(res, 200, startMatte(p, await readJson(req)));
+  // Xem thử tách nền trên một khung, trước khi chạy cả clip. Ảnh để ngoài dự án.
+  if (seg === "tach-nen/thu" && m === "POST") return send(res, 200, await matteOneFrame(p, await readJson(req), q.get("du-an")));
+  if (seg === "tach-nen/anh" && m === "GET") return sendFile(req, res, inside(MATTE_TRY, path.basename(q.get("ten") || "")));
+  // Phông theo tên mẫu cho ô xem trước; kèm cho biết có đúng tệp hay phải dùng tệp gần nhất.
+  if (seg === "font-goc" && m === "GET") {
+    const f = findFontFile(p, q.get("ten"));
+    if (!f) throw httpError(404, "Không có phông này");
+    if (q.get("tra") === "tin") return send(res, 200, { file: f.file, exact: f.exact });
+    return sendFile(req, res, f.full);
+  }
+  // Xem thử mẫu: chạy thao tác trên bản sao trong bộ nhớ và trả kết quả, không ghi tệp, không vào lịch sử.
+  if (seg === "thu-mau" && m === "POST") {
+    const { op, body } = await readJson(req);
+    if (!["addTextVfxPreset", "applyMotionPreset", "addMgPreset", "setProIcon", "setPalette", "cssVar", "addFx", "batch", "highlightSubs", "splitMgLayers", "mgLayerStyle", "addWallText", "setBehindPerson", "clearMotion", "groupLayers", "ungroupLayers", "splitHtmlLayers", "applyTrack", "cameraFollow", "clearTrack", "blendSet"].includes(op)) throw httpError(400, "Thao tác này không xem thử được");
+    const before = fs.readFileSync(p.file, "utf8");
+    const result = ops[op](before, withFonts(p, op, body));
+    const id = (typeof result === "object" && result.id) || body.id || null;
+    const html = syncAnim(afterOp(typeof result === "string" ? result : result.html, id, body));
+    const hot = hotChange(before, html), hotBack = hot ? hotChange(html, before) : null;
+    const c = id ? parse(html).clips.find((x) => x.id === id) : null;
+    return send(res, 200, { html, id, start: c?.start ?? null, end: c?.end ?? null, count: result.count, hot, hotBack });
+  }
   if (seg.startsWith("op/") && m === "POST") {
-    const r = await mutate(p, seg.slice(3), await readJson(req));
+    const r = await mutate(p, seg.slice(3), withFonts(p, seg.slice(3), await readJson(req)));
     return send(res, 200, r);
   }
   if (seg === "undo" && m === "POST") return send(res, 200, (await stepHistory(p, p.history.undo, p.history.redo, "hoan_tac")) || { changed: false });
@@ -1472,20 +1839,30 @@ async function route(req, res, url) {
 
   if (seg === "renders" && m === "GET") {
     const files = [];
-    for (const folder of ["final", "preview"]) {
-      const dir = path.join(p.root, folder);
-      if (!fs.existsSync(dir)) continue;
+    const custom = readOutDir();
+    for (const [folder, dir] of [["chon", custom], ["final", path.join(p.root, "final")], ["preview", path.join(p.root, "preview")]]) {
+      if (!dir || !fs.existsSync(dir)) continue;
       for (const f of fs.readdirSync(dir)) {
         if (!/\.(mp4|mov|webm)$/i.test(f)) continue;
+        // Thư mục chọn dùng chung nhiều dự án: chỉ liệt kê video của dự án này.
+        if (folder === "chon" && !f.startsWith(p.name)) continue;
         const st = fs.statSync(path.join(dir, f));
         files.push({ name: f, folder, size: st.size, mtime: st.mtimeMs });
       }
     }
-    return send(res, 200, { files: files.sort((a, b) => b.mtime - a.mtime) });
+    return send(res, 200, { files: files.sort((a, b) => b.mtime - a.mtime), dir: finalDirOf(p), custom });
+  }
+  if (seg === "thu-muc-xuat" && m === "GET") return send(res, 200, { dir: finalDirOf(p), custom: readOutDir() });
+  if (seg === "thu-muc-xuat" && m === "POST") { saveOutDir((await readJson(req)).dir); return send(res, 200, { dir: finalDirOf(p), custom: readOutDir() }); }
+  if (seg === "chon-thu-muc" && m === "POST") {
+    const picked = await pickFolder(finalDirOf(p));
+    if (picked) saveOutDir(picked);
+    return send(res, 200, { dir: finalDirOf(p), custom: readOutDir(), picked: !!picked });
   }
   if (seg === "final" && m === "GET") {
-    const folder = q.get("thu-muc") === "preview" ? "preview" : "final";
-    return sendFile(req, res, inside(path.join(p.root, folder), path.basename(q.get("ten"))));
+    const q2 = q.get("thu-muc");
+    const base = q2 === "chon" && readOutDir() ? readOutDir() : path.join(p.root, q2 === "preview" ? "preview" : "final");
+    return sendFile(req, res, inside(base, path.basename(q.get("ten"))));
   }
   if (seg === "notes") {
     const f = path.join(p.root, "studio_ghi_chu.json");
@@ -1499,7 +1876,9 @@ async function route(req, res, url) {
     return send(res, 200, { notes });
   }
   if (seg === "open-folder" && m === "POST") {
-    spawn("explorer", [path.join(p.root, "final")], { detached: true, stdio: "ignore" }).unref();
+    const dir = finalDirOf(p);
+    fs.mkdirSync(dir, { recursive: true });
+    spawn("explorer", [dir], { detached: true, stdio: "ignore" }).unref();
     return send(res, 200, {});
   }
   if (seg === "render" && m === "POST") return send(res, 200, { job: startRender(p, await readJson(req)) });
@@ -1525,6 +1904,7 @@ const server = http.createServer(async (req, res) => {
     if (url.pathname.startsWith("/vn/")) return await route(req, res, url);
     if (url.pathname.startsWith("/api/")) return proxy(req, res);
     if (url.pathname === "/lib/html.mjs") return sendFile(req, res, path.join(HERE, "lib", "html.mjs"));
+    if (url.pathname === "/lib/pro_presets.mjs") return sendFile(req, res, path.join(HERE, "lib", "pro_presets.mjs"));
     const rel = url.pathname === "/" ? "index.html" : url.pathname.slice(1);
     const file = inside(path.join(HERE, "public"), rel);
     if (fs.existsSync(file) && fs.statSync(file).isFile()) return sendFile(req, res, file);

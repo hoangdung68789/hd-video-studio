@@ -1,31 +1,21 @@
 ---
 name: khong-doan-do-lai-truoc-khi-bao
-description: "01/11: /dung-video luôn chạy cùng smart-dispatcher-portable + hoang-dung-agent-orchestrator (luật cứng); quy trình không đoán: đo, kế hoạch, sửa, đo lại trên bản xuất; có danh sách công cụ"
+description: "Cập nhật 03/11/2026: Điều phối theo mô hình Công ty Sản xuất Nội dung MXH (tối đa 50 Sub-Agents vừa đủ, chạy đồng thời, kiểm chéo & sửa ngay tại chỗ, kiểm nhanh tổng thể ≥98/100 bàn giao ngay, loại bỏ Sub-Agent hỏng việc >2 lần)"
 metadata:
   node_type: memory
   type: feedback
-  originSessionId: eaa2e849-ec6a-4ca5-ba70-f665d88d69cc
-  modified: 2026-11-01T13:40:11.243Z
+  modified: 2026-11-03T12:25:00.000Z
 ---
 
-01/11/2026 Dũng chốt: `smart-dispatcher-portable` và `hoang-dung-agent-orchestrator` là luật cứng, luôn hoạt động cùng `/dung-video`. AI không đoán, chỉ làm theo quy tắc, có kế hoạch rõ ràng, có kiểm chứng. Lỗi ở video DU-AN-MAU: "người dùng đã yêu cầu sửa video 3 lần vẫn không sửa, chỉ đoán rồi không làm".
+> **Cập nhật 03/11/2026 (Dũng chốt — thắng mọi quy tắc điều phối cũ):**
+> 1. **Làm đồng thời & Sửa ngay tại chỗ (In-line Fix):** Tất cả tác vụ chạy đồng thời. AI không tự bịa, không tự đoán, làm đúng chuẩn quy trình Editor chuyên nghiệp; phát hiện lỗi ở đâu là sửa ngay lập tức trong lúc làm, cấm đợi làm xong mới rà soát lỗi rồi mới sửa.
+> 2. **Kiểm tra chéo giữa các Sub-Agents (Peer Cross-Check):** Các Sub-Agents được giao nhiệm vụ riêng có quyền kiểm tra lỗi của nhau và **yêu cầu sửa ngay trước khi đảm nhiệm công việc của chính Sub-Agent đó**.
+> 3. **Kiểm tra nhanh tổng thể `≥ 98/100` & Vá cục bộ (Surgical Patch):** Agent Tổng kiểm tra nhanh tổng thể video và bàn giao ngay cho Dũng nếu đạt **tối thiểu từ `98/100` trở lên (`≥ 98/100`)**, nói rõ chi tiết cho Dũng. Nếu có lỗi, **chỉ sửa ngay đúng đoạn có lỗi** để khớp toàn bộ video mà không tốn thời gian làm lại từ đầu.
+> 4. **Quản trị tới 50 Sub-Agents & Kỷ luật loại bỏ (`> 2 lần lỗi`):** Agent Tổng có thể tạo **tối đa 50 Sub-Agents** nếu cần thiết nhưng chỉ tạo **đủ số lượng cần cho dự án đó (không tạo dư)**. Sau mỗi dự án đánh giá giữ lại (`RETAINED`) Sub-Agents làm tốt vào `agent-roster.json`; Sub-Agent làm hỏng việc **trên 2 lần (`> 2 lần lỗi`)** bị **loại bỏ ngay (`TERMINATED`)**.
 
-**Why:** AI đổi fps, đổi ease rồi báo xong mà chưa đo chuyển động trên bản xuất. Đo lại mới thấy footage rung sẵn, còn bộ đổi 50→60fps do AI thêm còn làm rung nặng hơn.
-
-**How to apply — quy trình mỗi lần dựng hoặc sửa:**
-1. Nạp 3 skill: `dung-video`, `smart-dispatcher-portable`, `hoang-dung-agent-orchestrator`; đọc `rules/luat-cung.md`. Tạo dự án và mở HD Studio trước tiên.
-2. Tách đúng việc Dũng yêu cầu. Vừa/lớn: bảng tiểu tác vụ có tiêu chí đạt đo được.
-3. Đo nguyên nhân trên file thật trước khi sửa, ghi số đo. Không chắc thì hỏi 1 lần, tối đa 3 câu, có lựa chọn.
-4. Sửa đúng nguyên nhân, thử trên đoạn ngắn, đo lại rồi mới áp toàn bộ.
-5. Xuất trong HD Studio bằng GPU (`POST /vn/render`), đo lại cùng cách trên bản xuất.
-6. QA độc lập (vai `dung-qa`, chưa làm công đoạn nào) xem bằng mắt; bảng CP5 đủ dòng; không còn Chưa đạt mới trình 1 bản cuối.
-7. Dũng nhắc lại một lỗi nghĩa là cách trước sai: bỏ cách đó, đo lại từ đầu, không báo "đã sửa" khi chưa có số đo.
-
-**Công cụ đã kiểm chứng:**
-- Rung/zoom: `ffmpeg` + phase correlation bằng numpy (so clip gốc, clip đã xử lý, bản xuất); `hyperframes snapshot --at` lấy PNG chưa nén để đo zoom. `ffmpeg` có `vidstabdetect`, `vidstabtransform`, `minterpolate`; `framerate` đổi 50→60 làm tăng rung, không dùng cho cảnh lia; `minterpolate` mci ở 1728×3072 chậm (~0,8 hình/giây).
-- Lời: faster-whisper large-v3 trong `HDRE AI\venv`; không đưa từ vựng vào prompt ở clip không có lời vì gây ảo giác.
-- Màu: quét kho `Downloads\freshluts-LUT-phan-loai_DAY-DU.zip`, gửi ảnh LUT gốc để Dũng chọn.
-- Che địa chỉ: `boxblur` theo mốc tay; bản đồ: `fetch_map.py` (Esri + OSM), tiện ích tra Nominatim. SFX: `dung-text-fx/scripts/sfx_plan.py`, thư viện `Downloads\SOUNDEFFECT TAKING HEARD`, mỗi âm một `.mp3`.
-- Âm lượng: bộ trộn render làm nhạc lớn tụt ~3 dB, trộn lại theo `data-volume` rồi ghép (`mux_audio.py` của dự án 45.4), đo `ebur128`.
-
-Liên quan [[zoom-muot-khong-rung]], [[orchestrator-100-point-rule]], [[video-dispatcher-no-style-question]], [[xuat-trong-hd-studio-gpu]].
+**Công cụ chuẩn đã kiểm chứng:**
+- Rung/zoom: `ffmpeg` + phase correlation bằng numpy; `hyperframes snapshot --at` lấy PNG chưa nén.
+- Lời: `faster-whisper large-v3` trong `HDRE AI\venv` + `voice_cleaner_pro.py` + `srt_helper.py`.
+- Màu: Luôn hỏi Dũng 3 lựa chọn (giữ gốc / theo mẫu / ≤3 LUT từ kho `Downloads\freshluts-LUT-phan-loai_DAY-DU.zip`).
+- Che địa chỉ: `boxblur` tracking bám chuyển động; bản đồ: `fetch_map.py` (OSM). SFX: `sfx_plan.py` + kho 863 file `Downloads\SOUNDEFFECT TAKING HEARD`.
+- Âm lượng: `sfx_mix.py` + đo `ebur128` thật.

@@ -4,8 +4,7 @@ description: "Dũng's mandatory rules for real-estate review video edits (TikTok
 metadata:
   node_type: memory
   type: feedback
-  originSessionId: c6903d82-e317-4077-889a-64b3568f4b63
-  modified: 2026-10-25T13:43:15.288Z
+  modified: 2026-11-02T11:43:46.582Z
 ---
 
 Rules Dũng gave while editing the DU-AN-MAU (Ngã Tư Bốn Xã) review video in HyperFrames, 2026-10-19:
@@ -27,7 +26,7 @@ Rules Dũng gave while editing the DU-AN-MAU (Ngã Tư Bốn Xã) review video i
 **Why:** Dũng posts vertical videos on TikTok/Reels and judges by how they look on the phone; badly placed or boxed text hides the property.
 
 **How to apply:** Apply these by default on every future BĐS video edit. Related: [[video-quality-feedback]], [[hoang-dung-skills-location]].
-- 2026-10-31: Dũng bỏ luật cấm zoom, Ken Burns, punch-in, rung: AI tự quyết (xem [[free-to-work]]).
+- 2026-11-02 tối (thắng các dòng cũ trái với đây): Zoom, Ken Burns, punch-in mặc định tắt, muốn dùng phải hỏi Dũng; cấm rung footage và lắc khung hình (xem [[cam-hdfx-rung-01]]). Có phụ đề trắng viền đen. Phụ đề và nhãn dùng Be Vietnam Pro, không hiệu ứng, không SFX; chữ hook dùng font display có đủ dấu tiếng Việt.
 - 2026-10-20: End of video = CTA text that follows the host's own spoken words only. Never insert unrelated text (e.g. a price card, phone, slogan) that the host didn't say before/at the CTA; on-screen text everywhere must match what he says (no invented extras like "2 WC", "7M", "100%").
 - 2026-10-20: Always keep the location map scene (pin + real routes + travel-time labels to nearby landmarks/center from his listing) — it helps buyers picture where the house is. Its labels are the one allowed exception to "text must match speech".
 - 2026-10-25 (DU-AN-MAU, latest — replaces the earlier same-day "light street map" note): the light vector street map had too many errors (labels running off the right edge, labels overlapping), so from now on use a **Google-Maps-style satellite map**: natural-brightness satellite imagery (not darkened) with Vietnamese road/place labels on top (hybrid look), real OSRM routes, pin + travel-time labels. Every label must stay inside x 40–920 / y 230–1440 (1080 frame): flip it to the left of its dot when the dot is right of centre, clamp it to the frame, and never let two labels overlap.

@@ -3,6 +3,12 @@
 ## Công cụ
 Node.js 20+, FFmpeg/FFprobe, Git, Python 3, `hyperframes@0.8.171` (trình cài tự cài).
 
+Tracking trong Studio cần OpenCV bản 4.x (trình cài tự cài). Bản 5 đã bỏ bộ nhận diện mặt người nên không dùng được:
+
+```
+python -m pip install "opencv-python-headless<5"
+```
+
 ## Repo tích hợp
 HyperFrames, Remotion và WhisperX cài từ repo gốc bằng `cai-thanh-phan.ps1`, xem README. `vendor/hyperframes` và `vendor/remotion` là submodule, tải bằng `git submodule update --init --depth 1 vendor/hyperframes`.
 

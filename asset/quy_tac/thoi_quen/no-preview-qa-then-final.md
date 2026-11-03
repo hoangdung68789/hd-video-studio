@@ -4,7 +4,6 @@ description: "Không gửi preview nữa — chỉ QA toàn bộ video, đạt t
 metadata:
   node_type: memory
   type: feedback
-  originSessionId: 98723c4a-6d4f-45cf-a836-b99cfeb10aa6
   modified: 2026-10-28T16:54:42.406Z
 ---
 
